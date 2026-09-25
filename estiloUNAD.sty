@@ -1,0 +1,52 @@
+% Archivo de estilo para títulos UNAD sin numeración y con formato específico
+
+\usepackage{titlesec}
+\usepackage{setspace}
+
+% Fuente Times New Roman
+\usepackage{mathptmx}
+
+% Título 1: (chapter) Negrita, centrado, 12pt, doble espacio
+\titleformat{\chapter}[block]
+  {\normalfont\bfseries\centering\fontsize{12pt}{14pt}\selectfont\singlespacing}
+  {} % Sin numeración
+  {0pt}
+  {}
+\titlespacing*{\chapter}
+  {0pt}{24pt}{24pt} % Espaciado antes y después
+
+% Título 2: (section) Negrita, 12pt, alineado izquierda, sin numeración, doble espacio
+\titleformat{\section}[block]
+  {\normalfont\bfseries\fontsize{12pt}{14pt}\selectfont\singlespacing}
+  {}{0pt}{}
+\titlespacing*{\section}
+  {0pt}{18pt}{12pt}
+
+% Título 3: (subsection) Cursiva, 12pt, alineado izquierda, sin numeración, doble espacio
+\titleformat{\subsection}[block]
+  {\normalfont \bfseries \itshape\fontsize{12pt}{14pt}\selectfont\singlespacing}
+  {}{0pt}{}
+\titlespacing*{\subsection}
+  {0pt}{12pt}{6pt}
+
+% Título 4: (subsubsection) Negrita, 12pt, alineado izquierda, sangría 1.27cm, doble espacio
+\titleformat{\subsubsection}[block]
+  {\normalfont\bfseries\fontsize{12pt}{14pt}\selectfont\singlespacing}
+  {}{0pt}{}
+\titlespacing*{\subsubsection}
+  {36pt}{12pt}{6pt} % 36pt ≈ 1.27cm
+
+% Título 5: (paragraph) Cursiva, 12pt, alineado izquierda, sangría 1.27cm, doble espacio
+\titleformat{\paragraph}[block]
+  {\normalfont \bfseries \itshape\fontsize{12pt}{14pt}\selectfont\singlespacing}
+  {}{0pt}{}
+\titlespacing*{\paragraph}
+  {36pt}{6pt}{6pt}
+
+% Quitar numeración de capítulos/secciones/subsecciones
+\setcounter{secnumdepth}{0}
+
+% Doble espaciado general en el documento
+\AtBeginDocument{\doublespacing}
+
+\endinput

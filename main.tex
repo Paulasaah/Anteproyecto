@@ -1,0 +1,130 @@
+
+\documentclass[12pt,letterpaper,oneside]{report}
+
+% -------------------------- CONFIGURACIÓN GENERAL ----------------------------
+
+% Idioma y codificación
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Bibliografía APA 7ma edición
+\usepackage[style=apa,backend=biber,sortcites=true,sorting=nyt,hyperref=true]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{referencias.bib}
+
+% Sangría francesa y espacio entre referencias para APA
+\setlength{\bibhang}{1.27cm} % sangría francesa recomendada por APA
+\setlength{\bibitemsep}{1.2\baselineskip} % espacio entre referencias (opcional)
+
+% Márgenes y papel carta (2.54 cm estándar)
+\usepackage{geometry}
+\geometry{
+  paper=letterpaper,
+  left=2.54cm,
+  right=2.54cm,
+  top=2.54cm,
+  bottom=2.54cm
+}
+
+% Paquetes de matemáticas y símbolos
+\usepackage{amsmath,amssymb}
+
+% Gráficos y tablas
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+% Hipervínculos y formato de referencias
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black, pdfborder={0 0 0}]{hyperref}
+
+% Formato de captions para tablas y figuras
+\usepackage{caption}
+\captionsetup[table]{labelfont=bf}
+\captionsetup[figure]{labelfont=bf}
+\captionsetup[figure]{labelformat=default,labelsep=period,name=Figura}
+\captionsetup[table]{labelformat=default,labelsep=period,name=Tabla}
+
+% Listas y apéndices
+\usepackage{enumitem}
+\usepackage{appendix}
+
+% Encabezados y pie de página
+\usepackage{fancyhdr}
+
+% Citas con biblatex (requerido para APA 7ma)
+\usepackage{csquotes}
+
+% Cambiar nombre de Tabla de Contenido y listas (ajustar según idioma)
+\addto\captionsspanish{
+  \renewcommand{\contentsname}{Tabla de Contenido}
+  \renewcommand{\listfigurename}{Lista de Figuras}
+  \renewcommand{\listtablename}{Lista de Tablas}
+  \renewcommand{\figurename}{Figura}
+  \renewcommand{\tablename}{Tabla}
+}
+
+% Archivo de estilo personalizado con títulos (CRÍTICO: NO quitar)
+\usepackage{estiloUNAD}
+
+% Configuración de sangría y espacio entre párrafos
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.5em}
+
+% Si se desea personalizar la lista de contenido, descomentar:
+% \usepackage{tocloft}
+
+% -------------------------- INICIO DEL DOCUMENTO ----------------------------
+
+\begin{document}
+
+% Numeración de tablas y figuras continua a lo largo del documento (CRÍTICO para formatos de tesis)
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% Portada y preliminares (estos archivos deben estar presentes)
+\input{portada}
+\input{nota_aceptacion}
+\input{dedicatoria}
+\input{agradecimientos}
+\input{resumen_abstract}
+
+% Índices automáticos
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+% -------- Lista de Apéndices manual --------
+\chapter*{Lista de Apéndices}
+% Actualizar manualmente esta lista según los apéndices incluidos
+\begin{itemize}
+    \item Ingresar Manualmente índice de Apéndice
+    % Agregar más apéndices según corresponda
+\end{itemize}
+% -------------------------------------------
+
+% Capítulos y secciones principales (archivos requeridos)
+\input{introduccion}
+\input{planteamiento_problema}
+\input{justificacion}
+\input{objetivos}
+\input{alcance_delimitacion}
+\input{capitulos/cap1}
+\input{conclusiones}
+\input{recomendaciones}
+
+% --------------------- BIBLIOGRAFÍA APA 7ma EDICIÓN -------------------------
+%\nocite{*} %Para incluir bibliografía no citada en el cuerpo
+\printbibliography[title={Referencias Bibliográficas}]
+\addcontentsline{toc}{chapter}{Referencias bibliográficas} % Para que aparezca en el TOC
+
+% Apéndices (el archivo debe llamarse exactamente apendices.tex)
+\input{apendices}
+
+\end{document}
