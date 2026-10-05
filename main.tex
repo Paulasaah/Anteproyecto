@@ -89,13 +89,14 @@
 \counterwithout{table}{chapter}
 
 % Portada y preliminares (estos archivos deben estar presentes)
+\hypersetup{pageanchor=false}
 \input{portada}
 \input{nota_aceptacion}
-\input{dedicatoria}
-\input{agradecimientos}
-\input{resumen_abstract}
 
 % Índices automáticos
+\clearpage
+\pagenumbering{roman}
+\hypersetup{pageanchor=true}
 \tableofcontents
 \newpage
 \listoffigures
@@ -103,12 +104,14 @@
 \listoftables
 \newpage
 
-% Marcador provisional. La lista se completará cuando se definan los anexos.
-\chapter*{Lista de apéndices}
-\addcontentsline{toc}{chapter}{Lista de apéndices}
-\noindent\textit{[Pendiente: enumerar los apéndices que se incorporen a la versión final.]}
+% Preliminares en el orden establecido para el proyecto de grado.
+\input{agradecimientos}
+\input{dedicatoria}
+\input{resumen_abstract}
 
-% Cuerpo del anteproyecto
+% Cuerpo del proyecto de grado
+\clearpage
+\pagenumbering{arabic}
 \input{introduccion}
 \input{planteamiento_problema}
 \input{justificacion}
@@ -125,8 +128,7 @@
 
 % --------------------- BIBLIOGRAFÍA APA 7ma EDICIÓN -------------------------
 %\nocite{*} %Para incluir bibliografía no citada en el cuerpo
-\printbibliography[title={Referencias Bibliográficas}]
-\addcontentsline{toc}{chapter}{Referencias bibliográficas} % Para que aparezca en el TOC
+\printbibliography[heading=bibintoc,title={Referencias bibliográficas}]
 
 % Apéndices (el archivo debe llamarse exactamente apendices.tex)
 \input{apendices}
