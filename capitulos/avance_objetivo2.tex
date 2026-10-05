@@ -33,6 +33,51 @@ El clasificador es el núcleo del proyecto. El sistema usa un codificador DINOv2
 \end{figure}
 \noindent\textit{Nota.} La flecha entre segmentación y la compuerta I indica una evaluación posterior, no una integración ya validada. El diseño de preentrenamiento se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
 
+\section{Formulación matemática de los componentes implementados}
+
+La formulación siguiente describe las operaciones verificadas en el repositorio técnico. DINOv2 es el codificador público de partida; no se afirma que el proyecto reproduzca desde cero su entrenamiento original. Para una imagen $x_i$ y dos vistas aumentadas $v_{i1}$ y $v_{i2}$, el codificador $f_\theta$, el proyector $g_\phi$ y el predictor $q_\psi$ producen
+\begin{equation}
+ h_{ij}=f_\theta(v_{ij}),\qquad z_{ij}=g_\phi(h_{ij}),\qquad p_{ij}=q_\psi(z_{ij}),\qquad j\in\{1,2\}.
+\end{equation}
+La implementación \texttt{torch\_simsiam.py} detiene el gradiente en los objetivos $z$ y utiliza similitud coseno negativa simétrica \parencite{chen2021simsiam}:
+\begin{equation}
+ \mathcal L_{\mathrm{SSL}}=-\frac{1}{2N}\sum_{i=1}^{N}\left[
+ \frac{p_{i1}^{\mathsf T}\operatorname{sg}(z_{i2})}{\|p_{i1}\|_2\|\operatorname{sg}(z_{i2})\|_2}
+ +\frac{p_{i2}^{\mathsf T}\operatorname{sg}(z_{i1})}{\|p_{i2}\|_2\|\operatorname{sg}(z_{i1})\|_2}\right].
+\end{equation}
+Aquí $N$ es el tamaño del lote y $\operatorname{sg}$ conserva el valor del tensor sin propagar gradientes por esa rama. La operación coseno del código incluye protección numérica para normas pequeñas.
+
+Para el brazo que activa consistencia de tono, la tercera vista reutiliza el recorte y las transformaciones de la primera vista sobre la copia con tono modificado. Con $h_{it}=f_\theta(v_{it})$, \texttt{torch\_adaptation.py} calcula una pérdida sobre características del codificador, sin predictor en este término:
+\begin{equation}
+ \mathcal L_{\mathrm{tono}}=\frac{1}{N}\sum_{i=1}^{N}\left[
+ 1-\frac{h_{it}^{\mathsf T}\operatorname{sg}(h_{i1})}{\|h_{it}\|_2\|\operatorname{sg}(h_{i1})\|_2}\right].
+\end{equation}
+El mismo módulo implementa el anclaje de pesos hacia el estado inicial $\theta^0$ para el conjunto $\Theta_{\mathrm{ent}}$ de parámetros entrenables del codificador, sin incluir el proyector ni el predictor, y un anclaje de características hacia el codificador público congelado $f_{\theta^0}$:
+\begin{align}
+ \mathcal L_{\mathrm{L2SP}}&=\sum_{a\in\Theta_{\mathrm{ent}}}(\theta_a-\theta_a^0)^2,\\
+ \mathcal L_{\mathrm{dist}}&=\frac{1}{N}\sum_{i=1}^{N}\left[
+ 1-\frac{h_{i1}^{\mathsf T}f_{\theta^0}(v_{i1})}{\|h_{i1}\|_2\|f_{\theta^0}(v_{i1})\|_2}\right],\\
+ \mathcal L_{\mathrm{total}}&=\mathcal L_{\mathrm{base}}+\lambda_t\mathcal L_{\mathrm{tono}}+
+ \lambda_a\mathcal L_{\mathrm{L2SP}}+\lambda_d\mathcal L_{\mathrm{dist}}.
+\end{align}
+Solo se calculan los términos con peso activo en la configuración de la corrida. En el modo original/transformado de dos vistas, \texttt{paired\_objective} define $\mathcal L_{\mathrm{base}}=w\mathcal L_{\mathrm{SSL}}$; con $w=1$ se conserva la pérdida base, sin sumar una segunda copia del mismo término. El término adicional de tres vistas tiene su propio peso $\lambda_t$. Esta distinción evita atribuir a corridas antiguas una formulación que no utilizaron.
+
+La transformación implementada en \texttt{circle.py} recibe una máscara de lesión $M(p)$, con valor uno en la lesión. Para un desplazamiento entero solicitado $s$, acotado a $s_c=\max(-2,\min(2,s))$, modifica el canal CIELAB $L^*$ fuera de la lesión:
+\begin{equation}
+ L^{*\prime}(p)=\begin{cases}
+ L^*(p), & M(p)=1,\\
+ \operatorname{clip}(L^*(p)-8s_c,0,100), & M(p)=0.
+ \end{cases}
+\end{equation}
+Los canales $a^*$ y $b^*$ se conservan en el espacio CIELAB. Después de convertir a sRGB, el código restaura exactamente los píxeles originales de la lesión y acota el resultado a $[0,1]$. La versión protegida por manifiesto rechaza máscaras no elegibles. La operación modifica todos los píxeles fuera de la máscara de lesión, incluidos el fondo y los artefactos que permanezcan allí; no utiliza una selección adicional que identifique exclusivamente piel. Por ello, el desplazamiento representa una modificación sintética de luminosidad y no una corrección validada del tono de piel. No cambia el fototipo clínico ni garantiza el paso a otro fototipo.
+
+En la etapa de clasificación, \texttt{probes.py} ajusta \texttt{StandardScaler} únicamente a las representaciones de entrenamiento y aplica esa misma transformación a las demás particiones. Para la dimensión $j$, $u_{ij}=(h_{ij}-\mu_j)/\sigma_j$, con escala unitaria para dimensiones de varianza cero. La regresión logística multiclase produce
+\begin{equation}
+ P(y_i=k\mid x_i)=\frac{\exp(w_k^{\mathsf T}u_i+b_k)}{\sum_{c=1}^{7}\exp(w_c^{\mathsf T}u_i+b_c)},\qquad
+ \widehat y_i=\operatorname*{arg\,max}_{k}P(y_i=k\mid x_i).
+\end{equation}
+El ajuste usa etiquetas HAM10000; el parámetro $C$, la ponderación de clases y los límites de iteración se registran en el protocolo correspondiente. PAD-UFES-20 queda fuera del ajuste, calibración y selección del modelo. Estas ecuaciones describen operaciones implementadas y no implican una mejora clínica o de equidad demostrada.
+
 \section{Resultados disponibles de clasificación}
 
 La tabla \ref{tab:v7-clasificacion} resume las medias de tres semillas de la evaluación v7. Los brazos adaptados presentan métricas puntuales superiores al DINOv2 público en HAM10000; los contrastes registrados favorecen de forma robusta a B* frente al público para el criterio P3-IC. En cambio, los contrastes B*--A* no sustentan una ventaja general del término de tono. La no inferioridad P1-NI de A* no es robusta porque falla en la semilla 42.
@@ -58,5 +103,3 @@ La lectura secundaria v7.1 en validación reporta F1 macro de 0,7229 para A* y 0
 \section{Avance y límites del módulo complementario de segmentación}
 
 La línea de segmentación sin etiquetas sigue un flujo separado de MoCo v2/ResNet-50, CCAM, pseudo-máscaras y un U-Net estudiante. El candidato S4-A2 obtuvo Dice 0,7221 en ISIC2018 y 0,7949 en HAM10000; superó por márgenes pequeños algunos umbrales registrados frente al estudiante \texttt{student\_r3}. Sin embargo, las pruebas de integración C1 no muestran una mejora general del clasificador al usar máscaras. Este resultado respalda mantener la segmentación como módulo complementario, no afirmar que mejore el clasificador.
-
-\noindent\textit{[Pendiente: insertar una figura representativa del segmentador y sus ejemplos de máscaras, con selección de casos y fuente verificadas.]}
