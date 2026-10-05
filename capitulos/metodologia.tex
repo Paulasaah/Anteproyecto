@@ -1,0 +1,40 @@
+\chapter{Diseño metodológico}
+
+\section{Enfoque y fases}
+
+El proyecto es una investigación aplicada con enfoque cuantitativo y evaluación experimental de modelos de clasificación de imágenes. CRISP-ML(Q) organiza el trabajo en fases iterativas de comprensión de datos, ingeniería de datos y modelado, evaluación con controles de calidad, y elaboración del prototipo \parencite{studer2021crispmlq}.
+
+\begin{enumerate}
+    \item \textbf{Caracterización de datos:} documentar procedencia, modalidad, etiquetas, distribución de clases, licencias y limitaciones de los conjuntos.
+    \item \textbf{Diseño del clasificador SSL:} adaptar representaciones DINOv2 mediante SimSiam y entrenar el clasificador lineal posterior definido por el protocolo.
+    \item \textbf{Evaluación:} contrastar el clasificador con controles, reportar incertidumbre y evaluar generalización externa sin ajustar el modelo con el conjunto externo.
+    \item \textbf{Prototipo:} integrar el clasificador validado en una demostración experimental con límites y fallbacks explícitos. Este objetivo no equivale a evaluación clínica.
+\end{enumerate}
+
+\section{Conjuntos de datos y unidades de análisis}
+
+HAM10000 es la fuente etiquetada principal para la clasificación de siete clases \parencite{tschandl2018ham10000}. Las imágenes de ISIC2019 e ISIC2020 se consideran dentro del conjunto no etiquetado únicamente de acuerdo con los manifiestos y exclusiones de cada corrida. \textit{[Pendiente: incorporar las referencias primarias de ISIC2019/2020 y enlazar los manifiestos usados.]}
+
+BCN20000 no se contará como conjunto externo independiente si sus imágenes ya están contenidas en ISIC2019 \parencite{combalia2024bcn20000}. CO2Wounds-V2 corresponde a imágenes de heridas crónicas y no se usará como validación equivalente de clasificación dermatoscópica. \textit{[Pendiente: agregar la referencia primaria del conjunto CO2Wounds-V2 si se conserva esta mención.]}
+
+PAD-UFES-20 se usa como evaluación externa sin entrenamiento ni ajuste posterior: son fotografías clínicas capturadas con teléfonos, por lo que el resultado mide transferencia entre modalidades y dominios, no validación clínica \parencite{pacheco2020padufes}.
+
+\section{Partición y prevención de fuga}
+
+La partición confirmatoria debe mantener cada lesión —identificada por \texttt{lesion\_id}— dentro de un solo subconjunto. Los manifiestos de entrenamiento, selección interna y prueba se congelarán con sus identificadores y hashes. Las imágenes, sus versiones aumentadas o sus duplicados de los conjuntos de selección o prueba no se usarán para preentrenamiento, selección de variantes, umbrales ni ajuste de hiperparámetros.
+
+La incertidumbre de HAM10000 debe estimarse mediante remuestreo agrupado por lesión, no por imagen independiente. En los resultados v7 actualmente disponibles, los intervalos publicados usan remuestreo por imagen; por eso se reportan como evidencia del protocolo registrado y no como intervalos confirmatorios corregidos por clúster. La comparación SSL-supervisada debe usar el mismo conjunto de datos, arquitectura y partición por lesión para permitir un contraste pareado; las comparaciones existentes con particiones de tamaños distintos todavía no satisfacen ese criterio.
+
+\section{Modelos, controles y métricas}
+
+El módulo principal es el codificador DINOv2 ViT-B/14 con adaptación SimSiam. Los controles comprenden DINOv2 público sin adaptación y los brazos adaptados registrados como A* (sin emparejamiento por tono) y B* (con emparejamiento por tono). El ajuste de la representación y el clasificador lineal posterior se describen por separado para no llamar “sin etiquetas” a la fase que usa etiquetas.
+
+La métrica primaria de clasificación es F1 macro. Se reportan además exactitud balanceada, AUC macro, error de calibración esperado (ECE), sensibilidad de melanoma y matrices de confusión. Cada afirmación de mejora requiere un contraste pareado y su intervalo de confianza; el solapamiento de intervalos marginales no demuestra equivalencia.
+
+La segmentación se evalúa de forma independiente con Dice, IoU y HD95, además de cobertura, máscaras vacías y fallos. Los indicadores ITA se nombran como estimación de tono no validada y no como fototipo Fitzpatrick. No se formula un reclamo de equidad por FST sin etiquetas expertas válidas y suficientes.
+
+\section{Trazabilidad y límites}
+
+Cada resultado debe vincularse con la revisión de código, configuración, semillas, identificadores y hashes de partición, pesos, datos de origen, métricas y estado comprobado de W\&B. Las corridas de entrenamiento y validación del proyecto corresponden al clúster UNAB. El presente documento no inicia corridas nuevas.
+
+\noindent\textit{[Pendiente para cerrar el protocolo confirmatorio: verificar los manifiestos exactos, recalcular los intervalos HAM agrupados por lesión y definir con dirección la línea base supervisada comparable y su presupuesto.]}

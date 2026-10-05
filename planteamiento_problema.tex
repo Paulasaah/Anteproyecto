@@ -1,9 +1,26 @@
 \chapter{Planteamiento del Problema}
-La elección de este tema responde a la necesidad de comprender con mayor profundidad una problemática que, en la actualidad, tiene un impacto significativo en distintos ámbitos de la sociedad. [Nombre del tema o problema] no solo representa un desafío a nivel teórico, sino que también tiene consecuencias prácticas que afectan directamente a comunidades, instituciones y políticas públicas. Por ello, su estudio resulta relevante para contribuir con propuestas que favorezcan su abordaje efectivo.
+Las lesiones cutáneas comprenden alteraciones benignas y malignas que requieren clasificación clínica. Entre las malignas se encuentran el melanoma, el carcinoma basocelular y el carcinoma escamocelular. La carga mundial del melanoma y del cáncer cutáneo no melanoma ha sido analizada para el periodo 1990--2021 \parencite{zhou2025skinburdengbd}. En Colombia, la Cuenta de Alto Costo reportó 11.064 casos atendidos de melanoma cutáneo hasta el 31 de diciembre de 2024; el dato era preliminar y estaba sujeto a auditoría \parencite{cuentaaltocosto2025melanoma}.
 
-Además, existe una limitada cantidad de investigaciones locales que analicen este fenómeno desde una perspectiva integral, lo que genera vacíos en el conocimiento y en la formulación de estrategias adecuadas para enfrentarlo. Esta investigación busca aportar evidencia empírica y reflexión crítica, con el fin de enriquecer el debate y fomentar la toma de decisiones informadas.
+La evidencia epidemiológica local disponible incluye un estudio del carcinoma basocelular en el área metropolitana de Bucaramanga \parencite{uribe2018bccbucaramanga}. Las cifras adicionales atribuidas al Instituto de Cáncer del HIC —3.060 casos entre 2016 y 2023 y la proporción de mortalidad atribuida al melanoma— requieren una fuente institucional primaria que documente periodo, población y definición de caso. Se incorporará esa evidencia cuando se localice.
 
-Finalmente, se justifica este trabajo por su potencial impacto en el campo académico y profesional, ya que los hallazgos obtenidos podrían ser utilizados como base para el diseño de nuevas líneas de estudio, así como para la elaboración de programas, políticas o intervenciones que respondan de manera más eficiente a las necesidades detectadas.
+\noindent\textit{[Pendiente: recuperar la referencia completa de Oliveros et al. (2025) y verificar la población, el periodo y el método antes de incluir las cifras de incidencia por altitud. No interpretar la altitud como causa de incidencia sin respaldo del estudio.]}
+
+La inspección clínica y la dermatoscopía requieren conocimiento especializado. Los modelos de clasificación de imágenes han mostrado resultados en conjuntos de datos de investigación, pero su rendimiento depende de la tarea, la población y el protocolo de evaluación; esos resultados no equivalen a validación clínica del presente prototipo \parencite{esteva2017dermatologist,tschandl2018ham10000}. Las afirmaciones sobre exactitud según años de experiencia, variabilidad entre especialistas, tiempos de espera o costos locales se mantienen fuera de la versión factual hasta contar con fuentes primarias compatibles.
+
+\noindent\textit{[Pendiente: añadir evidencia local si se afirma escasez de dermatólogos o retrasos de atención en Santander.]}
+
+Una barrera metodológica es la disponibilidad limitada de anotaciones clínicas, ya que su producción requiere tiempo de especialistas. El aprendizaje autosupervisado puede aprovechar imágenes no etiquetadas para aprender representaciones, pero la clasificación posterior continúa requiriendo etiquetas para entrenar o evaluar el clasificador lineal. Otra dificultad es el cambio de dominio: las imágenes de entrenamiento pueden diferir de las de aplicación por población, dispositivo, iluminación o protocolo de captura. La necesidad de evaluar la generalización entre centros también se ha observado en estudios de IA médica, aunque no todos se refieren a dermatología \parencite{yang2024crosshospital}.
+
+Por ello, la pregunta central del proyecto es:
+
+\begin{quote}
+¿Cómo diseñar un algoritmo de inteligencia artificial basado en aprendizaje autosupervisado para clasificar lesiones cutáneas a partir de imágenes dermatológicas y apoyar el análisis clínico en el contexto del departamento de Santander?
+\end{quote}
+
+\section{Árbol del problema}
+\noindent\textbf{[Pendiente de actualización.]}
+
+Reformular el árbol para que el problema central describa la dificultad de clasificar lesiones cutáneas con modelos computacionales cuando hay pocas etiquetas clínicas y existe cambio de dominio. Verificar con evidencia antes de atribuir al departamento retrasos asistenciales, sobrecarga clínica, costos o mortalidad.
 
 
 

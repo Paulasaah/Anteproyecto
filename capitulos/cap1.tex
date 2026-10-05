@@ -1,56 +1,47 @@
-\chapter{Estado del arte}
-\section{Titulo nivel 2}
-La globalización ha generado una transformación significativa en la forma en que las sociedades interactúan, comparten información y desarrollan sus economías. Esta interconexión ha traído consigo múltiples beneficios, como el acceso a nuevas tecnologías y mercados, pero también ha planteado desafíos importantes en términos de identidad cultural, sostenibilidad y equidad. Comprender estos efectos resulta clave para formular estrategias que permitan un desarrollo más equilibrado y justo.
+\chapter{Marco de referencia}
 
-\subsection{Ejemplo de ubicación de viñetas}
-\begin{itemize}
-    \item •	Comprender estos efectos resulta clave para formular estrategias que permitan un desarrollo más equilibrado y justo.
-    \item •	Comprender estos efectos resulta clave para formular estrategias que permitan un desarrollo más equilibrado y justo.
-    \item •	Comprender estos efectos resulta clave para formular estrategias que permitan un desarrollo más equilibrado y justo.
-\end{itemize}
-\subsection{Titulo nivel 3}
-El uso de herramientas digitales en entornos educativos ha demostrado un potencial considerable para mejorar el aprendizaje, especialmente en contextos donde el acceso a recursos tradicionales es limitado. Sin embargo, la brecha digital persiste como una barrera que impide una participación equitativa. Es necesario que las políticas públicas y las instituciones académicas trabajen conjuntamente para garantizar una inclusión real, promoviendo tanto la infraestructura como la capacitación adecuada.
-\subsubsection{Titulo nivel 4}
-El uso de herramientas digitales en entornos educativos ha demostrado un potencial considerable para mejorar el aprendizaje, especialmente en contextos donde el acceso a recursos tradicionales es limitado. Sin embargo, la brecha digital persiste como una barrera que impide una participación equitativa. Es necesario que las políticas públicas y las instituciones académicas trabajen conjuntamente para garantizar una inclusión real, promoviendo tanto la infraestructura como la capacitación adecuada.
+\section{Lesiones cutáneas y modalidades de imagen}
 
-\paragraph{Titulo nivel 5}
-Uno de los aspectos más relevantes al analizar cualquier fenómeno social es la necesidad de integrar diferentes perspectivas disciplinarias. La complejidad de los problemas actuales requiere enfoques interdisciplinarios que consideren factores económicos, culturales, ambientales y tecnológicos. Solo así es posible alcanzar una comprensión más profunda de la realidad y proponer soluciones sostenibles y efectivas.
-La complejidad de los problemas actuales requiere enfoques interdisciplinarios que consideren factores económicos, culturales, ambientales y tecnológicos. Solo así es posible alcanzar una comprensión más profunda de la realidad y proponer soluciones sostenibles y efectivas.
-Uno de los aspectos más relevantes al analizar cualquier fenómeno social es la necesidad de integrar diferentes perspectivas disciplinarias. La complejidad de los problemas actuales requiere enfoques interdisciplinarios que consideren factores económicos, culturales, ambientales y tecnológicos. Solo así es posible alcanzar una comprensión más profunda de la realidad y proponer soluciones sostenibles y efectivas.
+Las lesiones cutáneas abarcan alteraciones de distinta naturaleza clínica. Su evaluación puede incluir observación directa, dermatoscopía, fotografía clínica y, cuando está indicado, confirmación histopatológica. Estas modalidades no son intercambiables: los modelos y sus métricas deben interpretarse según el tipo de imagen, la población y las etiquetas disponibles.
 
-\chapter{Figuras}
-
-\section*{Ejemplo de Figura con su Nota}
+HAM10000 reúne 10.015 imágenes dermatoscópicas distribuidas en siete clases: nevo melanocítico (\texttt{nv}), melanoma (\texttt{mel}), queratosis seborreica (\texttt{bkl}), carcinoma basocelular (\texttt{bcc}), queratosis actínica/carcinoma intraepidérmico (\texttt{akiec}), lesiones vasculares (\texttt{vasc}) y dermatofibroma (\texttt{df}) \parencite{tschandl2018ham10000}. El conjunto no cuenta con una clase independiente de carcinoma escamocelular invasor ni representa todas las patologías cutáneas de Santander. Por ello, sus resultados no se extrapolan a categorías ausentes.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.75\textwidth]{image1.png}
-    \caption{\textit{Pie de Figura}}
-    \label{fig:ejemplo-nota}
+    \includegraphics[width=0.72\textwidth]{figura01-ejemplos-lesiones-dermatologicas.png}
+    \caption{Ejemplos de imágenes clínicas de lesiones cutáneas.}
+    \label{fig:ejemplos-lesiones}
 \end{figure}
+\noindent\textit{Nota.} La imagen proviene del conjunto PAD-UFES-20; sus fotografías clínicas de teléfono móvil difieren de las imágenes dermatoscópicas de HAM10000 \parencite{pacheco2020padufes}.
 
-\textbf{Nota.} Se hace una descripción del contenido de la tabla en cuestión de lo que se esté exponiendo dentro de esta. Cuando la figura es de elaboración propia no es necesario agregar ningún tipo de declaración de derechos de autor. En APA se asume que todo lo que no tenga cita (o la declaración de derechos de autor) es de autoría del propio autor.
+\section{Clasificación asistida por computador}
 
-\chapter{Tablas}
+Los sistemas de diagnóstico asistido por computador aplican modelos de visión para analizar imágenes y producir predicciones que un profesional puede revisar. En clasificación supervisada, cada imagen de entrenamiento tiene una etiqueta; las redes convolucionales y los Vision Transformers aprenden representaciones que se relacionan con esas categorías. La literatura muestra que los resultados dependen del conjunto, la modalidad y el protocolo, por lo que una métrica publicada no constituye por sí sola evidencia de utilidad clínica en otro contexto \parencite{esteva2017dermatologist,chaturvedi2020multiclassskin,yang2024crosshospital}.
 
-\section*{}
+\section{Aprendizaje autosupervisado}
 
-\begin{table}[htbp]
-     \caption{\textit{El Título Debe ser Breve y Descriptivo (en Cursiva)}}
-    \centering
-    \begin{tabular}{p{7cm} p{7cm}}
-        \toprule
-        \textbf{Columna uno} & \textbf{Columna dos} \\
-        \midrule
-        Table data & Table data \\
-        Table data & Table data \\
-        Table data & Table data \\
-        Table data & Table data \\
-        Table data & Table data \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+El aprendizaje autosupervisado (SSL) construye señales de entrenamiento a partir de los propios datos y permite aprender representaciones con imágenes no etiquetadas. En métodos contrastivos o de auto-predicción, el modelo aprende a conservar información útil entre vistas transformadas de una misma imagen. En una tarea posterior de clasificación, las etiquetas siguen siendo necesarias para entrenar o evaluar el clasificador; el SSL reduce la dependencia de etiquetas para aprender la representación, no las elimina \parencite{krishnan2022selfsupervisedmedicine,useini2024automatizedSSL}.
 
-% Nota APA debajo de la tabla, alineada a la izquierda
-\noindent\textit{Nota.} Se hace una descripción del contenido de la tabla en cuestión de lo que se esté exponiendo dentro de esta, para referenciar la tabla se puede tomar el ejemplo de la figura que está ubicada en este documento.
+El proyecto parte de DINOv2 ViT-B/14 y evalúa adaptación SimSiam sobre esa representación. El control público y los brazos adaptados se mantienen separados para distinguir el efecto de adaptar el codificador. El término de consistencia de tono se trata como factor experimental: la evidencia actual no demuestra una ventaja robusta de ese término \parencite{oquab2024dinov2,chen2021simsiam}.
 
+\section{Segmentación y otros módulos complementarios}
+
+La segmentación estima una máscara espacial de la lesión; no asigna por sí misma una clase diagnóstica. La línea complementaria del proyecto comprende un codificador MoCo v2/ResNet-50, generación de pseudo-máscaras mediante CCAM y un modelo U-Net estudiante. Se evalúa como módulo independiente con métricas de segmentación, como Dice, IoU y HD95 \parencite{chen2020mocov2,xie2022ccam,sharma2025skinsegmentationreview}.
+
+Entre los antecedentes de segmentación, EIU-Net modifica la extracción de características y las conexiones de un U-Net dentro de un enfoque supervisado \parencite{yu2023eiunet}. USL-Net propone aprendizaje contrastivo, mapas de activación y pseudo-etiquetas con regiones de incertidumbre para segmentación sin anotaciones manuales de entrenamiento \parencite{li2024uslnet}. Estos trabajos permiten situar el módulo complementario y distinguir sus necesidades de anotación; sus resultados publicados no constituyen resultados del proyecto ni controles directamente comparables sin igualar datos y protocolo.
+
+El flujo de validación modular establece compuertas independientes para clasificación, segmentación, manejo de artefactos y estimación de tono. La integración de una máscara en el clasificador se considera una hipótesis experimental posterior, no un beneficio asumido. Los resultados actuales de integración no demuestran una mejora general del clasificador, y la estimación ITA del proyecto no equivale a una etiqueta Fitzpatrick validada.
+
+\section{Estado del arte}
+
+Los estudios de SSL en dermatología cubren tareas y modalidades diferentes. Useini et al. estudian detección de lesiones atípicas en fotografías corporales de pacientes de alto riesgo; el trabajo es pertinente como antecedente de SSL, pero no es una comparación multiclase con HAM10000 \parencite{useini2024automatizedSSL}. PanDerm representa modelos fundacionales multimodales de gran escala; sus recursos y datos no corresponden a una línea base reproducible de este proyecto \parencite{yan2025panderm}.
+
+El problema de generalización entre instituciones y la representación desigual de tonos de piel requieren evaluación cuidadosa. La literatura clínica diversa muestra que el desempeño de modelos dermatológicos puede variar entre subgrupos, pero este hecho no permite afirmar que el presente clasificador sea justo o esté validado por fototipo \parencite{daneshjou2022disparities,yang2024crosshospital}. El proyecto reportará solo desgloses para los que existan etiquetas válidas, tamaño suficiente y protocolo explícito.
+
+\section{Marco metodológico, ético y normativo}
+
+El trabajo usa CRISP-ML(Q) como guía para organizar la comprensión de datos, el modelado, la evaluación, el control de calidad y el prototipo \parencite{studer2021crispmlq}. El prototipo es experimental: no reemplaza el juicio médico ni constituye un diagnóstico clínicamente validado.
+
+El proyecto trabaja con conjuntos públicos y no recolecta imágenes de pacientes en instituciones. Antes de redistribuir datos o publicar imágenes, se verifican las licencias y condiciones de cada fuente; el acceso público no implica permiso irrestricto de reutilización. La Ley 1581 de 2012 establece el marco colombiano de protección de datos personales; la aplicación institucional y las responsabilidades concretas del prototipo deben confirmarse con la universidad y la dirección del proyecto \parencite{colombia2012ley1581}. El Marco Ético para la Inteligencia Artificial en Colombia se incluye como orientación ética, no como prueba de cumplimiento ni de validez clínica \parencite{minciencias2021marcoetico}.
+
+\noindent\textit{[Pendiente de revisión por dirección: determinar si hace falta concepto del comité de ética institucional para el uso de conjuntos de datos públicos y precisar la normativa aplicable al alcance experimental. No se plantea telesalud, recolección clínica ni despliegue hospitalario.]}
