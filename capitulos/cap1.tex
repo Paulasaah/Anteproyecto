@@ -1,47 +1,191 @@
+% Source: Anteproyecto (3).pdf. Original wording retained except population/sample.
 \chapter{Marco de referencia}
 
-\section{Lesiones cutáneas y modalidades de imagen}
+\section{Marco teórico}
 
-Las lesiones cutáneas abarcan alteraciones de distinta naturaleza clínica. Su evaluación puede incluir observación directa, dermatoscopía, fotografía clínica y, cuando está indicado, confirmación histopatológica. Estas modalidades no son intercambiables: los modelos y sus métricas deben interpretarse según el tipo de imagen, la población y las etiquetas disponibles.
+ En esta sección se presentan los conceptos claves que permiten ofrecer un contexto de la investigación propuesta, abordando desde la descripción de las lesiones cutáneas, métodos tradicionales para la identificación de las lesiones y métodos de Inteligencia Artificial para el Diagnóstico Médico. (no capitalizado)
 
-HAM10000 reúne 10.015 imágenes dermatoscópicas distribuidas en siete clases: nevo melanocítico (\texttt{nv}), melanoma (\texttt{mel}), queratosis seborreica (\texttt{bkl}), carcinoma basocelular (\texttt{bcc}), queratosis actínica/carcinoma intraepidérmico (\texttt{akiec}), lesiones vasculares (\texttt{vasc}) y dermatofibroma (\texttt{df}) \parencite{tschandl2018ham10000}. El conjunto no cuenta con una clase independiente de carcinoma escamocelular invasor ni representa todas las patologías cutáneas de Santander. Por ello, sus resultados no se extrapolan a categorías ausentes.
+\subsection{Lesiones cutáneas}
+
+La piel, como órgano más extenso del cuerpo humano, está expuesta de manera permanente a una amplia variedad de condiciones que pueden derivar en alteraciones de su estructura y apariencia, conocidas clínicamente como lesiones cutáneas. Desde una perspectiva dermatológica, estas lesiones se clasifican en dos grandes categorías según su naturaleza y potencial de riesgo para la salud del paciente: benignas y malignas. Las lesiones benignas, como los nevos melanocíticos (NEV) y la queratosis seborreica, no representan una amenaza directa para la vida, aunque pueden requerir seguimiento clínico. Las lesiones malignas, en cambio, comprenden patologías de alto impacto clínico como el melanoma (Mel), el carcinoma basocelular (BCC) y el carcinoma de células escamosas (SCC), cuya detección oportuna es determinante para el pronóstico del paciente (Urban et al., 2021). En la Figura~\ref{fig:original-1}, se ilustran los diferentes tipos de lesiones cutáneas.
+
+El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, concentra el 80\% de las muertes asociadas a esta enfermedad, lo que lo convierte en la forma más letal de las lesiones cutáneas malignas (Urban et al., 2021). El carcinoma basocelular, por su parte, es el más frecuente a nivel global y en el contexto local de Santander representa el 64,82\% de los diagnósticos de cáncer de piel \parencite{uribe2018bccbucaramanga}. Esta distinción entre tipos de lesiones no es meramente taxonómica: define el curso del tratamiento, la urgencia de la intervención y las posibilidades de recuperación del paciente, lo que subraya la importancia crítica de contar con herramientas diagnósticas precisas y accesibles para su identificación temprana.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.72\textwidth]{figura01-ejemplos-lesiones-dermatologicas.png}
-    \caption{Ejemplos de imágenes clínicas de lesiones cutáneas.}
-    \label{fig:ejemplos-lesiones}
+    \includegraphics[width=0.9\textwidth]{figura01-ejemplos-lesiones-dermatologicas.png}
+    \caption{Ejemplos de lesiones dermatológicas}
+    \label{fig:original-1}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Adaptado de PAD-UFES-20: A skin lesion dataset composed of patient data and clinical images collected from smartphones, por A. G. C. Pacheco et al., 2020, Data in Brief. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7479321/}
 \end{figure}
-\noindent\textit{Nota.} La imagen proviene del conjunto PAD-UFES-20; sus fotografías clínicas de teléfono móvil difieren de las imágenes dermatoscópicas de HAM10000 \parencite{pacheco2020padufes}.
 
-\section{Clasificación asistida por computador}
+En el estudio del cáncer de piel, la clasificación de las lesiones dermatológicas permite establecer las características clínicas y visuales que diferencian las lesiones benignas de las malignas. Esta clasificación es ampliamente utilizada en la literatura médica y en los datasets dermatológicos empleados en modelos de inteligencia artificial. En la Tabla~\ref{tab:clasificacion-lesiones} se presentan los principales tipos de lesiones cutáneas y sus características clínicas.
 
-Los sistemas de diagnóstico asistido por computador aplican modelos de visión para analizar imágenes y producir predicciones que un profesional puede revisar. En clasificación supervisada, cada imagen de entrenamiento tiene una etiqueta; las redes convolucionales y los Vision Transformers aprenden representaciones que se relacionan con esas categorías. La literatura muestra que los resultados dependen del conjunto, la modalidad y el protocolo, por lo que una métrica publicada no constituye por sí sola evidencia de utilidad clínica en otro contexto \parencite{esteva2017dermatologist,chaturvedi2020multiclassskin,yang2024crosshospital}.
+\begingroup
+\small
+\singlespacing
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}@{}}
+\caption{Clasificación de lesiones dermatológicas y frecuencia en Colombia y Santander}\label{tab:clasificacion-lesiones}\\
+\toprule
+\textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Carcinoma basocelular (BCC) & Maligna & Tumor cutáneo más frecuente, de crecimiento lento y baja metástasis \\
+\addlinespace
+Carcinoma escamocelular (SCC) & Maligna & Tumor asociado a radiación UV con potencial invasivo \\
+\addlinespace
+Melanoma (MEL) & Maligna & Tumor agresivo de melanocitos con alta mortalidad \\
+\addlinespace
+Queratosis actínica (ACK) & Precancerosa & Lesión causada por daño solar que puede evolucionar a SCC \\
+\addlinespace
+Nevo (NEV) & Benigna & Lunar melanocítico común \\
+\addlinespace
+Queratosis seborreica (SEK) & Benigna & Lesión cutánea no cancerosa común en adultos \\
+\addlinespace
+Dermatofibroma (DF) & Benigna & Lesión fibrosa causada por reacción inflamatoria \\
+\addlinespace
+Lesiones vasculares (VASC) & Benigna & Lesiones pigmentadas por hemoglobina \\
+\addlinespace
+\end{longtable}
+\endgroup
 
-\section{Aprendizaje autosupervisado}
+Nota. Elaboración propia a partir de Tschandl et al. (2018) y Uribe et al. (2018).
 
-El aprendizaje autosupervisado (SSL) construye señales de entrenamiento a partir de los propios datos y permite aprender representaciones con imágenes no etiquetadas. En métodos contrastivos o de auto-predicción, el modelo aprende a conservar información útil entre vistas transformadas de una misma imagen. En una tarea posterior de clasificación, las etiquetas siguen siendo necesarias para entrenar o evaluar el clasificador; el SSL reduce la dependencia de etiquetas para aprender la representación, no las elimina \parencite{krishnan2022selfsupervisedmedicine,useini2024automatizedSSL}.
+\subsection{Métodos tradicionales para la identificación de lesiones cutáneas}
 
-El proyecto parte de DINOv2 ViT-B/14 y evalúa adaptación SimSiam sobre esa representación. El control público y los brazos adaptados se mantienen separados para distinguir el efecto de adaptar el codificador. El término de consistencia de tono se trata como factor experimental: la evidencia actual no demuestra una ventaja robusta de ese término \parencite{oquab2024dinov2,chen2021simsiam}.
+ El diagnóstico de patologías dermatológicas ha evolucionado desde la observación clínica subjetiva hasta sistemas de diagnóstico asistido por computador de alta precisión basados en datos. A continuación, se detallan los pilares técnicos y científicos que sustentan esta evolución.
 
-\section{Segmentación y otros módulos complementarios}
+\subsubsection{Exploración clínica y método ABCDE}
 
-La segmentación estima una máscara espacial de la lesión; no asigna por sí misma una clase diagnóstica. La línea complementaria del proyecto comprende un codificador MoCo v2/ResNet-50, generación de pseudo-máscaras mediante CCAM y un modelo U-Net estudiante. Se evalúa como módulo independiente con métricas de segmentación, como Dice, IoU y HD95 \parencite{chen2020mocov2,xie2022ccam,sharma2025skinsegmentationreview}.
+La inspección visual constituye el primer nivel de cribado. El método ABCDE (Asimetría, Borde, Color, Diámetro y Evolución) es el estándar semiológico para identificar signos tempranos de melanoma (Liga Contra el Cáncer, 2024), ver Figura~\ref{fig:original-2}. A pesar de su utilidad, este método presenta limitaciones en la detección de melanomas amelanóticos o lesiones en etapas muy tempranas, donde la sensibilidad depende directamente de la experiencia del facultativo (Niklitschek, 2025).
 
-Entre los antecedentes de segmentación, EIU-Net modifica la extracción de características y las conexiones de un U-Net dentro de un enfoque supervisado \parencite{yu2023eiunet}. USL-Net propone aprendizaje contrastivo, mapas de activación y pseudo-etiquetas con regiones de incertidumbre para segmentación sin anotaciones manuales de entrenamiento \parencite{li2024uslnet}. Estos trabajos permiten situar el módulo complementario y distinguir sus necesidades de anotación; sus resultados publicados no constituyen resultados del proyecto ni controles directamente comparables sin igualar datos y protocolo.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura02-regla-abcde-melanoma.png}
+    \caption{Regla ABCDE del melanoma}
+    \label{fig:original-2}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Modificado de ABCDE del melanoma, por HC Marbella International Hospital, 2020, \url{https://www.hcmarbella.com/es/abcde-del-melanoma/}
+\end{figure}
 
-El flujo de validación modular establece compuertas independientes para clasificación, segmentación, manejo de artefactos y estimación de tono. La integración de una máscara en el clasificador se considera una hipótesis experimental posterior, no un beneficio asumido. Los resultados actuales de integración no demuestran una mejora general del clasificador, y la estimación ITA del proyecto no equivale a una etiqueta Fitzpatrick validada.
+\subsubsection{Dermatoscopía y Técnicas Avanzadas}
 
-\section{Estado del arte}
+La dermatoscopía permite visualizar estructuras subepidérmicas invisibles al ojo humano, incrementando la precisión diagnóstica en un 49\% (Santa Vélez et al., 2020). Por su parte, la Microscopía de Reflectancia Confocal (RCM), denominada "biopsia virtual", ofrece imágenes de resolución casi histológica con una especificidad del 95.3\% (Fundación Piel Sana, 2024). Pese a su efectividad para reducir biopsias innecesarias, el elevado costo operativo de estas técnicas limita su disponibilidad en la atención primaria, justificando el desarrollo de alternativas basadas en software como los sistemas de diagnóstico asistido por computador (CAD).
 
-Los estudios de SSL en dermatología cubren tareas y modalidades diferentes. Useini et al. estudian detección de lesiones atípicas en fotografías corporales de pacientes de alto riesgo; el trabajo es pertinente como antecedente de SSL, pero no es una comparación multiclase con HAM10000 \parencite{useini2024automatizedSSL}. PanDerm representa modelos fundacionales multimodales de gran escala; sus recursos y datos no corresponden a una línea base reproducible de este proyecto \parencite{yan2025panderm}.
+\subsubsection{Biopsia histopatológica}
 
-El problema de generalización entre instituciones y la representación desigual de tonos de piel requieren evaluación cuidadosa. La literatura clínica diversa muestra que el desempeño de modelos dermatológicos puede variar entre subgrupos, pero este hecho no permite afirmar que el presente clasificador sea justo o esté validado por fototipo \parencite{daneshjou2022disparities,yang2024crosshospital}. El proyecto reportará solo desgloses para los que existan etiquetas válidas, tamaño suficiente y protocolo explícito.
+ El diagnóstico definitivo de una lesión cutánea sospechosa requiere la obtención y análisis de una muestra de tejido mediante biopsia, procedimiento que constituye el estándar de oro en la práctica dermatológica. Una vez extraída la muestra, esta debe someterse a un proceso histológico que la prepare para su análisis microscópico, el cual comprende cuatro etapas secuenciales.
 
-\section{Marco metodológico, ético y normativo}
+La primera etapa corresponde a la fijación, en la que el tejido extraído es estabilizado mediante una solución química o por congelación, con el objetivo de detener los procesos metabólicos celulares y preservar la integridad morfológica de la muestra. Posteriormente, en la etapa de inclusión, el tejido es deshidratado mediante soluciones de etanol y embebido en parafina fundida, que al solidificarse genera un bloque de consistencia firme que facilita su manipulación. En la tercera etapa, denominada microtomía, el bloque de parafina es seccionado transversalmente mediante un micrótomo en láminas de aproximadamente 5 micrómetros de grosor, obteniendo cortes histológicos de alta precisión. Finalmente, en la etapa de tinción, se eliminan los residuos de parafina y la muestra es rehidratada e impregnada con pigmentos como hematoxilina y eosina (HE), que permiten diferenciar los componentes biológicos del tejido al aumentar el contraste entre estructuras celulares y extracelulares.
 
-El trabajo usa CRISP-ML(Q) como guía para organizar la comprensión de datos, el modelado, la evaluación, el control de calidad y el prototipo \parencite{studer2021crispmlq}. El prototipo es experimental: no reemplaza el juicio médico ni constituye un diagnóstico clínicamente validado.
+El resultado de este proceso es una preparación histológica que puede ser analizada mediante microscopía óptica, electrónica o sistemas de digitalización de alta resolución. Esta última modalidad ha cobrado especial relevancia en el contexto de la inteligencia artificial aplicada al diagnóstico médico, dado que la digitalización de las preparaciones histológicas genera imágenes de alta resolución que pueden ser procesadas computacionalmente para la clasificación automatizada de patrones morfológicos asociados a patologías malignas, como el melanoma y el carcinoma basocelular. En este sentido, el análisis histopatológico digital constituye uno de los dominios de mayor aplicación de los sistemas CAD y los modelos de aprendizaje profundo en dermatología. El proceso anteriormente descrito se puede observar de manera gráfica en la Figura~\ref{fig:original-3}.
 
-El proyecto trabaja con conjuntos públicos y no recolecta imágenes de pacientes en instituciones. Antes de redistribuir datos o publicar imágenes, se verifican las licencias y condiciones de cada fuente; el acceso público no implica permiso irrestricto de reutilización. La Ley 1581 de 2012 establece el marco colombiano de protección de datos personales; la aplicación institucional y las responsabilidades concretas del prototipo deben confirmarse con la universidad y la dirección del proyecto \parencite{colombia2012ley1581}. El Marco Ético para la Inteligencia Artificial en Colombia se incluye como orientación ética, no como prueba de cumplimiento ni de validez clínica \parencite{minciencias2021marcoetico}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura03-histologia-estandar-vs-virtual.png}
+    \caption{Comparación entre histológica estándar y virtual basada en aprendizaje profundo}
+    \label{fig:original-3}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Adaptado de Deep learning-enabled virtual histological staining of biological samples, por B. Bai et al., 2023, Light, Science \& Applications.
+\end{figure}
 
-\noindent\textit{[Pendiente de revisión por dirección: determinar si hace falta concepto del comité de ética institucional para el uso de conjuntos de datos públicos y precisar la normativa aplicable al alcance experimental. No se plantea telesalud, recolección clínica ni despliegue hospitalario.]}
+\url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9981740/}
+
+\subsubsection{Sistemas de Diagnóstico Asistido por Computador (CAD)}
+
+Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en inglés) integran la ingeniería de software en la práctica clínica mediante un flujo técnico que abarca el preprocesamiento (limpieza de vello e iluminación), la segmentación del área de interés (ROI, por sus siglas en inglés) y la clasificación de malignidad. Este enfoque marca la transición desde el Machine Learning tradicional, limitado por la extracción manual de rasgos, hacia el Aprendizaje Profundo (Deep Learning); aquí, arquitecturas como las CNN y los Vision Transformers (ViTs) permiten que el sistema aprenda automáticamente jerarquías visuales complejas, optimizando la precisión diagnóstica (Rehman et al., 2024), como se ilustra en la Figura~\ref{fig:original-4}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura04-evolucion-cad-deep-learning.png}
+    \caption{Evolución basada en aprendizaje profundo en sistemas CAD para cáncer de piel.}
+    \label{fig:original-4}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Modificado de Deep learning-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
+\end{figure}
+
+\subsection{Métodos de Inteligencia Artificial para el diagnóstico médico}
+
+\subsubsection{Aprendizaje supervisado en imágenes médicas}
+
+ El aprendizaje supervisado constituye el paradigma predominante en el análisis de imágenes médicas mediante inteligencia artificial. En este enfoque, el modelo es entrenado a partir de un conjunto de datos compuesto por pares de entrada-salida, donde cada imagen está asociada a una etiqueta diagnóstica proporcionada por un experto clínico. El objetivo del entrenamiento es que el modelo aprenda a establecer una función de mapeo entre las características visuales de la imagen y su categoría clínica correspondiente, minimizando una función de pérdida que cuantifica el error entre la predicción del modelo y la etiqueta real (Goodfellow et al., 2016). En el contexto de la clasificación de lesiones cutáneas, el aprendizaje supervisado se ha implementado predominantemente mediante Redes Neuronales Convolucionales (CNN), las cuales procesan la imagen a través de capas sucesivas de convolución, activación no lineal y pooling, extrayendo automáticamente jerarquías de características que van desde bordes y texturas elementales hasta patrones dermatoscópicos complejos como redes de pigmento, glóbulos y estructuras vasculares \parencite{esteva2017dermatologist}. Arquitecturas como ResNet, que emplea conexiones residuales para mitigar el problema de desvanecimiento de gradiente en redes profundas, y EfficientNet, que optimiza simultáneamente la profundidad, el ancho y la resolución de la red, se han consolidado como los backbones de referencia en esta tarea (He et al., 2016; Tan \& Le, 2019), como se presenta en la Figura~\ref{fig:original-5}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura05-marco-deep-learning-clasificacion.png}
+    \caption{Marco de aprendizaje profundo para la clasificación de imágenes de cáncer de piel.}
+    \label{fig:original-5}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Modificado de A deep learning-based framework for the classification of skin cancer images, por S. K. Zamani et al., 2022, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9616944/}
+\end{figure}
+
+Una de las estrategias más exitosas dentro del aprendizaje supervisado para imágenes médicas es el transfer learning, en el cual un modelo preentrenado en un conjunto de datos de gran escala como ImageNet (con más de 14 millones de imágenes naturales) es posteriormente ajustado finamente (fine-tuning) sobre el dominio específico de interés. Esta técnica ha demostrado ser particularmente efectiva cuando los datos médicos etiquetados son escasos, ya que las capas iniciales del modelo retienen conocimiento genérico sobre la extracción de características visuales que es transferible entre dominios (Raghu et al., 2019). En dermatología, modelos supervisados con transfer learning han alcanzado accuracies superiores al 90\% en datasets como HAM10000 e ISIC, con ensembles de EfficientNet y ResNet logrando hasta un 99.14\% en condiciones experimentales controladas (Diagnostics, 2025). No obstante, el aprendizaje supervisado presenta limitaciones fundamentales en el contexto clínico: la obtención de etiquetas confiables requiere la participación de dermatólogos experimentados, el proceso de anotación es costoso y difícilmente escalable, y los modelos supervisados son susceptibles a sesgos derivados de datasets desbalanceados donde ciertas patologías están sobrerrepresentadas mientras otras, clínicamente relevantes, cuentan con pocas muestras \parencite{tschandl2018ham10000}. Estas limitaciones son especialmente pronunciadas en contextos como el departamento de Santander, donde la disponibilidad de especialistas para generar anotaciones clínicas es restringida y los sistemas de información hospitalarios no cuentan con repositorios de imágenes dermatológicas estandarizados.
+
+\subsubsection{Aprendizaje no supervisado en imágenes médicas}
+
+ El aprendizaje no supervisado agrupa un conjunto de técnicas de inteligencia artificial en las cuales el modelo aprende a identificar patrones, estructuras y regularidades en los datos sin disponer de etiquetas o anotaciones previas. A diferencia del paradigma supervisado, donde el objetivo es predecir una categoría conocida, en el aprendizaje no supervisado el sistema busca descubrir la organización intrínseca de los datos mediante la agrupación de instancias similares (clustering), la reducción de dimensionalidad o la detección de anomalías (Bishop, 2006). En el ámbito de las imágenes médicas, las técnicas no supervisadas cumplen un rol complementario al aprendizaje supervisado, particularmente en escenarios donde las etiquetas diagnósticas son escasas, costosas o subjetivas. Entre las aplicaciones más relevantes se encuentran: Clustering y segmentación no supervisada: Algoritmos como K-means, DBSCAN y modelos basados en Mixture of Gaussians han sido empleados para agrupar regiones de interés en imágenes dermatológicas según sus propiedades de textura, color y forma, permitiendo la delimitación automática de lesiones sin intervención manual. Estos métodos resultan útiles en la etapa de preprocesamiento de los sistemas CAD, al facilitar la identificación de la Región de Interés (ROI) que posteriormente es clasificada por un modelo supervisado (Rehman et al., 2024), como se ilustra en la Figura~\ref{fig:original-6}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura06-segmentacion-lesiones-cutaneas.png}
+    \caption{Proceso de segmentación de lesiones cutáneas mediante extracción de características y agrupamiento K-means.}
+    \label{fig:original-6}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Modificado de Deep learning-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
+\end{figure}
+
+Autoencoders y detección de anomalías: Los autoencoders son redes neuronales que aprenden a comprimir una imagen en una representación latente de menor dimensión y a reconstruirla a partir de dicha representación. Cuando un autoencoder es entrenado exclusivamente con imágenes de piel sana, las lesiones patológicas generan errores de reconstrucción significativamente mayores, lo que permite su detección como anomalías. Los Variational Autoencoders (VAE) extienden este principio al modelar la distribución probabilística del espacio latente, lo que permite no solo detectar anomalías sino también generar nuevas muestras sintéticas que amplían los conjuntos de datos de entrenamiento (Kingma \& Welling, 2014), como se representa en la Figura~\ref{fig:original-7}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura07-autoencoder-variacional.png}
+    \caption{Modelo probabilístico de autoencoder variacional para detección de anomalías en imágenes cutáneas}
+    \label{fig:original-7}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Modificado de Artificial Intelligence in Medical Imaging: General Concepts, por J. Lee et al., 2024, Korean Journal of Radiology. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11202861/}
+\end{figure}
+
+Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances más relevantes del aprendizaje no supervisado para imágenes médicas. Mediante la competencia entre una red generadora y una red discriminadora, las GAN permiten sintetizar imágenes dermatológicas realistas que contribuyen a mitigar el desbalance de clases, un problema recurrente en los datasets dermatológicos donde patologías como el melanoma están subrepresentadas frente a lesiones benignas. Estudios recientes han identificado 11 casos de uso clínico de las GAN en dermatología, incluyendo la síntesis de fenotipos cutáneos subrepresentados, la segmentación, el denoising y la super-resolución de imágenes (PMC, 2025), como se muestra en la Figura~\ref{fig:original-8}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura08-arquitectura-gan.png}
+    \caption{Arquitectura de redes generativas antagónicas (GAN) aplicada al análisis de lesiones cutáneas.}
+    \label{fig:original-8}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Elaboración propia con base en Generative Adversarial Networks (GANs) in Dermatology, por S. S. G. S. J. Ahmed et al., 2023, Diagnostics. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10453872/}
+\end{figure}
+
+A pesar de su versatilidad, el aprendizaje no supervisado presenta limitaciones para tareas de clasificación diagnóstica, puesto que la ausencia de señal supervisada dificulta la alineación de las representaciones aprendidas con categorías clínicamente relevantes. Por esta razón, en el presente proyecto se adopta el aprendizaje autosupervisado como enfoque principal, el cual combina las ventajas de aprender sin etiquetas (propio del paradigma no supervisado) con la capacidad de generar representaciones orientadas a tareas específicas de clasificación, como se describe en la siguiente subsección.
+
+\subsubsection{Aprendizaje autosupervisado en imágenes médicas}
+
+El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este proyecto para el tratamiento de datos dermatológicos no etiquetados. A través de estrategias contrastivas (comparación de representaciones aumentadas), generativas (reconstrucción de regiones enmascaradas) y de auto-predicción de propiedades espaciales \parencite{chaitanya2023localcontrastive}, el sistema extrae características morfológicas sin requerir intervención experta previa. El prototipo integra arquitecturas como SimCLR y BYOL para la obtención de descriptores robustos, DINO para la segmentación de lesiones mediante destilación de conocimiento, y Masked Autoencoders (MAE) para el análisis de texturas cutáneas. Esta implementación técnica permite mitigar la dependencia de grandes conjuntos de datos médicos etiquetados, optimizando la identificación de patrones clínicos sutiles en entornos de teledermatología donde la supervisión constante es limitada, como se ilustra en la Figura~\ref{fig:original-9}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figura09-marco-ssl.png}
+    \caption{Marco de aprendizaje autosupervisado (SSL) para análisis de imágenes.}
+    \label{fig:original-9}
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Elaboración propia con base en Self-supervised learning for medical image analysis: A survey, por S. Azizi et al., 2024, Scientific Reports
+\end{figure}
+
+\url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11148053/}
