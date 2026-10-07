@@ -243,7 +243,7 @@ Las categorías diagnósticas de PAD-UFES-20 se muestran en la figura \ref{fig:p
 
 \subsection{Metodología de caracterización de los conjuntos}
 
-La caracterización de clase, fototipo y tono se realizó de forma descriptiva sobre los conjuntos ya existentes, sin generar, anotar ni validar nuevas etiquetas. Para HAM10000, ISIC2019 e ISIC2020, el proceso calculó, por imagen y a una resolución canónica, el ángulo de tipología individual (ITA) sobre tres regiones de muestreo de piel --máscara por Otsu, imagen completa y anillo perilesional--, usando pseudo-máscaras automáticas del segmentador cuando están disponibles, con abstención explícita cuando no hay piel suficiente o la máscara es degenerada. El estimador de ITA no está validado contra fototipo real: acierta 22,9\,\% frente a 51,3\,\% de una base de referencia por mayoría en PAD-UFES-20 \parencite{alipour2026italimitations}. Por esta razón, los conteos de clase y de fototipo se presentan como descriptivos y trazables a su fuente, no como medidas validadas de representatividad epidemiológica. Los conteos de clase diagnóstica en sí (figuras \ref{fig:ham10000-clases}, \ref{fig:isic2019-clases}, \ref{fig:isic2020-clases} y \ref{fig:pad-categorias-fig}) provienen de las etiquetas editoriales de cada conjunto y no dependen del estimador de ITA ni de la calidad de las pseudo-máscaras.
+La caracterización de clase, fototipo y tono se realizó de forma descriptiva sobre los conjuntos ya existentes, sin generar, anotar ni validar nuevas etiquetas. Para HAM10000, ISIC2019 e ISIC2020, el proceso calculó, por imagen y a una resolución canónica, el ángulo de tipología individual (ITA) sobre tres regiones de muestreo de piel --máscara por Otsu, imagen completa y anillo perilesional--, usando pseudo-máscaras automáticas del segmentador cuando están disponibles, con abstención explícita cuando no hay piel suficiente o la máscara es degenerada. El estimador ITA no está validado contra fototipo real. La evaluación propia en PAD-UFES-20 y sus resultados se presentan en la sección de transformación de tono; el valor de 22,9\,\% frente a 51,3\,\% corresponde a la evaluación publicada por Alipour et al. (2026), bajo otro protocolo \parencite{alipour2026italimitations}. Por esta razón, los conteos de clase y de fototipo se presentan como descriptivos y trazables a su fuente, no como medidas validadas de representatividad epidemiológica. Los conteos de clase diagnóstica en sí (figuras \ref{fig:ham10000-clases}, \ref{fig:isic2019-clases}, \ref{fig:isic2020-clases} y \ref{fig:pad-categorias-fig}) provienen de las etiquetas editoriales de cada conjunto y no dependen del estimador de ITA ni de la calidad de las pseudo-máscaras.
 
 \subsection{Cobertura regional y límites del corpus}
 
@@ -400,13 +400,13 @@ Esta sección define las métricas y el protocolo estadístico usados en las Sec
 
 Con $s$ el total de observaciones y $c$ el total de predicciones correctas --misma notación empleada para el MCC en el Capítulo~7--, la exactitud (\emph{accuracy}) es $\mathrm{Accuracy}=c/s$. La exactitud balanceada, el F1 macro, el AUC uno-contra-el-resto (OvR), el error de calibración esperado (ECE) y el coeficiente de correlación de Matthews (MCC) se calculan exactamente según las ecuaciones ya presentadas en el Capítulo~7. Estas cinco métricas, junto con accuracy, son las que se reportan en las tablas de las Secciones~8.5 y 8.6.
 
-Las comparaciones pareadas de este capítulo siguen el mismo protocolo ya registrado en el Capítulo~7: remuestreo bootstrap por lesión con $B=1\,000$ remuestras, intervalo de confianza al 95\,\% por el método percentil y semilla 20260923, con corrección de Holm para contrastes múltiples --ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se detiene el rechazo en el primer índice donde $p_{(i)}>\alpha/(m-i+1)$--.
+Los intervalos de los contrastes pareados se calcularon mediante bootstrap con $B=1\,000$ remuestras, intervalo percentil del 95\,\% y semilla 20260923. La unidad de remuestreo dependió del conjunto: lesión (\texttt{lesion\_id}) en HAM10000, paciente (\texttt{patient\_id}) en ISIC2020 y PAD-UFES-20, e imagen en ISIC2019, cuyo conjunto no proporciona un identificador de grupo. Los 491 contrastes reunidos en el banco no cuentan con una corrección global por multiplicidad. En el análisis post hoc de B71-limpio frente a ocho modelos ajustados en ISIC2020, Holm se aplicó por separado a cada familia de métrica. Los contrastes se interpretan dentro de su familia y según el protocolo de cada análisis.
 
 \section{Resultados de transformación de tono de piel}
 
 El método de transformación y de estimación de tono de piel se describe en el Capítulo~7, Sección~\ref{sec:desarrollo-tono}; esta sección presenta el resultado de su validación externa contra fototipo Fitzpatrick (FST) real.
 
-Contra el FST asignado por expertos en Fitzpatrick17k-C (11.098 imágenes), el proxy ITA del proyecto acierta entre 28,5\,\% y 30,8\,\%, frente a 32,9\,\% de una base de referencia trivial que predice siempre la clase mayoritaria. Contra el FST asignado clínicamente en PAD-UFES-20 (1.494 imágenes con dato de fototipo, caracterizadas en la Sección~\ref{sec:caracterizacion-tono}), el proxy ITA acierta 22,9\,\%, frente a 51,3\,\% de una base de referencia por mayoría \parencite{alipour2026italimitations}.
+En Fitzpatrick17k-C (11.098 imágenes con anotación de referencia), el proxy ITA obtuvo una exactitud de 28,5\,\% a 30,8\,\%, frente a 32,9\,\% de la línea base trivial por mayoría, según el artefacto de validación externa del proyecto. En PAD-UFES-20, la evaluación exploratoria del proyecto incluyó 1.494 registros con fototipo experto válido. Para imagen completa hubo 1.265 casos evaluables y 229 sin estimación: la exactitud fue 21,74\,\%, frente a 59,37\,\% de la línea base por mayoría calculada sobre los mismos casos. Con fondo enmascarado mediante Otsu, hubo 1.189 casos evaluables y 305 sin estimación: la exactitud fue 22,88\,\%, frente a 59,80\,\% de la línea base en esos mismos casos. Esta comparación evalúa el estimador ITA frente a etiquetas de fototipo; no constituye una evaluación de la calidad de las máscaras de segmentación. Los valores de 22,9\,\% y 51,3\,\% corresponden a una evaluación publicada por Alipour et al. (2026) con otro protocolo y no son la comparación propia del proyecto \parencite{alipour2026italimitations}.
 
 En ambos conjuntos de validación externa el estimador ITA rinde \textbf{por debajo} del baseline trivial de predecir siempre la clase mayoritaria. Este es un resultado negativo explícito, no una afirmación de que \enquote{no es el mejor resultado}: no hay evidencia, en ninguna de las dos validaciones, de que el proxy ITA del proyecto capture el fototipo Fitzpatrick real mejor que adivinar la clase más frecuente. En consecuencia, ningún proxy de ITA de este trabajo debe interpretarse como una estimación válida de fototipo clínico, y las caracterizaciones por fototipo de la Sección~\ref{sec:caracterizacion-tono} se mantienen explícitamente como descriptivas y trazables a su fuente de píxeles, no como mediciones validadas de equidad.
 
@@ -443,7 +443,7 @@ Los intervalos de confianza individuales de A71 y B71 se solapan en exactitud ba
 \subsection{Segmentación complementaria}
 \label{sec:segmentacion-complementaria}
 
-La línea USL-Net produce máscaras aproximadas sin utilizar etiquetas diagnósticas ni máscaras expertas durante el entrenamiento. El protocolo principal \texttt{student\_r3} aplica MoCo v2/ResNet-50, CCAM, pseudo-máscaras y tres rondas de refinamiento del U-Net. Posteriormente se evaluó S4-A2, con DINOv2 ViT-B/14 congelado y un decoder tipo DPT. La tabla presenta el Dice medio y su IC del 95\,\% frente a las máscaras de referencia.
+La línea USL-Net produce máscaras aproximadas sin utilizar etiquetas diagnósticas ni máscaras expertas durante el entrenamiento. El protocolo ejecutado \texttt{student\_r3} aplica MoCo v2/ResNet-50, CCAM, pseudo-máscaras y tres rondas de refinamiento del U-Net. El número de rondas corresponde a la configuración registrada; no se comparó experimentalmente con otras cantidades ni se documentó por qué se fijó exactamente en tres. El equipo informó que el tiempo disponible limitó la exploración de variantes adicionales. Posteriormente se evaluó S4-A2, con DINOv2 ViT-B/14 congelado y un decoder tipo DPT. La tabla presenta el Dice medio y su IC del 95\,\% frente a las máscaras de referencia.
 
 \begin{table}[htbp]
 \centering
@@ -464,14 +464,14 @@ S4-A2 superó el criterio registrado antes de la evaluación: su Dice en ISIC201
 
 \section{Discusión}
 
-\subsection{Comparación confirmatoria: clasificador SSL congelado frente a ocho líneas base}
+\subsection{Comparación pareada: clasificador SSL congelado frente a ocho líneas base}
 
-\enquote{Congelado} significa que el backbone preentrenado con SSL no actualiza sus pesos: solo se ajusta una regresión logística sobre las representaciones extraídas, con etiquetas del conjunto de entrenamiento de cada dataset. Esta es la comparación confirmatoria y controlada del banco: todas las líneas base se evalúan sobre la misma partición de HAM10000 (n = 2.004, agrupada por \texttt{lesion\_id}), con bootstrap pareado de 1.000 remuestras, semilla 20260923.
+\enquote{Congelado} significa que el backbone preentrenado con SSL no actualiza sus pesos: solo se ajusta una regresión logística sobre las representaciones extraídas, con etiquetas del conjunto de entrenamiento de cada dataset. Esta comparación controlada utiliza una partición común de HAM10000 (n = 2.004, agrupada por \texttt{lesion\_id}) y bootstrap pareado de 1.000 remuestras, con semilla 20260923. Los intervalos de los contrastes de esta tabla no tienen ajuste global por multiplicidad, por lo que la lectura 8 de 8 es descriptiva de esta familia y no una confirmación independiente de ocho hipótesis.
 
 \begin{table}[htbp]
 \centering
-\caption{Comparación confirmatoria: F1 macro del clasificador congelado (B71) contra ocho líneas base, HAM10000 (n = 2.004).}
-\label{tab:confirmatoria-baselines}
+\caption{Contrastes pareados de F1 macro entre el clasificador congelado (B71) y ocho líneas base en HAM10000 (n = 2.004).}
+\label{tab:comparacion-baselines-ham}
 \begin{tabular}{lrrl}
 \toprule
 Línea base & F1 macro propio & $\Delta$ F1 vs. B71 [IC 95\,\%] & Lectura \\
@@ -489,17 +489,17 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 [$+$0,0728; $+$0,1585] & excluye cero \\
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
-B71 alcanza F1 macro 0,7141 en esta misma partición. Los ocho contrastes pareados excluyen cero: es el único resultado del banco con lectura confirmatoria 8 de 8.
+B71 alcanza F1 macro 0,7141 en esta partición. Los intervalos del 95\,\% de los ocho contrastes pareados excluyen cero. Como no se aplicó una corrección global por multiplicidad a este conjunto de contrastes, el hallazgo se interpreta como una señal dentro de esta comparación y no como confirmación independiente de cada contraste.
 
 \subsection{Comparación descriptiva: ajuste fino de las ocho líneas base}
 
 El ajuste fino actualiza todos los pesos de cada línea base con etiquetas, usando una partición distinta (n = 2.014) y eligiendo la época por desempeño en validación, lo que introduce un sesgo optimista declarado. Por estas diferencias de protocolo, esta comparación es descriptiva y no un contraste pareado contra B71.
 
-Los máximos de ajuste fino fueron 0,7058 (ViT-B/16) en HAM10000, 0,7962 (ViT-B/16) en ISIC2019 y 0,5889 (VGG19) en ISIC2020. A diferencia del régimen congelado, donde B71 gana a las ocho líneas base de forma confirmatoria, el ajuste fino de los mejores backbones sí alcanza o supera a B71 en HAM10000 e ISIC2019. La distinción entre ambos regímenes --representación congelada frente a ajuste con etiquetas-- es la que sostiene la contribución SSL: B71 no requiere etiquetas para aprender la representación, mientras que el ajuste fino las requiere en su totalidad.
+Los máximos de ajuste fino fueron 0,7058 (ViT-B/16) en HAM10000, 0,7962 (ViT-B/16) en ISIC2019 y 0,5889 (VGG19) en ISIC2020. A diferencia del régimen congelado, en el que los intervalos pareados de B71 frente a ocho líneas base excluyen cero en esta partición, el ajuste fino de los mejores backbones alcanza o supera a B71 en HAM10000 e ISIC2019. La distinción entre ambos regímenes --representación congelada frente a ajuste con etiquetas-- es la que sostiene la contribución SSL: B71 no requiere etiquetas para aprender la representación, mientras que el ajuste fino las requiere en su totalidad.
 
 \subsection{Caso especial: ISIC2020, F1 contra sensibilidad clínica}
 
-En ISIC2020, el contraste pareado entre B71-limpio y sus ocho ajustes finos, corregido por Holm, favorece a B71 en F1 macro frente a 7 de 8 líneas base (VGG19 queda cerca, $p_{\text{Holm}}=0{,}066$). Sin embargo, la exactitud balanceada favorece a 7 de 8 ajustes finos, y la sensibilidad de melanoma --la métrica de mayor relevancia clínica-- muestra la brecha más marcada del banco: B71 detecta 39 de 122 melanomas (recall 0,3197), frente a 86 de 122 (recall 0,7049) del AlexNet ajustado. F1 macro alto no implica mejor detección de melanoma; esta tensión se reporta de forma explícita y no se resuelve a favor de ninguno de los dos regímenes sin una decisión clínica adicional sobre qué métrica priorizar.
+En ISIC2020, un análisis post hoc comparó B71-limpio con ocho modelos ajustados. La corrección de Holm se aplicó a cada familia de métrica por separado. Para F1 macro, el análisis favorece a B71-limpio frente a 7 de 8 líneas base; en VGG19 no se alcanza el umbral corregido ($p_{\text{Holm}}=0{,}066$). Esta comparación se reporta como post hoc y no como parte del registro original. Sin embargo, la exactitud balanceada favorece a 7 de 8 ajustes finos, y la sensibilidad de melanoma --la métrica de mayor relevancia clínica-- muestra la brecha más marcada del banco: B71 detecta 39 de 122 melanomas (recall 0,3197), frente a 86 de 122 (recall 0,7049) del AlexNet ajustado. F1 macro alto no implica mejor detección de melanoma; esta tensión se reporta de forma explícita y no se resuelve a favor de ninguno de los dos regímenes sin una decisión clínica adicional sobre qué métrica priorizar.
 
 \subsection{Ablación de segmentación complementaria (F4)}
 
@@ -532,15 +532,16 @@ El contraste primario D3$-$D2 es significativo: $\Delta$F1 $=+0{,}0816$ [$+0{,}0
 
 \subsection{Limitaciones de ITA y Fitzpatrick}
 
-El estimador de ITA del proyecto no es un clasificador Fitzpatrick validado: acierta 22,9\,\% frente al 51,3\,\% de una base de referencia por mayoría en PAD-UFES-20 \parencite{alipour2026italimitations}. Los metadatos de PAD-UFES-20 no permiten concluir sobre fototipos V--VI: esos grupos tienen muy pocas observaciones en el banco. Por estas razones, ningún resultado de este capítulo se presenta como una auditoría concluyente de equidad por fototipo.
+El estimador de ITA del proyecto no es un clasificador Fitzpatrick validado. En PAD-UFES-20, la evaluación propia obtuvo 21,74\,\% de exactitud con imagen completa (n = 1.265; línea base por mayoría de 59,37\,\%) y 22,88\,\% con el fondo enmascarado por Otsu (n = 1.189; línea base de 59,80\,\%), calculadas sobre los mismos casos evaluables. La cifra de 22,9\,\% frente a 51,3\,\% corresponde al estudio de Alipour et al. (2026), no a esta evaluación \parencite{alipour2026italimitations}. Los metadatos de PAD-UFES-20 no permiten concluir sobre fototipos V--VI: esos grupos tienen muy pocas observaciones en el banco. Por estas razones, ningún resultado de este capítulo se presenta como una auditoría concluyente de equidad por fototipo.
 
 \subsection{Estado del objetivo y trabajo pendiente}
 
-El banco respalda el aprendizaje autosupervisado como método de representación frente a ocho líneas base, de forma confirmatoria en régimen congelado (8 de 8), y aporta una señal piloto de que la adaptación con imágenes de PAD sin etiquetas mejora la sonda de origen frente a su control de cómputo. No demuestra que la segmentación mejore la clasificación de forma general ni que la adaptación a PAD supere al encoder público. El estado de las cuestiones abiertas es el siguiente:
+En la partición común de HAM10000, los intervalos pareados de B71 frente a ocho líneas base excluyeron cero, sin ajuste global por multiplicidad. La adaptación con imágenes sin etiquetas de PAD mostró una mejora piloto frente a su control de cómputo, pero no superó al encoder público. La integración de segmentación no demostró una mejora general de la clasificación. El estado de las cuestiones abiertas es el siguiente:
 \begin{enumerate}
     \item \textbf{Trazabilidad de D2/D3.} Antes de nuevas semillas se debe completar el registro de procedencia. En la versión revisada, los \texttt{run.json} dejan \texttt{data\_revision} vacío y no contienen un hash de partición válido; el protocolo sí identifica otros hashes de exclusión, listas de IDs y del split PAD.
     \item \textbf{Ablación de F4.} F4 combina recorte de lesión y descriptores de forma/color. Como esos componentes no se aislaron en el banco reportado, el resultado sigue siendo exploratorio y no permite atribuir un eventual cambio a la segmentación por separado.
     \item \textbf{Proxy ITA.} El contraste con fototipos de referencia quedó por debajo de la línea base por mayoría. No se usa el ITA como fototipo Fitzpatrick ni como validación de equidad.
     \item \textbf{Criterio clínico de selección.} El banco muestra una tensión entre F1 macro y sensibilidad de melanoma. No hay una decisión clínica documentada que permita priorizar una de estas métricas; por ello se reportan ambas y no se declara un ganador clínico.
+    \item \textbf{Prototipo.} La implementación prevista en el objetivo 4 aún no se ha realizado. Permanece pendiente hasta seleccionar el modelo y la configuración finales.
 \end{enumerate}
 Estas limitaciones no autorizan por sí solas nuevas corridas; cualquier corrida se ejecuta en UNAB con presupuesto previamente acordado.
