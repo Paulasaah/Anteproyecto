@@ -1,5 +1,403 @@
 \chapter{Resultados y Discusión}
 
+% TODO T11: reorganizar este capítulo completo según 7.1-7.6 de la plantilla del profesor
+% (7.1 Configuración experimental, 7.2 Conjuntos de datos, 7.3 Métricas de evaluación,
+% 7.4 Resultados de transformación de tono de piel, 7.5 Resultados de clasificación con
+% 7.5.1/7.5.2, 7.6 Discusión). Las secciones siguientes se migraron tal cual desde
+% capitulos/desarrollo_proyecto.tex y capitulos/resultados_esperados_riesgos.tex (ya no
+% son capítulos independientes de main.tex) como contenido real a reorganizar, no como
+% estructura final de este capítulo.
+
+\section{Caracterización de los conjuntos de datos y perfil epidemiológico}
+% TODO T11: pertenece a 7.2 Conjuntos de datos.
+
+\subsection{Caracterización de HAM10000}
+
+HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete categorías diagnósticas: nevos melanocíticos (\texttt{nv}), melanoma (\texttt{mel}), lesiones similares a queratosis benignas (\texttt{bkl}), carcinoma basocelular (\texttt{bcc}), queratosis actínica y carcinoma intraepidérmico (\texttt{akiec}), lesiones vasculares (\texttt{vasc}) y dermatofibroma (\texttt{df}) \parencite{tschandl2018ham10000}. La categoría \texttt{bkl} comprende lesiones como queratosis seborreicas, lentigos solares y queratosis liquenoides; su denominación abreviada en la figura no reduce la clase a queratosis seborreica. La clase \texttt{nv} concentra la mayoría de las imágenes. \texttt{akiec} no representa una clase independiente de carcinoma escamocelular invasor. El conjunto constituye la fuente principal de entrenamiento y evaluación del clasificador, pero su composición no demuestra representatividad epidemiológica de Santander. Tampoco proporciona etiquetas clínicas de fototipo Fitzpatrick.
+
+``Sin bucket'' (blanco) son imágenes sin estimación de tono confiable (piel insuficiente o máscara degenerada) y es la porción mayoritaria en varias clases; se muestra explícitamente para no ocultar la cobertura real. Los colores I--VI son la salida de un estimador de ITA no validado contra fototipo Fitzpatrick real \parencite{alipour2026italimitations}, no una medición clínica.
+
+\begin{figure}[!htbp]
+\centering
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}
+\begin{axis}[
+    xbar stacked,
+    width=0.95\linewidth,
+    height=7.2cm,
+    bar width=11pt,
+    xlabel={Número de imágenes},
+    symbolic y coords={df,vasc,akiec,bcc,bkl,mel,nv},
+    ytick=data,
+    yticklabels={Dermatofibroma (df), Lesión vascular (vasc), Queratosis actínica (akiec), Carcinoma basocelular (bcc), Queratosis seborreica (bkl), Melanoma (mel), Nevo (nv)},
+    tick label style={font=\scriptsize},
+    axis lines*=left,
+    enlarge y limits=0.09,
+    legend columns=4,
+    legend style={at={(0.5,-0.22)}, anchor=north, font=\scriptsize, draw=none},
+]
+\addplot[fill=fitzI,draw=cappnearblack,line width=0.3pt] coordinates {(40,df) (31,vasc) (109,akiec) (125,bcc) (177,bkl) (219,mel) (3022,nv)};
+\addplot[fill=fitzII,draw=cappnearblack,line width=0.3pt] coordinates {(2,df) (1,vasc) (2,akiec) (2,bcc) (11,bkl) (11,mel) (435,nv)};
+\addplot[fill=fitzIII,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (1,vasc) (0,akiec) (3,bcc) (4,bkl) (3,mel) (102,nv)};
+\addplot[fill=fitzIV,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (0,vasc) (0,akiec) (0,bcc) (0,bkl) (1,mel) (30,nv)};
+\addplot[fill=fitzV,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (0,vasc) (0,akiec) (0,bcc) (0,bkl) (0,mel) (7,nv)};
+\addplot[fill=fitzVI,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (0,vasc) (0,akiec) (0,bcc) (0,bkl) (0,mel) (1,nv)};
+\addplot[fill=white,draw=cappnearblack,line width=0.3pt] coordinates {(73,df) (109,vasc) (216,akiec) (384,bcc) (907,bkl) (879,mel) (3108,nv)};
+\legend{I,II,III,IV,V,VI,Sin bucket}
+\end{axis}
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Distribución de clases diagnósticas de HAM10000 por bucket de tono (estimador ITA por Otsu, no validado como fototipo real).}
+\label{fig:ham10000-clase-tono}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia.
+\end{figure}
+
+\FloatBarrier
+\Needspace{0.88\textheight}
+\subsection{Caracterización de ISIC2019}
+
+ISIC2019 reúne 25.331 imágenes dermatoscópicas (20.264 de entrenamiento y 5.067 de validación) distribuidas en ocho categorías diagnósticas: nevos melanocíticos (\texttt{NV}), melanoma (\texttt{MEL}), carcinoma basocelular (\texttt{BCC}), lesiones similares a queratosis benignas (\texttt{BKL}), queratosis actínica (\texttt{AK}), carcinoma escamocelular (\texttt{SCC}), dermatofibroma (\texttt{DF}) y lesión vascular (\texttt{VASC}) \parencite{combalia2024bcn20000}. A diferencia de HAM10000, que agrupa la queratosis actínica y el carcinoma intraepidérmico en una sola clase (\texttt{akiec}), ISIC2019 separa \texttt{AK} de \texttt{SCC} como categorías independientes; ambas taxonomías no son directamente intercambiables en un entrenamiento conjunto. La clase \texttt{NV} concentra igualmente la mayoría de las imágenes, un desbalance compartido con HAM10000.
+
+La distribución de clases de ISIC2019 se presenta en la figura \ref{fig:isic2019-clases}, junto con las de HAM10000, ISIC2020 y PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el pool local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
+
+\begin{figure}[!htbp]
+\centering
+\definecolor{technicalnavy}{HTML}{23394D}
+\begin{subfigure}[t]{0.49\linewidth}
+\centering
+\begin{tikzpicture}[x=0.68cm,y=0.70cm]
+\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
+\foreach \tick in {0,1,2,3,4,5} {
+\draw[gray!25] (0,\tick) -- (7.6,\tick);
+\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
+}
+\draw[->] (0,0) -- (0,5.2);
+\draw (0,0) -- (7.6,0);
+\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (0.2529,0) rectangle (0.8329,3.82639878);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (0.5429,3.82639878) {6705};
+\node[below,font=\scriptsize,inner sep=3pt] at (0.5429,0) {nv};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.3386,0) rectangle (1.9186,3.04649516);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (1.6286,3.04649516) {1113};
+\node[below,font=\scriptsize,inner sep=3pt] at (1.6286,0) {mel};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (2.4243,0) rectangle (3.0043,3.04099769);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (2.7143,3.04099769) {1099};
+\node[below,font=\scriptsize,inner sep=3pt] at (2.7143,0) {bkl};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (3.5100,0) rectangle (4.0900,2.71096312);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (3.8000,2.71096312) {514};
+\node[below,font=\scriptsize,inner sep=3pt] at (3.8000,0) {bcc};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.5957,0) rectangle (5.1757,2.51454775);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (4.8857,2.51454775) {327};
+\node[below,font=\scriptsize,inner sep=3pt] at (4.8857,0) {akiec};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.6814,0) rectangle (6.2614,2.15228834);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (5.9714,2.15228834) {142};
+\node[below,font=\scriptsize,inner sep=3pt] at (5.9714,0) {vasc};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (6.7671,0) rectangle (7.3471,2.06069784);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (7.0571,2.06069784) {115};
+\node[below,font=\scriptsize,inner sep=3pt] at (7.0571,0) {df};
+\end{tikzpicture}
+\caption{HAM10000}
+\label{fig:ham10000-clases}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\linewidth}
+\centering
+\begin{tikzpicture}[x=0.68cm,y=0.70cm]
+\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
+\foreach \tick in {0,1,2,3,4,5} {
+\draw[gray!25] (0,\tick) -- (7.6,\tick);
+\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
+}
+\draw[->] (0,0) -- (0,5.2);
+\draw (0,0) -- (7.6,0);
+\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (0.2090,0) rectangle (0.7410,4.10974724);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (0.4750,4.10974724) {12875};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (0.4750,0) {NV};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.1590,0) rectangle (1.6910,3.65533056);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (1.4250,3.65533056) {4522};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (1.4250,0) {MEL};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (2.1090,0) rectangle (2.6410,3.52153034);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (2.3750,3.52153034) {3323};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (2.3750,0) {BCC};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (3.0590,0) rectangle (3.5910,3.41896383);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (3.3250,3.41896383) {2624};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (3.3250,0) {BKL};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.0090,0) rectangle (4.5410,2.93801910);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (4.2750,2.93801910) {867};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (4.2750,0) {AK};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.9590,0) rectangle (5.4910,2.79795964);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (5.2250,2.79795964) {628};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (5.2250,0) {SCC};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.9090,0) rectangle (6.4410,2.40312052);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (6.1750,2.40312052) {253};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (6.1750,0) {VASC};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (6.8590,0) rectangle (7.3910,2.37839790);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (7.1250,2.37839790) {239};
+\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (7.1250,0) {DF};
+\end{tikzpicture}
+\caption{ISIC2019}
+\label{fig:isic2019-clases}
+\end{subfigure}
+\par\medskip
+\begin{subfigure}[t]{0.49\linewidth}
+\centering
+\begin{tikzpicture}[x=0.68cm,y=0.70cm]
+\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
+\foreach \tick in {0,1,2,3,4,5} {
+\draw[gray!25] (0,\tick) -- (7.6,\tick);
+\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
+}
+\draw[->] (0,0) -- (0,5.2);
+\draw (0,0) -- (7.6,0);
+\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.6100,0) rectangle (2.1900,4.51244424);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (1.9000,4.51244424) {32542};
+\node[below,font=\scriptsize,inner sep=3pt] at (1.9000,0) {Benigno};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.4100,0) rectangle (5.9900,2.76641285);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (5.7000,2.76641285) {584};
+\node[below,font=\scriptsize,inner sep=3pt] at (5.7000,0) {Maligno};
+\end{tikzpicture}
+\caption{ISIC2020}
+\label{fig:isic2020-clases}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\linewidth}
+\centering
+\begin{tikzpicture}[x=0.68cm,y=0.70cm]
+\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
+\foreach \tick in {0,1,2,3,4,5} {
+\draw[gray!25] (0,\tick) -- (7.6,\tick);
+\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
+}
+\draw[->] (0,0) -- (0,5.2);
+\draw (0,0) -- (7.6,0);
+\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (0.3433,0) rectangle (0.9233,2.92685671);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (0.6333,2.92685671) {845};
+\node[below,font=\scriptsize,inner sep=3pt] at (0.6333,0) {BCC};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.6100,0) rectangle (2.1900,2.86332286);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (1.9000,2.86332286) {730};
+\node[below,font=\scriptsize,inner sep=3pt] at (1.9000,0) {ACK};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (2.8767,0) rectangle (3.4567,2.38738983);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (3.1667,2.38738983) {244};
+\node[below,font=\scriptsize,inner sep=3pt] at (3.1667,0) {NEV};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.1433,0) rectangle (4.7233,2.37106786);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (4.4333,2.37106786) {235};
+\node[below,font=\scriptsize,inner sep=3pt] at (4.4333,0) {SEK};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.4100,0) rectangle (5.9900,2.28330123);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (5.7000,2.28330123) {192};
+\node[below,font=\scriptsize,inner sep=3pt] at (5.7000,0) {SCC};
+\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (6.6767,0) rectangle (7.2567,1.71600334);
+\node[above,font=\scriptsize,inner sep=1.5pt] at (6.9667,1.71600334) {52};
+\node[below,font=\scriptsize,inner sep=3pt] at (6.9667,0) {MEL};
+\end{tikzpicture}
+\caption{PAD-UFES-20}
+\label{fig:pad-categorias-fig}
+\end{subfigure}
+\caption{Distribución de clases por conjunto en escala logarítmica.}
+\label{fig:distribuciones-clase-combinadas}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Los valores sobre las barras indican el número de imágenes. Las abreviaturas conservan las etiquetas de cada conjunto: nv/NV y NEV, nevo; mel/MEL, melanoma; bkl/BKL, lesiones similares a queratosis benignas; SEK, queratosis seborreica; bcc/BCC, carcinoma basocelular; akiec/AK/ACK, queratosis actínica; vasc/VASC, lesión vascular; df/DF, dermatofibroma; SCC, carcinoma escamocelular. En HAM10000, akiec también incluye carcinoma intraepitelial. Los conteos y fuentes corresponden a la descripción precedente.
+\end{figure}
+
+\FloatBarrier
+\subsection{Caracterización de ISIC2020}
+
+ISIC2020 comprende 33.126 imágenes dermatoscópicas (26.466 de entrenamiento y 6.660 de validación) con una taxonomía binaria de diagnóstico: benigno y maligno \parencite{rotemberg2021isic2020}. El conjunto presenta un desbalance extremo, con apenas 584 imágenes malignas (1,8\,\%) frente a 32.542 benignas (98,2\,\%), condición que exige funciones de pérdida ponderadas o estrategias de remuestreo en cualquier ajuste supervisado sobre este corpus. A diferencia de HAM10000 e ISIC2019, no distingue subtipo histológico dentro de cada clase.
+
+La distribución binaria se presenta en el panel ISIC2020 de la figura \ref{fig:distribuciones-clase-combinadas}; el tamaño del pool local coincide con las 33.126 imágenes del conjunto.
+
+\FloatBarrier
+\subsection{Caracterización de PAD-UFES-20}
+
+PAD-UFES-20 es un conjunto de 2.298 imágenes clínicas --no dermatoscópicas-- tomadas con cámaras de teléfonos inteligentes, correspondientes a 1.891 lesiones de 1.373 pacientes atendidos entre 2018 y 2019 en el Hospital Universitario Cassiano Antônio Moraes (HUCAM), de la Universidad Federal de Espírito Santo (UFES, Brasil), en el marco del Programa de Assistência Dermatológica e Cirúrgica \parencite{pacheco2020padufes}. De más de 50 tipos de lesión documentados originalmente, los autores seleccionaron las seis categorías diagnósticas más frecuentes, agrupando la enfermedad de Bowen con el carcinoma escamocelular por tratarse de SCC in situ: carcinoma basocelular (\texttt{BCC}), queratosis actínica (\texttt{ACK}), nevus (\texttt{NEV}), queratosis seborreica (\texttt{SEK}), carcinoma escamocelular (\texttt{SCC}) y melanoma (\texttt{MEL}). Todas las muestras diagnosticadas como cáncer de piel cuentan con confirmación biópsica; las categorías restantes (\texttt{ACK}, \texttt{SEK}, \texttt{NEV}) fueron diagnosticadas clínicamente por un equipo de dermatólogos, sin biopsia en todos los casos.
+
+\begin{table}[htbp]
+\centering
+\caption{Categorías diagnósticas de PAD-UFES-20.}
+\label{tab:pad-categorias}
+\begin{tabular}{p{6cm}cr}
+\toprule
+Categoría & Código & Imágenes \\
+\midrule
+Carcinoma basocelular & BCC & 845 \\
+Queratosis actínica & ACK & 730 \\
+Nevus & NEV & 244 \\
+Queratosis seborreica & SEK & 235 \\
+Carcinoma escamocelular (incluye enfermedad de Bowen) & SCC & 192 \\
+Melanoma & MEL & 52 \\
+\midrule
+Total & & 2.298 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las categorías diagnósticas de PAD-UFES-20 se muestran en la figura \ref{fig:pad-categorias-fig}, junto con las de HAM10000, ISIC2019 e ISIC2020. La figura \ref{fig:pad-fototipo-clinico} presenta, por separado, el fototipo clínico: una variable demográfica que no corresponde al diagnóstico de la lesión.
+
+\subsection{Metodología de caracterización de los conjuntos}
+
+La caracterización de clase, fototipo y tono se realizó de forma descriptiva sobre los conjuntos ya existentes, sin generar, anotar ni validar nuevas etiquetas. Para HAM10000, ISIC2019 e ISIC2020, el proceso calculó, por imagen y a una resolución canónica, el ángulo de tipología individual (ITA) sobre tres regiones de muestreo de piel --máscara por Otsu, imagen completa y anillo perilesional--, usando pseudo-máscaras automáticas del segmentador cuando están disponibles, con abstención explícita cuando no hay piel suficiente o la máscara es degenerada. El estimador de ITA no está validado contra fototipo real: acierta 22,9\,\% frente a 51,3\,\% de una base de referencia por mayoría en PAD-UFES-20 \parencite{alipour2026italimitations}. Por esta razón, los conteos de clase y de fototipo se presentan como descriptivos y trazables a su fuente, no como medidas validadas de representatividad epidemiológica. Los conteos de clase diagnóstica en sí (figuras \ref{fig:ham10000-clases}, \ref{fig:isic2019-clases}, \ref{fig:isic2020-clases} y \ref{fig:pad-categorias-fig}) provienen de las etiquetas editoriales de cada conjunto y no dependen del estimador de ITA ni de la calidad de las pseudo-máscaras.
+
+\subsection{Cobertura regional y límites del corpus}
+
+La caracterización vincula los conjuntos públicos con las patologías regionales sin asumir cobertura completa. HAM10000 permite estudiar las siete categorías dermatoscópicas enumeradas, pero no incluye una clase separada de SCC invasor ni patologías como leishmaniasis. El estudio local de Uribe et al. documenta carcinoma basocelular en Bucaramanga, pero no basta para inferir conteos acumulados de todas las neoplasias del HIC o mortalidad por melanoma \parencite{uribe2018bccbucaramanga}.
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{ISIC2019/ISIC2020:} caracterizados en las secciones anteriores; el pool local de 15.316 imágenes de ISIC2019 usado en preentrenamiento SSL es un subconjunto sin etiquetas del corpus editorial completo, y su distribución por clase no se asume idéntica a la de la figura \ref{fig:isic2019-clases}.
+    \item \textbf{CO2Wounds-V2:} excluido del núcleo clasificatorio porque contiene heridas crónicas y no imágenes dermatoscópicas de lesiones comparables.
+    \item \textbf{PAD-UFES-20:} caracterizado en la sección anterior; la partición \texttt{target\_adapt} se usa sin etiquetas para adaptación SSL de dominio y \texttt{target\_test} se reserva para evaluación externa, excluida de todo entrenamiento y ajuste.
+\end{enumerate}
+
+\subsection{Caracterización del fototipo y del tono por conjunto}
+\label{sec:caracterizacion-tono}
+
+El fototipo Fitzpatrick registrado en los metadatos y el tono medido en una imagen son variables diferentes. La caracterización clínica utiliza únicamente etiquetas aportadas por la fuente. Los valores derivados de píxeles se presentan como proxies colorimétricos y no como anotaciones clínicas de tipos I--VI. La tabla \ref{tab:disponibilidad-fototipo} distingue ambas fuentes de información.
+
+\begin{table}[!htbp]
+\begingroup
+\small
+\singlespacing
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.05}
+\centering
+\caption{Disponibilidad de fototipo clínico y caracterización de tono en los conjuntos considerados.}
+\label{tab:disponibilidad-fototipo}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.30\linewidth}>{\raggedright\arraybackslash}p{\dimexpr0.53\linewidth-16pt\relax}@{}}
+\toprule
+Conjunto & Fototipo clínico disponible & Caracterización local y límite \\
+\midrule
+HAM10000 & No reportado: 10.015 imágenes & Resumen de proxy ITA para las dos carpetas del conjunto; no permite asignar fototipos clínicos. \\
+ISIC2019 & Sin etiquetas FST verificadas en el pool local & Resumen colorimétrico de 15.316 imágenes del pool; no corresponde al total editorial del dataset. \\
+ISIC2020 & Sin etiquetas FST verificadas en el pool local & Resumen colorimétrico de 33.126 imágenes del pool. \\
+ISIC2018 & Sin inventario FST verificado para esta evaluación & Se utiliza en evaluación del segmentador; no hay histograma clínico local trazable. \\
+PAD-UFES-20 & 1.494 imágenes con FST; 804 sin dato & Exportación clínica por imagen: 2.298 imágenes en total; caracterización descriptiva del conjunto, con particiones separadas de adaptación y evaluación externa. \\
+CO2Wounds-V2 & No caracterizado en este trabajo & Excluido del alcance actual. \\
+\bottomrule
+\end{tabular}
+\endgroup
+\end{table}
+
+BCN20000 no se utiliza como conjunto independiente en este trabajo; las imágenes presentes en ISIC2019 se consideran dentro de ese conjunto. HAM10000 no reporta fototipo clínico para sus 10.015 imágenes, por lo que no se asignan tipos Fitzpatrick a partir de su apariencia.
+
+En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 identificadores de imagen únicos con etiquetas clínicas: I, 153; II, 876; III, 392; IV, 62; V, 10; y VI, 1. Otras 804 imágenes no tienen fototipo. Estos recuentos por tipo provienen de la exportación del proyecto, no de una tabla del artículo. Su total de 2.298 imágenes coincide con el tamaño del conjunto descrito por la publicación primaria \parencite{pacheco2020padufes}. La unidad del histograma es la imagen, no el paciente: varias imágenes de una misma persona pueden compartir la etiqueta, sin que ello constituya un duplicado de identificador. Los tamaños de V y VI solo permiten descripción, no conclusiones de desempeño para esos fototipos.
+
+La exportación del proyecto verifica identificadores únicos. La etiqueta clínica no cambia al transformar el color de una imagen.
+
+\begin{figure}[!htbp]
+\centering
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[x=1.45cm,y=0.004cm]
+  \draw[->] (0,0) -- (7.5,0);
+  \draw[->] (0,0) -- (0,1000) node[above] {Imágenes};
+  \foreach \tick in {0,200,400,600,800} {
+    \draw (-0.08,\tick) -- (0,\tick) node[left] {\scriptsize \tick};
+  }
+  \foreach \x/\tipo/\valor/\col in {1/I/153/fitzI,2/II/876/fitzII,3/III/392/fitzIII,4/IV/62/fitzIV,5/V/10/fitzV,6/VI/1/fitzVI,7/Sin\ dato/804/white} {
+    \draw[fill=\col,draw=cappnearblack,line width=0.7pt] (\x-0.28,0) rectangle (\x+0.28,\valor);
+    \node[above,font=\scriptsize] at (\x,\valor) {\valor};
+    \node[below,font=\scriptsize] at (\x,0) {\tipo};
+  }
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Número de imágenes por fototipo clínico registrado en PAD-UFES-20.}
+\label{fig:pad-fototipo-clinico}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia.
+\end{figure}
+
+\subsection{Caracterización colorimétrica antes y después de la transformación}
+
+El resumen local anterior a la transformación permite describir el proxy ITA de las imágenes originales (tabla \ref{tab:ita-originales}). Se calcula sobre píxeles de piel seleccionados por máscara, usando las medianas de los canales CIELAB: $\mathrm{ITA}=(180/\pi)\arctan((\widetilde L^*-50)/\widetilde b^*)$. El código marca el resultado como indeterminado si $\widetilde b^*<5$; otras imágenes quedan en cuarentena por los controles del módulo. Los seis intervalos empleados internamente para agrupar ITA no se interpretan como fototipos clínicos.
+
+\begin{table}[htbp]
+\centering
+\caption{Caracterización del proxy ITA en imágenes originales del pool local.}
+\label{tab:ita-originales}
+\begin{tabular}{lrrrrr}
+\toprule
+Conjunto & Imágenes & ITA válido & Indeterminado & Cuarentena & ITA medio ($^\circ$) \\
+\midrule
+HAM10000 & 10.015 & 4.277 & 5.545 & 193 & 56,86 \\
+ISIC2019 (pool) & 15.316 & 6.287 & 7.449 & 1.580 & 51,72 \\
+ISIC2020 (pool) & 33.126 & 20.833 & 10.587 & 1.706 & 52,36 \\
+\bottomrule
+\end{tabular}
+
+\noindent\textit{Nota.} Elaboración propia.
+\end{table}
+
+El resumen usa la estratificación del 21 de septiembre de 2026. HAM10000 agrega sus carpetas de 5.000 y 5.015 imágenes; su media ITA pondera los 2.547 y 1.730 casos válidos, respectivamente. Las cifras describen ese pool y esa versión de máscaras; no son prevalencias de fototipo ni se trasladan automáticamente a otras corridas.
+
+La transformación modifica la luminosidad de todos los píxeles fuera de la máscara de lesión, incluidos fondo y artefactos; es una modificación sintética de luminosidad, no una corrección validada del tono de piel. Su formulación se desarrolla en el Capítulo~6, Sección~\ref{sec:metodologia-tono}. Para comparar antes y después se requieren pares originales/transformados con identificadores coincidentes, hashes y mediciones colorimétricas obtenidas con el mismo protocolo. Los resultados locales revisados no contienen el manifiesto de transformaciones ni mediciones posteriores emparejadas. Por ello, el efecto posterior sobre ITA o luminosidad permanece pendiente y no se presenta un histograma simulado. Los conteos de fototipo clínico de PAD-UFES-20 conservan su valor tras cualquier transformación, porque son metadatos de la persona y no una propiedad que se reasigne a partir de los píxeles.
+
+\subsection{Perfil objetivo para el contexto de Santander}
+
+Los tipos III y IV se consideran un perfil objetivo de interés indicado para el proyecto. No se dispone en las fuentes locales revisadas de una distribución poblacional de fototipos de Santander que permita afirmar su predominio o asignarles porcentajes. En consecuencia, este perfil orienta preguntas de cobertura y evaluación futura, sin constituir una prevalencia demostrada ni justificar la conversión de los proxies ITA en etiquetas clínicas.
+
+En el ámbito clínico colombiano se menciona de forma no sistemática, sin estudio poblacional formal que lo confirme, un posible predominio de fototipos III y IV en la población general del país. El único estudio epidemiológico robusto disponible para Colombia \parencite{oliveros2025melanomacolombia} no midió fototipo directamente; su única inferencia relacionada es hipotética y se refiere a población afrodescendiente de zonas costeras de baja altitud (0--400 m), geográficamente distinta del perfil de Santander, y los propios autores declaran la ausencia de información de fototipo como limitación explícita del estudio.
+
+\subsection{Perfil epidemiológico regional de Santander}
+
+La revisión de la literatura regional, los reportes del Instituto del Cáncer del Hospital Internacional de Colombia (HIC), los boletines del SIVIGILA y los estudios académicos asociados a la Universidad Industrial de Santander documentaron quince patologías cutáneas con carga clínica relevante en el departamento, clasificadas en cinco niveles de prioridad para el modelo SSL (crítica, alta, media, baja y trabajo futuro) según incidencia regional reportada, mortalidad asociada y disponibilidad de evidencia epidemiológica trazable.
+
+Cuatro lesiones malignas concentran la prioridad crítica: el carcinoma basocelular, con una tasa de incidencia estandarizada de 124,2 casos por 100.000 habitantes-año en el área metropolitana de Bucaramanga; el carcinoma escamocelular, asociado al daño solar acumulado; el cáncer de piel no melanoma agregado, con 3.060 casos reportados por el Instituto del Cáncer del HIC entre 2016 y 2023; y el melanoma, responsable del 80\,\% de la mortalidad por cáncer de piel pese a representar únicamente el 13,66\,\% de los casos en el área metropolitana de Bucaramanga \parencite{uribe2018bccbucaramanga}. Esta cifra es de alcance regional y no debe confundirse con la proporción global citada en el marco teórico (2\,\% de los casos y 80\,\% de las muertes, Urban et al., 2021): ambas comparten el porcentaje de mortalidad pero describen poblaciones y fuentes distintas. La cifra nacional de 11.064 casos corresponde a melanoma cutáneo atendido hasta el 31 de diciembre de 2024 y la Cuenta de Alto Costo la reporta como preliminar \parencite{cuentaaltocosto2025melanoma}.
+
+\begin{table}[htbp]
+\centering
+\caption{Patologías cutáneas documentadas en Santander, ordenadas por prioridad para el modelo SSL.}
+\label{tab:patologias-santander}
+\begin{tabular}{p{5.5cm}p{3.5cm}l}
+\toprule
+Patología & Categoría clínica & Prioridad \\
+\midrule
+Cáncer de piel no melanoma (agregado) & Maligna & Crítica \\
+Carcinoma basocelular & Maligna & Crítica \\
+Carcinoma escamocelular & Maligna & Crítica \\
+Melanoma & Maligna & Crítica \\
+Leishmaniasis cutánea & Parasitaria & Alta \\
+Nevus melanocítico & Benigna & Alta \\
+Queratosis seborreica & Benigna & Alta \\
+Dermatofibroma & Benigna & Media \\
+Lesiones vasculares & Benigna & Media \\
+Lesiones por presión / LRC & Hospitalaria & Media \\
+Acné & Inflamatoria crónica & Media \\
+Dermatitis atópica & Inflamatoria crónica & Media \\
+Hidradenitis supurativa & Inflamatoria crónica & Baja \\
+Maskne (post-COVID) & Inflamatoria aguda & Baja \\
+Heridas crónicas (lepra/Hansen) & Crónica (lepra) & Trabajo futuro \\
+\bottomrule
+\end{tabular}
+\end{table}
+\noindent\textit{Nota.} Elaboración propia a partir de la revisión epidemiológica cruzada documentada en la propuesta original del proyecto, con fuentes primarias en el Instituto del Cáncer del HIC, SIVIGILA y estudios de la Universidad Industrial de Santander.
+
+De las quince patologías, cuatro corresponden a lesiones malignas (27\,\%), cuatro a lesiones benignas (27\,\%), tres a inflamatorias crónicas (20\,\%) y las cuatro restantes se distribuyen entre categorías parasitaria, inflamatoria aguda, hospitalaria y crónica asociada a lepra. Esta composición evidencia que el universo dermatológico santandereano no se limita al espectro oncológico clásicamente representado en los datasets internacionales: incluye patologías inflamatorias, infecciosas tropicales y crónicas con carga clínica documentada en la región, que los conjuntos HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20 no cubren.
+
+\subsection{Estado del objetivo}
+
+La identificación y el análisis exploratorio de conjuntos constituyen evidencia de avance del objetivo 1. Antes de declarar el objetivo cerrado, documentar los criterios de selección y exclusión, licencias, grupos de lesión, hashes de las particiones y correspondencia entre cada afirmación epidemiológica y su fuente primaria.
+
+% Las figuras de arquitectura modular (fig:arquitectura-modular) y de protocolo de
+% evaluación (fig:protocolo-evaluacion) se movieron al Capítulo 6 (Metodología):
+% la primera antes de las tres líneas de trabajo en metodologia.tex, la segunda
+% dentro del protocolo del clasificador en metodologia_clasificador.tex. Son
+% contenido metodológico, no resultados.
+
+\FloatBarrier
+
+\noindent\textit{Nota sobre consolidación.} Los resultados de este capítulo corresponden a la auditoría del banco completo, etiqueta \texttt{v8.0.0-clean}. Los resultados de un ciclo anterior (v7, brazos A*/B* con término de ajuste de tono) quedaron superados por este diseño experimental más completo, con un brazo de control de cómputo (D2) que el ciclo anterior no tenía; no se presentan como resultados vigentes.
+
+\section{Resultados esperados}
+% TODO T11: reorganizar dentro de 7.1 o donde corresponda al armar el capítulo 7 completo.
+
+El proyecto espera producir: (i) una caracterización documentada de conjuntos de imágenes dermatológicas y sus límites de representatividad; (ii) un clasificador que use representaciones aprendidas mediante SSL y un clasificador lineal posterior claramente descrito; (iii) una evaluación reproducible frente a controles y, cuando se complete el protocolo comparable, una línea base supervisada; y (iv) un prototipo experimental de apoyo a la revisión de imágenes.
+
+No se fijan umbrales de desempeño como resultados garantizados. Las métricas se reportarán con su protocolo, incertidumbre y límites de dominio. El sistema no sustituye al profesional ni representa una herramienta clínica validada.
+
 \section{Resultados de clasificación y de la segmentación complementaria}
 
 \subsection{Resultados disponibles de clasificación}

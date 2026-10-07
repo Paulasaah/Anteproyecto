@@ -1,13 +1,13 @@
 % Source: Anteproyecto (3).pdf. Original wording retained except population/sample.
-\chapter{Diseño metodológico}
+\chapter{Metodología}
 
-El presente diseño metodológico establece la ruta estructurada que orientará el desarrollo del proyecto desde la identificación de los datos hasta el despliegue del prototipo funcional. El proyecto se enmarca en una investigación aplicada con enfoque cuantitativo y alcance experimental, cuyo propósito es el diseño e implementación de un modelo de inteligencia artificial basado en aprendizaje autosupervisado para el apoyo diagnóstico de lesiones cutáneas en contextos clínicos con escasez de datos etiquetados en el departamento de Santander.
+El presente diseño metodológico documenta la ruta que orientó el desarrollo del proyecto desde la identificación de los datos hasta la evaluación comparativa del algoritmo propuesto. El proyecto se enmarcó en una investigación aplicada con enfoque cuantitativo y alcance experimental, cuyo propósito fue el diseño e implementación de un modelo de inteligencia artificial basado en aprendizaje autosupervisado para el apoyo diagnóstico de lesiones cutáneas en contextos clínicos con escasez de datos etiquetados en el departamento de Santander. La implementación de un prototipo funcional (objetivo específico 4) permanece fuera del alcance efectivamente ejecutado hasta el cierre de este documento, tal como se precisa en la Tabla~\ref{tab:trazabilidad-fases}.
 
-El desempeño del modelo será cuantificado mediante métricas estándar de clasificación AUC-ROC, F1-score y exactitud que permiten comparaciones objetivas entre configuraciones (Hernández-Sampieri et al., 2018). Para garantizar la validez interna de las comparaciones, el modelo SSL será entrenado y sometido a ajuste de hiperparámetros manteniendo constantes el conjunto de datos, la arquitectura backbone y el protocolo de evaluación, contrastando los resultados obtenidos con modelos supervisados de referencia reportados en la literatura bajo las mismas condiciones experimentales.
+El desempeño del modelo se cuantificó mediante métricas estándar de clasificación --F1 macro, exactitud balanceada, AUC-ROC uno-contra-el-resto, entre otras detalladas en la Sección~\ref{sec:metodologia-clasificador}-- que permiten comparaciones objetivas entre configuraciones (Hernández-Sampieri et al., 2018). Para garantizar la validez interna de las comparaciones, el modelo SSL se entrenó y se sometió a ajuste de hiperparámetros manteniendo constantes el conjunto de datos, la arquitectura backbone y el protocolo de evaluación, contrastando los resultados obtenidos con un codificador público de referencia bajo las mismas condiciones experimentales; los resultados de esta comparación se presentan en el Capítulo~7.
 
 \section{Diseño de la investigación}
 
-El desarrollo del proyecto estará basado en el cumplimiento de los objetivos formulados siguiendo el modelo CRISP-ML(Q), estructurado originalmente en seis fases: comprensión del negocio y de los datos, ingeniería de datos, ingeniería del modelo, evaluación del modelo, despliegue y monitoreo y mantenimiento \parencite{studer2021crispmlq}. Estas fases se agrupan en cuatro etapas iterativas representadas en la Figura~\ref{fig:original-10}: (i) Comprensión del problema clínico y de los datos dermatológicos, (ii) Ingeniería de datos y modelado del algoritmo SSL, (iii) Evaluación del modelo con aseguramiento de calidad y (iv) Implementación y despliegue del prototipo de apoyo al diagnóstico clínico. La sexta fase del modelo original, correspondiente al monitoreo y mantenimiento del modelo en producción, excede el nivel de madurez tecnológica TRL 4 proyectado para este trabajo de grado; por esta razón, se documenta como línea de continuidad para investigaciones posteriores.
+El desarrollo del proyecto se organizó según el cumplimiento de los cuatro objetivos específicos formulados (objetivos.tex), siguiendo el modelo CRISP-ML(Q), estructurado originalmente en seis fases: comprensión del negocio y de los datos, ingeniería de datos, ingeniería del modelo, evaluación del modelo, despliegue y monitoreo y mantenimiento \parencite{studer2021crispmlq}. Para este trabajo de grado, esas seis fases se adaptaron y agruparon en cuatro etapas iterativas, representadas en la Figura~\ref{fig:original-10} y conectadas con los objetivos específicos y con su estado de ejecución real en la Tabla~\ref{tab:trazabilidad-fases}: (i) Comprensión del problema clínico y de los datos dermatológicos (objetivo 1), (ii) Ingeniería de datos y modelado de las tres líneas de trabajo autosupervisadas (objetivo 2), (iii) Evaluación del modelo con aseguramiento de calidad (objetivo 3) y (iv) Implementación y despliegue del prototipo de apoyo al diagnóstico clínico (objetivo 4). Las primeras tres etapas se ejecutaron durante este trabajo de grado; la cuarta ---que agrupa la sexta fase del modelo original (monitoreo y mantenimiento en producción) con la implementación del prototipo-- excede el nivel de madurez tecnológica TRL 4 alcanzado y se documenta como línea de continuidad para investigaciones posteriores, no como trabajo realizado.
 
 \begin{figure}[htbp]
     \centering
@@ -39,6 +39,38 @@ El desarrollo del proyecto estará basado en el cumplimiento de los objetivos fo
 \textit{Nota.} Elaboración propia. Las flechas sólidas indican la secuencia de trabajo; las flechas discontinuas son los retornos condicionados por riesgo de la Tabla~\ref{tab:riesgos-proyecto} (R1, R5, R7), que la versión anterior de este diagrama no representaba. R2 y R3 retornan dentro de la propia fase 2 y no se dibujan como arco independiente. El recuadro inferior presenta la continuidad futura fuera del alcance del proyecto.
 \end{figure}
 
+La Tabla~\ref{tab:trazabilidad-fases} conecta cada etapa del diseño con su ejecución real: el objetivo específico al que respondió, las actividades efectivamente realizadas, la línea o líneas de trabajo involucradas, el producto que generó y su estado de avance.
+
+\begingroup
+\tiny
+\singlespacing
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.06\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.09\textwidth}@{}}
+\caption{Trazabilidad entre diseño metodológico y ejecución real}\label{tab:trazabilidad-fases}\\
+\toprule
+\textbf{Fase CRISP-ML(Q)} & \textbf{Obj.} & \textbf{Actividades ejecutadas} & \textbf{Línea de trabajo} & \textbf{Producto o entregable} & \textbf{Estado} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Fase CRISP-ML(Q)} & \textbf{Obj.} & \textbf{Actividades ejecutadas} & \textbf{Línea de trabajo} & \textbf{Producto o entregable} & \textbf{Estado} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1. Comprensión del problema y los datos & 1 & Revisión epidemiológica; caracterización de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20; definición de la matriz de riesgos inicial. & Transversal (preparatoria a las tres líneas). & Caracterización de conjuntos de datos; matriz de riesgos de proyecto (Tabla~\ref{tab:riesgos-proyecto}). & Ejecutada \\
+\addlinespace
+2. Ingeniería de datos y modelado SSL & 2 & Partición de HAM10000 por \texttt{lesion\_id}; preentrenamiento autosupervisado de las tres líneas; adaptación de dominio hacia PAD-UFES-20 sin etiquetas. & Las tres (tono, segmentación, clasificador). & Transformación de tono, segmentador y clasificador implementados (detalle técnico en las Secciones~\ref{sec:metodologia-tono}--\ref{sec:metodologia-clasificador}). & Ejecutada \\
+\addlinespace
+3. Evaluación del modelo & 3 & Comparación pareada contra codificador público con bootstrap y corrección de Holm (clasificador); validación externa del proxy ITA contra FST real (tono); evaluación con coeficiente Dice (segmentación). & Las tres, con distinto grado de madurez: protocolo confirmatorio completo en el clasificador; evaluación interna sin comparación externa formal en segmentación. & Procedimientos y protocolos de evaluación de cada línea; las cifras de desempeño se presentan en el Capítulo~7. & Ejecutada \\
+\addlinespace
+4. Implementación del prototipo & 4 & Ninguna. & No aplica. & Ninguno. & Pendiente, fuera del alcance TRL~4 actual (ver Análisis de factibilidad). \\
+\addlinespace
+\end{longtable}
+\endgroup
+{\footnotesize\singlespacing
+\noindent\textit{Nota.} Elaboración propia. La columna «Producto o entregable» describe lo que produjo cada fase, no cifras de desempeño; los resultados numéricos y hallazgos experimentales se presentan en el Capítulo~7.\par
+}
+
 \section{Población y muestra}
 
 La disponibilidad de conjuntos de datos de imágenes dermatológicas con fines investigativos es reducida en el contexto clínico del departamento de Santander. Ante esta restricción, el estudio adopta repositorios públicos consolidados en la literatura de clasificación dermatológica. La población de análisis corresponde a las imágenes dermatológicas disponibles en los conjuntos seleccionados; su uso no constituye una muestra representativa de pacientes del departamento ni una validación clínica regional.
@@ -54,49 +86,49 @@ La selección de imágenes estará guiada por criterios de calidad y pertinencia
 
 \subsection{Fase 1 -- Comprensión del problema clínico y de los datos dermatológicos}
 
-En esta fase se desarrolla la comprensión integral del problema diagnóstico de lesiones cutáneas en el contexto del departamento de Santander y se realiza la caracterización de los conjuntos de datos públicos de imágenes dermatológicas que sustentarán el desarrollo del modelo. Se evalúan aspectos relacionados con la incidencia y prevalencia epidemiológica de las lesiones cutáneas reportadas a nivel regional, las propiedades estadísticas de los datasets candidatos --distribución de clases, calidad de imagen, tamaño y condiciones de licencia-- y la matriz de riesgos por fase que orientará las etapas posteriores del proyecto, en concordancia con los componentes de aseguramiento de calidad (Q) propuestos por Studer et al. (2021). Entregable: Informe de comprensión empresarial y de datos con la caracterización formal de los conjuntos de datos seleccionados, los criterios de inclusión y exclusión, las métricas objetivo del modelo y la matriz de riesgos por fase.
+En esta fase se desarrolló la comprensión integral del problema diagnóstico de lesiones cutáneas en el contexto del departamento de Santander y se realizó la caracterización de los conjuntos de datos públicos de imágenes dermatológicas que sustentaron el desarrollo del modelo. Se evaluaron aspectos relacionados con la incidencia y prevalencia epidemiológica de las lesiones cutáneas reportadas a nivel regional, las propiedades estadísticas de los datasets candidatos --distribución de clases, calidad de imagen, tamaño y condiciones de licencia-- y se consolidó la matriz de riesgos por fase que orientó las etapas posteriores del proyecto, en concordancia con los componentes de aseguramiento de calidad (Q) propuestos por Studer et al. (2021). Entregable: caracterización formal de los conjuntos de datos seleccionados, criterios de inclusión y exclusión, métricas objetivo del modelo y matriz de riesgos por fase (Tabla~\ref{tab:riesgos-proyecto}).
 
-Actividad 1.1: Revisar literatura científica y reportes epidemiológicos relacionados con lesiones cutáneas de mayor relevancia clínica en el departamento de Santander.
+Actividad 1.1: se revisó la literatura científica y los reportes epidemiológicos relacionados con las lesiones cutáneas de mayor relevancia clínica en el departamento de Santander.
 
-Actividad 1.2: Definir los objetivos de aprendizaje automático del proyecto y traducirlos a métricas medibles, en concordancia con el perfil epidemiológico regional y los estándares reportados en la literatura.
+Actividad 1.2: se definieron los objetivos de aprendizaje automático del proyecto y se tradujeron a métricas medibles, en concordancia con el perfil epidemiológico regional y los estándares reportados en la literatura.
 
-Actividad 1.3: Identificar y caracterizar conjuntos de datos públicos de imágenes dermatológicas, documentando tamaño, calidad de imagen, distribución de clases, fototipos representados y condiciones de licencia.
+Actividad 1.3: se identificaron y caracterizaron los conjuntos de datos públicos de imágenes dermatológicas, documentando tamaño, calidad de imagen, distribución de clases, fototipos representados y condiciones de licencia.
 
-Actividad 1.4: Seleccionar las imágenes y clases diagnósticas pertinentes para el contexto del proyecto, aplicando criterios de inclusión y exclusión previamente definidos.
+Actividad 1.4: se seleccionaron las imágenes y clases diagnósticas pertinentes para el contexto del proyecto, aplicando criterios de inclusión y exclusión previamente definidos.
 
-Actividad 1.5: Consolidar la matriz de riesgos por fase y los criterios de aseguramiento de calidad (Q) que orientarán el desarrollo de las fases posteriores.
+Actividad 1.5: se consolidó la matriz de riesgos por fase y los criterios de aseguramiento de calidad (Q) que orientaron el desarrollo de las fases posteriores.
 
 \subsection{Fase 2 -- Ingeniería de datos y modelado del algoritmo SSL}
 
-En esta fase se desarrolla el pipeline reproducible de preparación de los datos seleccionados en la fase anterior y se diseña el algoritmo de clasificación basado en aprendizaje autosupervisado. El proceso incluye la implementación de las transformaciones de preprocesamiento, la partición estratificada de los conjuntos de datos, la selección de la arquitectura backbone, el entrenamiento autosupervisado con imágenes no etiquetadas y el ajuste fino supervisado, manteniendo un registro completo de metadata de cada experimento para garantizar la reproducibilidad de los resultados. Entregable: Pipeline de datos versionado y algoritmo computacional basado en aprendizaje autosupervisado para la clasificación de lesiones cutáneas, con documentación de arquitectura, hiperparámetros y trazabilidad experimental.
+En esta fase se desarrolló el pipeline reproducible de preparación de los datos seleccionados en la fase anterior y se diseñaron e implementaron las tres líneas de trabajo autosupervisadas (Secciones~\ref{sec:metodologia-tono}--\ref{sec:metodologia-clasificador}). El proceso incluyó la implementación de las transformaciones de preprocesamiento, la partición de los conjuntos de datos por \texttt{lesion\_id}, la selección de las arquitecturas backbone, el entrenamiento autosupervisado con imágenes no etiquetadas y la adaptación de dominio hacia PAD-UFES-20, manteniendo un registro de metadata de cada experimento para favorecer la reproducibilidad de los resultados. Entregable: pipeline de datos versionado y las tres líneas de trabajo implementadas (transformación de tono, segmentador, clasificador), con documentación de arquitectura, hiperparámetros y trazabilidad experimental --detallada en las secciones de cada línea, más abajo en este capítulo.
 
-Actividad 2.1: Implementar el pipeline de preprocesamiento de imágenes, incluyendo redimensionamiento, normalización, aumento de datos y partición estratificada en subconjuntos de entrenamiento, validación y prueba.
+Actividad 2.1: se implementó el pipeline de preprocesamiento de imágenes, incluyendo redimensionamiento, normalización, aumentación y partición por \texttt{lesion\_id} en subconjuntos de entrenamiento, validación y prueba.
 
-Actividad 2.2: Revisar modelos y estrategias de aprendizaje autosupervisado reportadas en la literatura para clasificación de imágenes médicas y dermatológicas.
+Actividad 2.2: se revisaron modelos y estrategias de aprendizaje autosupervisado reportadas en la literatura para clasificación de imágenes médicas y dermatológicas.
 
-Actividad 2.3: Seleccionar la arquitectura base (backbone) y definir la estrategia de entrenamiento autosupervisado del modelo propuesto.
+Actividad 2.3: se seleccionaron las arquitecturas base (DINOv2 ViT-B/14 para el clasificador, ResNet-50 para el segmentador) y se definieron las estrategias de entrenamiento autosupervisado de cada línea.
 
-Actividad 2.4: Entrenar el modelo mediante aprendizaje autosupervisado utilizando imágenes dermatológicas sin etiquetas y realizar el ajuste fino supervisado sobre el conjunto de datos etiquetados.
+Actividad 2.4: se entrenaron las tres líneas mediante aprendizaje autosupervisado utilizando imágenes dermatológicas sin etiquetas, y se adaptó el clasificador al dominio de PAD-UFES-20 sin usar sus etiquetas.
 
-Actividad 2.5: Documentar la arquitectura final del modelo, los hiperparámetros utilizados, las decisiones de diseño adoptadas y la metadata completa de los experimentos realizados.
+Actividad 2.5: se documentaron la arquitectura final de cada línea, los hiperparámetros utilizados, las decisiones de diseño adoptadas y la metadata de los experimentos realizados.
 
 \subsection{Fase 3 -- Evaluación del modelo con aseguramiento de calidad}
 
-En esta fase se evalúa el desempeño del algoritmo propuesto mediante métricas estándar de clasificación dermatológica reportadas en la literatura científica y se realiza una comparación experimental con modelos supervisados de referencia entrenados bajo las mismas condiciones experimentales. Adicionalmente, se incorporan los componentes de aseguramiento de calidad (Q) propios del marco CRISP-ML(Q), incluyendo el análisis de robustez del modelo, la auditoría de fairness por fototipo de piel y la generación de mapas de explicabilidad. Entregable: Informe comparativo con métricas de desempeño, matrices de confusión, análisis estadístico, auditoría de fairness y mapas de explicabilidad del modelo propuesto frente a los modelos supervisados de referencia.
+En esta fase se evaluó el desempeño del algoritmo propuesto mediante métricas estándar de clasificación dermatológica reportadas en la literatura científica y se realizó una comparación experimental pareada frente a un codificador público de referencia, bajo las mismas condiciones experimentales. Adicionalmente, se aplicaron componentes de aseguramiento de calidad (Q) propios del marco CRISP-ML(Q): protocolo confirmatorio registrado de antemano, corrección de Holm para comparaciones múltiples y, en la línea de tono, validación externa contra fototipo Fitzpatrick real. Entregable: protocolos de evaluación y comparación de cada línea (Secciones~\ref{sec:metodologia-tono}--\ref{sec:metodologia-clasificador}); las cifras de desempeño y el análisis de los resultados se presentan en el Capítulo~7.
 
-Actividad 3.1: Identificar y seleccionar modelos supervisados de referencia reportados en la literatura científica para comparación experimental.
+Actividad 3.1: se identificó y seleccionó el codificador público de referencia para la comparación experimental del clasificador.
 
-Actividad 3.2: Implementar los modelos de referencia utilizando el mismo conjunto de datos, backbone y protocolo experimental del modelo propuesto.
+Actividad 3.2: se implementó la comparación de referencia utilizando el mismo conjunto de datos, arquitectura y protocolo experimental del modelo propuesto.
 
-Actividad 3.3: Calcular métricas de evaluación como AUC-ROC, F1-score, exactitud, precisión y sensibilidad, desagregando los resultados por clase diagnóstica.
+Actividad 3.3: se calcularon las métricas de evaluación (F1 macro, exactitud balanceada, AUC-ROC, ECE, MCC, entre otras; Sección~\ref{sec:metodologia-clasificador}), desagregadas por clase diagnóstica.
 
-Actividad 3.4: Realizar análisis de robustez del modelo, auditoría de fairness por fototipo de piel y generación de mapas de explicabilidad como componentes de aseguramiento de calidad.
+Actividad 3.4: se realizó la validación externa del proxy ITA frente a fototipo Fitzpatrick real (Sección~\ref{sec:metodologia-tono}) como componente de aseguramiento de calidad relacionado con sesgo por fototipo; no se generaron mapas de explicabilidad en esta fase --queda como trabajo pendiente.
 
-Actividad 3.5: Elaborar el análisis estadístico y la documentación comparativa de los resultados obtenidos durante la evaluación experimental.
+Actividad 3.5: se elaboró el protocolo de análisis estadístico (bootstrap pareado y corrección de Holm, Sección~\ref{sec:metodologia-clasificador}) aplicado a los resultados obtenidos durante la evaluación experimental.
 
 \subsection{Fase 4 -- Implementación y despliegue del prototipo de apoyo al diagnóstico clínico}
 
-En esta fase se desarrolla un prototipo funcional que integra el algoritmo de clasificación validado para apoyar el análisis de imágenes dermatológicas en un entorno clínico experimental. El aplicativo permite cargar imágenes dermatológicas, visualizar las predicciones generadas por el modelo, declarar de forma explícita las limitaciones conocidas del sistema y aplicar un plan de contingencia frente a casos de baja confianza, en concordancia con los principios de despliegue responsable propuestos por el marco CRISP-ML(Q). Entregable: Prototipo funcional documentado con manual de uso, matriz de limitaciones y plan de contingencia.
+Esta fase \textbf{no se ejecutó} durante este trabajo de grado (Tabla~\ref{tab:trazabilidad-fases}); queda documentada como planificación pendiente para el cierre del proyecto, no como trabajo realizado. En esta fase se desarrollaría un prototipo funcional que integra el algoritmo de clasificación validado para apoyar el análisis de imágenes dermatológicas en un entorno clínico experimental. El aplicativo permite cargar imágenes dermatológicas, visualizar las predicciones generadas por el modelo, declarar de forma explícita las limitaciones conocidas del sistema y aplicar un plan de contingencia frente a casos de baja confianza, en concordancia con los principios de despliegue responsable propuestos por el marco CRISP-ML(Q). Entregable: Prototipo funcional documentado con manual de uso, matriz de limitaciones y plan de contingencia.
 
 Actividad 4.1: Definir los requerimientos funcionales y no funcionales del aplicativo de apoyo diagnóstico.
 
@@ -152,7 +184,43 @@ R7. Discrepancia laboratorio vs. prototipo. & Medio & Pruebas funcionales con im
 \noindent\textit{Nota.} Elaboración propia. La indicación de retorno en cada plan identifica la fase que se debe revisar cuando se materializa el riesgo. Por ejemplo, R1 exige revisar los resultados de la fase 3 y volver al modelado de la fase 2; R7 requiere revisar la integración de la fase 4 y repetir la evaluación de la fase 3.\par
 }
 
+De los siete riesgos previstos durante la planificación, la ejecución del proyecto confirmó empíricamente uno: el riesgo R4 (sesgo de fototipos IV-V en los conjuntos de datos públicos). La validación externa del proxy ITA frente a fototipo Fitzpatrick real, descrita en la Sección~\ref{sec:metodologia-tono}, mostró que el estimador de tono no distingue el fototipo real mejor que una base de referencia trivial --un resultado consistente con el sesgo de representación que R4 anticipaba--. Más allá de este caso, no se llevó una bitácora formal de riesgos materializados durante la ejecución; los hallazgos relevantes de cada línea de trabajo se discuten en el Capítulo~7.
+
 Además de los siete riesgos de proyecto anteriores, existe un riesgo transversal a la integridad de la evidencia que no se resuelve con un retorno de fase sino con disciplina de registro: la \textbf{procedencia incompleta de las corridas y los pesos} (configuración, semillas, hashes de particiones y de pesos, y estado del seguimiento de experimentos) dificulta reproducir o auditar los resultados de cualquiera de las tres líneas de trabajo. El control previsto es registrar esta información en cada corrida mediante la plataforma de seguimiento experimental y el versionado de código. Los riesgos específicos de evidencia de cada línea --no de gestión de proyecto-- se presentan junto al protocolo de la línea correspondiente en las secciones siguientes.
+
+Las tres secciones siguientes desarrollan, en el orden que trae la plantilla, los procedimientos técnicos de cada línea de trabajo. La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, con una posible integración (compuerta I) que requiere ablación propia y no se presenta como validada.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    box/.style={draw=capptan, line width=0.8pt, rounded corners=3pt, align=center, text width=2.4cm, minimum height=1.15cm, inner sep=4pt, font=\sffamily\small, text=cappnearblack},
+    main/.style={box, fill=shwhite2},
+    aux/.style={box, dashed, draw=cappwine, fill=shwhite4},
+    flow/.style={-{Stealth[length=2mm]}, thick, color=capptan},
+    node distance=0.3cm
+]
+\node[main] (pool) {Imágenes sin etiqueta\\conjunto SSL versionado};
+\node[main, right=of pool] (views) {Dos vistas\\aumentadas};
+\node[main, right=of views] (encoder) {Codificador DINOv2 ViT-B/14\\+ adaptación SimSiam};
+\node[main, right=of encoder] (probe) {Representación\\+ regresión logística};
+\node[main, right=of probe] (classes) {Predicción\\de 7 clases};
+\draw[flow] (pool) -- (views);
+\draw[flow] (views) -- (encoder);
+\draw[flow] (encoder) -- (probe);
+\draw[flow] (probe) -- (classes);
+
+\node[aux, below=0.9cm of encoder, text width=5.6cm] (segment) {Módulo complementario de segmentación\\MoCo v2/ResNet-50 $\rightarrow$ CCAM $\rightarrow$ pseudo-máscaras $\rightarrow$ U-Net};
+\node[aux, right=0.8cm of segment, text width=4.1cm] (gate) {Compuerta S independiente\\Integración con clasificador: compuerta I, requiere ablación};
+\draw[flow, dashed] (pool.south) |- (segment.west);
+\draw[flow, dashed] (segment) -- (gate);
+\end{tikzpicture}
+\caption{Arquitectura modular del proyecto: clasificación SSL como núcleo y segmentación como componente independiente.}
+\label{fig:arquitectura-modular}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} La flecha entre segmentación y la compuerta I indica una evaluación posterior, no una integración ya validada. El diseño de preentrenamiento se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
+\par\endgroup
+\end{figure}
 
 \section{Transformación y estimación del tono de piel}
 \label{sec:metodologia-tono}

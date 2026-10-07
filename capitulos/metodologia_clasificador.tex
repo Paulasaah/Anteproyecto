@@ -2,7 +2,7 @@ Esta línea de trabajo es el núcleo del proyecto: un clasificador de lesiones c
 
 \subsection{Actividades y fases}
 
-El desarrollo de esta línea siguió cuatro actividades encadenadas, correspondientes a las fases 1--3 descritas en la sección~\ref{sec:fases-investigacion}: (i) selección y caracterización de los conjuntos HAM10000 y PAD-UFES-20; (ii) preentrenamiento autosupervisado del codificador sobre imágenes sin etiqueta, con adaptación de dominio hacia PAD-UFES-20; (iii) ajuste de un clasificador lineal (regresión logística) sobre representaciones congeladas, usando etiquetas de HAM10000; y (iv) evaluación comparativa frente al codificador público, con selección de variantes restringida al conjunto interno y evaluación externa reservada.
+El desarrollo de esta línea siguió cuatro actividades encadenadas, correspondientes a las fases 1--3 descritas en la sección~\ref{sec:fases-investigacion} y trazadas en la Tabla~\ref{tab:trazabilidad-fases}: (i) selección y caracterización de los conjuntos HAM10000 y PAD-UFES-20; (ii) preentrenamiento autosupervisado del codificador sobre imágenes sin etiqueta, con adaptación de dominio hacia PAD-UFES-20; (iii) ajuste de un clasificador lineal (regresión logística) sobre representaciones congeladas, usando etiquetas de HAM10000; y (iv) evaluación comparativa frente al codificador público, con selección de variantes restringida al conjunto interno y evaluación externa reservada.
 
 \subsection{Herramientas y arquitectura}
 
@@ -107,7 +107,38 @@ con $s$ el total de observaciones, $c$ el total de predicciones correctas, $p_k$
 
 \subsection{Protocolo aplicado antes de los experimentos}
 
-Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiestos (identificadores, hashes y exclusiones de cada partición), se fija la separación por \texttt{lesion\_id} y se registran de antemano el conjunto de datos, la arquitectura, el preprocesamiento, las particiones, las semillas y la regla de decisión. Las comparaciones pareadas usan remuestreo bootstrap por lesión ($B=1\,000$ remuestras) con intervalo de confianza al 95\,\% por el método percentil, y corrección de Holm para contrastes múltiples: ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se rechaza la hipótesis asociada a $p_{(i)}$ si $p_{(i)}\leq \alpha/(m-i+1)$, deteniendo el procedimiento en el primer índice donde la condición falla.
+Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiestos (identificadores, hashes y exclusiones de cada partición), se fija la separación por \texttt{lesion\_id} y se registran de antemano el conjunto de datos, la arquitectura, el preprocesamiento, las particiones, las semillas y la regla de decisión. La Figura~\ref{fig:protocolo-evaluacion} resume este flujo, incluida la separación entre la selección de variantes en el conjunto interno y la evaluación externa reservada en PAD-UFES-20 \texttt{target\_test}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    box/.style={draw=cappdark, rounded corners=3pt, align=center, text width=11cm, minimum height=0.7cm, inner sep=4.5pt, font=\sffamily\small},
+    phase/.style={box, fill=shwhite1},
+    external/.style={box, dashed, fill=shwhite4},
+    flow/.style={-{Stealth[length=2mm]}, thick, color=cappdark},
+    node distance=0.18cm
+]
+\node[phase] (manifest) {Congelar manifiestos\\IDs, hashes y exclusiones};
+\node[phase, below=of manifest] (split) {Separar por lesión en HAM10000, manteniendo \texttt{lesion\_id} dentro de una sola partición};
+\node[phase, below=of split] (fit) {Adaptar el codificador SSL; en D3, incluir PAD \texttt{target\_adapt} sin etiquetas. Ajustar el clasificador con HAM10000};
+\node[phase, below=of fit] (select) {Seleccionar variantes solo con el conjunto interno de selección};
+\node[phase, below=of select] (final) {Evaluar según el protocolo registrado en la partición de validación};
+\draw[flow] (manifest) -- (split);
+\draw[flow] (split) -- (fit);
+\draw[flow] (fit) -- (select);
+\draw[flow] (select) -- (final);
+\node[external, below=of final] (pad) {PAD-UFES-20 \texttt{target\_test}: evaluación externa de dominio, sin ajuste del modelo};
+\node[phase, below=of pad] (metrics) {Reportar métricas, incertidumbre y límites por dominio};
+\draw[flow, dashed] (final) -- (pad);
+\draw[flow] (pad) -- (metrics);
+\end{tikzpicture}
+\caption{Flujo de evaluación y separación entre selección interna y evaluación externa.}
+\label{fig:protocolo-evaluacion}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} El diagrama representa el protocolo confirmatorio aplicado. Las lecturas v7 y v7.1 incluyeron evaluaciones previas de validación; v7.1 es una lectura secundaria adicional registrada después de seleccionar variantes en el conjunto interno de selección.
+\par\endgroup
+\end{figure} Las comparaciones pareadas usan remuestreo bootstrap por lesión ($B=1\,000$ remuestras) con intervalo de confianza al 95\,\% por el método percentil, y corrección de Holm para contrastes múltiples: ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se rechaza la hipótesis asociada a $p_{(i)}$ si $p_{(i)}\leq \alpha/(m-i+1)$, deteniendo el procedimiento en el primer índice donde la condición falla.
 
 Este protocolo responde directamente a cuatro riesgos de integridad de la evidencia identificados para esta línea:
 \begin{itemize}

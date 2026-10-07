@@ -24,6 +24,7 @@ La Ley 1419 de 2010 y la Resolución 2654 de 2019 regulan la prestación de serv
 Estos principios se aplican directamente al proyecto, dado que los conjuntos de datos de entrenamiento presentan un sesgo demográfico hacia fototipos claros, condición que se documenta explícitamente como limitación. Finalmente, el Documento CONPES 4144 establece los lineamientos estratégicos del Estado colombiano para el desarrollo, adopción y gobernanza responsable de la inteligencia artificial, constituyendo el marco de política pública dentro del cual se inscribe el presente proyecto como contribución al fortalecimiento de capacidades tecnológicas en salud a nivel regional (Departamento Nacional de Planeación, 2023).
 
 \section{Consideraciones éticas}
+\label{sec:consideraciones-eticas}
 
 El presente proyecto involucra el uso de imágenes clínicas de lesiones cutáneas, el desarrollo de un sistema de apoyo diagnóstico basado en inteligencia artificial y su potencial impacto en la toma de decisiones médicas, factores que implican un nivel de riesgo ético moderado y que exigen el establecimiento de principios y medidas concretas a lo largo de todo el proceso de desarrollo.
 
@@ -46,3 +47,11 @@ Se reconoce que los conjuntos de datos públicos utilizados para el entrenamient
 \subsection{Impacto social y responsabilidad en el uso de IA médica}
 
 El desarrollo de herramientas de inteligencia artificial para el ámbito médico conlleva una responsabilidad ética particular, dado que los errores diagnósticos pueden tener consecuencias directas sobre la salud de los pacientes. En este sentido, el proyecto adopta un enfoque de IA responsable, en el que el modelo es evaluado rigurosamente mediante métricas estándar, sus limitaciones son documentadas con transparencia y su uso se propone como complemento al juicio clínico y no como sustituto del mismo. El prototipo no será implementado en entornos clínicos reales sin los procesos previos de validación regulatoria y certificación médica correspondientes (UNESCO, 2021; Ministerio de Ciencia, Tecnología e Innovación, 2021).
+
+\section{Ética, privacidad y límites de uso}
+
+El entrenamiento y la evaluación del modelo usan exclusivamente conjuntos de datos públicos (HAM10000, ISIC Archive, PAD-UFES-20), sujetos a sus respectivas licencias académicas; el proyecto no recolecta imágenes de pacientes en ninguna fase. Antes de reutilizar o redistribuir imágenes de estos conjuntos, se verificarán los términos de licencia de cada uno.
+
+El prototipo descrito en este documento se plantea como una demostración académica en entorno de laboratorio, consistente con los principios de transparencia y responsabilidad descritos en la Sección~\ref{sec:consideraciones-eticas}. Cualquier recolección de datos clínicos, prueba con pacientes o despliegue en un entorno real excede el alcance de este trabajo y requeriría una revisión institucional y un protocolo ético distinto a lo ya cubierto en este capítulo.
+
+\textit{[Pendiente de confirmación con la dirección del proyecto y la instancia ética de la UNAB: requisitos institucionales específicos para investigación con conjuntos de datos públicos y condiciones de uso o redistribución de cada conjunto.]}
