@@ -50,6 +50,7 @@ PAD-UFES-20 constituye el dominio objetivo para estudiar la transferencia desde 
 La selección de imágenes estará guiada por criterios de calidad y pertinencia diagnóstica, aplicados de forma diferenciada según la fuente. La procedencia, las etiquetas disponibles, las licencias, los criterios de inclusión y exclusión y el preprocesamiento se registrarán junto con los identificadores y hashes de las particiones. La composición del conjunto de imágenes no etiquetadas para preentrenamiento se reportará conforme a los manifiestos y exclusiones de cada corrida, evitando incorporar imágenes reservadas para selección o prueba.
 
 \section{Fases de la investigación}
+\label{sec:fases-investigacion}
 
 \subsection{Fase 1 -- Comprensión del problema clínico y de los datos dermatológicos}
 
@@ -150,4 +151,18 @@ R7. Discrepancia laboratorio vs. prototipo. & Medio & Pruebas funcionales con im
 {\footnotesize\singlespacing
 \noindent\textit{Nota.} Elaboración propia. La indicación de retorno en cada plan identifica la fase que se debe revisar cuando se materializa el riesgo. Por ejemplo, R1 exige revisar los resultados de la fase 3 y volver al modelado de la fase 2; R7 requiere revisar la integración de la fase 4 y repetir la evaluación de la fase 3.\par
 }
+
+Además de los siete riesgos de proyecto anteriores, existe un riesgo transversal a la integridad de la evidencia que no se resuelve con un retorno de fase sino con disciplina de registro: la \textbf{procedencia incompleta de las corridas y los pesos} (configuración, semillas, hashes de particiones y de pesos, y estado del seguimiento de experimentos) dificulta reproducir o auditar los resultados de cualquiera de las tres líneas de trabajo. El control previsto es registrar esta información en cada corrida mediante la plataforma de seguimiento experimental y el versionado de código. Los riesgos específicos de evidencia de cada línea --no de gestión de proyecto-- se presentan junto al protocolo de la línea correspondiente en las secciones siguientes.
+
+\section{Transformación y estimación del tono de piel}
+\label{sec:metodologia-tono}
+\input{capitulos/metodologia_tono}
+
+\section{Segmentación de lesiones cutáneas}
+\label{sec:metodologia-segmentacion}
+\input{capitulos/metodologia_segmentacion}
+
+\section{Clasificador con aprendizaje autosupervisado y adaptación de dominio}
+\label{sec:metodologia-clasificador}
+\input{capitulos/metodologia_clasificador}
 

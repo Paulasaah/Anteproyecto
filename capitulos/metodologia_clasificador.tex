@@ -1,0 +1,118 @@
+Esta línea de trabajo es el núcleo del proyecto: un clasificador de lesiones cutáneas construido sobre un codificador preentrenado de forma autosupervisada y adaptado por dominio hacia el contexto clínico de interés, sin depender de grandes volúmenes de datos etiquetados.
+
+\subsection{Actividades y fases}
+
+El desarrollo de esta línea siguió cuatro actividades encadenadas, correspondientes a las fases 1--3 descritas en la sección~\ref{sec:fases-investigacion}: (i) selección y caracterización de los conjuntos HAM10000 y PAD-UFES-20; (ii) preentrenamiento autosupervisado del codificador sobre imágenes sin etiqueta, con adaptación de dominio hacia PAD-UFES-20; (iii) ajuste de un clasificador lineal (regresión logística) sobre representaciones congeladas, usando etiquetas de HAM10000; y (iv) evaluación comparativa frente al codificador público, con selección de variantes restringida al conjunto interno y evaluación externa reservada.
+
+\subsection{Herramientas y arquitectura}
+
+El codificador base es DINOv2 ViT-B/14, un transformador visual preentrenado públicamente que se adapta mediante SimSiam, el único algoritmo autosupervisado propio de esta línea. ViT-B/14 aporta la arquitectura; SimSiam aporta el procedimiento de adaptación. Se estudiaron dos variantes de adaptación: A* (sin término de consistencia de tono) y B* (con dicho término, descrito en la sección~\ref{sec:modelamiento-clasificador}). Sobre el codificador adaptado, un clasificador lineal (regresión logística) se ajusta con las representaciones y las etiquetas de HAM10000.
+
+Entorno de cómputo del preentrenamiento: cluster UNABIA vía SLURM, 1 nodo con 4 GPU, 32 CPU y 128\,GB de RAM, presupuesto de 40--80 GPU-hora según la variante del backbone; Python 3.11, PyTorch 2.4.1, CUDA 12.1, precisión \texttt{bf16}, tamaño de lote efectivo 128, semilla 42.
+
+\subsection{Datos y particiones}
+
+HAM10000 es la fuente de entrenamiento y evaluación del clasificador, particionada por \texttt{lesion\_id} para que ninguna lesión aparezca en más de un subconjunto a la vez. PAD-UFES-20 es el dominio objetivo de adaptación: la partición \texttt{target\_adapt} (1.141 imágenes, sin etiquetas) se incorpora al preentrenamiento autosupervisado para continuar adaptando el codificador al dominio clínico; la partición \texttt{target\_test} se reserva íntegramente para evaluación externa y queda excluida de todo entrenamiento, selección de modelos o hiperparámetros, calibración y ajuste de umbrales.
+
+\subsection{Modelamiento matemático}
+\label{sec:modelamiento-clasificador}
+
+Para una imagen $x_i$ y dos vistas aumentadas $v_{i1}$ y $v_{i2}$, el codificador $f_\theta$, el proyector $g_\phi$ y el predictor $q_\psi$ producen
+\begin{equation}
+ h_{ij}=f_\theta(v_{ij}),\qquad z_{ij}=g_\phi(h_{ij}),\qquad p_{ij}=q_\psi(z_{ij}),\qquad j\in\{1,2\}.
+\end{equation}
+La pérdida SimSiam detiene el gradiente en los objetivos $z$ y usa similitud coseno negativa simétrica:
+\begin{equation}
+ \mathcal L_{\mathrm{SSL}}=-\frac{1}{2N}\sum_{i=1}^{N}\left[
+ \frac{p_{i1}^{\mathsf T}\operatorname{sg}(z_{i2})}{\|p_{i1}\|_2\|\operatorname{sg}(z_{i2})\|_2}
+ +\frac{p_{i2}^{\mathsf T}\operatorname{sg}(z_{i1})}{\|p_{i2}\|_2\|\operatorname{sg}(z_{i1})\|_2}\right],
+\end{equation}
+donde $N$ es el tamaño del lote y $\operatorname{sg}$ detiene el gradiente de esa rama.
+
+La variante B* agrega un término de consistencia de tono: una tercera vista $v_{it}$ reutiliza el recorte de la primera vista sobre una copia con tono modificado, y con $h_{it}=f_\theta(v_{it})$,
+\begin{equation}
+ \mathcal L_{\mathrm{tono}}=\frac{1}{N}\sum_{i=1}^{N}\left[
+ 1-\frac{h_{it}^{\mathsf T}\operatorname{sg}(h_{i1})}{\|h_{it}\|_2\|\operatorname{sg}(h_{i1})\|_2}\right].
+\end{equation}
+El entrenamiento ancla los pesos entrenables $\Theta_{\mathrm{ent}}$ hacia su estado inicial $\theta^0$ (L2SP) y las características hacia el codificador público congelado $f_{\theta^0}$:
+\begin{align}
+ \mathcal L_{\mathrm{L2SP}}&=\sum_{a\in\Theta_{\mathrm{ent}}}(\theta_a-\theta_a^0)^2,\\
+ \mathcal L_{\mathrm{dist}}&=\frac{1}{N}\sum_{i=1}^{N}\left[
+ 1-\frac{h_{i1}^{\mathsf T}f_{\theta^0}(v_{i1})}{\|h_{i1}\|_2\|f_{\theta^0}(v_{i1})\|_2}\right],\\
+ \mathcal L_{\mathrm{total}}&=\mathcal L_{\mathrm{base}}+\lambda_t\mathcal L_{\mathrm{tono}}+
+ \lambda_a\mathcal L_{\mathrm{L2SP}}+\lambda_d\mathcal L_{\mathrm{dist}}.
+\end{align}
+Solo se calculan los términos con peso activo en la configuración de la corrida; la variante A* fija $\lambda_t=0$. Según la release \texttt{v8.0.0-clean} del repositorio del proyecto, el término de tono (B* frente a A*) no mostró una diferencia demostrable en ningún conjunto evaluado: el aporte medible proviene de la adaptación SSL anclada en sí misma, no del término de tono. El resultado completo se presenta en el Capítulo~7.
+
+Sobre las representaciones estandarizadas ($u_{ij}=(h_{ij}-\mu_j)/\sigma_j$, con escala unitaria para dimensiones de varianza cero), el clasificador lineal produce
+\begin{equation}
+ P(y_i=k\mid x_i)=\frac{\exp(w_k^{\mathsf T}u_i+b_k)}{\sum_{c=1}^{7}\exp(w_c^{\mathsf T}u_i+b_c)},\qquad
+ \widehat y_i=\operatorname*{arg\,max}_{k}P(y_i=k\mid x_i).
+\end{equation}
+
+\subsection{Algoritmo de preentrenamiento}
+
+El Algoritmo~\ref{alg:simsiam-anclado} resume el procedimiento de adaptación SSL anclada descrito arriba.
+
+\begin{algorithm}[htbp]
+\caption{Preentrenamiento SimSiam anclado}
+\label{alg:simsiam-anclado}
+\begin{algorithmic}[1]
+\Statex \textbf{Input:} Conjunto de imágenes sin etiqueta $\{x_i\}_{i=1}^N$ (HAM10000 + PAD-UFES-20 \texttt{target\_adapt}); codificador público preentrenado $f_{\theta^0}$; pesos $\lambda_t,\lambda_a,\lambda_d$; número de pasos $T$
+\Statex \textbf{Initialize:} $\theta\leftarrow\theta^0$ \Comment{copia entrenable del codificador público}
+\For{$t=1$ \textbf{hasta} $T$}
+  \State Muestrear lote de imágenes; generar vistas aumentadas $v_{i1},v_{i2}$ (y $v_{it}$ si la variante usa término de tono) \Comment{Aumentación}
+  \State Calcular $h_{ij}=f_\theta(v_{ij})$, $z_{ij}=g_\phi(h_{ij})$, $p_{ij}=q_\psi(z_{ij})$ \Comment{Paso hacia adelante}
+  \State Calcular $\mathcal L_{\mathrm{SSL}}$ con parada de gradiente en $z$ \Comment{Pérdida SimSiam}
+  \If{variante B*}
+    \State Calcular $\mathcal L_{\mathrm{tono}}$ con $h_{it}$ \Comment{Consistencia de tono}
+  \EndIf
+  \State Calcular $\mathcal L_{\mathrm{L2SP}}$ y $\mathcal L_{\mathrm{dist}}$ contra $\theta^0$ y $f_{\theta^0}$ \Comment{Anclaje}
+  \State $\mathcal L_{\mathrm{total}}\leftarrow \mathcal L_{\mathrm{SSL}}+\lambda_t\mathcal L_{\mathrm{tono}}+\lambda_a\mathcal L_{\mathrm{L2SP}}+\lambda_d\mathcal L_{\mathrm{dist}}$
+  \State Actualizar $\theta,\phi,\psi$ por descenso de gradiente sobre $\mathcal L_{\mathrm{total}}$
+\EndFor
+\State \Return codificador adaptado $f_\theta$
+\end{algorithmic}
+\end{algorithm}
+
+Sobre $f_\theta$ ya adaptado, un clasificador lineal se ajusta por separado con etiquetas de HAM10000 (regresión logística, ecuación anterior); este paso no forma parte del algoritmo autosupervisado.
+
+\subsection{Métricas de evaluación}
+
+Para $K=7$ clases, con matriz de confusión $C\in\mathbb{N}^{K\times K}$ ($\mathrm{TP}_k=C_{kk}$, $\mathrm{FP}_k=\sum_{l\neq k}C_{lk}$, $\mathrm{FN}_k=\sum_{l\neq k}C_{kl}$):
+\begin{equation}
+ \mathrm{Prec}_k=\frac{\mathrm{TP}_k}{\mathrm{TP}_k+\mathrm{FP}_k},\qquad
+ \mathrm{Rec}_k=\frac{\mathrm{TP}_k}{\mathrm{TP}_k+\mathrm{FN}_k},\qquad
+ F1_k=\frac{2\,\mathrm{Prec}_k\,\mathrm{Rec}_k}{\mathrm{Prec}_k+\mathrm{Rec}_k},\qquad
+ F1_{\mathrm{macro}}=\frac{1}{K}\sum_{k=1}^{K}F1_k.
+\end{equation}
+F1 macro es la métrica primaria de este proyecto, por no ponderar por el tamaño de cada clase. La exactitud balanceada promedia la sensibilidad por clase:
+\begin{equation}
+ \text{Ex. balanceada}=\frac{1}{K}\sum_{k=1}^{K}\mathrm{Rec}_k.
+\end{equation}
+El AUC-ROC uno-contra-el-resto (OvR) equivale, por clase, al estadístico de Mann--Whitney normalizado:
+\begin{equation}
+ \mathrm{AUC}_k=\frac{1}{n_k^{+}n_k^{-}}\sum_{i\in k^{+}}\sum_{j\in k^{-}}\left[\mathbb{1}(s_i>s_j)+\tfrac{1}{2}\mathbb{1}(s_i=s_j)\right],\qquad
+ \mathrm{AUC}_{\mathrm{OvR}}=\frac{1}{K}\sum_{k=1}^{K}\mathrm{AUC}_k.
+\end{equation}
+El error de calibración esperado (ECE), con $M$ contenedores de confianza $B_m$:
+\begin{equation}
+ \mathrm{ECE}=\sum_{m=1}^{M}\frac{|B_m|}{n}\left|\mathrm{acc}(B_m)-\mathrm{conf}(B_m)\right|.
+\end{equation}
+El coeficiente de correlación de Matthews (MCC) multiclase:
+\begin{equation}
+ \mathrm{MCC}=\frac{c\cdot s-\sum_{k=1}^{K}p_k t_k}{\sqrt{\left(s^2-\sum_{k=1}^{K}p_k^2\right)\left(s^2-\sum_{k=1}^{K}t_k^2\right)}},
+\end{equation}
+con $s$ el total de observaciones, $c$ el total de predicciones correctas, $p_k$ el número de veces que se predijo la clase $k$ y $t_k$ el número de veces que $k$ es la clase verdadera.
+
+\subsection{Protocolo aplicado antes de los experimentos}
+
+Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiestos (identificadores, hashes y exclusiones de cada partición), se fija la separación por \texttt{lesion\_id} y se registran de antemano el conjunto de datos, la arquitectura, el preprocesamiento, las particiones, las semillas y la regla de decisión. Las comparaciones pareadas usan remuestreo bootstrap por lesión ($B=1\,000$ remuestras) con intervalo de confianza al 95\,\% por el método percentil, y corrección de Holm para contrastes múltiples: ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se rechaza la hipótesis asociada a $p_{(i)}$ si $p_{(i)}\leq \alpha/(m-i+1)$, deteniendo el procedimiento en el primer índice donde la condición falla.
+
+Este protocolo responde directamente a cuatro riesgos de integridad de la evidencia identificados para esta línea:
+\begin{itemize}
+ \item \textbf{Solapamiento de imágenes de una lesión entre particiones}, que produciría fuga de información y métricas optimistas: se controla separando por \texttt{lesion\_id} y congelando listas y hashes antes de entrenar.
+ \item \textbf{Bootstrap por imagen en HAM10000}, que produciría intervalos demasiado estrechos por correlación intralesión: se reporta esta limitación y se complementa con un análisis de sensibilidad agrupado por lesión antes de afirmaciones confirmatorias.
+ \item \textbf{Conjuntos de datos y modalidades diferentes} (HAM10000 dermatoscópico frente a PAD-UFES-20 clínico), que podrían simular una transferencia aparente o un deterioro fuera de dominio: se describe la modalidad, la fuente y la población de cada conjunto, y PAD-UFES-20 se reporta por separado.
+ \item \textbf{Línea base supervisada con partición distinta}, que haría la comparación no pareada y no atribuible solo al régimen de aprendizaje: se iguala el conjunto de datos, la arquitectura, la partición, el presupuesto de cómputo y las métricas antes de concluir.
+\end{itemize}
