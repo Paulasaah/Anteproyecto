@@ -20,8 +20,8 @@ El desarrollo del proyecto estará basado en el cumplimiento de los objetivos fo
 ]
 \node[font=\sffamily\bfseries\small, text=cappnearblack, align=center] (titulo) {DESARROLLO EXPERIMENTAL $\cdot$ TRL 4\\[2pt]\footnotesize\normalfont Calidad transversal en las cuatro fases: trazabilidad, prevención de fuga de datos, reproducibilidad y control de riesgos};
 \node[fase, below=0.4cm of titulo] (f1) {\textbf{1. Comprensión del problema y los datos}\\Contexto clínico y selección de conjuntos\\Criterios de inclusión y análisis de riesgos};
-\node[fase, below=of f1] (f2) {\textbf{2. Ingeniería de datos y modelado SSL}\\Particiones, preprocesamiento y preentrenamiento\\Adaptación con PAD sin etiquetas; ajuste con HAM};
-\node[fase, below=of f2] (f3) {\textbf{3. Evaluación del modelo}\\Comparación supervisada, métricas y robustez\\Prueba externa reservada y análisis de limitaciones};
+\node[fase, below=of f1] (f2) {\textbf{2. Ingeniería de datos y modelado SSL}\\Particiones, preprocesamiento y preentrenamiento\\Tres líneas de trabajo: (a) clasificador SSL con adaptación de dominio, (b) segmentación de lesiones, (c) transformación y estimación de tono de piel\\Adaptación con PAD sin etiquetas; ajuste con HAM};
+\node[fase, below=of f2] (f3) {\textbf{3. Evaluación del modelo}\\Comparación supervisada, métricas y robustez por cada una de las tres líneas\\Prueba externa reservada y análisis de limitaciones};
 \node[fase, below=of f3] (f4) {\textbf{4. Implementación del prototipo}\\Integración del modelo y la interfaz\\Validación funcional y manejo de baja confianza};
 \node[futuro, below=0.6cm of f4] (futuro) {\textbf{CONTINUIDAD FUTURA}\\Fuera del alcance TRL 4 del proyecto\\Monitoreo y mantenimiento en producción\\Validación clínica y actualización del modelo};
 \draw[flujo] (f1) -- (f2);
@@ -30,7 +30,7 @@ El desarrollo del proyecto estará basado en el cumplimiento de los objetivos fo
 \draw[flujo, dashed, color=cappnearblack!40] (f4) -- (futuro);
 \draw[retorno] ([xshift=-0.3cm]f3.west) to[bend right=35] node[left,font=\scriptsize,text width=2.2cm,align=right,xshift=-0.1cm] {R1: desempeño insuficiente} ([xshift=-0.3cm]f2.west);
 \draw[retorno] ([xshift=0.3cm]f4.east) to[bend left=35] node[right,font=\scriptsize,text width=2.2cm,align=left,xshift=0.1cm] {R7: discrepancia laboratorio-prototipo} ([xshift=0.3cm]f3.east);
-\draw[retorno] (f2.north) to[bend right=55] node[left,font=\scriptsize,text width=2.4cm,align=right,xshift=-0.2cm,yshift=0.3cm] {R5: cobertura vs. perfil epidemiológico} (f1.north);
+\draw[retorno] ([xshift=-0.3cm]f2.west) to[bend right=35] node[left,font=\scriptsize,text width=2.2cm,align=right,xshift=-0.1cm] {R5: cobertura vs. perfil epidemiológico} ([xshift=-0.3cm]f1.west);
 \end{tikzpicture}
     \caption{Diseño metodológico basado en CRISP-ML(Q)}
     \label{fig:original-10}
