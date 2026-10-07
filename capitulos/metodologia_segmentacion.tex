@@ -1,0 +1,103 @@
+Esta línea de trabajo es un módulo \emph{complementario} al clasificador: genera, sin usar máscaras expertas ni etiquetas de diagnóstico en ningún punto del proceso, una segmentación aproximada de la lesión que puede alimentar al módulo de incertidumbre y a la caracterización de tono descrita en la Sección~\ref{sec:desarrollo-tono}. No sustituye una validación clínica de la segmentación.
+
+\subsection{Actividades y fases}
+
+El pipeline se organiza en dos etapas secuenciales dentro de la Fase 2 de la Tabla~\ref{tab:trazabilidad-fases}: una generación inicial de la pseudo-máscara y un refinamiento iterativo que repite el entrenamiento del U-Net estudiante sobre versiones sucesivamente mejoradas de esa pseudo-máscara.
+
+\begin{enumerate}
+    \item \textbf{Generación inicial.}
+    \begin{enumerate}
+        \item \textbf{\texttt{contrastive}}: preentrenamiento contrastivo del backbone con MoCo v2 (algoritmo de MoCo v2 más abajo), sin etiquetas.
+        \item \textbf{\texttt{ccam}}: generación del mapa de activación de clase agnóstica con CCAM (algoritmo de CCAM más abajo) a partir de las representaciones de \texttt{contrastive}.
+        \item \textbf{\texttt{pseudo\_r0}}: umbralización del mapa CCAM para producir la primera pseudo-máscara.
+        \item \textbf{\texttt{student\_r1}}: entrenamiento de un U-Net estudiante sobre \texttt{pseudo\_r0}.
+    \end{enumerate}
+    \item \textbf{Refinamiento iterativo.} Cada ronda repite el mismo patrón hasta llegar a \texttt{student\_r3}: refinar la pseudo-máscara con las predicciones del estudiante de la ronda anterior y entrenar sobre ella una nueva ronda de U-Net estudiante.
+    \begin{enumerate}
+        \item \textbf{\texttt{pseudo\_r1}}: refinamiento de la pseudo-máscara con las predicciones de \texttt{student\_r1}.
+        \item \textbf{\texttt{student\_r2}}: segunda ronda de entrenamiento del U-Net sobre \texttt{pseudo\_r1}.
+        \item \textbf{\texttt{pseudo\_r2}}: segundo refinamiento de la pseudo-máscara.
+        \item \textbf{\texttt{student\_r3}}: tercera y última ronda de entrenamiento del U-Net sobre \texttt{pseudo\_r2}; es el candidato final de este módulo.
+    \end{enumerate}
+\end{enumerate}
+
+Las tres rondas de estudiante (\texttt{student\_r1}--\texttt{student\_r3}) comparten el mismo protocolo de entrenamiento: 20 épocas, 32 imágenes por GPU en 2 GPU, optimizador Adam con tasa de aprendizaje $10^{-4}$, una época de calentamiento, programación coseno, precisión \texttt{bf16} y semilla 42. La pérdida combina entropía cruzada binaria y Dice suave, calculada solo sobre los píxeles que el módulo de incertidumbre marca como confiables.
+
+\texttt{student\_r3} se tomó como candidato final por ser la última ronda ejecutada, no por una comparación de métricas entre \texttt{student\_r1}, \texttt{student\_r2} y \texttt{student\_r3}. La configuración registrada especifica tres rondas de re-etiquetado, 20 épocas por ronda de estudiante y 30 épocas contrastivas. Los artefactos no incluyen una comparación experimental entre distintos números de rondas ni documentan por qué se fijaron exactamente tres; por tanto, no se presenta esa cantidad como óptima. El equipo informó que el tiempo disponible limitó la exploración de variantes adicionales, lo cual se reporta como limitación experimental y no como justificación documentada del número de rondas. Dentro de cada ronda, el punto de verificación se seleccionó según la pérdida de pseudo-validación.
+
+\subsection{Herramientas y arquitectura}
+
+El backbone es un ResNet-50 preentrenado de forma contrastiva con MoCo v2 \parencite{chen2020mocov2}, independiente del SimSiam que adapta el backbone del clasificador (Sección~\ref{sec:desarrollo-clasificador}). Sobre ese backbone, CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}, \parencite{xie2022ccam}) produce un mapa de activación sin etiquetas de segmentación, que se umbraliza para entrenar al U-Net estudiante. Framework y hardware: ver configuración experimental en el Capítulo~8; a diferencia del preentrenamiento del clasificador (cluster UNABIA vía SLURM, 4 GPU), este módulo se ejecuta en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128} --una versión de PyTorch distinta a la del clasificador porque son dos entornos de cómputo independientes, no por inconsistencia.
+
+\paragraph{Alternativa S4-A2.} Como variante posterior se evaluó un decoder tipo DPT con un encoder público DINOv2 ViT-B/14 congelado. El decoder combina las salidas de los bloques 3, 6, 9 y 12 y se entrena con las pseudo-máscaras iniciales \texttt{pseudo\_r0} generadas por CCAM, sin máscaras expertas. Su criterio, registrado antes de la evaluación, fue alcanzar en ISIC2018 un Dice no inferior a \texttt{student\_r3} por más de 0,01; se evalúa además en HAM10000. S4-A2 es una alternativa distinta del refinamiento iterativo \texttt{student\_r1}--\texttt{student\_r3}, no una cuarta ronda.
+
+\subsection{Datos empleados}
+
+El pool desduplicado de imágenes sin etiquetas contiene 58.457 imágenes: 10.015 de HAM10000, 15.316 de ISIC2019 que no duplican HAM10000 y 33.126 de ISIC2020. Esta cifra corresponde al módulo de segmentación y no al pool de preentrenamiento del clasificador. Para la caché compartida por \texttt{student\_r3} y S4-A2, el registro de ejecución especifica 57.288 imágenes de entrenamiento y 1.169 de pseudo-validación; de ellas, 52.453 y 1.082, respectivamente, cuentan con píxeles confiables. En \texttt{pseudo\_r2}, 2.508 imágenes (4,29\,\%) quedaron excluidas por los criterios de región y área de la máscara. Ninguna etapa de entrenamiento utiliza las máscaras expertas de ISIC2018 ni etiquetas de diagnóstico. La evaluación final compara las predicciones con máscaras de referencia de ISIC2018 (2.594 imágenes) y HAM10000 (10.015). Como parte de ISIC2018 coincide por identificador con imágenes incluidas sin etiquetas en el pool, esta evaluación es parcialmente transductiva y no debe describirse como completamente independiente.
+
+\subsection{Criterios de evaluación}
+
+La selección de cada punto de verificación de \texttt{student\_r1}--\texttt{student\_r3} se basa en la pérdida de pseudo-validación, no en las máscaras expertas. La evaluación posterior contra las máscaras de referencia reporta Dice, IoU, sensibilidad, especificidad y distancia de Hausdorff al percentil 95 (HD95). Para S4-A2 se fijó antes de la evaluación el umbral de adopción Dice $\geq$ Dice(\texttt{student\_r3}) $-0{,}01$ en ISIC2018; cumplirlo permite considerarlo candidato de segmentación, pero no demuestra una mejora del clasificador. El coeficiente Dice entre la máscara predicha $A$ y la máscara de referencia $B$ se define como:
+\begin{equation}
+ \mathrm{Dice}(A,B)=\frac{2|A\cap B|}{|A|+|B|}=\frac{2\,\mathrm{TP}}{2\,\mathrm{TP}+\mathrm{FP}+\mathrm{FN}},
+ \label{eq:dice-s6}
+\end{equation}
+donde $\mathrm{TP}$, $\mathrm{FP}$ y $\mathrm{FN}$ se calculan a nivel de píxel entre ambas máscaras. Los valores de Dice obtenidos se presentan como resultado en el Capítulo~8, no en este apartado.
+
+\subsection{Modelamiento matemático}
+
+\paragraph{MoCo v2.} Un codificador de consulta $f_q$ procesa la vista $x^q$ y un codificador de clave $f_k$, actualizado por media móvil exponencial del codificador de consulta ($\theta_k\leftarrow m\,\theta_k+(1-m)\theta_q$, con $m=0{,}99$), procesa la vista $x^k$. Las representaciones $q=f_q(x^q)$ y $k=f_k(x^k)$ se comparan contra una cola de $Q=16\,384$ claves negativas $\{k_j\}_{j=1}^{Q}$ acumuladas de lotes anteriores, con temperatura $\tau=0{,}2$:
+\begin{equation}
+ \mathcal L_{\mathrm{MoCo}}=-\log\frac{\exp(q\cdot k_+/\tau)}{\exp(q\cdot k_+/\tau)+\sum_{j=1}^{Q}\exp(q\cdot k_j/\tau)}.
+ \label{eq:moco-loss-s6}
+\end{equation}
+Los parámetros de $f_k$ no reciben gradiente directo; solo se actualizan por la media móvil.
+
+\paragraph{CCAM.} Para un mapa de características $Z\in\mathbb{R}^{C\times h\times w}$ del backbone y un mapa de activación $P\in(0,1)^{1\times h\times w}=\sigma(\mathrm{BN}(\mathrm{Conv}(Z)))$, los vectores de primer plano y de fondo son promedios ponderados espacialmente:
+\begin{equation}
+ v_f=\operatorname{norm}\left(\sum_{p} P(p)\,Z(p)\right),\qquad
+ v_b=\operatorname{norm}\left(\sum_{p}\bigl(1-P(p)\bigr)\,Z(p)\right).
+ \label{eq:ccam-vectores-s6}
+\end{equation}
+La pérdida combina un término negativo (separar primer plano de fondo dentro de la misma imagen) y uno positivo (acercar primeros planos entre sí y fondos entre sí, ponderado por similitud dentro del lote):
+\begin{align}
+ \mathcal L_{\mathrm{NEG}}&=-\frac{1}{B}\sum_{i=1}^{B}\log\left(1-v_f^{(i)\top}v_b^{(i)}\right),\\
+ \mathcal L_{\mathrm{POS}}&=-\frac{1}{B(B-1)}\sum_{i\neq j} w_{ij}\log\left(v_f^{(i)\top}v_f^{(j)}\right) + \text{(término análogo para } v_b\text{)},
+\end{align}
+con peso $w_{ij}=\exp(-\alpha\cdot\operatorname{rank}_{ij})$, de modo que solo los pares más parecidos del lote contribuyen de forma apreciable. La pérdida total es $\mathcal L_{\mathrm{CCAM}}=\mathcal L_{\mathrm{POS}}+\mathcal L_{\mathrm{NEG}}$. El mapa $P$ resultante se umbraliza para producir la pseudo-máscara inicial.
+
+\subsection{Algoritmos}
+
+\begin{algorithm}[htbp]
+\caption{MoCo v2 (preentrenamiento contrastivo del backbone)}
+\label{alg:mocov2}
+\begin{algorithmic}[1]
+\Statex \textbf{Input:} lote de imágenes sin etiquetar; dos aumentaciones por imagen $x^q$, $x^k$
+\Statex \textbf{Initialize:} codificador de consulta $f_q$; codificador de clave $f_k\leftarrow f_q$; cola vacía de $Q=16\,384$ claves; $m=0{,}99$; $\tau=0{,}2$
+\For{cada lote}
+  \State $q\leftarrow f_q(x^q)$,\ $k\leftarrow f_k(x^k)$ \Comment{sin gradiente por $f_k$}
+  \State Calcular $\mathcal L_{\mathrm{MoCo}}$ (Ecuación~\ref{eq:moco-loss-s6}) con la cola actual \Comment{paso de pérdida}
+  \State Actualizar $f_q$ por descenso de gradiente sobre $\mathcal L_{\mathrm{MoCo}}$ \Comment{solo $f_q$ recibe gradiente}
+  \State $\theta_k\leftarrow m\,\theta_k+(1-m)\,\theta_q$ \Comment{actualización por media móvil}
+  \State Encolar $k$; descartar la clave más antigua si la cola excede $Q$ \Comment{actualización de la cola}
+\EndFor
+\State \Return backbone ResNet-50 preentrenado $f_q$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[htbp]
+\caption{CCAM (generación de pseudo-máscaras)}
+\label{alg:ccam}
+\begin{algorithmic}[1]
+\Statex \textbf{Input:} lote de $B$ imágenes; backbone preentrenado (Algoritmo~\ref{alg:mocov2})
+\Statex \textbf{Initialize:} capa convolucional + BN + sigmoide sobre el mapa de características $Z$
+\For{cada lote}
+  \State $P\leftarrow\sigma(\mathrm{BN}(\mathrm{Conv}(Z)))$ \Comment{mapa de activación}
+  \State Calcular $v_f$, $v_b$ (Ecuación~\ref{eq:ccam-vectores-s6}) \Comment{vectores primer plano/fondo}
+  \State Calcular $\mathcal L_{\mathrm{CCAM}}=\mathcal L_{\mathrm{POS}}+\mathcal L_{\mathrm{NEG}}$ \Comment{paso de pérdida}
+  \State Actualizar los pesos de la capa por descenso de gradiente \Comment{paso de optimización}
+\EndFor
+\State Umbralizar $P$ \Comment{pseudo-máscara inicial (\texttt{pseudo\_r0})}
+\State \Return pseudo-máscara inicial para entrenar al U-Net estudiante
+\end{algorithmic}
+\end{algorithm}

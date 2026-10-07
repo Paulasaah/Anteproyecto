@@ -1,35 +1,19 @@
-\chapter{Resultados esperados y gestión de riesgos}
-
-\section{Resultados esperados}
-
-El proyecto espera producir: (i) una caracterización documentada de conjuntos de imágenes dermatológicas y sus límites de representatividad; (ii) un clasificador que use representaciones aprendidas mediante SSL y un clasificador lineal posterior claramente descrito; (iii) una evaluación reproducible frente a controles y, cuando se complete el protocolo comparable, una línea base supervisada; y (iv) un prototipo experimental de apoyo a la revisión de imágenes.
-
-No se fijan umbrales de desempeño como resultados garantizados. Las métricas se reportarán con su protocolo, incertidumbre y límites de dominio. El sistema no sustituye al profesional ni representa una herramienta clínica validada.
-
-\section{Riesgos y aseguramiento de calidad}
-
-\begin{longtable}{p{0.24\textwidth}p{0.34\textwidth}p{0.34\textwidth}}
-\caption{Riesgos prioritarios y medidas de control.}\label{tab:riesgos-principales}\\
-\toprule
-Riesgo & Consecuencia para la evidencia & Control previsto \\
-\midrule
-\endfirsthead
-\toprule
-Riesgo & Consecuencia para la evidencia & Control previsto \\
-\midrule
-\endhead
-Solapamiento de imágenes de una lesión entre particiones & Fuga de información y métricas optimistas & Separar por \texttt{lesion\_id}; congelar listas y hashes antes de entrenar. \\
-\addlinespace
-Bootstrap por imagen en HAM10000 & Intervalos demasiado estrechos por correlación intralesión & Reportar la limitación y hacer sensibilidad agrupada por lesión antes de afirmaciones confirmatorias. \\
-Conjuntos de datos y modalidades diferentes & Transferencia aparente o deterioro fuera de dominio & Describir modalidad, fuente y población; reportar PAD-UFES-20 por separado. \\
-Línea base supervisada con partición distinta & Comparación no pareada y no atribuible solo al régimen de aprendizaje & Igualar conjunto de datos, arquitectura, partición, presupuesto y métricas antes de concluir. \\
-ITA presentado como fototipo & Conclusiones inválidas sobre equidad por FST & Nombrar ITA correctamente; no afirmar FST sin anotación experta y validación. \\
-Procedencia incompleta de corridas/pesos & Dificultad para reproducir o auditar resultados & Registrar revisión, configuración, semillas, hashes de particiones/pesos y estado W\&B. \\
-\bottomrule
-\end{longtable}
-
-\section{Ética, privacidad y límites de uso}
-
-El proyecto usa conjuntos públicos, sujetos a sus respectivas licencias, y no recoge imágenes de pacientes. Antes de reutilizar o redistribuir imágenes, se comprobarán los términos de cada conjunto. El prototipo se plantea como demostración académica en entorno de laboratorio; cualquier recolección de datos clínicos, prueba con pacientes o despliegue requiere revisión institucional y un protocolo distinto.
-
-\noindent\textit{[Pendiente de confirmación con dirección y la instancia ética de la UNAB: requisitos institucionales para investigación con conjuntos públicos y condiciones de uso o redistribución de cada conjunto.]}
+% Este archivo ya NO se incluye desde main.tex como capítulo independiente
+% "Resultados esperados y gestión de riesgos" (esa estructura no existe en la
+% plantilla del profesor).
+%
+% Su contenido se redistribuyó así:
+% - "Resultados esperados" -> movida a capitulos/resultados_discusion.tex, sección
+%   "Resultados esperados" (pendiente T11: reorganizar dentro de 7.1 o donde
+%   corresponda).
+% - "Riesgos y aseguramiento de calidad" (Tabla riesgos-principales, 6 filas) ->
+%   las 6 filas ya están integradas en el Capítulo 6: la fila "ITA presentado como
+%   fototipo" en capitulos/metodologia_tono.tex; las filas de lesion_id, bootstrap,
+%   datasets/modalidades distintas y línea base no pareada en
+%   capitulos/metodologia_clasificador.tex; la fila "procedencia incompleta de
+%   corridas/pesos" como nota transversal en capitulos/metodologia.tex. No se
+%   repitieron aquí.
+% - "Ética, privacidad y límites de uso" -> movida a capitulos/marco_normativo.tex,
+%   como nueva sección "Ética, privacidad y límites de uso" dentro de ese capítulo
+%   sin numerar (incluye la nota pendiente de confirmación con la instancia ética
+%   de la UNAB, que se conservó tal cual).

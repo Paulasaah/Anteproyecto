@@ -1,53 +1,63 @@
+% ========================================================================
+%                     PORTADA Y CONTRAPORTADA
+% Los datos se toman de main.tex (sección "DATOS DEL TRABAJO").
+% ========================================================================
+
+% ------------------------------- Portada --------------------------------
 \begin{titlepage}
-    \thispagestyle{empty} % Sin número de página
+\thispagestyle{empty}
+\begin{center}
+\singlespacing
+% Si su programa exige el logo, guárdelo en figuras/ y descomente:
+% \includegraphics[width=4cm]{logo-unab}\par\vspace{1cm}
 
-    % Fuente Times New Roman, 12pt (se hereda del documento con el estilo actual)
-    \begin{center}
-        
-        
-        {\bfseries
-        Algoritmo de aprendizaje autosupervisado para la clasificación de lesiones cutáneas en imágenes dermatológicas aplicado al contexto clínico de Santander
+\vspace*{2cm}
+{\bfseries \tituloTrabajo\par}
 
-        }
-        
-        \vspace{2.5cm}
-        
-        María Paula Saavedra Martinez
+\vfill
+\autores\par
 
-        
-        \vspace{0.2cm}
-        
-        Nicolás Santiago Moreno Monroy
-        
-        \vspace{2.5cm}
-        
-        Director
-        
-        \vspace{0.5cm}
-        
-        Andrés Felipe Jerez Ariza
+\vfill
+\universidad\\
+\facultad\\
+\programa\\
+\ciudad\\
+\anio
+\end{center}
+\end{titlepage}
 
-        \vspace{1.0cm}
+% ---------------------------- Contraportada -----------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\singlespacing
+\vspace*{2cm}
+{\bfseries \tituloTrabajo\par}
 
-        Asesor o Co-Director
+\vfill
+\autores\par
 
-        \vspace{0.5cm}
+\vfill
+Trabajo de grado presentado como requisito para optar al título de\\
+\tituloProfesional
 
-        Karen Yaneth Sánchez Quiroga, 
-        
-        King Abdullah University of Science and Technology KAUST
+\vfill
+Director:\\
+\director\\
+\directorFormacion\\
+\directorAfiliacion
 
-        
-        \vspace{2.5cm}
-        
-        Universidad Autónoma de Bucaramanga
+\vspace{0.8cm}
+Codirector:\\
+\codirector\\
+\codirectorFormacion\\
+\codirectorAfiliacion
 
-        
-        Facultad de Ingeniería 
-        
-        Ingeniería de Sistemas
-        
-        2026
-        
-    \end{center}
+\vfill
+\universidad\\
+\facultad\\
+\programa\\
+\ciudad\\
+\anio
+\end{center}
 \end{titlepage}

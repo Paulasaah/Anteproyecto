@@ -39,8 +39,41 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{needspace}
+\usepackage{xurl}
 \usepackage{tikz}
 \usetikzlibrary{babel, arrows.meta, positioning, shapes.geometric}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{subcaption}
+
+% Paleta de colores para diagramas y gráficos (cappuccino + shades of white)
+% Convención: capptan/cappwine/cappdark son colores de BORDE/acento, nunca relleno
+% sólido de cajas de contenido (satura y dificulta la lectura). Los rellenos de
+% cajas en diagramas de proceso/arquitectura usan shwhite* o cappcream (tonos
+% casi blancos, estilo USL-Net). La escala fitzI-fitzVI se reserva EXCLUSIVAMENTE
+% para gráficos que representan tono de piel/fototipo (nunca para diagramas
+% conceptuales ni para conteos de clase diagnóstica, que no son tono).
+\definecolor{cappdark}{HTML}{4B3832}
+\definecolor{cappwine}{HTML}{854442}
+\definecolor{cappcream}{HTML}{FFF4E6}
+\definecolor{cappnearblack}{HTML}{3C2F2F}
+\definecolor{capptan}{HTML}{BE9B7B}
+\definecolor{shwhite1}{HTML}{FAF0E6}
+\definecolor{shwhite2}{HTML}{FFF5EE}
+\definecolor{shwhite3}{HTML}{FDF5E6}
+\definecolor{shwhite4}{HTML}{FAEBD7}
+\definecolor{fitzI}{HTML}{F1DFCB}
+\definecolor{fitzII}{HTML}{E3C7A8}
+\definecolor{fitzIII}{HTML}{C9A47E}
+\definecolor{fitzIV}{HTML}{A67B52}
+\definecolor{fitzV}{HTML}{7A5636}
+\definecolor{fitzVI}{HTML}{4A3222}
 
 % Hipervínculos y formato de referencias
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black, pdfborder={0 0 0}]{hyperref}
@@ -79,7 +112,31 @@
 \setlength{\parskip}{0.5em}
 
 % Si se desea personalizar la lista de contenido, descomentar:
-% \usepackage{tocloft}
+\usepackage[titles]{tocloft}
+\renewcommand{\cftdotsep}{1.5}
+\renewcommand{\cftchapaftersnum}{.}
+
+% ------------------------------ DATOS DEL TRABAJO -----------------------------
+% Fuente única de los datos de portada y contraportada (plantilla del profesor).
+% No modificar sin verificar los datos reales del comité de grado.
+
+\newcommand{\tituloTrabajo}{Algoritmo de aprendizaje autosupervisado para la clasificación de lesiones cutáneas en imágenes dermatológicas aplicado al contexto clínico de Santander}
+\newcommand{\autores}{María Paula Saavedra Martínez\\ Nicolás Santiago Moreno Monroy}
+\newcommand{\tituloProfesional}{Ingeniero de Sistemas}
+
+\newcommand{\director}{Andrés Felipe Jerez Ariza}
+\newcommand{\directorFormacion}{Doctor en Ingeniería}
+\newcommand{\directorAfiliacion}{Profesor Asociado / Universidad Autónoma de Bucaramanga (UNAB)}
+
+\newcommand{\codirector}{Karen Yaneth Sánchez Quiroga}
+\newcommand{\codirectorFormacion}{Doctora en Ingeniería}
+\newcommand{\codirectorAfiliacion}{Investigadora posdoctoral / King Abdullah University of Science and Technology (KAUST)}
+
+\newcommand{\universidad}{Universidad Autónoma de Bucaramanga}
+\newcommand{\facultad}{Facultad de Ingeniería}
+\newcommand{\programa}{Programa de Ingeniería de Sistemas}
+\newcommand{\ciudad}{Bucaramanga}
+\newcommand{\anio}{2026}
 
 % -------------------------- INICIO DEL DOCUMENTO ----------------------------
 
@@ -91,14 +148,20 @@
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
 
-% Portada y preliminares (estos archivos deben estar presentes)
+% Portada (plantilla del profesor)
 \hypersetup{pageanchor=false}
 \input{portada}
 
-% Índices automáticos
+% Preliminares: Resumen/Abstract, Dedicatoria, Agradecimientos -- antes de la
+% tabla de contenido y fuera de ella (ninguno usa \addcontentsline).
 \clearpage
 \pagenumbering{roman}
 \hypersetup{pageanchor=true}
+\input{resumen_abstract}
+\input{dedicatoria}
+\input{agradecimientos}
+
+% Índices automáticos (la tabla de contenido inicia en "1. Introducción")
 \tableofcontents
 \newpage
 \listoffigures
@@ -106,29 +169,23 @@
 \listoftables
 \newpage
 
-% Preliminares en el orden establecido para el proyecto de grado.
-\input{agradecimientos}
-\input{dedicatoria}
-\input{resumen_abstract}
-
 % Cuerpo del proyecto de grado
 \clearpage
 \pagenumbering{arabic}
 \input{introduccion}
-\input{planteamiento_problema}
-\input{justificacion}
+\input{capitulos/planteamiento_justificacion}
 \input{objetivos}
 \input{alcance_delimitacion}
 \input{capitulos/cap1}
 \input{capitulos/estado_arte}
 \input{capitulos/marco_normativo}
+\begingroup
+\setlength{\emergencystretch}{1em}
 \input{capitulos/metodologia}
-\input{capitulos/avance_objetivo1}
-\input{capitulos/avance_objetivo2}
-\input{capitulos/avance_objetivo3}
-\input{capitulos/resultados_esperados_riesgos}
+\endgroup
+\input{capitulos/desarrollo_proyecto}
+\input{capitulos/resultados_discusion}
 \input{conclusiones}
-\input{recomendaciones}
 
 % --------------------- BIBLIOGRAFÍA APA 7ma EDICIÓN -------------------------
 \nocite{*} % Includes original PDF references whose citations are literal source text.
