@@ -28,23 +28,3 @@ El aporte diferencial de esta investigación radica en la exploración de enfoqu
 La viabilidad del proyecto se sustenta en la disponibilidad de conjuntos de datos dermatológicos ampliamente utilizados en la investigación científica y en el desarrollo reciente de técnicas de aprendizaje autosupervisado para el análisis de imágenes médicas. Estos enfoques han demostrado resultados prometedores en tareas de clasificación y detección, lo que respalda su potencial aplicación en el desarrollo de herramientas computacionales de apoyo al diagnóstico dermatológico \parencite{chaturvedi2020multiclassskin}.
 
 Finalmente, el desarrollo de este proyecto contribuye al fortalecimiento de competencias en áreas como el diseño de sistemas inteligentes, el procesamiento y análisis de imágenes médicas y la implementación de modelos de aprendizaje automático, promoviendo una formación orientada hacia la innovación tecnológica con impacto potencial en el mejoramiento de los procesos de diagnóstico clínico.
-
-\section{Alcances y limitaciones}
-
-\subsection{Alcance}
-
-El proyecto comprende el diseño, la implementación y la evaluación experimental de un clasificador de lesiones cutáneas basado en aprendizaje autosupervisado. La caracterización de los conjuntos públicos se contrasta con el perfil epidemiológico del departamento de Santander para establecer su pertinencia y sus límites de cobertura, sin asumir que representan por sí solos la población regional.
-
-HAM10000 constituye la fuente etiquetada principal de entrenamiento y evaluación de clasificación de siete categorías: \texttt{nv}, \texttt{mel}, \texttt{bkl}, \texttt{bcc}, \texttt{akiec}, \texttt{vasc} y \texttt{df} \parencite{tschandl2018ham10000}. El aprendizaje autosupervisado permite aprender representaciones a partir de imágenes no etiquetadas; la adaptación y el entrenamiento del clasificador se documentan según el protocolo de cada experimento. El desempeño se cuantifica mediante métricas estándar de clasificación y se plantea su comparación con una línea base supervisada bajo condiciones equivalentes de arquitectura, datos y partición.
-
-El modelo se integrará en un prototipo funcional orientado al apoyo de médicos generales y dermatólogos, que permita cargar una imagen y consultar la predicción del clasificador. La segmentación, el manejo de pelo y otros artefactos y la estimación de tono son módulos complementarios que se evalúan por separado. Su incorporación al clasificador requiere comprobar experimentalmente su aporte mediante comparaciones que aíslen el efecto de cada módulo.
-
-\subsection{Delimitación}
-
-El proyecto se desarrolla durante el período académico del trabajo de grado y utiliza conjuntos públicos y recursos computacionales de acceso abierto o gratuito. No contempla recolección de imágenes en instituciones clínicas, pruebas prospectivas con pacientes ni implementación hospitalaria. El aplicativo no incluye integración con sistemas de información clínica ni con bases de datos institucionales externas.
-
-HAM10000 no contiene una clase independiente de carcinoma escamocelular invasor ni cubre patologías tropicales como leishmaniasis. El conjunto de preentrenamiento no supervisado, las particiones y las exclusiones se documentarán mediante identificadores, manifiestos y hashes de cada corrida. BCN20000 no se contará como un conjunto independiente cuando sus imágenes ya formen parte de ISIC2019. CO2Wounds-V2 queda excluido del trabajo actual.
-
-PAD-UFES-20 se utiliza como dominio objetivo mediante dos particiones: \texttt{target\_adapt} aporta imágenes sin etiquetas para la adaptación de dominio mediante continuación del aprendizaje autosupervisado, mientras \texttt{target\_test} se reserva exclusivamente para evaluación externa. El ajuste supervisado del clasificador utiliza etiquetas de HAM10000; \texttt{target\_test} queda excluida de todo entrenamiento, calibración, selección del modelo y ajuste de umbrales. Sus fotografías clínicas capturadas con teléfonos difieren de la dermatoscopía de HAM10000 \parencite{pacheco2020padufes}; por ello, el informe documentará las particiones y exclusiones, el mapeo de etiquetas y las limitaciones de esta evaluación.
-
-La validación se realiza bajo condiciones experimentales y no constituye validación clínica formal. El prototipo es una demostración de laboratorio y no un dispositivo médico certificado ni una herramienta diagnóstica autónoma. La validez externa, la representatividad regional y los análisis de subgrupos se limitan a la evidencia observada y a la calidad de las anotaciones disponibles. El despliegue clínico y la integración operativa en flujos de atención quedan como posibles extensiones de investigaciones posteriores.

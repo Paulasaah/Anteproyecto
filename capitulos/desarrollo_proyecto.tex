@@ -1,22 +1,49 @@
-% Este archivo ya NO se incluye desde main.tex como capítulo independiente
-% "Desarrollo del Proyecto" (esa estructura no existe en la plantilla del profesor).
-%
-% Su contenido se redistribuyó así:
-% - Caracterización de los conjuntos de datos y perfil epidemiológico (secciones
-%   "Caracterización de HAM10000/ISIC2019/ISIC2020/PAD-UFES-20", "Metodología de
-%   caracterización", "Cobertura regional y límites del corpus", "Caracterización
-%   del fototipo y del tono por conjunto", "Caracterización colorimétrica antes y
-%   después de la transformación", "Perfil objetivo para Santander", "Perfil
-%   epidemiológico regional de Santander", "Estado del objetivo") -> movida completa
-%   a capitulos/resultados_discusion.tex, sección "Caracterización de los conjuntos
-%   de datos y perfil epidemiológico" (pendiente T11: reorganizar dentro de 7.2).
-% - Las figuras fig:arquitectura-modular y fig:protocolo-evaluacion (arquitectura
-%   general y flujo de evaluación) -> movidas a capitulos/resultados_discusion.tex,
-%   sección "Arquitectura general y protocolo de evaluación" (posiblemente
-%   pertenezcan al Capítulo 6, pendiente de decidir).
-% - La "Nota sobre consolidación" (v7 -> v8.0.0-clean) -> movida junto con esas
-%   figuras en resultados_discusion.tex.
-% - El resto del contenido (formulación matemática de SimSiam/tono/L2SP/métricas/
-%   MoCo v2/CCAM, protocolo de bootstrap+Holm) era contenido DUPLICADO: ya vive en
-%   capitulos/metodologia_tono.tex, metodologia_segmentacion.tex y
-%   metodologia_clasificador.tex (Capítulo 6). No se repitió aquí.
+\chapter{Desarrollo del proyecto}
+
+Este capítulo presenta el desarrollo técnico realizado para cada una de las tres líneas de trabajo del proyecto, en continuidad con el diseño metodológico del Capítulo~6: clasificación con aprendizaje autosupervisado y adaptación de dominio, segmentación de lesiones cutáneas, y transformación y estimación del tono de piel. Para cada línea se presentan las actividades realizadas, los datos y las entradas, las herramientas, los criterios, el modelamiento matemático y los algoritmos y procedimientos aplicados, incluida la descripción técnica del protocolo de evaluación. Los valores numéricos obtenidos y su interpretación se presentan en el Capítulo~8, que no repite aquí el procedimiento ya descrito.
+
+La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí las tres líneas: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, con una posible integración (compuerta I) que requiere ablación propia y no se presenta como validada.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    box/.style={draw=capptan, line width=0.8pt, rounded corners=3pt, align=center, text width=2.4cm, minimum height=1.15cm, inner sep=4pt, font=\sffamily\small, text=cappnearblack},
+    main/.style={box, fill=shwhite2},
+    aux/.style={box, dashed, draw=cappwine, fill=shwhite4},
+    flow/.style={-{Stealth[length=2mm]}, thick, color=capptan},
+    node distance=0.3cm
+]
+\node[main] (pool) {Imágenes sin etiqueta\\conjunto SSL versionado};
+\node[main, right=of pool] (views) {Dos vistas\\aumentadas};
+\node[main, right=of views] (encoder) {Codificador DINOv2 ViT-B/14\\+ adaptación SimSiam};
+\node[main, right=of encoder] (probe) {Representación\\+ regresión logística};
+\node[main, right=of probe] (classes) {Predicción\\de 7 clases};
+\draw[flow] (pool) -- (views);
+\draw[flow] (views) -- (encoder);
+\draw[flow] (encoder) -- (probe);
+\draw[flow] (probe) -- (classes);
+
+\node[aux, below=0.9cm of encoder, text width=5.6cm] (segment) {Módulo complementario de segmentación\\MoCo v2/ResNet-50 $\rightarrow$ CCAM $\rightarrow$ pseudo-máscaras $\rightarrow$ U-Net};
+\node[aux, right=0.8cm of segment, text width=4.1cm] (gate) {Compuerta S independiente\\Integración con clasificador: compuerta I, requiere ablación};
+\draw[flow, dashed] (pool.south) |- (segment.west);
+\draw[flow, dashed] (segment) -- (gate);
+\end{tikzpicture}
+\caption{Arquitectura modular del proyecto: clasificación SSL como núcleo y segmentación como componente independiente.}
+\label{fig:arquitectura-modular}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} La flecha entre segmentación y la compuerta I indica una evaluación posterior, no una integración ya validada. El diseño de preentrenamiento se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
+\par\endgroup
+\end{figure}
+
+\section{Clasificación con aprendizaje autosupervisado y adaptación de dominio}
+\label{sec:desarrollo-clasificador}
+\input{capitulos/metodologia_clasificador}
+
+\section{Segmentación de lesiones cutáneas}
+\label{sec:desarrollo-segmentacion}
+\input{capitulos/metodologia_segmentacion}
+
+\section{Transformación y estimación del tono de piel}
+\label{sec:desarrollo-tono}
+\input{capitulos/metodologia_tono}

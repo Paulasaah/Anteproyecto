@@ -126,14 +126,20 @@
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
 
-% Portada y preliminares (estos archivos deben estar presentes)
+% Portada (plantilla del profesor)
 \hypersetup{pageanchor=false}
 \input{portada}
 
-% Índices automáticos
+% Preliminares: Resumen/Abstract, Dedicatoria, Agradecimientos -- antes de la
+% tabla de contenido y fuera de ella (ninguno usa \addcontentsline).
 \clearpage
 \pagenumbering{roman}
 \hypersetup{pageanchor=true}
+\input{resumen_abstract}
+\input{dedicatoria}
+\input{agradecimientos}
+
+% Índices automáticos (la tabla de contenido inicia en "1. Introducción")
 \tableofcontents
 \newpage
 \listoffigures
@@ -141,17 +147,13 @@
 \listoftables
 \newpage
 
-% Preliminares en el orden establecido para el proyecto de grado.
-\input{agradecimientos}
-\input{dedicatoria}
-\input{resumen_abstract}
-
 % Cuerpo del proyecto de grado
 \clearpage
 \pagenumbering{arabic}
 \input{introduccion}
 \input{capitulos/planteamiento_justificacion}
 \input{objetivos}
+\input{alcance_delimitacion}
 \input{capitulos/cap1}
 \input{capitulos/estado_arte}
 \input{capitulos/marco_normativo}
@@ -159,6 +161,7 @@
 \setlength{\emergencystretch}{1em}
 \input{capitulos/metodologia}
 \endgroup
+\input{capitulos/desarrollo_proyecto}
 \input{capitulos/resultados_discusion}
 \input{conclusiones}
 

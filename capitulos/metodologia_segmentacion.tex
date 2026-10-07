@@ -1,4 +1,4 @@
-Esta línea de trabajo es un módulo \emph{complementario} al clasificador: genera, sin usar máscaras expertas ni etiquetas de diagnóstico en ningún punto del proceso, una segmentación aproximada de la lesión que puede alimentar al módulo de incertidumbre y a la caracterización de tono descrita en la Sección~\ref{sec:metodologia-tono}. No sustituye una validación clínica de la segmentación.
+Esta línea de trabajo es un módulo \emph{complementario} al clasificador: genera, sin usar máscaras expertas ni etiquetas de diagnóstico en ningún punto del proceso, una segmentación aproximada de la lesión que puede alimentar al módulo de incertidumbre y a la caracterización de tono descrita en la Sección~\ref{sec:desarrollo-tono}. No sustituye una validación clínica de la segmentación.
 
 \subsection{Actividades y fases}
 
@@ -21,7 +21,7 @@ Cada ronda de estudiante (\texttt{student\_r1}--\texttt{student\_r3}) usa el mis
 
 \subsection{Herramientas y arquitectura}
 
-El backbone es un ResNet-50 preentrenado de forma contrastiva con MoCo v2 \parencite{chen2020mocov2}, independiente del SimSiam que adapta el backbone del clasificador (Sección~\ref{sec:metodologia-clasificador}). Sobre ese backbone, CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}, \parencite{xie2022ccam}) produce un mapa de activación sin etiquetas de segmentación, que se umbraliza para entrenar al U-Net estudiante. Framework y hardware: ver configuración experimental en el Capítulo~7; a diferencia del preentrenamiento del clasificador (cluster UNABIA vía SLURM, 4 GPU), este módulo se ejecuta en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128} --una versión de PyTorch distinta a la del clasificador porque son dos entornos de cómputo independientes, no por inconsistencia.
+El backbone es un ResNet-50 preentrenado de forma contrastiva con MoCo v2 \parencite{chen2020mocov2}, independiente del SimSiam que adapta el backbone del clasificador (Sección~\ref{sec:desarrollo-clasificador}). Sobre ese backbone, CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}, \parencite{xie2022ccam}) produce un mapa de activación sin etiquetas de segmentación, que se umbraliza para entrenar al U-Net estudiante. Framework y hardware: ver configuración experimental en el Capítulo~8; a diferencia del preentrenamiento del clasificador (cluster UNABIA vía SLURM, 4 GPU), este módulo se ejecuta en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128} --una versión de PyTorch distinta a la del clasificador porque son dos entornos de cómputo independientes, no por inconsistencia.
 
 \subsection{Datos empleados}
 
@@ -34,7 +34,7 @@ El desempeño del módulo se mide con el coeficiente Dice entre la máscara pred
  \mathrm{Dice}(A,B)=\frac{2|A\cap B|}{|A|+|B|}=\frac{2\,\mathrm{TP}}{2\,\mathrm{TP}+\mathrm{FP}+\mathrm{FN}},
  \label{eq:dice-s6}
 \end{equation}
-donde $\mathrm{TP}$, $\mathrm{FP}$ y $\mathrm{FN}$ se calculan a nivel de píxel entre ambas máscaras. Los valores de Dice obtenidos se presentan como resultado en el Capítulo~7, no en este apartado metodológico.
+donde $\mathrm{TP}$, $\mathrm{FP}$ y $\mathrm{FN}$ se calculan a nivel de píxel entre ambas máscaras. Los valores de Dice obtenidos se presentan como resultado en el Capítulo~8, no en este apartado.
 
 \subsection{Modelamiento matemático}
 
