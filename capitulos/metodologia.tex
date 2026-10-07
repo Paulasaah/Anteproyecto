@@ -13,15 +13,13 @@ El desarrollo del proyecto se organizó según el cumplimiento de los cuatro obj
 \centering
 \fbox{\begin{minipage}{0.82\textwidth}
 \centering
-\vspace{2.8cm}
-\textit{Espacio reservado para el diagrama de flujo de CRISP-ML(Q).}
-\vspace{2.8cm}
+\includegraphics[width=0.92\textwidth]{images/figura10-diseno-crisp-mlq.png}
 \end{minipage}}
 \caption{Diagrama de flujo de la aplicación de CRISP-ML(Q)}
 \label{fig:flujo-crispmlq}
 \par\smallskip
 \raggedright\footnotesize
-\textit{Nota.} Diagrama pendiente de entrega por el equipo en formato Mermaid; se integrará en esta ubicación cuando esté disponible. Debe mostrar las cuatro fases en el orden aplicado, su relación con los objetivos específicos (Tabla~\ref{tab:trazabilidad-fases}) y dónde se integran las tres líneas de trabajo.
+\textit{Nota.} Elaboración propia. El diagrama presenta las cuatro fases de CRISP-ML(Q), su relación con los objetivos específicos y la integración de las líneas de clasificación, segmentación y caracterización de tono.
 \end{figure}
 
 La Tabla~\ref{tab:trazabilidad-fases} resume la relación entre las fases de CRISP-ML(Q), los objetivos específicos y las actividades realizadas. Los datos, algoritmos, criterios y procedimientos se describen en las secciones correspondientes del Capítulo~7.
@@ -99,7 +97,7 @@ Actividad 2.5: se documentaron la arquitectura final de cada línea, los hiperpa
 
 \subsection{Fase 3 -- Evaluación del modelo con aseguramiento de calidad}
 
-En esta fase se evaluó el desempeño del algoritmo propuesto mediante métricas estándar de clasificación dermatológica reportadas en la literatura científica y se realizó una comparación experimental pareada frente a un codificador público de referencia, bajo las mismas condiciones experimentales. Adicionalmente, se aplicaron componentes de aseguramiento de calidad (Q) propios del marco CRISP-ML(Q): protocolo confirmatorio registrado de antemano, corrección de Holm para comparaciones múltiples y, en la línea de tono, validación externa contra fototipo Fitzpatrick real. Entregable: protocolos de evaluación y comparación de cada línea (Capítulo~7); las cifras de desempeño y el análisis de los resultados se presentan en el Capítulo~8.
+En esta fase se evaluó el desempeño del algoritmo propuesto mediante métricas estándar de clasificación dermatológica reportadas en la literatura científica y se realizó una comparación experimental pareada frente a un codificador público de referencia, bajo las mismas condiciones experimentales. Adicionalmente, se aplicaron componentes de aseguramiento de calidad (Q) propios del marco CRISP-ML(Q): protocolo registrado antes de las evaluaciones y corrección de Holm para las comparaciones múltiples. En la línea de tono, el proxy ITA se contrastó con anotaciones de fototipo de referencia, pero su desempeño quedó por debajo de la predicción por mayoría; por tanto, esa evaluación no valida el ITA como estimador de Fitzpatrick. Entregable: protocolos de evaluación y comparación de cada línea (Capítulo~7); las cifras de desempeño y el análisis de los resultados se presentan en el Capítulo~8.
 
 Actividad 3.1: se identificó y seleccionó el codificador público de referencia para la comparación experimental del clasificador.
 
@@ -107,7 +105,7 @@ Actividad 3.2: se implementó la comparación de referencia utilizando el mismo 
 
 Actividad 3.3: se calcularon las métricas de evaluación (F1 macro, exactitud balanceada, AUC-ROC, ECE, MCC, entre otras; Capítulo~7), desagregadas por clase diagnóstica.
 
-Actividad 3.4: se realizó la validación externa del proxy ITA frente a fototipo Fitzpatrick real (Capítulo~7) como componente de aseguramiento de calidad relacionado con sesgo por fototipo; no se generaron mapas de explicabilidad en esta fase --queda como trabajo pendiente.
+Actividad 3.4: se contrastó el proxy ITA con anotaciones de fototipo de referencia (Capítulo~7). El resultado fue inferior a la línea base por mayoría, por lo que no se trata como un estimador validado de Fitzpatrick ni como evidencia de equidad por fototipo. No se generaron mapas de explicabilidad en esta fase; quedan fuera de la evaluación reportada.
 
 Actividad 3.5: se elaboró el protocolo de análisis estadístico (bootstrap pareado y corrección de Holm, Capítulo~7) aplicado a los resultados obtenidos durante la evaluación experimental.
 

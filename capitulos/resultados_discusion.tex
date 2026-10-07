@@ -443,7 +443,24 @@ Los intervalos de confianza individuales de A71 y B71 se solapan en exactitud ba
 \subsection{Segmentación complementaria}
 \label{sec:segmentacion-complementaria}
 
-La línea de segmentación sin etiquetas sigue un flujo separado de MoCo v2/ResNet-50, CCAM, pseudo-máscaras y un U-Net estudiante. El candidato S4-A2 obtuvo Dice 0,7221 en ISIC2018 y 0,7949 en HAM10000; superó por márgenes pequeños algunos umbrales registrados frente al estudiante \texttt{student\_r3}. Sin embargo, las pruebas de integración C1 no muestran una mejora general del clasificador al usar máscaras. Este resultado respalda mantener la segmentación como módulo complementario, no afirmar que mejore el clasificador.
+La línea USL-Net produce máscaras aproximadas sin utilizar etiquetas diagnósticas ni máscaras expertas durante el entrenamiento. El protocolo principal \texttt{student\_r3} aplica MoCo v2/ResNet-50, CCAM, pseudo-máscaras y tres rondas de refinamiento del U-Net. Posteriormente se evaluó S4-A2, con DINOv2 ViT-B/14 congelado y un decoder tipo DPT. La tabla presenta el Dice medio y su IC del 95\,\% frente a las máscaras de referencia.
+
+\begin{table}[htbp]
+\centering
+\caption{Evaluación de los segmentadores \texttt{student\_r3} y S4-A2.}
+\label{tab:segmentacion-student-a2}
+\begin{tabular}{lrr}
+\toprule
+Segmentador & ISIC2018 ($n=2.594$) & HAM10000 ($n=10.015$) \\
+\midrule
+\texttt{student\_r3} & 0,718 [0,709; 0,726] & 0,785 [0,781; 0,788] \\
+S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
+\bottomrule
+\end{tabular}
+\end{table}
+\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el pool sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
+
+S4-A2 superó el criterio registrado antes de la evaluación: su Dice en ISIC2018 quedó por encima del umbral de \texttt{student\_r3} menos 0,01; también obtuvo un Dice mayor en HAM10000. Se considera el candidato de segmentación con mejor resultado entre estas dos variantes. Sin embargo, la comparación de integración C1 no mostró una mejora general del clasificador al usar las máscaras: ninguna de las 15 celdas del análisis primario de \texttt{student\_r3} mejoró con un intervalo de F1 macro que excluyera cero, y el análisis secundario de S4-A2 mostró el mismo patrón. En consecuencia, la segmentación se mantiene como módulo complementario y no como una mejora demostrada de la clasificación.
 
 \section{Discusión}
 
@@ -519,4 +536,11 @@ El estimador de ITA del proyecto no es un clasificador Fitzpatrick validado: aci
 
 \subsection{Estado del objetivo y trabajo pendiente}
 
-El banco respalda el aprendizaje autosupervisado como método de representación frente a ocho líneas base, de forma confirmatoria en régimen congelado (8 de 8), y aporta una señal piloto de que la adaptación con imágenes de PAD sin etiquetas mejora la sonda de origen frente a su control de cómputo. No demuestra que la segmentación (F4) mejore la clasificación de forma general, que el ITA prediga Fitzpatrick, ni que la adaptación a PAD supere al encoder público. Quedan pendientes: (i) fijar antes de nuevas semillas el split y los hashes de D2/D3, hoy sin \texttt{data\_revision} registrada; (ii) separar el recorte de los descriptores en F4 para aislar el efecto de la segmentación; (iii) validar el ITA contra anotación experta antes de cualquier afirmación de equidad; y (iv) decidir, con criterio clínico, si la detección de melanoma (recall) o el F1 macro agregado es la métrica que debe gobernar la selección final del modelo, dada la tensión observada en ISIC2020. Ninguna de estas tareas autoriza por sí sola nuevas corridas; cualquier corrida se ejecuta en UNAB con presupuesto previamente acordado.
+El banco respalda el aprendizaje autosupervisado como método de representación frente a ocho líneas base, de forma confirmatoria en régimen congelado (8 de 8), y aporta una señal piloto de que la adaptación con imágenes de PAD sin etiquetas mejora la sonda de origen frente a su control de cómputo. No demuestra que la segmentación mejore la clasificación de forma general ni que la adaptación a PAD supere al encoder público. El estado de las cuestiones abiertas es el siguiente:
+\begin{enumerate}
+    \item \textbf{Trazabilidad de D2/D3.} Antes de nuevas semillas se debe completar el registro de procedencia. En la versión revisada, los \texttt{run.json} dejan \texttt{data\_revision} vacío y no contienen un hash de partición válido; el protocolo sí identifica otros hashes de exclusión, listas de IDs y del split PAD.
+    \item \textbf{Ablación de F4.} F4 combina recorte de lesión y descriptores de forma/color. Como esos componentes no se aislaron en el banco reportado, el resultado sigue siendo exploratorio y no permite atribuir un eventual cambio a la segmentación por separado.
+    \item \textbf{Proxy ITA.} El contraste con fototipos de referencia quedó por debajo de la línea base por mayoría. No se usa el ITA como fototipo Fitzpatrick ni como validación de equidad.
+    \item \textbf{Criterio clínico de selección.} El banco muestra una tensión entre F1 macro y sensibilidad de melanoma. No hay una decisión clínica documentada que permita priorizar una de estas métricas; por ello se reportan ambas y no se declara un ganador clínico.
+\end{enumerate}
+Estas limitaciones no autorizan por sí solas nuevas corridas; cualquier corrida se ejecuta en UNAB con presupuesto previamente acordado.

@@ -9,9 +9,27 @@ Con el objetivo de apoyar la labor clínica, se han desarrollado sistemas de dia
 En este contexto, las técnicas de aprendizaje autosupervisado se presentan como una alternativa prometedora en el análisis de imágenes médicas, al permitir el entrenamiento de modelos utilizando grandes volúmenes de datos no etiquetados. Este enfoque reduce significativamente la dependencia de conjuntos de datos anotados y ha mostrado resultados alentadores en diferentes tareas de diagnóstico asistido por imágenes \parencite{krishnan2022selfsupervisedmedicine}. Por lo tanto, su aplicación en el análisis de imágenes dermatológicas podría contribuir al desarrollo de herramientas computacionales que apoyen la detección y clasificación de lesiones cutáneas, fortaleciendo las capacidades diagnósticas en contextos regionales como el departamento de Santander.
 
 \subsection*{Árbol del problema}
-\noindent\textbf{[Pendiente de actualización.]}
-
-Reformular el árbol para que el problema central describa la dificultad de clasificar lesiones cutáneas con modelos computacionales cuando hay pocas etiquetas clínicas y existe cambio de dominio. Verificar con evidencia antes de atribuir al departamento retrasos asistenciales, sobrecarga clínica, costos o mortalidad.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=5mm,
+    arbol/.style={rectangle, rounded corners=2pt, draw=black!65, align=center,
+        text width=0.88\textwidth, inner sep=6pt},
+    relacion/.style={-Latex, thick}
+]
+\node[arbol] (efectos) {\textbf{Efectos}\\
+La transferencia a imágenes clínicas de otros contextos es incierta.\\
+Las métricas globales no bastan para establecer desempeño por subgrupos ni aptitud clínica.};
+\node[arbol, below=of efectos] (problema) {\textbf{Problema central}\\
+Limitaciones para clasificar lesiones cutáneas con modelos computacionales cuando hay pocas anotaciones clínicas locales y las imágenes de aplicación difieren del dominio de entrenamiento.};
+\node[arbol, below=of problema] (causas) {\textbf{Causas}\\
+Disponibilidad limitada de imágenes dermatológicas locales con diagnóstico experto; diferencias de población, dispositivo y protocolo de captura entre conjuntos; y variación en la representación de tonos de piel y categorías diagnósticas.};
+\draw[relacion] (problema) -- (efectos);
+\draw[relacion] (causas) -- (problema);
+\end{tikzpicture}
+\caption{Árbol del problema de clasificación de lesiones cutáneas.}
+\label{fig:arbol-problema}
+\end{figure}
 
 \subsection{Pregunta de investigación}
 
