@@ -1,5 +1,7 @@
 % Source: Anteproyecto (3).pdf. Original wording retained except population/sample.
-\chapter{Marco normativo y legal}
+\chapter*{Marco normativo y legal}
+\addcontentsline{toc}{chapter}{Marco normativo y legal}
+\markboth{Marco normativo y legal}{Marco normativo y legal}
 
 El desarrollo de un sistema de apoyo diagnóstico basado en inteligencia artificial para la clasificación de lesiones cutáneas involucra el procesamiento de imágenes médicas que, por su naturaleza, constituyen datos sensibles de salud. Esta condición exige que el proyecto se enmarque en un conjunto de disposiciones normativas tanto internacionales como nacionales que regulan la protección de datos personales, el uso ético de la inteligencia artificial en contextos clínicos y la prestación de servicios de salud mediados por tecnología. A continuación, se describen los instrumentos normativos que aplican directamente al alcance de este proyecto y se precisa el ámbito en que cada uno incide sobre su diseño, desarrollo y eventual implementación.
 
@@ -13,15 +15,6 @@ La Ley de Inteligencia Artificial de la Unión Europea (AIAct) clasifica los sis
 
 Finalmente, el proyecto se alinea con la Recomendación sobre la Ética de la Inteligencia Artificial de la UNESCO, la cual promueve el desarrollo de sistemas de IA que respeten la dignidad humana, la equidad, la transparencia y la rendición de cuentas, principios que orientan las decisiones de diseño del algoritmo propuesto (UNESCO, 2021).
 
-El proyecto reconoce los siguientes instrumentos normativos de referencia en el ámbito internacional:
-
-\begin{itemize}
-    \item Reglamento General de Protección de Datos (GDPR, UE): establece que los datos biométricos y de salud constituyen categorías especiales que requieren consentimiento explícito y garantizan el derecho a la explicabilidad de las decisiones automatizadas.
-    \item Declaración de Helsinki: define los principios éticos fundamentales para la investigación médica, estableciendo que el bienestar del paciente prevalece sobre el interés científico o tecnológico.
-    \item Ley de IA de la Unión Europea (AI Act): clasifica los sistemas de IA aplicados en salud como de alto riesgo, exigiendo transparencia, supervisión humana y medidas de ciberseguridad para prevenir diagnósticos erróneos (Parlamento Europeo y Consejo de la Unión Europea, 2024).
-    \item Este proyecto se alinea con la Recomendación sobre la Ética de la Inteligencia Artificial de la UNESCO (2021), la cual establece principios globales para el desarrollo responsable y ético de sistemas de IA (UNESCO, 2021).
-\end{itemize}
-
 \section{Normativa Nacional (Colombia)}
 
 En el contexto colombiano, el proyecto se inscribe en un conjunto de disposiciones legales que regulan tanto la protección de datos personales como la incorporación de tecnologías en el sistema de salud. La Ley 1581 de 2012 y su Decreto reglamentario 1377 de 2013 establecen que los datos de salud y las imágenes médicas son datos sensibles, cuyo tratamiento exige consentimiento previo, expreso e informado del titular, y la implementación de medidas técnicas y administrativas para prevenir el acceso no autorizado \parencite{colombia2012ley1581}. Este marco se aplica al proyecto al delimitar las condiciones bajo las cuales el prototipo podrá procesar imágenes cargadas por el usuario, garantizando que ninguna imagen será almacenada ni utilizada con fines distintos al análisis inmediato.
@@ -29,16 +22,6 @@ En el contexto colombiano, el proyecto se inscribe en un conjunto de disposicion
 La Ley 1419 de 2010 y la Resolución 2654 de 2019 regulan la prestación de servicios de telesalud y telemedicina en Colombia, estableciendo las condiciones técnicas y éticas para el uso de herramientas tecnológicas de apoyo a la decisión clínica (Congreso de la República de Colombia, 2010). Dentro de este marco, el sistema desarrollado se define como una herramienta complementaria al diagnóstico, en la que la responsabilidad final recae exclusivamente en el médico tratante. Por su parte, el Marco Ético para la Inteligencia Artificial en Colombia, publicado por el Ministerio de Ciencia, Tecnología e Innovación, promueve principios de transparencia, explicabilidad, beneficio humano y reducción de sesgos algorítmicos que puedan afectar a poblaciones específicas según su fototipo de piel (Ministerio de Ciencia, Tecnología e Innovación, 2021).
 
 Estos principios se aplican directamente al proyecto, dado que los conjuntos de datos de entrenamiento presentan un sesgo demográfico hacia fototipos claros, condición que se documenta explícitamente como limitación. Finalmente, el Documento CONPES 4144 establece los lineamientos estratégicos del Estado colombiano para el desarrollo, adopción y gobernanza responsable de la inteligencia artificial, constituyendo el marco de política pública dentro del cual se inscribe el presente proyecto como contribución al fortalecimiento de capacidades tecnológicas en salud a nivel regional (Departamento Nacional de Planeación, 2023).
-
-El desarrollo del prototipo se enmarca en el ordenamiento jurídico colombiano, en particular en las siguientes disposiciones:
-
-Ley 1581 de 2012 y Decreto 1377 de 2013 -- Protección de Datos Personales: en Colombia, los datos de salud y las imágenes médicas son catalogados como datos sensibles. Su tratamiento exige consentimiento previo, expreso e informado del titular; la finalidad de uso queda restringida al diagnóstico médico o a la investigación anonimizada; y se exige la implementación de medidas técnicas y administrativas para prevenir el acceso no autorizado o la adulteración de la información \parencite{colombia2012ley1581}.
-
-Ley 1419 de 2010 y Resolución 2654 de 2019 -- Telesalud y Telemedicina: regulan la prestación de servicios de salud a distancia. En este marco, el sistema desarrollado se define como una herramienta de apoyo a la decisión clínica; la responsabilidad del diagnóstico final recae exclusivamente en el médico tratante (Congreso de la República de Colombia, 2010; Ministerio de Salud y Protección Social, 2019).
-
-Marco Ético para la Inteligencia Artificial en Colombia, MinTIC (2021): promueve la transparencia y explicabilidad de los sistemas de IA, la prevalencia del beneficio humano y la reducción de sesgos diagnósticos que puedan afectar a poblaciones específicas según su fototipo de piel (Ministerio de Ciencia, Tecnología e Innovación, 2021)
-
-CONPES 4144 Política Nacional de Inteligencia Artificial: establece los lineamientos estratégicos del Estado colombiano para el desarrollo, adopción y gobernanza responsable de la IA, marco dentro del cual se inscribe el presente proyecto (Departamento Nacional de Planeación, 2023).
 
 \section{Consideraciones éticas}
 

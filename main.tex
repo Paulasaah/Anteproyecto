@@ -39,8 +39,39 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{needspace}
+\usepackage{xurl}
 \usepackage{tikz}
 \usetikzlibrary{babel, arrows.meta, positioning, shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{subcaption}
+
+% Paleta de colores para diagramas y gráficos (cappuccino + shades of white)
+% Convención: capptan/cappwine/cappdark son colores de BORDE/acento, nunca relleno
+% sólido de cajas de contenido (satura y dificulta la lectura). Los rellenos de
+% cajas en diagramas de proceso/arquitectura usan shwhite* o cappcream (tonos
+% casi blancos, estilo USL-Net). La escala fitzI-fitzVI se reserva EXCLUSIVAMENTE
+% para gráficos que representan tono de piel/fototipo (nunca para diagramas
+% conceptuales ni para conteos de clase diagnóstica, que no son tono).
+\definecolor{cappdark}{HTML}{4B3832}
+\definecolor{cappwine}{HTML}{854442}
+\definecolor{cappcream}{HTML}{FFF4E6}
+\definecolor{cappnearblack}{HTML}{3C2F2F}
+\definecolor{capptan}{HTML}{BE9B7B}
+\definecolor{shwhite1}{HTML}{FAF0E6}
+\definecolor{shwhite2}{HTML}{FFF5EE}
+\definecolor{shwhite3}{HTML}{FDF5E6}
+\definecolor{shwhite4}{HTML}{FAEBD7}
+\definecolor{fitzI}{HTML}{F1DFCB}
+\definecolor{fitzII}{HTML}{E3C7A8}
+\definecolor{fitzIII}{HTML}{C9A47E}
+\definecolor{fitzIV}{HTML}{A67B52}
+\definecolor{fitzV}{HTML}{7A5636}
+\definecolor{fitzVI}{HTML}{4A3222}
 
 % Hipervínculos y formato de referencias
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black, pdfborder={0 0 0}]{hyperref}
@@ -79,7 +110,9 @@
 \setlength{\parskip}{0.5em}
 
 % Si se desea personalizar la lista de contenido, descomentar:
-% \usepackage{tocloft}
+\usepackage[titles]{tocloft}
+\renewcommand{\cftdotsep}{1.5}
+\renewcommand{\cftchapaftersnum}{.}
 
 % -------------------------- INICIO DEL DOCUMENTO ----------------------------
 
@@ -115,17 +148,17 @@
 \clearpage
 \pagenumbering{arabic}
 \input{introduccion}
-\input{planteamiento_problema}
-\input{justificacion}
+\input{capitulos/planteamiento_justificacion}
 \input{objetivos}
-\input{alcance_delimitacion}
 \input{capitulos/cap1}
 \input{capitulos/estado_arte}
 \input{capitulos/marco_normativo}
+\begingroup
+\setlength{\emergencystretch}{1em}
 \input{capitulos/metodologia}
-\input{capitulos/avance_objetivo1}
-\input{capitulos/avance_objetivo2}
-\input{capitulos/avance_objetivo3}
+\endgroup
+\input{capitulos/desarrollo_proyecto}
+\input{capitulos/resultados_discusion}
 \input{capitulos/resultados_esperados_riesgos}
 \input{conclusiones}
 \input{recomendaciones}
