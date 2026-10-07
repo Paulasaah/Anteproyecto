@@ -2,20 +2,26 @@ Esta línea de trabajo es un módulo \emph{complementario} al clasificador: gene
 
 \subsection{Actividades y fases}
 
-El pipeline se ejecutó en rondas secuenciales de preentrenamiento contrastivo y auto-entrenamiento con refinamiento iterativo de pseudo-máscaras, dentro de la Fase 2 de la Tabla~\ref{tab:trazabilidad-fases}:
+El pipeline se organiza en dos etapas secuenciales dentro de la Fase 2 de la Tabla~\ref{tab:trazabilidad-fases}: una generación inicial de la pseudo-máscara y un refinamiento iterativo que repite el entrenamiento del U-Net estudiante sobre versiones sucesivamente mejoradas de esa pseudo-máscara.
 
 \begin{enumerate}
-    \item \textbf{\texttt{contrastive}}: preentrenamiento contrastivo del backbone con MoCo v2 (algoritmo de MoCo v2 más abajo), sin etiquetas.
-    \item \textbf{\texttt{ccam}}: generación del mapa de activación de clase agnóstica con CCAM (algoritmo de CCAM más abajo) a partir de las representaciones de \texttt{contrastive}.
-    \item \textbf{\texttt{pseudo\_r0}}: umbralización del mapa CCAM para producir la primera pseudo-máscara.
-    \item \textbf{\texttt{student\_r1}}: entrenamiento de un U-Net estudiante sobre \texttt{pseudo\_r0}.
-    \item \textbf{\texttt{pseudo\_r1}}: refinamiento de la pseudo-máscara con las predicciones de \texttt{student\_r1}.
-    \item \textbf{\texttt{student\_r2}}: segunda ronda de entrenamiento del U-Net sobre \texttt{pseudo\_r1}.
-    \item \textbf{\texttt{pseudo\_r2}}: segundo refinamiento de la pseudo-máscara.
-    \item \textbf{\texttt{student\_r3}}: tercera y última ronda de entrenamiento del U-Net sobre \texttt{pseudo\_r2}; es el candidato final de este módulo.
+    \item \textbf{Generación inicial.}
+    \begin{enumerate}
+        \item \textbf{\texttt{contrastive}}: preentrenamiento contrastivo del backbone con MoCo v2 (algoritmo de MoCo v2 más abajo), sin etiquetas.
+        \item \textbf{\texttt{ccam}}: generación del mapa de activación de clase agnóstica con CCAM (algoritmo de CCAM más abajo) a partir de las representaciones de \texttt{contrastive}.
+        \item \textbf{\texttt{pseudo\_r0}}: umbralización del mapa CCAM para producir la primera pseudo-máscara.
+        \item \textbf{\texttt{student\_r1}}: entrenamiento de un U-Net estudiante sobre \texttt{pseudo\_r0}.
+    \end{enumerate}
+    \item \textbf{Refinamiento iterativo.} Cada ronda repite el mismo patrón hasta llegar a \texttt{student\_r3}: refinar la pseudo-máscara con las predicciones del estudiante de la ronda anterior y entrenar sobre ella una nueva ronda de U-Net estudiante.
+    \begin{enumerate}
+        \item \textbf{\texttt{pseudo\_r1}}: refinamiento de la pseudo-máscara con las predicciones de \texttt{student\_r1}.
+        \item \textbf{\texttt{student\_r2}}: segunda ronda de entrenamiento del U-Net sobre \texttt{pseudo\_r1}.
+        \item \textbf{\texttt{pseudo\_r2}}: segundo refinamiento de la pseudo-máscara.
+        \item \textbf{\texttt{student\_r3}}: tercera y última ronda de entrenamiento del U-Net sobre \texttt{pseudo\_r2}; es el candidato final de este módulo.
+    \end{enumerate}
 \end{enumerate}
 
-Cada ronda de estudiante (\texttt{student\_r1}--\texttt{student\_r3}) usa el mismo protocolo: 20 épocas, 32 imágenes por GPU en 2 GPU, optimizador Adam con tasa de aprendizaje $10^{-4}$, una época de calentamiento, programación coseno, precisión \texttt{bf16} y semilla 42. La pérdida combina entropía cruzada binaria y Dice suave, calculada solo sobre los píxeles que el módulo de incertidumbre marca como confiables.
+Las tres rondas de estudiante (\texttt{student\_r1}--\texttt{student\_r3}) comparten el mismo protocolo de entrenamiento: 20 épocas, 32 imágenes por GPU en 2 GPU, optimizador Adam con tasa de aprendizaje $10^{-4}$, una época de calentamiento, programación coseno, precisión \texttt{bf16} y semilla 42. La pérdida combina entropía cruzada binaria y Dice suave, calculada solo sobre los píxeles que el módulo de incertidumbre marca como confiables.
 
 \texttt{student\_r3} se selecciona como candidato final por ser la última ronda de un pipeline de \textbf{tres rondas fijas por diseño}, no por comparación de métricas entre \texttt{student\_r1}, \texttt{student\_r2} y \texttt{student\_r3}. Dentro de cada ronda sí se selecciona el punto de verificación (\emph{checkpoint}) con menor pérdida de pseudo-validación. \textit{[Pendiente: la razón para fijar el número de rondas en tres --y no en una cantidad distinta-- no está documentada en las fuentes revisadas; confirmar con el equipo si el anteproyecto necesita justificarlo.]}
 
