@@ -1,15 +1,18 @@
 \chapter{Resultados y Discusión}
 
-% TODO T11: reorganizar este capítulo completo según 7.1-7.6 de la plantilla del profesor
-% (7.1 Configuración experimental, 7.2 Conjuntos de datos, 7.3 Métricas de evaluación,
-% 7.4 Resultados de transformación de tono de piel, 7.5 Resultados de clasificación con
-% 7.5.1/7.5.2, 7.6 Discusión). Las secciones siguientes se migraron tal cual desde
-% capitulos/desarrollo_proyecto.tex y capitulos/resultados_esperados_riesgos.tex (ya no
-% son capítulos independientes de main.tex) como contenido real a reorganizar, no como
-% estructura final de este capítulo.
+Este capítulo presenta los resultados obtenidos por el proyecto y su discusión. El proyecto espera producir una caracterización documentada de los conjuntos de datos y sus límites de representatividad, un clasificador que use representaciones aprendidas mediante SSL con un clasificador lineal posterior claramente descrito, una evaluación reproducible frente a controles y, cuando se complete el protocolo comparable, una línea base supervisada, y un prototipo experimental de apoyo a la revisión de imágenes. No se fijan umbrales de desempeño como resultados garantizados: las métricas se reportan con su protocolo, incertidumbre y límites de dominio, y el sistema no sustituye al profesional ni representa una herramienta clínica validada.
 
-\section{Caracterización de los conjuntos de datos y perfil epidemiológico}
-% TODO T11: pertenece a 7.2 Conjuntos de datos.
+\section{Configuración experimental}
+
+Esta sección documenta la configuración de cómputo efectivamente utilizada para producir los resultados de este capítulo. El proyecto se ejecuta sobre dos entornos de cómputo distintos e independientes entre sí: que reporten versiones distintas de CUDA y de PyTorch no es una inconsistencia, sino el resultado de dos \emph{pipelines} separados, con hardware y calendario de ejecución propios.
+
+\textbf{(A) Preentrenamiento SSL y clasificador.} El preentrenamiento autosupervisado del codificador y el ajuste del clasificador lineal (Sección~\ref{sec:desarrollo-clasificador}) se ejecutan en el cluster UNABIA mediante SLURM: 1 nodo con 4 GPU, 32 CPU y 128\,GB de RAM, con un presupuesto de 40--80 GPU-hora según la variante del backbone. El entorno de software es Python 3.11, PyTorch 2.4.1 y CUDA 12.1, con precisión \texttt{bf16}, tamaño de lote efectivo 128 y semilla 42.
+
+\textbf{(B) Segmentador U-Net.} El módulo complementario de segmentación (Sección~\ref{sec:desarrollo-segmentacion}) se ejecuta en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24\,GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128}. Esta versión de PyTorch y de CUDA difiere de la del entorno (A) porque son dos entornos de cómputo independientes, no por un descuido de configuración.
+
+El protocolo de entrenamiento del segmentador sigue un \emph{pipeline} fijo de tres rondas de auto-entrenamiento con refinamiento iterativo de pseudo-máscaras: \texttt{contrastive} (preentrenamiento contrastivo con MoCo v2) $\rightarrow$ \texttt{ccam} $\rightarrow$ \texttt{pseudo\_r0} $\rightarrow$ \texttt{student\_r1} $\rightarrow$ \texttt{pseudo\_r1} $\rightarrow$ \texttt{student\_r2} $\rightarrow$ \texttt{pseudo\_r2} $\rightarrow$ \texttt{student\_r3}. Cada ronda de estudiante entrena 20 épocas, con 32 imágenes por GPU en 2 GPU, optimizador Adam con tasa de aprendizaje $10^{-4}$, una época de calentamiento, programación coseno, precisión \texttt{bf16} y semilla 42; la función de pérdida combina entropía cruzada binaria y Dice suave, calculada solo sobre los píxeles marcados como confiables por el módulo de incertidumbre. \texttt{student\_r3} se toma como candidato final por ser la última ronda de este \emph{pipeline} de tres rondas fijas por diseño, no por comparación de métricas entre rondas. La razón para fijar exactamente tres rondas --y no un número distinto-- no está documentada en las fuentes revisadas del proyecto: se reporta aquí como una decisión de diseño sin justificación trazable, pendiente de aclarar con el equipo.
+
+\section{Conjuntos de datos}
 
 \subsection{Caracterización de HAM10000}
 
@@ -391,16 +394,25 @@ La identificación y el análisis exploratorio de conjuntos constituyen evidenci
 
 \noindent\textit{Nota sobre consolidación.} Los resultados de este capítulo corresponden a la auditoría del banco completo, etiqueta \texttt{v8.0.0-clean}. Los resultados de un ciclo anterior (v7, brazos A*/B* con término de ajuste de tono) quedaron superados por este diseño experimental más completo, con un brazo de control de cómputo (D2) que el ciclo anterior no tenía; no se presentan como resultados vigentes.
 
-\section{Resultados esperados}
-% TODO T11: reorganizar dentro de 7.1 o donde corresponda al armar el capítulo 7 completo.
+\section{Métricas de evaluación}
 
-El proyecto espera producir: (i) una caracterización documentada de conjuntos de imágenes dermatológicas y sus límites de representatividad; (ii) un clasificador que use representaciones aprendidas mediante SSL y un clasificador lineal posterior claramente descrito; (iii) una evaluación reproducible frente a controles y, cuando se complete el protocolo comparable, una línea base supervisada; y (iv) un prototipo experimental de apoyo a la revisión de imágenes.
+Esta sección define las métricas y el protocolo estadístico usados en las Secciones~8.5 y 8.6, reutilizando la notación ya introducida en el Capítulo~7 (Sección~\ref{sec:desarrollo-clasificador}, subsecciones \enquote{Métricas de evaluación} y \enquote{Protocolo aplicado antes de los experimentos}) para no duplicar su formulación completa.
 
-No se fijan umbrales de desempeño como resultados garantizados. Las métricas se reportarán con su protocolo, incertidumbre y límites de dominio. El sistema no sustituye al profesional ni representa una herramienta clínica validada.
+Con $s$ el total de observaciones y $c$ el total de predicciones correctas --misma notación empleada para el MCC en el Capítulo~7--, la exactitud (\emph{accuracy}) es $\mathrm{Accuracy}=c/s$. La exactitud balanceada, el F1 macro, el AUC uno-contra-el-resto (OvR), el error de calibración esperado (ECE) y el coeficiente de correlación de Matthews (MCC) se calculan exactamente según las ecuaciones ya presentadas en el Capítulo~7. Estas cinco métricas, junto con accuracy, son las que se reportan en las tablas de las Secciones~8.5 y 8.6.
 
-\section{Resultados de clasificación y de la segmentación complementaria}
+Las comparaciones pareadas de este capítulo siguen el mismo protocolo ya registrado en el Capítulo~7: remuestreo bootstrap por lesión con $B=1\,000$ remuestras, intervalo de confianza al 95\,\% por el método percentil y semilla 20260923, con corrección de Holm para contrastes múltiples --ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se detiene el rechazo en el primer índice donde $p_{(i)}>\alpha/(m-i+1)$--.
 
-\subsection{Resultados disponibles de clasificación}
+\section{Resultados de transformación de tono de piel}
+
+El método de transformación y de estimación de tono de piel se describe en el Capítulo~7, Sección~\ref{sec:desarrollo-tono}; esta sección presenta el resultado de su validación externa contra fototipo Fitzpatrick (FST) real.
+
+Contra el FST asignado por expertos en Fitzpatrick17k-C (11.098 imágenes), el proxy ITA del proyecto acierta entre 28,5\,\% y 30,8\,\%, frente a 32,9\,\% de una base de referencia trivial que predice siempre la clase mayoritaria. Contra el FST asignado clínicamente en PAD-UFES-20 (1.494 imágenes con dato de fototipo, caracterizadas en la Sección~\ref{sec:caracterizacion-tono}), el proxy ITA acierta 22,9\,\%, frente a 51,3\,\% de una base de referencia por mayoría \parencite{alipour2026italimitations}.
+
+En ambos conjuntos de validación externa el estimador ITA rinde \textbf{por debajo} del baseline trivial de predecir siempre la clase mayoritaria. Este es un resultado negativo explícito, no una afirmación de que \enquote{no es el mejor resultado}: no hay evidencia, en ninguna de las dos validaciones, de que el proxy ITA del proyecto capture el fototipo Fitzpatrick real mejor que adivinar la clase más frecuente. En consecuencia, ningún proxy de ITA de este trabajo debe interpretarse como una estimación válida de fototipo clínico, y las caracterizaciones por fototipo de la Sección~\ref{sec:caracterizacion-tono} se mantienen explícitamente como descriptivas y trazables a su fuente de píxeles, no como mediciones validadas de equidad.
+
+\section{Resultados de clasificación}
+
+\subsection{Clasificación}
 
 \noindent\textit{Nota sobre consolidación.} Esta sección reemplaza una lectura v7 anterior (medias de tres semillas con remuestreo por imagen) por la lectura consolidada más reciente del banco completo (cómputo canónico, agrupado por \texttt{lesion\_id}), consistente con los números usados en el resto de este capítulo.
 
@@ -428,12 +440,12 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 
 Los intervalos de confianza individuales de A71 y B71 se solapan en exactitud balanceada y F1 macro. Esta comparación de intervalos individuales no demuestra una ventaja general del término de tono de B* sobre A*; una afirmación más fuerte requiere examinar el contraste pareado formal entre ambos brazos.
 
-\subsection{Avance y límites del módulo complementario de segmentación}
+\subsection{Segmentación complementaria}
 \label{sec:segmentacion-complementaria}
 
 La línea de segmentación sin etiquetas sigue un flujo separado de MoCo v2/ResNet-50, CCAM, pseudo-máscaras y un U-Net estudiante. El candidato S4-A2 obtuvo Dice 0,7221 en ISIC2018 y 0,7949 en HAM10000; superó por márgenes pequeños algunos umbrales registrados frente al estudiante \texttt{student\_r3}. Sin embargo, las pruebas de integración C1 no muestran una mejora general del clasificador al usar máscaras. Este resultado respalda mantener la segmentación como módulo complementario, no afirmar que mejore el clasificador.
 
-\section{Discusión confirmatoria, ablaciones, adaptación de dominio y limitaciones}
+\section{Discusión}
 
 \subsection{Comparación confirmatoria: clasificador SSL congelado frente a ocho líneas base}
 
