@@ -196,6 +196,14 @@ DoubleU-Net es una variante publicada que encadena dos redes U-Net y añade comp
 El aprendizaje supervisado utiliza ejemplos de entrada asociados con etiquetas conocidas. Durante el entrenamiento, el modelo ajusta sus parámetros para reducir la diferencia entre la predicción y la etiqueta de referencia. En la clasificación de lesiones cutáneas, las etiquetas pueden corresponder a categorías diagnósticas; su calidad y distribución condicionan el aprendizaje y la evaluación \parencite{goodfellow2016deeplearning,tschandl2018ham10000}. La Figura~\ref{fig:original-5} ilustra un flujo de clasificación basado en aprendizaje profundo.
 
 % Reserved for original figure 5. Replace the empty frame with the final image.
+
+\Needspace{4\baselineskip}
+
+
+
+
+El \textit{transfer learning} reutiliza representaciones aprendidas previamente en otra tarea o conjunto de datos. Puede aplicarse mediante extracción de características, en la que el codificador permanece congelado y se entrena un clasificador para la nueva tarea, o mediante ajuste fino (\textit{fine-tuning}), en el que se actualizan algunos o todos los parámetros preentrenados con datos del nuevo dominio. Son estrategias relacionadas, pero no equivalentes: el ajuste fino es una forma de adaptar parámetros, mientras que la extracción de características los mantiene fijos \parencite{raghu2019transfusion}. En dermatología se han reportado resultados altos con modelos preentrenados y combinaciones de arquitecturas; sin embargo, el rendimiento depende de los datos, las particiones y el protocolo de evaluación, por lo que las cifras de distintos estudios no son directamente comparables \parencite{alruwaili2025efficientnetresnet}. El aprendizaje supervisado también depende de la disponibilidad y calidad de las etiquetas, cuya obtención puede requerir revisión experta y resultar costosa. Los desbalances de clase pueden afectar la representación de patologías menos frecuentes \parencite{tschandl2018ham10000}.
+
 \begin{figure}[!htbp]
 \caption{Marco de aprendizaje profundo para la clasificación de imágenes de cáncer de piel.}
 \label{fig:original-5}
@@ -209,18 +217,12 @@ El aprendizaje supervisado utiliza ejemplos de entrada asociados con etiquetas c
     \par\endgroup
 
 \end{figure}
-\Needspace{4\baselineskip}
-
-
-
-
-El \textit{transfer learning} reutiliza representaciones aprendidas previamente en otra tarea o conjunto de datos. Puede aplicarse mediante extracción de características, en la que el codificador permanece congelado y se entrena un clasificador para la nueva tarea, o mediante ajuste fino (\textit{fine-tuning}), en el que se actualizan algunos o todos los parámetros preentrenados con datos del nuevo dominio. Son estrategias relacionadas, pero no equivalentes: el ajuste fino es una forma de adaptar parámetros, mientras que la extracción de características los mantiene fijos \parencite{raghu2019transfusion}. En dermatología se han reportado resultados altos con modelos preentrenados y combinaciones de arquitecturas; sin embargo, el rendimiento depende de los datos, las particiones y el protocolo de evaluación, por lo que las cifras de distintos estudios no son directamente comparables \parencite{alruwaili2025efficientnetresnet}. El aprendizaje supervisado también depende de la disponibilidad y calidad de las etiquetas, cuya obtención puede requerir revisión experta y resultar costosa. Los desbalances de clase pueden afectar la representación de patologías menos frecuentes \parencite{tschandl2018ham10000}.
 
 \subsection{Aprendizaje no supervisado}
 
  El aprendizaje no supervisado agrupa un conjunto de técnicas de inteligencia artificial en las cuales el modelo aprende a identificar patrones, estructuras y regularidades en los datos sin disponer de etiquetas o anotaciones previas. A diferencia del paradigma supervisado, donde el objetivo es predecir una categoría conocida, en el aprendizaje no supervisado el sistema busca descubrir la organización intrínseca de los datos mediante la agrupación de instancias similares (clustering), la reducción de dimensionalidad o la detección de anomalías \parencite{bishop2006patternrecognition}. En el ámbito de las imágenes médicas, las técnicas no supervisadas cumplen un rol complementario al aprendizaje supervisado, particularmente en escenarios donde las etiquetas diagnósticas son escasas, costosas o subjetivas. Entre las aplicaciones se encuentran las siguientes.
 
-\paragraph{Agrupamiento y segmentación no supervisada.} Algoritmos como K-means y DBSCAN agrupan observaciones según similitudes en sus características. En imágenes, estos métodos pueden utilizarse para explorar regiones con propiedades de color o textura y apoyar la delimitación de áreas de interés. La correspondencia entre los grupos obtenidos y las categorías clínicas requiere interpretación y validación específicas \parencite{rehman2024cadskin}, como se ilustra en la Figura~\ref{fig:original-6}.
+\paragraph{Agrupamiento no supervisado para la segmentación de imágenes.} Algoritmos como K-means y DBSCAN agrupan observaciones según similitudes en sus características. En imágenes, estos métodos pueden utilizarse para explorar regiones con propiedades de color o textura y apoyar la delimitación de áreas de interés. La correspondencia entre los grupos obtenidos y las categorías clínicas requiere interpretación y validación específicas \parencite{rehman2024cadskin}, como se ilustra en la Figura~\ref{fig:original-6}.
 
 % Reserved for original figure 6. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
@@ -301,7 +303,66 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
 
 \end{figure}
 
-\section{Síntesis conceptual y relación con las líneas del proyecto}
+\section{Relación entre los conceptos teóricos y el proyecto}
 
-Los fundamentos anteriores se articulan en tres líneas. La clasificación utiliza representaciones visuales aprendidas mediante aprendizaje autosupervisado y una etapa de clasificación posterior. La segmentación combina mecanismos de generación de pseudo-máscaras con una arquitectura U-Net para delimitar lesiones. La estimación del tono de piel emplea la representación colorimétrica CIELAB y el ITA, con las precauciones indicadas sobre su interpretación. Estas líneas tienen objetivos y criterios de evaluación distintos; sus procedimientos y resultados se presentan por separado en los capítulos correspondientes.
+La Tabla~\ref{tab:conceptos-marco-proyecto} resume cómo se conectan los conceptos de este capítulo con las líneas de trabajo y con las secciones donde se describen sus procedimientos y resultados.
+
+\begingroup
+\small
+\singlespacing
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.45\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
+\caption{Relación de los conceptos del marco teórico con el proyecto}
+\label{tab:conceptos-marco-proyecto}\\
+\toprule
+\textbf{Concepto} & \textbf{Aplicación o relación con el proyecto} & \textbf{Ubicación en el documento} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Concepto} & \textbf{Aplicación o relación con el proyecto} & \textbf{Ubicación en el documento} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+Lesiones cutáneas y sistemas CAD &
+Contextualizan las categorías diagnósticas y las etapas de análisis computacional consideradas en el estudio. &
+Capítulo 7: desarrollo de la clasificación. Capítulo 8: resultados de clasificación. \\
+\addlinespace
+
+Fototipos de Fitzpatrick &
+Se consideran una referencia clínica basada en la respuesta a radiación UV. No se interpretan como mediciones directas del color de los píxeles ni como equivalentes al ITA. &
+Capítulo 7: estimación del tono. Capítulo 8: evaluación y limitaciones del estimador. \\
+\addlinespace
+
+CIELAB e ITA &
+Fundamentan la transformación determinística del tono y el cálculo de una medida colorimétrica a partir de imágenes. El ITA se interpreta con las limitaciones de captura y validación descritas en el estudio. &
+Capítulo 7: procedimiento de transformación y estimación. Capítulo 8: resultados de tono de piel. \\
+\addlinespace
+
+CNN y U-Net &
+Las CNN sustentan el procesamiento de imágenes; U-Net corresponde a una de las arquitecturas consideradas para la segmentación con pseudo-máscaras. &
+Capítulo 7: desarrollo de la segmentación. Capítulo 8: resultados de segmentación. \\
+\addlinespace
+
+ViT y DINOv2 &
+Los transformadores visuales sustentan la extracción de representaciones visuales. DINOv2 se emplea en la línea de clasificación y en configuraciones de segmentación documentadas. &
+Capítulo 7: arquitecturas de clasificación y segmentación. Capítulo 8: resultados de ambas líneas. \\
+\addlinespace
+
+Paradigmas de aprendizaje &
+El proyecto emplea aprendizaje autosupervisado con SimSiam en clasificación y MoCo v2 con CCAM para generar pseudo-máscaras. La regresión logística es la etapa supervisada de clasificación. &
+Capítulo 7: procedimientos de clasificación y segmentación. Capítulo 8: resultados correspondientes. \\
+\addlinespace
+
+DoubleU-Net, agrupamiento, VAE y GAN &
+Se presentan como antecedentes conceptuales. No se reportan como procedimientos implementados en las líneas experimentales descritas. &
+Marco teórico; no corresponden a resultados propios del proyecto. \\
+
+\end{longtable}
+
+\vspace{4pt}
+\noindent\textit{Nota.} La ubicación indicada distingue la fundamentación conceptual de la descripción técnica y de la presentación de resultados.
+\endgroup
 
