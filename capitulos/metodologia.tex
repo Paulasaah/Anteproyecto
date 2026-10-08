@@ -9,17 +9,16 @@ El desempeño se evaluó con métricas de clasificación como F1 macro, exactitu
 
 El desarrollo del proyecto se organizó según el cumplimiento de los cuatro objetivos específicos formulados (objetivos.tex), siguiendo el modelo CRISP-ML(Q), estructurado originalmente en seis fases: comprensión del negocio y de los datos, ingeniería de datos, ingeniería del modelo, evaluación del modelo, despliegue y monitoreo y mantenimiento \parencite{studer2021crispmlq}. Para este trabajo, las seis fases del marco se organizaron en cuatro etapas iterativas, representadas en la Figura~\ref{fig:flujo-crispmlq} y vinculadas con los objetivos específicos y su estado de ejecución en la Tabla~\ref{tab:trazabilidad-fases}: (i) comprensión del problema y de los datos (objetivo 1); (ii) ingeniería de datos y modelado de las tres líneas de trabajo (objetivo 2); (iii) evaluación de los modelos y procedimientos (objetivo 3); y (iv) implementación del prototipo de apoyo al análisis de imágenes (objetivo 4). Las tres primeras etapas se ejecutaron. La cuarta permanece pendiente mientras continúan los experimentos para seleccionar el modelo y la configuración finales. Su inclusión como etapa planificada no implica que se haya realizado un despliegue clínico ni que se hayan ejecutado actividades de monitoreo en producción.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
-\fbox{\begin{minipage}{0.82\textwidth}
-\centering
-\includegraphics[width=0.92\textwidth]{images/figura10-diseno-crisp-mlq.png}
-\end{minipage}}
+\includegraphics[height=0.82\textheight,width=0.84\textwidth,keepaspectratio]{images/diagrama_diseno_metodologico.pdf}
 \caption{Diagrama de flujo de la aplicación de CRISP-ML(Q)}
 \label{fig:flujo-crispmlq}
 \par\smallskip
-\raggedright\footnotesize
-\textit{Nota.} Elaboración propia. El diagrama presenta las cuatro fases de CRISP-ML(Q), su relación con los objetivos específicos y la integración de las líneas de clasificación, segmentación y caracterización de tono.
+\begin{minipage}{0.9\textwidth}
+\footnotesize
+\textit{Nota.} Diagrama suministrado por el equipo. Presenta las fases metodológicas, las líneas de trabajo y el estado de implementación del prototipo.
+\end{minipage}
 \end{figure}
 
 La Tabla~\ref{tab:trazabilidad-fases} resume la relación entre las fases de CRISP-ML(Q), los objetivos específicos y las actividades realizadas. Los datos, algoritmos, criterios y procedimientos se describen en las secciones correspondientes del Capítulo~7.
