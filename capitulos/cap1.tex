@@ -178,11 +178,15 @@ Los paradigmas de aprendizaje describen cómo se obtienen las señales de entren
 
 Las redes neuronales convolucionales (CNN) procesan imágenes mediante filtros que responden a patrones locales. Al combinar convoluciones, funciones de activación y reducción espacial, las capas construyen representaciones jerárquicas: desde bordes y texturas hasta estructuras visuales más complejas. En imágenes dermatológicas, estas representaciones pueden apoyar la clasificación de lesiones y la localización de regiones de interés. ResNet incorpora conexiones residuales para facilitar el entrenamiento de redes profundas; EfficientNet propone escalar de forma coordinada la profundidad, el ancho y la resolución \parencite{he2016resnet,tan2019efficientnet}. Estas arquitecturas son ejemplos de CNN, no paradigmas de aprendizaje.
 
+\subsection{Transformadores visuales}
+
+Los transformadores visuales (ViT) dividen la imagen en parches, los representan como una secuencia de vectores y modelan sus relaciones mediante mecanismos de autoatención. A diferencia de las CNN, que incorporan de manera explícita operaciones locales de convolución, los ViT pueden relacionar información de distintas regiones de la imagen. Su desempeño depende de la estrategia de preentrenamiento y de los datos disponibles \parencite{dosovitskiy2021image}. DINOv2 es un codificador visual basado en transformadores, preentrenado para producir representaciones reutilizables en distintas tareas \parencite{oquab2024dinov2}. En este proyecto, esta arquitectura se emplea en la línea de clasificación; su adaptación y evaluación se describen en el capítulo de desarrollo técnico.
+
 \subsection{U-Net y segmentación de lesiones}
 
 La segmentación asigna una clase a cada píxel para delimitar una región de interés. U-Net es una arquitectura convolucional de tipo codificador-decodificador: la ruta de contracción resume el contexto de la imagen y la ruta de expansión recupera la resolución espacial. Las conexiones entre niveles correspondientes transfieren detalles de localización hacia la salida, lo que permite producir una máscara de segmentación \parencite{ronneberger2015unet}.
 
-DoubleU-Net es una variante publicada que encadena dos redes U-Net y añade componentes de extracción multiescala. Se incluye aquí como antecedente arquitectónico para diferenciar diseños posibles; no corresponde a la arquitectura implementada en este proyecto. La línea de segmentación documentada utiliza una U-Net estudiante, mientras que las configuraciones y variantes experimentales se describen en el capítulo de desarrollo técnico \parencite{jha2020doubleunet}.
+DoubleU-Net es una variante publicada que encadena dos redes U-Net y añade componentes de extracción multiescala. Se incluye aquí como antecedente arquitectónico para diferenciar diseños posibles; no corresponde a la arquitectura implementada en este proyecto. La configuración de U-Net estudiante es una de las variantes documentadas para segmentación; las demás configuraciones experimentales se describen en el capítulo de desarrollo técnico \parencite{jha2020doubleunet}.
 
 
 \section{Paradigmas de aprendizaje en imágenes médicas}
