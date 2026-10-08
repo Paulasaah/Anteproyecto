@@ -17,11 +17,11 @@ El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, con
     
 \par\smallskip
 \raggedright\footnotesize
-\textit{Nota.} Adaptado de PAD-UFES-20: A skin lesion dataset composed of patient data and clinical images collected from smartphones, por A. G. C. Pacheco et al., 2020, Data in Brief. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7479321/}
+\textit{Nota.} Adaptado de PAD-UFES-20: A skin lesion \textit{dataset} composed of patient data and clinical images collected from smartphones, por A. G. C. Pacheco et al., 2020, Data in Brief. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7479321/}
 
 \end{figure}
 
-En el estudio del cáncer de piel, la clasificación de las lesiones dermatológicas permite establecer las características clínicas y visuales que diferencian las lesiones benignas de las malignas. Esta clasificación es ampliamente utilizada en la literatura médica y en los datasets dermatológicos empleados en modelos de inteligencia artificial. En la Tabla~\ref{tab:clasificacion-lesiones} se presentan los principales tipos de lesiones cutáneas y sus características clínicas.
+En el estudio del cáncer de piel, la clasificación de las lesiones dermatológicas permite establecer las características clínicas y visuales que diferencian las lesiones benignas de las malignas. Esta clasificación es ampliamente utilizada en la literatura médica y en los \textit{datasets} dermatológicos empleados en modelos de inteligencia artificial. En la Tabla~\ref{tab:clasificacion-lesiones} se presentan los principales tipos de lesiones cutáneas y sus características clínicas.
 
 \begingroup
 \small
@@ -82,7 +82,7 @@ La inspección visual constituye el primer nivel de cribado. El método ABCDE (A
 
 \subsubsection{Dermatoscopía y Técnicas Avanzadas}
 
-La dermatoscopía permite visualizar estructuras subepidérmicas invisibles al ojo humano, incrementando la precisión diagnóstica en un 49\% \parencite{santavelez2020dermatoscopia}. Por su parte, la Microscopía de Reflectancia Confocal (RCM), denominada "biopsia virtual", ofrece imágenes de resolución casi histológica con una especificidad del 95.3\% \parencite{fundacionpielsana2024confocal}. Pese a su efectividad para reducir biopsias innecesarias, el elevado costo operativo de estas técnicas limita su disponibilidad en la atención primaria, justificando el desarrollo de alternativas basadas en software como los sistemas de diagnóstico asistido por computador (CAD).
+La dermatoscopía permite visualizar estructuras subepidérmicas invisibles al ojo humano, incrementando la precisión diagnóstica en un 49\% \parencite{santavelez2020dermatoscopia}. Por su parte, la Microscopía de Reflectancia Confocal (RCM), denominada "biopsia virtual", ofrece imágenes de resolución casi histológica con una especificidad del 95.3\% \parencite{fundacionpielsana2024confocal}. Pese a su efectividad para reducir biopsias innecesarias, el elevado costo operativo de estas técnicas limita su disponibilidad en la atención primaria, justificando el desarrollo de alternativas basadas en \textit{software} como los sistemas de diagnóstico asistido por computador (CAD).
 
 \subsubsection{Biopsia histopatológica}
 
@@ -125,7 +125,7 @@ El resultado de este proceso es una preparación histológica que puede ser anal
 
 \subsubsection{Sistemas de Diagnóstico Asistido por Computador (CAD)}
 
-Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en inglés) integran la ingeniería de software en la práctica clínica mediante un flujo técnico que abarca el preprocesamiento (limpieza de vello e iluminación), la segmentación del área de interés (ROI, por sus siglas en inglés) y la clasificación de malignidad. Este enfoque marca la transición desde el Machine Learning tradicional, limitado por la extracción manual de rasgos, hacia el Aprendizaje Profundo (Deep Learning); aquí, arquitecturas como las CNN y los Vision Transformers (ViTs) permiten que el sistema aprenda automáticamente jerarquías visuales complejas, optimizando la precisión diagnóstica \parencite{rehman2024cadskin}, como se ilustra en la Figura~\ref{fig:original-4}.
+Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en inglés) integran la ingeniería de \textit{software} en la práctica clínica mediante un flujo técnico que abarca el preprocesamiento (limpieza de vello e iluminación), la segmentación del área de interés (ROI, por sus siglas en inglés) y la clasificación de malignidad. Este enfoque marca la transición desde el \textit{Machine Learning} tradicional, limitado por la extracción manual de rasgos, hacia el Aprendizaje Profundo (\textit{Deep Learning}); aquí, arquitecturas como las CNN y los \textit{Vision Transformers} (ViTs) permiten que el sistema aprenda automáticamente jerarquías visuales complejas, optimizando la precisión diagnóstica \parencite{rehman2024cadskin}, como se ilustra en la Figura~\ref{fig:original-4}.
 
 % Reserved for original figure 4. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
@@ -137,7 +137,7 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
     
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
-    \textit{Nota.} Modificado de Deep learning-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
+    \textit{Nota.} Modificado de \textit{Deep learning}-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
     \par\endgroup
 
 \end{figure}
@@ -149,7 +149,7 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 \subsubsection{Aprendizaje supervisado en imágenes médicas}
 
- El aprendizaje supervisado constituye el paradigma predominante en el análisis de imágenes médicas mediante inteligencia artificial. En este enfoque, el modelo es entrenado a partir de un conjunto de datos compuesto por pares de entrada-salida, donde cada imagen está asociada a una etiqueta diagnóstica proporcionada por un experto clínico. El objetivo del entrenamiento es que el modelo aprenda a establecer una función de mapeo entre las características visuales de la imagen y su categoría clínica correspondiente, minimizando una función de pérdida que cuantifica el error entre la predicción del modelo y la etiqueta real \parencite{goodfellow2016deeplearning}. En el contexto de la clasificación de lesiones cutáneas, el aprendizaje supervisado se ha implementado predominantemente mediante Redes Neuronales Convolucionales (CNN), las cuales procesan la imagen a través de capas sucesivas de convolución, activación no lineal y pooling, extrayendo automáticamente jerarquías de características que van desde bordes y texturas elementales hasta patrones dermatoscópicos complejos como redes de pigmento, glóbulos y estructuras vasculares \parencite{esteva2017dermatologist}. Arquitecturas como ResNet, que emplea conexiones residuales para mitigar el problema de desvanecimiento de gradiente en redes profundas, y EfficientNet, que optimiza simultáneamente la profundidad, el ancho y la resolución de la red, se han consolidado como los backbones de referencia en esta tarea \parencite{he2016resnet,tan2019efficientnet}, como se presenta en la Figura~\ref{fig:original-5}.
+ El aprendizaje supervisado constituye el paradigma predominante en el análisis de imágenes médicas mediante inteligencia artificial. En este enfoque, el modelo es entrenado a partir de un conjunto de datos compuesto por pares de entrada-salida, donde cada imagen está asociada a una etiqueta diagnóstica proporcionada por un experto clínico. El objetivo del entrenamiento es que el modelo aprenda a establecer una función de mapeo entre las características visuales de la imagen y su categoría clínica correspondiente, minimizando una función de pérdida que cuantifica el error entre la predicción del modelo y la etiqueta real \parencite{goodfellow2016deeplearning}. En el contexto de la clasificación de lesiones cutáneas, el aprendizaje supervisado se ha implementado predominantemente mediante Redes Neuronales Convolucionales (CNN), las cuales procesan la imagen a través de capas sucesivas de convolución, activación no lineal y pooling, extrayendo automáticamente jerarquías de características que van desde bordes y texturas elementales hasta patrones dermatoscópicos complejos como redes de pigmento, glóbulos y estructuras vasculares \parencite{esteva2017dermatologist}. Arquitecturas como ResNet, que emplea conexiones residuales para mitigar el problema de desvanecimiento de gradiente en redes profundas, y EfficientNet, que optimiza simultáneamente la profundidad, el ancho y la resolución de la red, se han consolidado como los \textit{backbones} de referencia en esta tarea \parencite{he2016resnet,tan2019efficientnet}, como se presenta en la Figura~\ref{fig:original-5}.
 
 % Reserved for original figure 5. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
@@ -161,7 +161,7 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
     
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
-    \textit{Nota.} Modificado de A deep learning-based framework for the classification of skin cancer images, por S. K. Zamani et al., 2022, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9616944/}
+    \textit{Nota.} Modificado de A \textit{deep learning}-based \textit{framework} for the classification of skin cancer images, por S. K. Zamani et al., 2022, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9616944/}
     \par\endgroup
 
 \end{figure}
@@ -170,7 +170,7 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 
 
-Una de las estrategias más exitosas dentro del aprendizaje supervisado para imágenes médicas es el transfer learning, en el cual un modelo preentrenado en un conjunto de datos de gran escala como ImageNet (con más de 14 millones de imágenes naturales) es posteriormente ajustado finamente (fine-tuning) sobre el dominio específico de interés. Esta técnica ha demostrado ser particularmente efectiva cuando los datos médicos etiquetados son escasos, ya que las capas iniciales del modelo retienen conocimiento genérico sobre la extracción de características visuales que es transferible entre dominios \parencite{raghu2019transfusion}. En dermatología, modelos supervisados con transfer learning han alcanzado accuracies superiores al 90\% en datasets como HAM10000 e ISIC, con ensembles de EfficientNet y ResNet logrando hasta un 99.14\% en condiciones experimentales controladas \parencite{alruwaili2025efficientnetresnet}. No obstante, el aprendizaje supervisado presenta limitaciones fundamentales en el contexto clínico: la obtención de etiquetas confiables requiere la participación de dermatólogos experimentados, el proceso de anotación es costoso y difícilmente escalable, y los modelos supervisados son susceptibles a sesgos derivados de datasets desbalanceados donde ciertas patologías están sobrerrepresentadas mientras otras, clínicamente relevantes, cuentan con pocas muestras \parencite{tschandl2018ham10000}. Estas limitaciones son especialmente pronunciadas en contextos como el departamento de Santander, donde la disponibilidad de especialistas para generar anotaciones clínicas es restringida y los sistemas de información hospitalarios no cuentan con repositorios de imágenes dermatológicas estandarizados.
+Una de las estrategias más exitosas dentro del aprendizaje supervisado para imágenes médicas es el \textit{transfer learning}, en el cual un modelo preentrenado en un conjunto de datos de gran escala como ImageNet (con más de 14 millones de imágenes naturales) es posteriormente ajustado finamente (\textit{fine-tuning}) sobre el dominio específico de interés. Esta técnica ha demostrado ser particularmente efectiva cuando los datos médicos etiquetados son escasos, ya que las capas iniciales del modelo retienen conocimiento genérico sobre la extracción de características visuales que es transferible entre dominios \parencite{raghu2019transfusion}. En dermatología, modelos supervisados con \textit{transfer learning} han alcanzado accuracies superiores al 90\% en \textit{datasets} como HAM10000 e ISIC, con \textit{ensembles} de EfficientNet y ResNet logrando hasta un 99.14\% en condiciones experimentales controladas \parencite{alruwaili2025efficientnetresnet}. No obstante, el aprendizaje supervisado presenta limitaciones fundamentales en el contexto clínico: la obtención de etiquetas confiables requiere la participación de dermatólogos experimentados, el proceso de anotación es costoso y difícilmente escalable, y los modelos supervisados son susceptibles a sesgos derivados de \textit{datasets} desbalanceados donde ciertas patologías están sobrerrepresentadas mientras otras, clínicamente relevantes, cuentan con pocas muestras \parencite{tschandl2018ham10000}. Estas limitaciones son especialmente pronunciadas en contextos como el departamento de Santander, donde la disponibilidad de especialistas para generar anotaciones clínicas es restringida y los sistemas de información hospitalarios no cuentan con repositorios de imágenes dermatológicas estandarizados.
 
 \subsubsection{Aprendizaje no supervisado en imágenes médicas}
 
@@ -186,7 +186,7 @@ Una de las estrategias más exitosas dentro del aprendizaje supervisado para im�
     
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
-    \textit{Nota.} Modificado de Deep learning-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
+    \textit{Nota.} Modificado de \textit{Deep learning}-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
     \par\endgroup
 
 \end{figure}
@@ -206,7 +206,7 @@ Autoencoders y detección de anomalías: Los autoencoders son redes neuronales q
     
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
-    \textit{Nota.} Modificado de Artificial Intelligence in Medical Imaging: General Concepts, por J. Lee et al., 2024, Korean Journal of Radiology. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11202861/}
+    \textit{Nota.} Modificado de \emph{Artificial Intelligence in Medical Imaging: General Concepts}, por J. Lee et al., 2024, Korean Journal of Radiology. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11202861/}
     \par\endgroup
 
 \end{figure}
@@ -214,7 +214,7 @@ Autoencoders y detección de anomalías: Los autoencoders son redes neuronales q
 
 
 
-Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances más relevantes del aprendizaje no supervisado para imágenes médicas. Mediante la competencia entre una red generadora y una red discriminadora, las GAN permiten sintetizar imágenes dermatológicas realistas que contribuyen a mitigar el desbalance de clases, un problema recurrente en los datasets dermatológicos donde patologías como el melanoma están subrepresentadas frente a lesiones benignas. Estudios recientes han identificado 11 casos de uso clínico de las GAN en dermatología, incluyendo la síntesis de fenotipos cutáneos subrepresentados, la segmentación, el denoising y la super-resolución de imágenes \parencite{ahmed2023gandermatology}, como se muestra en la Figura~\ref{fig:original-8}.
+Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances más relevantes del aprendizaje no supervisado para imágenes médicas. Mediante la competencia entre una red generadora y una red discriminadora, las GAN permiten sintetizar imágenes dermatológicas realistas que contribuyen a mitigar el desbalance de clases, un problema recurrente en los \textit{datasets} dermatológicos donde patologías como el melanoma están subrepresentadas frente a lesiones benignas. Estudios recientes han identificado 11 casos de uso clínico de las GAN en dermatología, incluyendo la síntesis de fenotipos cutáneos subrepresentados, la segmentación, el denoising y la super-resolución de imágenes \parencite{ahmed2023gandermatology}, como se muestra en la Figura~\ref{fig:original-8}.
 
 % Reserved for original figure 8. Replace the empty frame with the final image.
 \begin{figure}[H]
@@ -226,7 +226,7 @@ Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances m�
     
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
-    \textit{Nota.} Elaboración propia con base en Generative Adversarial Networks (GANs) in Dermatology, por S. S. G. S. J. Ahmed et al., 2023, Diagnostics. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10453872/}
+    \textit{Nota.} Elaboración propia con base en \emph{Generative Adversarial Networks (GANs) in Dermatology}, por S. S. G. S. J. Ahmed et al., 2023, Diagnostics. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10453872/}
     \par\endgroup
 
 \end{figure}
@@ -250,7 +250,7 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
     
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
-    \textit{Nota.} Elaboración propia con base en Self-supervised learning for medical image analysis: A survey, por S. Azizi et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11148053/}
+    \textit{Nota.} Elaboración propia con base en \textit{Self-supervised learning} for medical image analysis: A survey, por S. Azizi et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11148053/}
     \par\endgroup
 
 \end{figure}

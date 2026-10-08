@@ -8,7 +8,7 @@ El desarrollo de esta línea siguió cuatro actividades encadenadas, correspondi
 
 El codificador base es DINOv2 ViT-B/14, un transformador visual preentrenado públicamente que se adapta mediante SimSiam, el único algoritmo autosupervisado propio de esta línea. ViT-B/14 aporta la arquitectura; SimSiam aporta el procedimiento de adaptación. Se estudiaron dos variantes de adaptación: A* (sin término de consistencia de tono) y B* (con dicho término, descrito en la sección~\ref{sec:modelamiento-clasificador}). Sobre el codificador adaptado, un clasificador lineal (regresión logística) se ajusta con las representaciones y las etiquetas de HAM10000.
 
-Entorno de cómputo del preentrenamiento: cluster UNABIA vía SLURM, 1 nodo con 4 GPU, 32 CPU y 128\,GB de RAM, presupuesto de 40--80 GPU-hora según la variante del backbone; Python 3.11, PyTorch 2.4.1, CUDA 12.1, precisión \texttt{bf16}, tamaño de lote efectivo 128, semilla 42.
+Entorno de cómputo del preentrenamiento: cluster UNABIA vía SLURM, 1 nodo con 4 GPU, 32 CPU y 128\,GB de RAM, presupuesto de 40--80 GPU-hora según la variante del \textit{backbone}; Python 3.11, PyTorch 2.4.1, CUDA 12.1, precisión \texttt{bf16}, tamaño de lote efectivo 128, semilla 42.
 
 \subsection{Datos y particiones}
 
