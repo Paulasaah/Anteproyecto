@@ -303,66 +303,47 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
 
 \end{figure}
 
-\section{Relación entre los conceptos teóricos y el proyecto}
+\section{Relación de los conceptos teóricos con el proyecto}
 
-La Tabla~\ref{tab:conceptos-marco-proyecto} resume cómo se conectan los conceptos de este capítulo con las líneas de trabajo y con las secciones donde se describen sus procedimientos y resultados.
+La Tabla~\ref{tab:conceptos-marco-proyecto} agrupa los conceptos según las tres líneas de trabajo y explica la aplicación de cada grupo en el proyecto.
 
 \begingroup
 \small
 \singlespacing
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.45\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
-\caption{Relación de los conceptos del marco teórico con el proyecto}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.63\textwidth}@{}}
+\caption{Relación entre los conceptos teóricos y su aplicación en el proyecto}
 \label{tab:conceptos-marco-proyecto}\\
 \toprule
-\textbf{Concepto} & \textbf{Aplicación o relación con el proyecto} & \textbf{Ubicación en el documento} \\
+\textbf{Conceptos relacionados} & \textbf{Aplicación en el proyecto} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Concepto} & \textbf{Aplicación o relación con el proyecto} & \textbf{Ubicación en el documento} \\
+\textbf{Conceptos relacionados} & \textbf{Aplicación en el proyecto} \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
 
-Lesiones cutáneas y sistemas CAD &
-Contextualizan las categorías diagnósticas y las etapas de análisis computacional consideradas en el estudio. &
-Capítulo 7: desarrollo de la clasificación. Capítulo 8: resultados de clasificación. \\
+Lesiones cutáneas, sistemas CAD, CNN, ViT, aprendizaje supervisado y autosupervisado (SSL), \textit{transfer learning}, extracción de características, ajuste fino y adaptación de dominio &
+El clasificador utiliza un codificador DINOv2 adaptado mediante SimSiam. La clasificación principal se realiza con extracción congelada de características y regresión logística; el ajuste fino se considera en las líneas base comparativas. La adaptación de dominio se evalúa mediante continuación del aprendizaje autosupervisado con imágenes clínicas sin etiquetas. \\
 \addlinespace
 
-Fototipos de Fitzpatrick &
-Se consideran una referencia clínica basada en la respuesta a radiación UV. No se interpretan como mediciones directas del color de los píxeles ni como equivalentes al ITA. &
-Capítulo 7: estimación del tono. Capítulo 8: evaluación y limitaciones del estimador. \\
+Segmentación semántica, CNN, U-Net, DPT, MoCo v2, CCAM y pseudo-máscaras &
+La línea complementaria genera pseudo-máscaras con MoCo v2 y CCAM, y evalúa configuraciones de segmentación que incluyen un estudiante U-Net y la variante A2 con DINOv2 congelado y decodificador DPT. El desempeño de segmentación se evalúa por separado con la métrica Dice. \\
 \addlinespace
 
-CIELAB e ITA &
-Fundamentan la transformación determinística del tono y el cálculo de una medida colorimétrica a partir de imágenes. El ITA se interpreta con las limitaciones de captura y validación descritas en el estudio. &
-Capítulo 7: procedimiento de transformación y estimación. Capítulo 8: resultados de tono de piel. \\
+Fototipos de Fitzpatrick, espacio CIELAB e ITA &
+La línea de tono aplica una transformación determinística de luminosidad en CIELAB y calcula el ITA a partir de la región de piel analizada. La comparación con etiquetas de Fitzpatrick se interpreta como una evaluación exploratoria del estimador, no como validación de un clasificador clínico de fototipos. \\
 \addlinespace
 
-CNN y U-Net &
-Las CNN sustentan el procesamiento de imágenes; U-Net corresponde a una de las arquitecturas consideradas para la segmentación con pseudo-máscaras. &
-Capítulo 7: desarrollo de la segmentación. Capítulo 8: resultados de segmentación. \\
-\addlinespace
-
-ViT y DINOv2 &
-Los transformadores visuales sustentan la extracción de representaciones visuales. DINOv2 se emplea en la línea de clasificación y en configuraciones de segmentación documentadas. &
-Capítulo 7: arquitecturas de clasificación y segmentación. Capítulo 8: resultados de ambas líneas. \\
-\addlinespace
-
-Paradigmas de aprendizaje &
-El proyecto emplea aprendizaje autosupervisado con SimSiam en clasificación y MoCo v2 con CCAM para generar pseudo-máscaras. La regresión logística es la etapa supervisada de clasificación. &
-Capítulo 7: procedimientos de clasificación y segmentación. Capítulo 8: resultados correspondientes. \\
-\addlinespace
-
-DoubleU-Net, agrupamiento, VAE y GAN &
-Se presentan como antecedentes conceptuales. No se reportan como procedimientos implementados en las líneas experimentales descritas. &
-Marco teórico; no corresponden a resultados propios del proyecto. \\
+Agrupamiento, VAE, GAN y DoubleU-Net &
+Se presentan como antecedentes para contextualizar otros métodos de análisis y segmentación de imágenes. No se reportan como procedimientos experimentales implementados en el proyecto. \\
 
 \end{longtable}
 
 \vspace{4pt}
-\noindent\textit{Nota.} La ubicación indicada distingue la fundamentación conceptual de la descripción técnica y de la presentación de resultados.
+\noindent\textit{Nota.} CAD = diagnóstico asistido por computador; CNN = red neuronal convolucional; ViT = transformador visual; SSL = aprendizaje autosupervisado; CIELAB = espacio de color CIE L*a*b*; ITA = ángulo tipológico individual; DPT = transformador de predicción densa; CCAM = mapas de activación agnósticos a la clase mediante aprendizaje contrastivo; VAE = autoencoder variacional; GAN = red generativa adversarial.
 \endgroup
 
