@@ -1,7 +1,7 @@
 % Source: Anteproyecto (3).pdf. Original wording retained except population/sample.
 \chapter{Marco teórico}
 
-En este capítulo se presentan los conceptos clave que permiten ofrecer un contexto de la investigación propuesta, abordando desde la descripción de las lesiones cutáneas, métodos tradicionales para la identificación de las lesiones y métodos de Inteligencia Artificial para el diagnóstico médico.
+Este capítulo desarrolla los fundamentos para analizar lesiones cutáneas mediante imágenes. Primero aborda las lesiones y los métodos diagnósticos; luego presenta la medición del tono de piel y las arquitecturas de redes neuronales relevantes para clasificación y segmentación. Por último, distingue los paradigmas de aprendizaje utilizados en el proyecto.
 
 \section{Lesiones cutáneas}
 
@@ -145,11 +145,51 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 
 
-\section{Métodos de Inteligencia Artificial para el diagnóstico médico}
 
-\subsubsection{Aprendizaje supervisado en imágenes médicas}
 
- El aprendizaje supervisado constituye el paradigma predominante en el análisis de imágenes médicas mediante inteligencia artificial. En este enfoque, el modelo es entrenado a partir de un conjunto de datos compuesto por pares de entrada-salida, donde cada imagen está asociada a una etiqueta diagnóstica proporcionada por un experto clínico. El objetivo del entrenamiento es que el modelo aprenda a establecer una función de mapeo entre las características visuales de la imagen y su categoría clínica correspondiente, minimizando una función de pérdida que cuantifica el error entre la predicción del modelo y la etiqueta real \parencite{goodfellow2016deeplearning}. En el contexto de la clasificación de lesiones cutáneas, el aprendizaje supervisado se ha implementado predominantemente mediante Redes Neuronales Convolucionales (CNN), las cuales procesan la imagen a través de capas sucesivas de convolución, activación no lineal y pooling, extrayendo automáticamente jerarquías de características que van desde bordes y texturas elementales hasta patrones dermatoscópicos complejos como redes de pigmento, glóbulos y estructuras vasculares \parencite{esteva2017dermatologist}. Arquitecturas como ResNet, que emplea conexiones residuales para mitigar el problema de desvanecimiento de gradiente en redes profundas, y EfficientNet, que optimiza simultáneamente la profundidad, el ancho y la resolución de la red, se han consolidado como los \textit{backbones} de referencia en esta tarea \parencite{he2016resnet,tan2019efficientnet}, como se presenta en la Figura~\ref{fig:original-5}.
+\section{Tono de piel y fototipos en imágenes dermatológicas}
+
+La caracterización del tono de piel es relevante para describir la diversidad representada en las imágenes dermatológicas y contextualizar la evaluación de sistemas computacionales. Para ello, es necesario distinguir entre una escala clínica de fototipo y una medida colorimétrica: describen aspectos relacionados, pero no son equivalentes ni intercambiables.
+
+\subsection{Fototipos de Fitzpatrick}
+
+La clasificación de Fitzpatrick organiza seis fototipos a partir de la respuesta de la piel a la radiación ultravioleta, en particular su tendencia a quemarse o broncearse. La escala se formuló originalmente para orientar la selección de dosis de radiación ultravioleta en fototerapia; por tanto, no constituye una medición directa del color observado en una fotografía \parencite{fitzpatrick1988validity}. Esta distinción importa en estudios computacionales, porque una etiqueta de fototipo y una estimación de tono obtenida de píxeles representan variables diferentes.
+
+\subsection{Espacio CIELAB e índice ITA}
+
+El espacio CIELAB representa el color mediante tres coordenadas: $L^*$, asociada con la luminosidad; $a^*$, que ubica el color entre verde y rojo; y $b^*$, que lo ubica entre azul y amarillo. A partir de $L^*$ y $b^*$ se calcula el ángulo tipológico individual (ITA, por sus siglas en inglés), una medida colorimétrica continua relacionada con la pigmentación constitutiva \parencite{delbino2013variations}. Se expresa como:
+
+\begin{equation}
+\mathrm{ITA}^{\circ} =
+\arctan\left(\frac{L^* - 50}{b^*}\right)
+\frac{180}{\pi}.
+\label{eq:ita}
+\end{equation}
+
+Los intervalos utilizados para agrupar valores de ITA son categorías derivadas de una medida de color. No deben interpretarse como equivalentes a los fototipos de Fitzpatrick. Además, las condiciones de captura, la iluminación, el balance de blancos, la región de piel seleccionada y la segmentación pueden afectar la estimación en imágenes digitales; por ello, el ITA calculado sobre una imagen debe interpretarse según el protocolo y las limitaciones de validación empleados \parencite{alipour2026italimitations}.
+
+En este proyecto, el ITA se considera una estimación colorimétrica del tono de piel para analizar la representación de los datos. No se presenta como diagnóstico clínico ni como medición directa del fototipo. La transformación de tono aplicada a las imágenes es determinística; sus entradas, procedimiento y evaluación se especifican en los capítulos de desarrollo técnico y resultados.
+
+\section{Arquitecturas de aprendizaje profundo para imágenes médicas}
+
+Los paradigmas de aprendizaje describen cómo se obtienen las señales de entrenamiento; las arquitecturas describen cómo se procesan las entradas y se producen las salidas. Por esta razón, una red neuronal convolucional puede utilizarse en aprendizaje supervisado, no supervisado o autosupervisado. Esta distinción permite presentar por separado las arquitecturas y los mecanismos de aprendizaje.
+
+\subsection{Redes neuronales convolucionales}
+
+Las redes neuronales convolucionales (CNN) procesan imágenes mediante filtros que responden a patrones locales. Al combinar convoluciones, funciones de activación y reducción espacial, las capas construyen representaciones jerárquicas: desde bordes y texturas hasta estructuras visuales más complejas. En imágenes dermatológicas, estas representaciones pueden apoyar la clasificación de lesiones y la localización de regiones de interés. ResNet incorpora conexiones residuales para facilitar el entrenamiento de redes profundas; EfficientNet propone escalar de forma coordinada la profundidad, el ancho y la resolución \parencite{he2016resnet,tan2019efficientnet}. Estas arquitecturas son ejemplos de CNN, no paradigmas de aprendizaje.
+
+\subsection{U-Net y segmentación de lesiones}
+
+La segmentación asigna una clase a cada píxel para delimitar una región de interés. U-Net es una arquitectura convolucional de tipo codificador-decodificador: la ruta de contracción resume el contexto de la imagen y la ruta de expansión recupera la resolución espacial. Las conexiones entre niveles correspondientes transfieren detalles de localización hacia la salida, lo que permite producir una máscara de segmentación \parencite{ronneberger2015unet}.
+
+DoubleU-Net es una variante publicada que encadena dos redes U-Net y añade componentes de extracción multiescala. Se incluye aquí como antecedente arquitectónico para diferenciar diseños posibles; no corresponde a la arquitectura implementada en este proyecto. La línea de segmentación documentada utiliza una U-Net estudiante, mientras que las configuraciones y variantes experimentales se describen en el capítulo de desarrollo técnico \parencite{jha2020doubleunet}.
+
+
+\section{Paradigmas de aprendizaje en imágenes médicas}
+
+\subsection{Aprendizaje supervisado}
+
+El aprendizaje supervisado utiliza ejemplos de entrada asociados con etiquetas conocidas. Durante el entrenamiento, el modelo ajusta sus parámetros para reducir la diferencia entre la predicción y la etiqueta de referencia. En la clasificación de lesiones cutáneas, las etiquetas pueden corresponder a categorías diagnósticas; su calidad y distribución condicionan el aprendizaje y la evaluación \parencite{goodfellow2016deeplearning,tschandl2018ham10000}. La Figura~\ref{fig:original-5} ilustra un flujo de clasificación basado en aprendizaje profundo.
 
 % Reserved for original figure 5. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
@@ -170,11 +210,13 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 
 
-Una de las estrategias más exitosas dentro del aprendizaje supervisado para imágenes médicas es el \textit{transfer learning}, en el cual un modelo preentrenado en un conjunto de datos de gran escala como ImageNet (con más de 14 millones de imágenes naturales) es posteriormente ajustado finamente (\textit{fine-tuning}) sobre el dominio específico de interés. Esta técnica ha demostrado ser particularmente efectiva cuando los datos médicos etiquetados son escasos, ya que las capas iniciales del modelo retienen conocimiento genérico sobre la extracción de características visuales que es transferible entre dominios \parencite{raghu2019transfusion}. En dermatología, modelos supervisados con \textit{transfer learning} han alcanzado accuracies superiores al 90\% en \textit{datasets} como HAM10000 e ISIC, con \textit{ensembles} de EfficientNet y ResNet logrando hasta un 99.14\% en condiciones experimentales controladas \parencite{alruwaili2025efficientnetresnet}. No obstante, el aprendizaje supervisado presenta limitaciones fundamentales en el contexto clínico: la obtención de etiquetas confiables requiere la participación de dermatólogos experimentados, el proceso de anotación es costoso y difícilmente escalable, y los modelos supervisados son susceptibles a sesgos derivados de \textit{datasets} desbalanceados donde ciertas patologías están sobrerrepresentadas mientras otras, clínicamente relevantes, cuentan con pocas muestras \parencite{tschandl2018ham10000}. Estas limitaciones son especialmente pronunciadas en contextos como el departamento de Santander, donde la disponibilidad de especialistas para generar anotaciones clínicas es restringida y los sistemas de información hospitalarios no cuentan con repositorios de imágenes dermatológicas estandarizados.
+El \textit{transfer learning} reutiliza representaciones aprendidas previamente en otra tarea o conjunto de datos. Puede aplicarse mediante extracción de características, en la que el codificador permanece congelado y se entrena un clasificador para la nueva tarea, o mediante ajuste fino (\textit{fine-tuning}), en el que se actualizan algunos o todos los parámetros preentrenados con datos del nuevo dominio. Son estrategias relacionadas, pero no equivalentes: el ajuste fino es una forma de adaptar parámetros, mientras que la extracción de características los mantiene fijos \parencite{raghu2019transfusion}. En dermatología se han reportado resultados altos con modelos preentrenados y combinaciones de arquitecturas; sin embargo, el rendimiento depende de los datos, las particiones y el protocolo de evaluación, por lo que las cifras de distintos estudios no son directamente comparables \parencite{alruwaili2025efficientnetresnet}. El aprendizaje supervisado también depende de la disponibilidad y calidad de las etiquetas, cuya obtención puede requerir revisión experta y resultar costosa. Los desbalances de clase pueden afectar la representación de patologías menos frecuentes \parencite{tschandl2018ham10000}.
 
-\subsubsection{Aprendizaje no supervisado en imágenes médicas}
+\subsection{Aprendizaje no supervisado}
 
- El aprendizaje no supervisado agrupa un conjunto de técnicas de inteligencia artificial en las cuales el modelo aprende a identificar patrones, estructuras y regularidades en los datos sin disponer de etiquetas o anotaciones previas. A diferencia del paradigma supervisado, donde el objetivo es predecir una categoría conocida, en el aprendizaje no supervisado el sistema busca descubrir la organización intrínseca de los datos mediante la agrupación de instancias similares (clustering), la reducción de dimensionalidad o la detección de anomalías \parencite{bishop2006patternrecognition}. En el ámbito de las imágenes médicas, las técnicas no supervisadas cumplen un rol complementario al aprendizaje supervisado, particularmente en escenarios donde las etiquetas diagnósticas son escasas, costosas o subjetivas. Entre las aplicaciones más relevantes se encuentran: Clustering y segmentación no supervisada: Algoritmos como K-means, DBSCAN y modelos basados en Mixture of Gaussians han sido empleados para agrupar regiones de interés en imágenes dermatológicas según sus propiedades de textura, color y forma, permitiendo la delimitación automática de lesiones sin intervención manual. Estos métodos resultan útiles en la etapa de preprocesamiento de los sistemas CAD, al facilitar la identificación de la Región de Interés (ROI) que posteriormente es clasificada por un modelo supervisado \parencite{rehman2024cadskin}, como se ilustra en la Figura~\ref{fig:original-6}.
+ El aprendizaje no supervisado agrupa un conjunto de técnicas de inteligencia artificial en las cuales el modelo aprende a identificar patrones, estructuras y regularidades en los datos sin disponer de etiquetas o anotaciones previas. A diferencia del paradigma supervisado, donde el objetivo es predecir una categoría conocida, en el aprendizaje no supervisado el sistema busca descubrir la organización intrínseca de los datos mediante la agrupación de instancias similares (clustering), la reducción de dimensionalidad o la detección de anomalías \parencite{bishop2006patternrecognition}. En el ámbito de las imágenes médicas, las técnicas no supervisadas cumplen un rol complementario al aprendizaje supervisado, particularmente en escenarios donde las etiquetas diagnósticas son escasas, costosas o subjetivas. Entre las aplicaciones se encuentran las siguientes.
+
+\paragraph{Agrupamiento y segmentación no supervisada.} Algoritmos como K-means y DBSCAN agrupan observaciones según similitudes en sus características. En imágenes, estos métodos pueden utilizarse para explorar regiones con propiedades de color o textura y apoyar la delimitación de áreas de interés. La correspondencia entre los grupos obtenidos y las categorías clínicas requiere interpretación y validación específicas \parencite{rehman2024cadskin}, como se ilustra en la Figura~\ref{fig:original-6}.
 
 % Reserved for original figure 6. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
@@ -194,7 +236,7 @@ Una de las estrategias más exitosas dentro del aprendizaje supervisado para im�
 
 
 
-Autoencoders y detección de anomalías: Los autoencoders son redes neuronales que aprenden a comprimir una imagen en una representación latente de menor dimensión y a reconstruirla a partir de dicha representación. Cuando un autoencoder es entrenado exclusivamente con imágenes de piel sana, las lesiones patológicas generan errores de reconstrucción significativamente mayores, lo que permite su detección como anomalías. Los Variational Autoencoders (VAE) extienden este principio al modelar la distribución probabilística del espacio latente, lo que permite no solo detectar anomalías sino también generar nuevas muestras sintéticas que amplían los conjuntos de datos de entrenamiento \parencite{kingma2014vae}, como se representa en la Figura~\ref{fig:original-7}.
+\paragraph{Autoencoders y detección de anomalías.} Un autoencoder aprende una representación comprimida de la entrada y la reconstruye. En detección de anomalías, una diferencia de reconstrucción puede servir como señal para identificar muestras distintas de las usadas en el entrenamiento; su interpretación depende de la tarea y de los datos. Los autoencoders variacionales modelan una distribución en el espacio latente y permiten generar muestras a partir de ella \parencite{kingma2014vae}, como se representa en la Figura~\ref{fig:original-7}.
 
 % Reserved for original figure 7. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
@@ -214,7 +256,7 @@ Autoencoders y detección de anomalías: Los autoencoders son redes neuronales q
 
 
 
-Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances más relevantes del aprendizaje no supervisado para imágenes médicas. Mediante la competencia entre una red generadora y una red discriminadora, las GAN permiten sintetizar imágenes dermatológicas realistas que contribuyen a mitigar el desbalance de clases, un problema recurrente en los \textit{datasets} dermatológicos donde patologías como el melanoma están subrepresentadas frente a lesiones benignas. Estudios recientes han identificado 11 casos de uso clínico de las GAN en dermatología, incluyendo la síntesis de fenotipos cutáneos subrepresentados, la segmentación, el denoising y la super-resolución de imágenes \parencite{ahmed2023gandermatology}, como se muestra en la Figura~\ref{fig:original-8}.
+\paragraph{Redes generativas adversariales.} Las GAN entrenan una red generadora y otra discriminadora en competencia para producir muestras sintéticas. En dermatología se han estudiado para generación de imágenes, segmentación, reducción de ruido y superresolución. Su uso para ampliar clases minoritarias no garantiza por sí mismo una mejora del modelo; debe evaluarse con un protocolo que compruebe la calidad de las muestras y el efecto sobre la tarea posterior \parencite{ahmed2023gandermatology}, como se muestra en la Figura~\ref{fig:original-8}.
 
 % Reserved for original figure 8. Replace the empty frame with the final image.
 \begin{figure}[H]
@@ -236,7 +278,7 @@ Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances m�
 
 A pesar de su versatilidad, el aprendizaje no supervisado presenta limitaciones para tareas de clasificación diagnóstica, puesto que la ausencia de señal supervisada dificulta la alineación de las representaciones aprendidas con categorías clínicamente relevantes. Por esta razón, en el presente proyecto se adopta el aprendizaje autosupervisado como enfoque principal, el cual combina las ventajas de aprender sin etiquetas (propio del paradigma no supervisado) con la capacidad de generar representaciones orientadas a tareas específicas de clasificación, como se describe en la siguiente subsección.
 
-\subsubsection{Aprendizaje autosupervisado en imágenes médicas}
+\subsection{Aprendizaje autosupervisado}
 
 El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este proyecto para el tratamiento de datos dermatológicos no etiquetados. A través de estrategias contrastivas (comparación de representaciones aumentadas) y de auto-predicción de propiedades espaciales \parencite{chaitanya2023localcontrastive}, el sistema extrae características morfológicas sin requerir intervención experta previa. El clasificador del proyecto adopta como núcleo un codificador DINOv2 ViT-B/14 adaptado mediante SimSiam, único algoritmo SSL de este componente; de forma complementaria, un módulo independiente de segmentación emplea MoCo v2 junto con CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}) para generar pseudo-máscaras sin etiquetas que entrenan un U-Net estudiante, sin que esta línea haya demostrado todavía una mejora general sobre el clasificador en la ablación realizada. Esta implementación técnica permite mitigar la dependencia de grandes conjuntos de datos médicos etiquetados, optimizando la identificación de patrones clínicos sutiles en entornos de teledermatología donde la supervisión constante es limitada, como se ilustra en la Figura~\ref{fig:original-9}.
 
@@ -254,4 +296,8 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
     \par\endgroup
 
 \end{figure}
+
+\section{Síntesis conceptual y relación con las líneas del proyecto}
+
+Los fundamentos anteriores se articulan en tres líneas. La clasificación utiliza representaciones visuales aprendidas mediante aprendizaje autosupervisado y una etapa de clasificación posterior. La segmentación combina mecanismos de generación de pseudo-máscaras con una arquitectura U-Net para delimitar lesiones. La estimación del tono de piel emplea la representación colorimétrica CIELAB y el ITA, con las precauciones indicadas sobre su interpretación. Estas líneas tienen objetivos y criterios de evaluación distintos; sus procedimientos y resultados se presentan por separado en los capítulos correspondientes.
 
