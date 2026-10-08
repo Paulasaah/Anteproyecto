@@ -20,7 +20,11 @@ HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete catego
 
 ``Sin bucket'' (blanco) son imágenes sin estimación de tono confiable (piel insuficiente o máscara degenerada) y es la porción mayoritaria en varias clases; se muestra explícitamente para no ocultar la cobertura real. Los colores I--VI son la salida de un estimador de ITA no validado contra fototipo Fitzpatrick real \parencite{alipour2026italimitations}, no una medición clínica.
 
+La Figura~\ref{fig:ham10000-clase-tono} presenta los conteos de las clases de HAM10000 desglosados por categorías de tono estimadas mediante ITA. Estas categorías tienen un propósito descriptivo y no representan fototipos clínicos validados.
+
 \begin{figure}[!htbp]
+\caption{Distribución de clases diagnósticas de HAM10000 por bucket de tono (estimador ITA por Otsu, no validado como fototipo real).}
+\label{fig:ham10000-clase-tono}
 \centering
 \begin{adjustbox}{max width=\linewidth}
 \begin{tikzpicture}
@@ -50,11 +54,11 @@ HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete catego
 \end{axis}
 \end{tikzpicture}
 \end{adjustbox}
-\caption{Distribución de clases diagnósticas de HAM10000 por bucket de tono (estimador ITA por Otsu, no validado como fototipo real).}
-\label{fig:ham10000-clase-tono}
+
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia.
+
 \end{figure}
 
 \FloatBarrier
@@ -63,9 +67,11 @@ HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete catego
 
 ISIC2019 reúne 25.331 imágenes dermatoscópicas (20.264 de entrenamiento y 5.067 de validación) distribuidas en ocho categorías diagnósticas: nevos melanocíticos (\texttt{NV}), melanoma (\texttt{MEL}), carcinoma basocelular (\texttt{BCC}), lesiones similares a queratosis benignas (\texttt{BKL}), queratosis actínica (\texttt{AK}), carcinoma escamocelular (\texttt{SCC}), dermatofibroma (\texttt{DF}) y lesión vascular (\texttt{VASC}) \parencite{combalia2024bcn20000}. A diferencia de HAM10000, que agrupa la queratosis actínica y el carcinoma intraepidérmico en una sola clase (\texttt{akiec}), ISIC2019 separa \texttt{AK} de \texttt{SCC} como categorías independientes; ambas taxonomías no son directamente intercambiables en un entrenamiento conjunto. La clase \texttt{NV} concentra igualmente la mayoría de las imágenes, un desbalance compartido con HAM10000.
 
-La distribución de clases de ISIC2019 se presenta en la figura \ref{fig:isic2019-clases}, junto con las de HAM10000, ISIC2020 y PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el pool local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
+La distribución de clases de ISIC2019 se presenta en la figura \ref{fig:isic2019-clases}, junto con las de HAM10000 (Figura~\ref{fig:ham10000-clases}), ISIC2020 y PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el pool local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
 
 \begin{figure}[!htbp]
+\caption{HAM10000}
+\label{fig:ham10000-clases}
 \centering
 \definecolor{technicalnavy}{HTML}{23394D}
 \begin{subfigure}[t]{0.49\linewidth}
@@ -101,8 +107,7 @@ La distribución de clases de ISIC2019 se presenta en la figura \ref{fig:isic201
 \node[above,font=\scriptsize,inner sep=1.5pt] at (7.0571,2.06069784) {115};
 \node[below,font=\scriptsize,inner sep=3pt] at (7.0571,0) {df};
 \end{tikzpicture}
-\caption{HAM10000}
-\label{fig:ham10000-clases}
+
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.49\linewidth}
@@ -205,6 +210,7 @@ La distribución de clases de ISIC2019 se presenta en la figura \ref{fig:isic201
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia. Los valores sobre las barras indican el número de imágenes. Las abreviaturas conservan las etiquetas de cada conjunto: nv/NV y NEV, nevo; mel/MEL, melanoma; bkl/BKL, lesiones similares a queratosis benignas; SEK, queratosis seborreica; bcc/BCC, carcinoma basocelular; akiec/AK/ACK, queratosis actínica; vasc/VASC, lesión vascular; df/DF, dermatofibroma; SCC, carcinoma escamocelular. En HAM10000, akiec también incluye carcinoma intraepitelial. Los conteos y fuentes corresponden a la descripción precedente.
+
 \end{figure}
 
 \FloatBarrier
@@ -290,7 +296,11 @@ En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 
 
 La exportación del proyecto verifica identificadores únicos. La etiqueta clínica no cambia al transformar el color de una imagen.
 
+La Figura~\ref{fig:pad-fototipo-clinico} muestra la cantidad de imágenes de PAD-UFES-20 según las etiquetas clínicas de fototipo registradas en el conjunto de datos.
+
 \begin{figure}[!htbp]
+\caption{Número de imágenes por fototipo clínico registrado en PAD-UFES-20.}
+\label{fig:pad-fototipo-clinico}
 \centering
 \begin{adjustbox}{max width=\linewidth}
 \begin{tikzpicture}[x=1.45cm,y=0.004cm]
@@ -306,11 +316,11 @@ La exportación del proyecto verifica identificadores únicos. La etiqueta clín
   }
 \end{tikzpicture}
 \end{adjustbox}
-\caption{Número de imágenes por fototipo clínico registrado en PAD-UFES-20.}
-\label{fig:pad-fototipo-clinico}
+
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia.
+
 \end{figure}
 
 \subsection{Caracterización colorimétrica antes y después de la transformación}

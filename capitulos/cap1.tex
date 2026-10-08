@@ -10,13 +10,15 @@ La piel, como órgano más extenso del cuerpo humano, está expuesta de manera p
 El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, concentra el 80\% de las muertes asociadas a esta enfermedad, lo que lo convierte en la forma más letal de las lesiones cutáneas malignas \parencite{urban2021globalburden}. El carcinoma basocelular, por su parte, es el más frecuente a nivel global y en el contexto local de Santander representa el 64,82\% de los diagnósticos de cáncer de piel \parencite{uribe2018bccbucaramanga}. Esta distinción entre tipos de lesiones no es meramente taxonómica: define el curso del tratamiento, la urgencia de la intervención y las posibilidades de recuperación del paciente, lo que subraya la importancia crítica de contar con herramientas diagnósticas precisas y accesibles para su identificación temprana.
 
 \begin{figure}[htbp]
-    \centering
+\caption{Ejemplos de lesiones dermatológicas}
+\label{fig:original-1}
+\centering
     \includegraphics[width=0.9\textwidth]{figura01-ejemplos-lesiones-dermatologicas.png}
-    \caption{Ejemplos de lesiones dermatológicas}
-    \label{fig:original-1}
+    
 \par\smallskip
 \raggedright\footnotesize
 \textit{Nota.} Adaptado de PAD-UFES-20: A skin lesion dataset composed of patient data and clinical images collected from smartphones, por A. G. C. Pacheco et al., 2020, Data in Brief. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7479321/}
+
 \end{figure}
 
 En el estudio del cáncer de piel, la clasificación de las lesiones dermatológicas permite establecer las características clínicas y visuales que diferencian las lesiones benignas de las malignas. Esta clasificación es ampliamente utilizada en la literatura médica y en los datasets dermatológicos empleados en modelos de inteligencia artificial. En la Tabla~\ref{tab:clasificacion-lesiones} se presentan los principales tipos de lesiones cutáneas y sus características clínicas.
@@ -67,13 +69,15 @@ Nota. Elaboración propia a partir de \textcite{tschandl2018ham10000} y \textcit
 La inspección visual constituye el primer nivel de cribado. El método ABCDE (Asimetría, Borde, Color, Diámetro y Evolución) es el estándar semiológico para identificar signos tempranos de melanoma \parencite{ligacancer2024abcde}, ver Figura~\ref{fig:original-2}. A pesar de su utilidad, este método presenta limitaciones en la detección de melanomas amelanóticos o lesiones en etapas muy tempranas, donde la sensibilidad depende directamente de la experiencia del facultativo \parencite{niklitschek2025abcde}.
 
 \begin{figure}[H]
-    \centering
+\caption{Regla ABCDE del melanoma}
+\label{fig:original-2}
+\centering
     \includegraphics[width=0.78\linewidth,height=0.30\textheight,keepaspectratio]{figura02-regla-abcde-melanoma.png}
-    \caption{Regla ABCDE del melanoma}
-    \label{fig:original-2}
+    
 \par\smallskip
 \raggedright\footnotesize
 \textit{Nota.} Modificado de ABCDE del melanoma, por HC Marbella International Hospital, 2020, \url{https://www.hcmarbella.com/es/abcde-del-melanoma/}
+
 \end{figure}
 
 \subsubsection{Dermatoscopía y Técnicas Avanzadas}
@@ -89,7 +93,9 @@ La primera etapa corresponde a la fijación, en la que el tejido extraído es es
 El resultado de este proceso es una preparación histológica que puede ser analizada mediante microscopía óptica, electrónica o sistemas de digitalización de alta resolución. Esta última modalidad ha cobrado especial relevancia en el contexto de la inteligencia artificial aplicada al diagnóstico médico, dado que la digitalización de las preparaciones histológicas genera imágenes de alta resolución que pueden ser procesadas computacionalmente para la clasificación automatizada de patrones morfológicos asociados a patologías malignas, como el melanoma y el carcinoma basocelular. En este sentido, el análisis histopatológico digital constituye uno de los dominios de mayor aplicación de los sistemas CAD y los modelos de aprendizaje profundo en dermatología. El proceso anteriormente descrito se puede observar de manera gráfica en la Figura~\ref{fig:original-3}.
 
 \begin{figure}[!htbp]
-    \centering
+\caption{Escalera de precisión diagnóstica: de la inspección clínica a la biopsia histopatológica}
+\label{fig:original-3}
+\centering
 \begin{tikzpicture}[
     paso/.style={draw=capptan, line width=0.9pt, rounded corners=3pt, align=center, fill=shwhite2, text width=2.6cm, minimum height=2.1cm, inner sep=5pt, font=\sffamily\scriptsize, text=cappnearblack},
     flujo/.style={-{Stealth[length=2mm]}, thick, color=capptan},
@@ -104,12 +110,12 @@ El resultado de este proceso es una preparación histológica que puede ser anal
 \draw[flujo] (p3) -- (p4);
 \draw[-{Stealth[length=1.8mm]},thin,color=cappnearblack!55] ([yshift=-1.7cm]p1.south west) -- node[below,font=\scriptsize,text=cappnearblack!75] {invasividad y costo crecientes} ([yshift=-1.7cm]p4.south east);
 \end{tikzpicture}
-    \caption{Escalera de precisión diagnóstica: de la inspección clínica a la biopsia histopatológica}
-    \label{fig:original-3}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Elaboración propia a partir de los datos de precisión citados en el texto \parencite{santavelez2020dermatoscopia,fundacionpielsana2024confocal} y del proceso histológico de cuatro etapas descrito arriba.
     \par\endgroup
+
 \end{figure}
 
 
@@ -123,15 +129,17 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 % Reserved for original figure 4. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
-    \centering
+\caption{Evolución basada en aprendizaje profundo en sistemas CAD para cáncer de piel.}
+\label{fig:original-4}
+\centering
     \setlength{\fboxsep}{0pt}
     \fbox{\rule{0pt}{3cm}\rule{0.90\linewidth}{0pt}}
-    \caption{Evolución basada en aprendizaje profundo en sistemas CAD para cáncer de piel.}
-    \label{fig:original-4}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Modificado de Deep learning-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
     \par\endgroup
+
 \end{figure}
 
 
@@ -145,15 +153,17 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 % Reserved for original figure 5. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
-    \centering
+\caption{Marco de aprendizaje profundo para la clasificación de imágenes de cáncer de piel.}
+\label{fig:original-5}
+\centering
     \setlength{\fboxsep}{0pt}
     \fbox{\rule{0pt}{3cm}\rule{0.90\linewidth}{0pt}}
-    \caption{Marco de aprendizaje profundo para la clasificación de imágenes de cáncer de piel.}
-    \label{fig:original-5}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Modificado de A deep learning-based framework for the classification of skin cancer images, por S. K. Zamani et al., 2022, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9616944/}
     \par\endgroup
+
 \end{figure}
 \Needspace{4\baselineskip}
 
@@ -168,15 +178,17 @@ Una de las estrategias más exitosas dentro del aprendizaje supervisado para im�
 
 % Reserved for original figure 6. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
-    \centering
+\caption{Proceso de segmentación de lesiones cutáneas mediante extracción de características y agrupamiento K-means.}
+\label{fig:original-6}
+\centering
     \setlength{\fboxsep}{0pt}
     \fbox{\rule{0pt}{3cm}\rule{0.90\linewidth}{0pt}}
-    \caption{Proceso de segmentación de lesiones cutáneas mediante extracción de características y agrupamiento K-means.}
-    \label{fig:original-6}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Modificado de Deep learning-based CAD system for accurate skin cancer detection and classification, por A. Rehman et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12378393/}
     \par\endgroup
+
 \end{figure}
 
 
@@ -186,15 +198,17 @@ Autoencoders y detección de anomalías: Los autoencoders son redes neuronales q
 
 % Reserved for original figure 7. Replace the empty frame with the final image.
 \begin{figure}[!htbp]
-    \centering
+\caption{Modelo probabilístico de autoencoder variacional para detección de anomalías en imágenes cutáneas}
+\label{fig:original-7}
+\centering
     \setlength{\fboxsep}{0pt}
     \fbox{\rule{0pt}{3cm}\rule{0.90\linewidth}{0pt}}
-    \caption{Modelo probabilístico de autoencoder variacional para detección de anomalías en imágenes cutáneas}
-    \label{fig:original-7}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Modificado de Artificial Intelligence in Medical Imaging: General Concepts, por J. Lee et al., 2024, Korean Journal of Radiology. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11202861/}
     \par\endgroup
+
 \end{figure}
 
 
@@ -204,15 +218,17 @@ Redes Generativas Adversariales (GAN): Las GAN constituyen uno de los avances m�
 
 % Reserved for original figure 8. Replace the empty frame with the final image.
 \begin{figure}[H]
-    \centering
+\caption{Arquitectura de redes generativas antagónicas (GAN) aplicada al análisis de lesiones cutáneas.}
+\label{fig:original-8}
+\centering
     \setlength{\fboxsep}{0pt}
     \fbox{\rule{0pt}{2cm}\rule{0.90\linewidth}{0pt}}
-    \caption{Arquitectura de redes generativas antagónicas (GAN) aplicada al análisis de lesiones cutáneas.}
-    \label{fig:original-8}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Elaboración propia con base en Generative Adversarial Networks (GANs) in Dermatology, por S. S. G. S. J. Ahmed et al., 2023, Diagnostics. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10453872/}
     \par\endgroup
+
 \end{figure}
 
 
@@ -226,14 +242,16 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
 
 % Reserved for original figure 9. Replace the empty frame with the final image.
 \begin{figure}[H]
-    \centering
+\caption{Marco de aprendizaje autosupervisado (SSL) para análisis de imágenes.}
+\label{fig:original-9}
+\centering
     \setlength{\fboxsep}{0pt}
     \fbox{\rule{0pt}{2cm}\rule{0.90\linewidth}{0pt}}
-    \caption{Marco de aprendizaje autosupervisado (SSL) para análisis de imágenes.}
-    \label{fig:original-9}
+    
     \par\smallskip
     \begingroup\footnotesize\singlespacing\raggedright
     \textit{Nota.} Elaboración propia con base en Self-supervised learning for medical image analysis: A survey, por S. Azizi et al., 2024, Scientific Reports. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11148053/}
     \par\endgroup
+
 \end{figure}
 
