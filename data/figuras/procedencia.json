@@ -21,6 +21,27 @@
       "local": "data/figuras/b71_confusion.json",
       "source": "resultados/banco_completo/confusion/ham10000/b71__congelado.json",
       "sha256": "4a268032fbb9c71ed7b2402bab36704545227c6b5b7c068f01cde04cf741a208"
+    },
+    {
+      "local": "data/figuras/e5ham.json",
+      "source": "resultados/banco_completo/e5/e5_fitzpatrick_ham10000.json",
+      "source_git_blob": "c180e80893ea478703ac07005fbf76e74dde20d8",
+      "sha256": "31a4bc0dc8768a95aea19f961580fa15ba938c6bc58e015bd62bf50f6f4acec3",
+      "extraction": "columnas image_id, split, otsu_status, otsu_ita, roi_status, roi_ita; todas las filas, report, estimators y provenance sin cambios; revisiones registradas"
+    },
+    {
+      "local": "data/figuras/e5isic19.json",
+      "source": "resultados/banco_completo/e5/e5_fitzpatrick_isic2019.json",
+      "source_git_blob": "0a389095a59ab57c9bc67d8cb5ab13a7479cf466",
+      "sha256": "62dea8dc8ffe46045ced5737d10c842f4c8aa8768b2f2d1b61aa3a2ce79677ae",
+      "extraction": "columnas image_id, split, otsu_status, otsu_ita, roi_status, roi_ita; todas las filas, report, estimators y provenance sin cambios; revisiones registradas"
+    },
+    {
+      "local": "data/figuras/e5isic20.json",
+      "source": "resultados/banco_completo/e5/e5_fitzpatrick_isic2020.json",
+      "source_git_blob": "adfd7e7cb09463baa13592e09ee1ba5c05a7a734",
+      "sha256": "2d6f3f3af2f0c334da506a10383fb04adfe5d6f18277bf53827048ded63471d7",
+      "extraction": "columnas image_id, split, otsu_status, otsu_ita, roi_status, roi_ita; todas las filas, report, estimators y provenance sin cambios; revisiones registradas"
     }
   ]
 }
