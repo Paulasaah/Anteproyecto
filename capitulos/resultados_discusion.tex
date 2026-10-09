@@ -10,7 +10,46 @@ Los experimentos se ejecutaron en dos entornos de cómputo independientes, uno p
 
 \textbf{(B) Segmentador U-Net.} El módulo de segmentación (Sección~\ref{sec:desarrollo-segmentacion}) se ejecutó en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24\,GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128}. Los datos y parámetros de entrenamiento se describen en la Sección~\ref{sec:desarrollo-segmentacion}; aquí se documenta el entorno de ejecución.
 
-\section{Conjuntos de datos}\label{sec:conjuntos-datos-resultados}
+\section{Conjuntos de datos y particiones}\label{sec:conjuntos-datos-resultados}
+
+Esta sección informa qué conjuntos y particiones se utilizaron en los experimentos, con sus funciones de entrenamiento, pseudo-validación y evaluación. La Tabla~\ref{tab:particiones-experimentales} resume los tamaños reportados por línea de trabajo. Las particiones corresponden a protocolos distintos y no deben sumarse ni compararse como si fueran una única división común.
+
+\begin{table}[!htbp]
+\centering
+\begingroup
+\small
+\singlespacing
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\caption{Particiones experimentales y función de los datos por línea de trabajo.}
+\label{tab:particiones-experimentales}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.45\textwidth}@{}}
+\toprule
+\textbf{Línea} & \textbf{Conjunto y partición} & \textbf{Función y tamaño reportado} \\
+\midrule
+Clasificación & HAM10000: ajuste de la sonda & 8.011 imágenes etiquetadas para ajustar la regresión logística en el experimento D0--D3. \\
+\addlinespace
+Clasificación & HAM10000: evaluación congelada & 2.004 imágenes en la partición agrupada por lesión usada para la comparación principal. \\
+\addlinespace
+Clasificación & HAM10000: ajuste fino & 2.014 imágenes en una partición distinta; la época se seleccionó según validación. La comparación con la evaluación congelada es descriptiva, no pareada. \\
+\addlinespace
+Adaptación de dominio & PAD-UFES-20: \texttt{target\_adapt} & 1.141 imágenes sin etiquetas para la continuación del preentrenamiento autosupervisado. \\
+\addlinespace
+Adaptación de dominio & PAD-UFES-20: \texttt{target\_test} & 567 imágenes de evaluación externa, correspondientes a 363 pacientes y 25 casos de melanoma; excluidas del entrenamiento y de la selección. \\
+\addlinespace
+Segmentación & \textit{Pool} sin etiquetas & 58.457 imágenes: 57.288 para entrenamiento y 1.169 para pseudo-validación. De ellas, 52.453 y 1.082, respectivamente, contaban con píxeles confiables. \\
+\addlinespace
+Segmentación & Evaluación con máscaras de referencia & ISIC 2018: 2.594 imágenes; HAM10000: 10.015 imágenes. La evaluación de ISIC 2018 es parcialmente transductiva por el solapamiento documentado con el \textit{pool} sin etiquetas. \\
+\addlinespace
+Tono de piel & Validación frente a FST & Fitzpatrick17k-C: 11.098 imágenes con anotación de referencia. PAD-UFES-20: 1.494 imágenes con FST registrado; el ITA fue calculable en 1.265 casos con imagen completa y en 1.189 con fondo enmascarado por Otsu. \\
+\bottomrule
+\end{tabular}
+
+\par\smallskip
+\raggedright\footnotesize
+\textit{Nota.} Elaboración propia a partir de los manifiestos y resultados experimentales descritos en las subsecciones correspondientes. FST = fototipo Fitzpatrick; ITA = índice de melanina individual. Las divisiones de HAM10000 para evaluación congelada y ajuste fino provienen de protocolos distintos. La pseudo-validación de segmentación usa pseudo-máscaras, no máscaras expertas. Los valores de ITA calculable excluyen los casos en que el estimador se abstuvo.
+\endgroup
+\end{table}
 
 \subsection{Caracterización de HAM10000}
 
