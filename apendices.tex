@@ -3,35 +3,46 @@
 
 \section{Protocolo experimental y procedencia}
 
-Los resultados experimentales se contrastaron con el repositorio de implementación \texttt{nicolas2601/proyecto-grado-ssl-lesiones}, rama \texttt{main}, en el commit \texttt{a3c3a6ed6670745c6687ae3d3430998c380d0dea}. La tabla resume las fuentes versionadas utilizadas para reconstruir el protocolo; no reemplaza los datos ni los artefactos originales.
+Los resultados experimentales se contrastaron con el repositorio de implementación \url{https://github.com/nicolas2601/proyecto-grado-ssl-lesiones}, rama \texttt{main}, en el commit \texttt{a3c3a6ed\allowbreak 6670745c\allowbreak 6687ae3d\allowbreak 3430998c\allowbreak 380d0dea}. La Tabla~\ref{tab:trazabilidad-experimental} resume las fuentes versionadas utilizadas para reconstruir el protocolo; no reemplaza los datos ni los artefactos originales.
 
-\begin{longtable}{@{}p{0.27\textwidth}p{0.37\textwidth}p{0.27\textwidth}@{}}
+\begingroup
+\small
+\singlespacing
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}@{}}
 \caption{Fuentes de trazabilidad de los protocolos y resultados.}
 \label{tab:trazabilidad-experimental}\\
 \toprule
-Fuente versionada & Información utilizada & Límite documentado \\
+\textbf{Fuente versionada} & \textbf{Información utilizada} & \textbf{Límite documentado} \\
 \midrule
 \endfirsthead
 \toprule
-Fuente versionada & Información utilizada & Límite documentado \\
+\textbf{Fuente versionada} & \textbf{Información utilizada} & \textbf{Límite documentado} \\
 \midrule
 \endhead
-\texttt{docs/33-banco-completo-multidataset.md} &
+\bottomrule
+\endfoot
+\path{docs/33-banco-completo-multidataset.md} &
 Protocolo del banco, definición de comparaciones y estado de las corridas D2/D3. &
 Los \texttt{run.json} de D2/D3 no registran \texttt{data\_revision} y dejan el campo de hash de partición sin un valor trazable; el documento conserva otros hashes de exclusión, listas de IDs y partición PAD. \\
-\texttt{docs/28-rediseno-brazo-propuesto-v7.md} &
+\addlinespace[5pt]
+\path{docs/28-rediseno-brazo-propuesto-v7.md} &
 Diseño y resultados históricos de v7, incluidos los contrastes C1 con máscaras. &
-Es una línea histórica; el banco consolidado de \texttt{docs/33} aclara qué resultados la sustituyen y cuáles permanecen exploratorios. \\
-\texttt{plan-segmentacion/camino-b-cnn/}\\\texttt{resultados/2026-09-21-final/resultados.md} &
-Métricas globales de \texttt{student\_r3} en ISIC2018 y HAM10000. &
-ISIC2018 comparte parcialmente identificadores con el \textit{pool} de entrenamiento sin etiquetas; la evaluación es transductiva. \\
-\texttt{plan-segmentacion/camino-b-cnn/resultados/2026-09-28-s4-a2/} &
+Es una línea histórica; el banco consolidado de \path{docs/33} aclara qué resultados la sustituyen y cuáles permanecen exploratorios. \\
+\addlinespace[5pt]
+\path{plan-segmentacion/camino-b-cnn/resultados/2026-09-21-final/resultados.md} &
+Métricas globales de \texttt{student\_r3} en ISIC 2018 y HAM10000. &
+ISIC 2018 comparte parcialmente identificadores con el \textit{pool} de entrenamiento sin etiquetas; la evaluación es transductiva. \\
+\addlinespace[5pt]
+\path{plan-segmentacion/camino-b-cnn/resultados/2026-09-28-s4-a2/} &
 Configuración, métricas y archivos por imagen de la variante S4-A2. &
 La mejora de segmentación no implica una mejora del clasificador; el contraste C1 no mostró beneficio general de usar las máscaras. \\
-\bottomrule
 \end{longtable}
+\endgroup
 
-\noindent\textit{Nota.} Los conjuntos de imágenes originales no se duplican en este documento. La reproducibilidad depende del acceso al repositorio y a los manifiestos y artefactos de las corridas; las limitaciones indicadas deben conservarse al interpretar los resultados.
+{\small\singlespacing
+\noindent\textit{Nota.} Elaboración propia. Los conjuntos de imágenes originales no se duplican en este documento. La reproducibilidad depende del acceso al repositorio y a los manifiestos y artefactos de las corridas; las limitaciones indicadas deben conservarse al interpretar los resultados.\par}
 
 \section{Materiales adicionales}
 
