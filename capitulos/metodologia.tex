@@ -1,4 +1,3 @@
-% Source: Anteproyecto (3).pdf. Original wording retained except population/sample.
 \chapter{Metodología}\label{chap:metodologia}
 
 Este capítulo describe el método de trabajo que se ejecutó para construir y evaluar los componentes del proyecto. El anteproyecto definió una ruta inicial, pero no se toma como registro de la ejecución. Aquí se documentan la organización metodológica adoptada, las decisiones técnicas y los procedimientos realmente aplicados a los pipelines de clasificación autosupervisada y adaptación de dominio, segmentación, y transformación y estimación del tono de piel. La composición de las particiones y los resultados obtenidos se presentan en el Capítulo~\ref{chap:resultados}.
@@ -6,6 +5,7 @@ Este capítulo describe el método de trabajo que se ejecutó para construir y e
 CRISP-ML(Q) se utiliza como marco de organización del trabajo. La descripción de sus fases resume el recorrido general; la construcción de cada pipeline, sus entradas, algoritmos, modelamiento, herramientas y procedimientos se desarrolla en las subsecciones técnicas de este capítulo. Las métricas y los protocolos de evaluación se especifican en la línea de trabajo correspondiente.
 
 \section{Diseño metodológico y organización del trabajo}
+\label{sec:fases-investigacion}
 
 El desarrollo del proyecto se organizó según el cumplimiento de los cuatro objetivos específicos formulados en el Capítulo~\ref{chap:objetivos}, siguiendo el modelo CRISP-ML(Q), estructurado originalmente en seis fases: comprensión del negocio y de los datos, ingeniería de datos, ingeniería del modelo, evaluación del modelo, despliegue y monitoreo y mantenimiento \parencite{wirth2000crispdm,studer2021crispmlq}. Para este trabajo, las seis fases del marco se organizaron en cuatro etapas iterativas, representadas en la Figura~\ref{fig:flujo-crispmlq} y vinculadas con los objetivos específicos y su estado de ejecución en la Tabla~\ref{tab:trazabilidad-fases}: (i) comprensión del problema y de los datos (objetivo 1); (ii) ingeniería de datos y modelado de las tres líneas de trabajo (objetivo 2); (iii) evaluación de los modelos y procedimientos (objetivo 3); y (iv) implementación del prototipo de apoyo al análisis de imágenes (objetivo 4). Las tres primeras etapas se ejecutaron. La cuarta permanece pendiente mientras continúan los experimentos para seleccionar el modelo y la configuración finales. Su inclusión como etapa planificada no implica que se haya realizado un despliegue clínico ni que se hayan ejecutado actividades de monitoreo en producción.
 
@@ -57,10 +57,7 @@ La Tabla~\ref{tab:trazabilidad-fases} resume la relación entre las fases de CRI
 \noindent\textit{Nota.} Elaboración propia. Obj.\ esp.\ = objetivo específico. La fase 4 está pendiente y forma parte del alcance previsto; su ejecución se realizará después de seleccionar el modelo y la configuración finales. El desarrollo técnico de cada línea de trabajo se presenta en la Sección~\ref{sec:desarrollo-tecnico}; las cifras de desempeño y su interpretación, en el Capítulo~\ref{chap:resultados}.\par
 }
 
-\section{Ejecución metodológica por fases}
-\label{sec:fases-investigacion}
-
-La Tabla~\ref{tab:trazabilidad-fases} resume las actividades ejecutadas en las tres primeras fases y el estado del objetivo de implementación del prototipo. La tabla ofrece una visión general, no sustituye la descripción técnica de los procedimientos. A continuación se presenta el desarrollo metodológico real de cada pipeline, con sus datos de entrada, preparación, arquitectura, algoritmos, criterios y evaluación. El prototipo permanece pendiente mientras el equipo continúa los experimentos para seleccionar el modelo y la configuración finales; sigue formando parte del alcance previsto.
+La tabla presenta la trazabilidad general entre las fases y el trabajo realizado; no sustituye la descripción de los procedimientos. A continuación se detalla cómo se construyeron y ejecutaron los pipelines de clasificación autosupervisada y adaptación de dominio, segmentación, y transformación y estimación del tono de piel. El prototipo sigue dentro del alcance previsto y permanece pendiente mientras continúan los experimentos de selección del modelo y de la configuración finales.
 
 \input{capitulos/desarrollo_proyecto}
 
