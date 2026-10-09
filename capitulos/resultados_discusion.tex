@@ -1,6 +1,6 @@
 \chapter{Resultados y discusión}\label{chap:resultados}
 
-Este capítulo presenta la configuración experimental, los conjuntos de datos y los resultados de las tres líneas de trabajo: transformación y estimación del tono de piel, clasificación y segmentación. La discusión interpreta los hallazgos y precisa el alcance de las comparaciones. Las métricas y los protocolos se describen en el Capítulo~\ref{chap:metodologia}. Los resultados corresponden a un desarrollo experimental y no constituyen una validación clínica ni sustituyen el criterio profesional.
+Este capítulo presenta la configuración experimental, los conjuntos de datos y los resultados de las tres líneas de trabajo: segmentación complementaria, estimación y transformación del tono de piel, y clasificación autosupervisada con adaptación de dominio. La discusión interpreta los hallazgos y precisa el alcance de las comparaciones. Las métricas y los protocolos se describen en el Capítulo~\ref{chap:metodologia}. Los resultados corresponden a un desarrollo experimental y no constituyen una validación clínica ni sustituyen el criterio profesional.
 
 \section{Configuración experimental}
 
@@ -14,18 +14,15 @@ Los experimentos se ejecutaron en dos entornos de cómputo independientes, uno p
 
 Esta sección informa qué conjuntos y particiones se utilizaron en los experimentos, con sus funciones de entrenamiento, pseudo-validación y evaluación. La Tabla~\ref{tab:particiones-experimentales} resume los tamaños reportados por línea de trabajo. Las particiones corresponden a protocolos distintos y no deben sumarse ni compararse como si fueran una única división común.
 
-\begin{table}[!htbp]
-\centering
 \begingroup
-\small
+\fontsize{11}{13}\selectfont
 \singlespacing
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{4pt}
-\caption{Particiones experimentales y función de los datos por línea de trabajo.}
-\label{tab:particiones-experimentales}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.45\textwidth}@{}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.45\textwidth}@{}}
+\caption{Particiones experimentales y función de los datos por línea de trabajo.}\label{tab:particiones-experimentales}\\
 \toprule
-\textbf{Línea} & \textbf{Conjunto y partición} & \textbf{Función y tamaño reportado} \\
+Línea & Conjunto y partición & Función y tamaño reportado \\
 \midrule
 Clasificación & HAM10000: ajuste de la sonda & 8.011 imágenes etiquetadas para ajustar la regresión logística en el experimento D0--D3. \\
 \addlinespace
@@ -43,13 +40,10 @@ Segmentación & Evaluación con máscaras de referencia & ISIC 2018: 2.594 imág
 \addlinespace
 Tono de piel & Validación frente a FST & Fitzpatrick17k-C: 11.098 imágenes con anotación de referencia. PAD-UFES-20: 1.494 imágenes con FST registrado; el ITA fue calculable en 1.265 casos con imagen completa y en 1.189 con fondo enmascarado por Otsu. \\
 \bottomrule
-\end{tabular}
-
-\par\smallskip
-\raggedright\footnotesize
-\textit{Nota.} Elaboración propia a partir de los manifiestos y resultados experimentales descritos en las subsecciones correspondientes. FST = fototipo Fitzpatrick; ITA = índice de melanina individual. Las divisiones de HAM10000 para evaluación congelada y ajuste fino provienen de protocolos distintos. La pseudo-validación de segmentación usa pseudo-máscaras, no máscaras expertas. Los valores de ITA calculable excluyen los casos en que el estimador se abstuvo.
+\end{longtable}
+\noindent \textit{Nota.} Elaboración propia a partir de los manifiestos y resultados experimentales descritos en las subsecciones correspondientes. FST = fototipo Fitzpatrick; ITA = ángulo tipológico individual. Las divisiones de HAM10000 para evaluación congelada y ajuste fino provienen de protocolos distintos. La pseudo-validación de segmentación usa pseudo-máscaras, no máscaras expertas. Los valores de ITA calculable excluyen los casos en que el estimador se abstuvo.
 \endgroup
-\end{table}
+
 
 \subsection{Caracterización de HAM10000}
 
@@ -76,6 +70,10 @@ La distribución binaria se presenta en el panel ISIC2020 de la figura \ref{fig:
 PAD-UFES-20 es un conjunto de 2.298 imágenes clínicas --no dermatoscópicas-- tomadas con cámaras de teléfonos inteligentes, correspondientes a 1.891 lesiones de 1.373 pacientes atendidos entre 2018 y 2019 en el Hospital Universitario Cassiano Antônio Moraes (HUCAM), de la Universidad Federal de Espírito Santo (UFES, Brasil), en el marco del Programa de Assistência Dermatológica e Cirúrgica \parencite{pacheco2020padufes}. De más de 50 tipos de lesión documentados originalmente, los autores seleccionaron las seis categorías diagnósticas más frecuentes, agrupando la enfermedad de Bowen con el carcinoma escamocelular por tratarse de SCC in situ: carcinoma basocelular (\texttt{BCC}), queratosis actínica (\texttt{ACK}), nevus (\texttt{NEV}), queratosis seborreica (\texttt{SEK}), carcinoma escamocelular (\texttt{SCC}) y melanoma (\texttt{MEL}). Todas las muestras diagnosticadas como cáncer de piel cuentan con confirmación biópsica; las categorías restantes (\texttt{ACK}, \texttt{SEK}, \texttt{NEV}) fueron diagnosticadas clínicamente por un equipo de dermatólogos, sin biopsia en todos los casos. La Tabla~\ref{tab:pad-categorias} resume las seis categorías diagnósticas y sus tamaños en el conjunto.
 
 \begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
 \centering
 \caption{Categorías diagnósticas de PAD-UFES-20.}
 \label{tab:pad-categorias}
@@ -93,6 +91,7 @@ Melanoma & MEL & 52 \\
 Total & & 2.298 \\
 \bottomrule
 \end{tabular}
+\endgroup
 \end{table}
 
 La Figura~\ref{fig:distribuciones-clase-combinadas} reúne los conteos de las categorías diagnósticas originales de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, organizados en los paneles (a)--(d), respectivamente. La figura permite comparar la composición de cada corpus, pero no estimar prevalencias poblacionales: los conjuntos proceden de contextos y protocolos de captura distintos, y sus taxonomías no son idénticas. En particular, ISIC2020 conserva una clasificación binaria entre lesiones benignas y malignas, no un diagnóstico por subtipo. Las categorías corresponden a las definidas por las fuentes de cada conjunto \parencite{tschandl2018ham10000,combalia2024bcn20000,rotemberg2021isic2020,pacheco2020padufes}.
@@ -146,112 +145,6 @@ La caracterización vincula los conjuntos públicos con las patologías regional
     \item \textbf{PAD-UFES-20:} caracterizado en la sección anterior; la partición \texttt{target\_adapt} se usa sin etiquetas para adaptación SSL de dominio y \texttt{target\_test} se reserva para evaluación externa, excluida de todo entrenamiento y ajuste.
 \end{enumerate}
 
-\subsection{Caracterización del fototipo y del tono por conjunto}
-\label{sec:caracterizacion-tono}
-
-El fototipo Fitzpatrick registrado en los metadatos y el tono medido en una imagen son variables diferentes. La caracterización clínica utiliza únicamente etiquetas aportadas por la fuente. Los valores derivados de píxeles se presentan como proxies colorimétricos y no como anotaciones clínicas de tipos I--VI. La tabla \ref{tab:disponibilidad-fototipo} distingue ambas fuentes de información.
-
-\begin{table}[!htbp]
-\begingroup
-\small
-\singlespacing
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.05}
-\centering
-\caption{Disponibilidad de fototipo clínico y caracterización de tono en los conjuntos considerados.}
-\label{tab:disponibilidad-fototipo}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.30\linewidth}>{\raggedright\arraybackslash}p{\dimexpr0.53\linewidth-16pt\relax}@{}}
-\toprule
-Conjunto & Fototipo clínico disponible & Caracterización local y límite \\
-\midrule
-HAM10000 & No reportado: 10.015 imágenes & Resumen de proxy ITA para las dos carpetas del conjunto; no permite asignar fototipos clínicos. \\
-ISIC2019 & Sin etiquetas FST verificadas en el \textit{pool} local & Resumen colorimétrico de 15.316 imágenes del \textit{pool}; no corresponde al total editorial del \textit{dataset}. \\
-ISIC2020 & Sin etiquetas FST verificadas en el \textit{pool} local & Resumen colorimétrico de 33.126 imágenes del \textit{pool}. \\
-ISIC2018 & Sin inventario FST verificado para esta evaluación & Se utiliza en evaluación del segmentador; no hay histograma clínico local trazable. \\
-PAD-UFES-20 & 1.494 imágenes con FST; 804 sin dato & Exportación clínica por imagen: 2.298 imágenes en total; caracterización descriptiva del conjunto, con particiones separadas de adaptación y evaluación externa. \\
-CO2Wounds-V2 & No caracterizado en este trabajo & Excluido del alcance actual. \\
-\bottomrule
-\end{tabular}
-\endgroup
-\end{table}
-
-BCN20000 no se utiliza como conjunto independiente en este trabajo; las imágenes presentes en ISIC2019 se consideran dentro de ese conjunto. HAM10000 no reporta fototipo clínico para sus 10.015 imágenes, por lo que no se asignan tipos Fitzpatrick a partir de su apariencia.
-
-La falta de una estimación ITA válida se reporta como abstención del estimador. Los grupos I--VI son intervalos derivados del ITA y no representan fototipos clínicos Fitzpatrick.
-
-La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del ITA estimado en HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20. Las estimaciones válidas se muestran por intervalos de 10 grados y las abstenciones se reportan por conjunto.
-
-\begin{figure}[!htbp]
-\caption{Distribución del ITA estimado en los conjuntos de datos analizados.}
-\label{fig:ita-distribucion-multidataset}
-\centering
-\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{images/distribucion_ita_2x2.pdf}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) corresponden a HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Los conteos de imágenes sin ITA válido se presentan como abstenciones. Los grupos I--VI son salidas del estimador y no equivalen a fototipos clínicos Fitzpatrick.
-\end{figure}
-
-En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 identificadores de imagen únicos con etiquetas clínicas: I, 153; II, 876; III, 392; IV, 62; V, 10; y VI, 1. Otras 804 imágenes no tienen fototipo. Estos recuentos por tipo provienen de la exportación del proyecto, no de una tabla del artículo. Su total de 2.298 imágenes coincide con el tamaño del conjunto descrito por la publicación primaria \parencite{pacheco2020padufes}. La unidad del histograma es la imagen, no el paciente: varias imágenes de una misma persona pueden compartir la etiqueta, sin que ello constituya un duplicado de identificador. Los tamaños de V y VI solo permiten descripción, no conclusiones de desempeño para esos fototipos.
-
-La exportación del proyecto verifica identificadores únicos. La etiqueta clínica no cambia al transformar el color de una imagen.
-
-La Figura~\ref{fig:pad-fototipo-clinico} contrasta las etiquetas de fototipo registradas en PAD-UFES-20 con la distribución del ITA estimado en el fondo de las imágenes. La comparación describe la relación entre dos fuentes distintas: una etiqueta consignada en los metadatos y una medida colorimétrica calculada a partir de píxeles. El origen de la asignación de FST no está verificado y el ITA no se ha validado como estimador del fototipo; por ello, la figura no acredita la calidad de las máscaras ni el desempeño clínico del estimador.
-
-\begin{figure}[!htbp]
-\caption{Distribución de las etiquetas de fototipo registradas y de las estimaciones del ITA en PAD-UFES-20.}
-\label{fig:pad-fototipo-clinico}
-\centering
-\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/pad_fst_ita.pdf}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. El panel (a) muestra los fototipos registrados en los metadatos y el panel (b), el ITA estimado en el fondo de las imágenes agrupado según esos registros. De las 2.298 imágenes, 1.494 tienen una etiqueta FST y 804 no cuentan con ese dato; se obtuvo un ITA válido para 1.189 imágenes con FST. La fuente de la asignación del FST no está verificada. El ITA se calculó con umbral de Otsu en el fondo y no está validado como fototipo; las categorías V y VI se presentan solo de forma descriptiva, sin inferencias. La comparación evalúa el estimador ITA frente a las etiquetas FST, no la calidad de las máscaras de segmentación.
-\end{figure}
-
-\FloatBarrier
-
-\subsection{Caracterización colorimétrica antes y después de la transformación}
-
-El resumen local anterior a la transformación permite describir el proxy ITA de las imágenes originales (tabla \ref{tab:ita-originales}). Se calcula sobre píxeles de piel seleccionados por máscara, usando las medianas de los canales CIELAB: $\mathrm{ITA}=(180/\pi)\arctan((\widetilde L^*-50)/\widetilde b^*)$. El código marca el resultado como indeterminado si $\widetilde b^*<5$; otras imágenes quedan en cuarentena por los controles del módulo. Los seis intervalos empleados internamente para agrupar ITA no se interpretan como fototipos clínicos.
-
-\begin{table}[htbp]
-\centering
-\caption{Caracterización del proxy ITA en imágenes originales del \textit{pool} local.}
-\label{tab:ita-originales}
-\begin{tabular}{lrrrrr}
-\toprule
-Conjunto & Imágenes & ITA válido & Indeterminado & Cuarentena & ITA medio ($^\circ$) \\
-\midrule
-HAM10000 & 10.015 & 4.277 & 5.545 & 193 & 56,86 \\
-ISIC2019 (\textit{pool}) & 15.316 & 6.287 & 7.449 & 1.580 & 51,72 \\
-ISIC2020 (\textit{pool}) & 33.126 & 20.833 & 10.587 & 1.706 & 52,36 \\
-\bottomrule
-\end{tabular}
-
-\noindent\textit{Nota.} Elaboración propia.
-\end{table}
-
-El resumen usa la estratificación del 21 de septiembre de 2026. HAM10000 agrega sus carpetas de 5.000 y 5.015 imágenes; su media ITA pondera los 2.547 y 1.730 casos válidos, respectivamente. Las cifras describen ese \textit{pool} y esa versión de máscaras; no son prevalencias de fototipo ni se trasladan automáticamente a otras corridas.
-
-La Figura~\ref{fig:ita-roi-e5} presenta un análisis complementario de la salida E5, calculada sobre una región de interés perilesional (ROI). Sus valores corresponden a otra configuración y cobertura que la Tabla~\ref{tab:ita-originales}: esta resume la estratificación del 21 de septiembre de 2026 sobre el \textit{pool} local, mientras que la figura muestra HAM10000, ISIC2019 e ISIC2020 completos y usa el anillo perilesional o, cuando no había una máscara elegible, el borde de la imagen. Por tanto, sus conteos no son una actualización directa de los de la tabla ni permiten atribuir diferencias al desempeño del estimador sin comparar entradas equivalentes. En el panel (a), $n$ corresponde a imágenes con ITA calculable; en el panel (b), los porcentajes incluyen también las abstenciones. Las categorías derivadas del ITA son descriptivas y no equivalen a fototipos clínicos.
-
-\begin{figure}[!htbp]
-\caption{Distribución del ITA estimado en regiones perilesionales de tres conjuntos de imágenes.}
-\label{fig:ita-roi-e5}
-\centering
-\includegraphics[width=0.94\textwidth,height=0.43\textheight,keepaspectratio]{images/ita_roi_e5_multidataset.pdf}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia con los resultados descriptivos E5. El panel (a) muestra la distribución continua del ITA en la ROI perilesional para los casos con estimación válida; el panel (b) muestra la proporción de las categorías I--VI y de abstención sobre el total de cada conjunto. Las pseudo-máscaras de las lesiones son automáticas, generadas con \texttt{student\_r3}; cuando no había máscara elegible, se usó el borde de la imagen. Los intervalos I--VI son agrupaciones del estimador de ITA, no diagnósticos ni fototipos clínicos validados. Esta figura caracteriza las salidas del estimador y no evalúa la calidad de las máscaras.
-\end{figure}
-
-La transformación modifica la luminosidad de todos los píxeles fuera de la máscara de lesión, incluidos fondo y artefactos; es una modificación sintética de luminosidad, no una corrección validada del tono de piel. Su formulación se desarrolla en el Capítulo~\ref{chap:metodologia}, Sección~\ref{sec:desarrollo-tono}. Para comparar antes y después se requieren pares originales/transformados con identificadores coincidentes, hashes y mediciones colorimétricas obtenidas con el mismo protocolo. Los resultados locales revisados no contienen el manifiesto de transformaciones ni mediciones posteriores emparejadas. Por ello, el efecto posterior sobre ITA o luminosidad permanece pendiente y no se presenta un histograma simulado. Los conteos de fototipo clínico de PAD-UFES-20 conservan su valor tras cualquier transformación, porque son metadatos de la persona y no una propiedad que se reasigne a partir de los píxeles.
-
-\subsection{Perfil objetivo para el contexto de Santander}
-
-Los tipos III y IV se consideran un perfil objetivo de interés indicado para el proyecto. No se dispone en las fuentes locales revisadas de una distribución poblacional de fototipos de Santander que permita afirmar su predominio o asignarles porcentajes. En consecuencia, este perfil orienta preguntas de cobertura y evaluación futura, sin constituir una prevalencia demostrada ni justificar la conversión de los proxies ITA en etiquetas clínicas.
-
-En el ámbito clínico colombiano se menciona de forma no sistemática, sin estudio poblacional formal que lo confirme, un posible predominio de fototipos III y IV en la población general del país. El único estudio epidemiológico robusto disponible para Colombia \parencite{oliveros2025melanomacolombia} no midió fototipo directamente; su única inferencia relacionada es hipotética y se refiere a población afrodescendiente de zonas costeras de baja altitud (0--400 m), geográficamente distinta del perfil de Santander, y los propios autores declaran la ausencia de información de fototipo como limitación explícita del estudio.
-
 \subsection{Perfil epidemiológico regional de Santander}\label{sec:perfil-epidemiologico-santander}
 
 La revisión de la literatura regional, los reportes del Instituto del Cáncer del Hospital Internacional de Colombia (HIC), los boletines del SIVIGILA y los estudios académicos asociados a la Universidad Industrial de Santander documentaron quince patologías cutáneas con carga clínica relevante en el departamento, clasificadas en cinco niveles de prioridad para el modelo SSL (crítica, alta, media, baja y trabajo futuro) según incidencia regional reportada, mortalidad asociada y disponibilidad de evidencia epidemiológica trazable.
@@ -259,6 +152,10 @@ La revisión de la literatura regional, los reportes del Instituto del Cáncer d
 Cuatro lesiones malignas concentran la prioridad crítica: el carcinoma basocelular, con una tasa de incidencia estandarizada de 124,2 casos por 100.000 habitantes-año en el área metropolitana de Bucaramanga; el carcinoma escamocelular, asociado al daño solar acumulado; el cáncer de piel no melanoma agregado, con 3.060 casos reportados por el Instituto del Cáncer del HIC entre 2016 y 2023; y el melanoma, responsable del 80\,\% de la mortalidad por cáncer de piel pese a representar únicamente el 13,66\,\% de los casos en el área metropolitana de Bucaramanga \parencite{uribe2018bccbucaramanga}. Esta cifra es de alcance regional y no debe confundirse con la proporción global citada en el marco teórico (2\,\% de los casos y 80\,\% de las muertes, \citeauthor{urban2021globalburden}, \citeyear{urban2021globalburden}): ambas comparten el porcentaje de mortalidad pero describen poblaciones y fuentes distintas. La cifra nacional de 11.064 casos corresponde a melanoma cutáneo atendido hasta el 31 de diciembre de 2024 y la Cuenta de Alto Costo la reporta como preliminar \parencite{cuentaaltocosto2025melanoma}. La Tabla~\ref{tab:patologias-santander} sintetiza las patologías regionales y su prioridad para el proyecto.
 
 \begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
 \centering
 \caption{Patologías cutáneas documentadas en Santander, ordenadas por prioridad para el modelo SSL.}
 \label{tab:patologias-santander}
@@ -283,6 +180,7 @@ Maskne (post-COVID) & Inflamatoria aguda & Baja \\
 Heridas crónicas (lepra/Hansen) & Crónica (lepra) & Trabajo futuro \\
 \bottomrule
 \end{tabular}
+\endgroup
 \end{table}
 \noindent\textit{Nota.} Elaboración propia a partir de la revisión epidemiológica cruzada documentada en la propuesta original del proyecto, con fuentes primarias en el Instituto del Cáncer del HIC, SIVIGILA y estudios de la Universidad Industrial de Santander.
 
@@ -335,9 +233,173 @@ Las métricas usadas para evaluar la clasificación se presentan a continuación
     \end{equation}
 
 \end{itemize}
-\section{Resultados de transformación de tono de piel}\label{sec:resultados-tono}
+\section{Resultados de segmentación complementaria}
+\label{sec:segmentacion-complementaria}
 
-El método de transformación y de estimación de tono de piel se describe en el Capítulo~\ref{chap:metodologia}, Sección~\ref{sec:desarrollo-tono}; esta sección presenta el resultado de su validación externa contra fototipo Fitzpatrick (FST) real.
+La evaluación incluyó dos variantes de segmentación. \texttt{student\_r3} se entrenó sin etiquetas diagnósticas ni máscaras expertas, mediante MoCo v2/ResNet-50, CCAM y tres rondas de refinamiento del U-Net con pseudo-máscaras. La configuración registrada no se comparó con otros números de rondas y las fuentes revisadas no explican por qué se fijaron tres. El equipo indicó que el tiempo disponible limitó la exploración de variantes adicionales. También se evaluó S4-A2, que utiliza DINOv2 ViT-B/14 congelado y un \textit{decoder} tipo DPT. Los ejemplos visuales se presentan primero; la Tabla~\ref{tab:segmentacion-student-a2} presenta el Dice medio y su IC del 95\,\% respecto de las máscaras de referencia.
+
+La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Se muestran la imagen original, la máscara de referencia, la predicción y la superposición de contornos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
+
+\begin{figure}[!htbp]
+\caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
+\label{fig:segmentacion-ejemplos}
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion_student_r3_isic2018.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Se muestra únicamente U-Net \texttt{student\_r3}; las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2 (p90, p50 y p10), no a categorías clínicas. Se conserva el mismo identificador y preprocesamiento de 224~px; los valores de Dice de U-Net se verificaron frente al CSV. Son tres ejemplos de las 2.594 imágenes evaluadas de ISIC 2018 y complementan, sin sustituir, las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
+\end{figure}
+
+\FloatBarrier
+
+\begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
+\centering
+\caption{Evaluación de los segmentadores \texttt{student\_r3} y S4-A2.}
+\label{tab:segmentacion-student-a2}
+\begin{tabular}{lrr}
+\toprule
+ & \multicolumn{2}{c}{Dice medio [IC del 95\,\%]} \\
+\cmidrule(lr){2-3}
+Segmentador & ISIC2018 ($n=2.594$) & HAM10000 ($n=10.015$) \\
+\midrule
+\texttt{student\_r3} & 0,718 [0,709; 0,726] & 0,785 [0,781; 0,788] \\
+S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
+\bottomrule
+\end{tabular}
+\endgroup
+\end{table}
+\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
+
+\FloatBarrier
+
+S4-A2 cumplió el criterio definido antes de la evaluación: su Dice en ISIC2018 superó el valor de \texttt{student\_r3} menos 0,01 y también fue mayor en HAM10000. Entre las dos variantes evaluadas, S4-A2 obtuvo los mejores resultados de segmentación. Esta diferencia no se tradujo en una mejora demostrada de la clasificación: en la comparación C1, ninguno de los 15 intervalos de F1 macro del análisis primario con \texttt{student\_r3} excluyó cero, y el análisis secundario de S4-A2 mostró el mismo patrón. Por ello, los resultados respaldan la segmentación como módulo complementario, pero no como una mejora general de la clasificación.
+
+\section{Resultados de estimación y transformación del tono de piel}\label{sec:resultados-tono}
+
+\subsection{Caracterización del fototipo y del tono por conjunto}
+\label{sec:caracterizacion-tono}
+
+El fototipo Fitzpatrick registrado en los metadatos y el tono medido en una imagen son variables diferentes. La caracterización clínica utiliza únicamente etiquetas aportadas por la fuente. Los valores derivados de píxeles se presentan como proxies colorimétricos y no como anotaciones clínicas de tipos I--VI. La tabla \ref{tab:disponibilidad-fototipo} distingue ambas fuentes de información.
+
+\begin{table}[!htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+\singlespacing
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.05}
+\centering
+\caption{Disponibilidad de fototipo clínico y caracterización de tono en los conjuntos considerados.}
+\label{tab:disponibilidad-fototipo}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.30\linewidth}>{\raggedright\arraybackslash}p{\dimexpr0.53\linewidth-16pt\relax}@{}}
+\toprule
+Conjunto & Fototipo clínico disponible & Caracterización local y límite \\
+\midrule
+HAM10000 & No reportado: 10.015 imágenes & Resumen de proxy ITA para las dos carpetas del conjunto; no permite asignar fototipos clínicos. \\
+ISIC2019 & Sin etiquetas FST verificadas en el \textit{pool} local & Resumen colorimétrico de 15.316 imágenes del \textit{pool}; no corresponde al total editorial del \textit{dataset}. \\
+ISIC2020 & Sin etiquetas FST verificadas en el \textit{pool} local & Resumen colorimétrico de 33.126 imágenes del \textit{pool}. \\
+ISIC2018 & Sin inventario FST verificado para esta evaluación & Se utiliza en evaluación del segmentador; no hay histograma clínico local trazable. \\
+PAD-UFES-20 & 1.494 imágenes con FST; 804 sin dato & Exportación clínica por imagen: 2.298 imágenes en total; caracterización descriptiva del conjunto, con particiones separadas de adaptación y evaluación externa. \\
+CO2Wounds-V2 & No caracterizado en este trabajo & Excluido del alcance actual. \\
+\bottomrule
+\end{tabular}
+\endgroup
+\endgroup
+\end{table}
+
+BCN20000 no se utiliza como conjunto independiente en este trabajo; las imágenes presentes en ISIC2019 se consideran dentro de ese conjunto. HAM10000 no reporta fototipo clínico para sus 10.015 imágenes, por lo que no se asignan tipos Fitzpatrick a partir de su apariencia.
+
+La falta de una estimación ITA válida se reporta como abstención del estimador. Los grupos I--VI son intervalos derivados del ITA y no representan fototipos clínicos Fitzpatrick.
+
+La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del ITA estimado en HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20. Las estimaciones válidas se muestran por intervalos de 10 grados y las abstenciones se reportan por conjunto.
+
+\begin{figure}[!htbp]
+\caption{Distribución del ITA estimado en los conjuntos de datos analizados.}
+\label{fig:ita-distribucion-multidataset}
+\centering
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{images/distribucion_ita_2x2.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) corresponden a HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Los conteos de imágenes sin ITA válido se presentan como abstenciones. Los grupos I--VI son salidas del estimador y no equivalen a fototipos clínicos Fitzpatrick.
+\end{figure}
+
+En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 identificadores de imagen únicos con etiquetas clínicas: I, 153; II, 876; III, 392; IV, 62; V, 10; y VI, 1. Otras 804 imágenes no tienen fototipo. Estos recuentos por tipo provienen de la exportación del proyecto, no de una tabla del artículo. Su total de 2.298 imágenes coincide con el tamaño del conjunto descrito por la publicación primaria \parencite{pacheco2020padufes}. La unidad del histograma es la imagen, no el paciente: varias imágenes de una misma persona pueden compartir la etiqueta, sin que ello constituya un duplicado de identificador. Los tamaños de V y VI solo permiten descripción, no conclusiones de desempeño para esos fototipos.
+
+La exportación del proyecto verifica identificadores únicos. La etiqueta clínica no cambia al transformar el color de una imagen.
+
+La Figura~\ref{fig:pad-fototipo-clinico} contrasta las etiquetas de fototipo registradas en PAD-UFES-20 con la distribución del ITA estimado en el fondo de las imágenes. La comparación describe la relación entre dos fuentes distintas: una etiqueta consignada en los metadatos y una medida colorimétrica calculada a partir de píxeles. El origen de la asignación de FST no está verificado y el ITA no se ha validado como estimador del fototipo; por ello, la figura no acredita la calidad de las máscaras ni el desempeño clínico del estimador.
+
+\begin{figure}[!htbp]
+\caption{Distribución de las etiquetas de fototipo registradas y de las estimaciones del ITA en PAD-UFES-20.}
+\label{fig:pad-fototipo-clinico}
+\centering
+\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/pad_fst_ita.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. El panel (a) muestra los fototipos registrados en los metadatos y el panel (b), el ITA estimado en el fondo de las imágenes agrupado según esos registros. De las 2.298 imágenes, 1.494 tienen una etiqueta FST y 804 no cuentan con ese dato; se obtuvo un ITA válido para 1.189 imágenes con FST. La fuente de la asignación del FST no está verificada. El ITA se calculó con umbral de Otsu en el fondo y no está validado como fototipo; las categorías V y VI se presentan solo de forma descriptiva, sin inferencias. La comparación evalúa el estimador ITA frente a las etiquetas FST, no la calidad de las máscaras de segmentación.
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Caracterización colorimétrica antes y después de la transformación}
+
+El resumen local anterior a la transformación permite describir el proxy ITA de las imágenes originales (tabla \ref{tab:ita-originales}). Se calcula sobre píxeles de piel seleccionados por máscara, usando las medianas de los canales CIELAB: $\mathrm{ITA}=(180/\pi)\arctan((\widetilde L^*-50)/\widetilde b^*)$. El código marca el resultado como indeterminado si $\widetilde b^*<5$; otras imágenes quedan en cuarentena por los controles del módulo. Los seis intervalos empleados internamente para agrupar ITA no se interpretan como fototipos clínicos.
+
+\begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
+\centering
+\caption{Caracterización del proxy ITA en imágenes originales del \textit{pool} local.}
+\label{tab:ita-originales}
+\begin{tabular}{lrrrrr}
+\toprule
+Conjunto & Imágenes & ITA válido & Indeterminado & Cuarentena & ITA medio ($^\circ$) \\
+\midrule
+HAM10000 & 10.015 & 4.277 & 5.545 & 193 & 56,86 \\
+ISIC2019 (\textit{pool}) & 15.316 & 6.287 & 7.449 & 1.580 & 51,72 \\
+ISIC2020 (\textit{pool}) & 33.126 & 20.833 & 10.587 & 1.706 & 52,36 \\
+\bottomrule
+\end{tabular}
+
+\noindent\textit{Nota.} Elaboración propia.
+\endgroup
+\end{table}
+
+El resumen usa la estratificación del 21 de septiembre de 2026. HAM10000 agrega sus carpetas de 5.000 y 5.015 imágenes; su media ITA pondera los 2.547 y 1.730 casos válidos, respectivamente. Las cifras describen ese \textit{pool} y esa versión de máscaras; no son prevalencias de fototipo ni se trasladan automáticamente a otras corridas.
+
+La Figura~\ref{fig:ita-roi-e5} presenta un análisis complementario de la salida E5, calculada sobre una región de interés perilesional (ROI). Sus valores corresponden a otra configuración y cobertura que la Tabla~\ref{tab:ita-originales}: esta resume la estratificación del 21 de septiembre de 2026 sobre el \textit{pool} local, mientras que la figura muestra HAM10000, ISIC2019 e ISIC2020 completos y usa el anillo perilesional o, cuando no había una máscara elegible, el borde de la imagen. Por tanto, sus conteos no son una actualización directa de los de la tabla ni permiten atribuir diferencias al desempeño del estimador sin comparar entradas equivalentes. En el panel (a), $n$ corresponde a imágenes con ITA calculable; en el panel (b), los porcentajes incluyen también las abstenciones. Las categorías derivadas del ITA son descriptivas y no equivalen a fototipos clínicos.
+
+\begin{figure}[!htbp]
+\caption{Distribución del ITA estimado en regiones perilesionales de tres conjuntos de imágenes.}
+\label{fig:ita-roi-e5}
+\centering
+\includegraphics[width=0.94\textwidth,height=0.43\textheight,keepaspectratio]{images/ita_roi_e5_multidataset.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia con los resultados descriptivos E5. El panel (a) muestra la distribución continua del ITA en la ROI perilesional para los casos con estimación válida; el panel (b) muestra la proporción de las categorías I--VI y de abstención sobre el total de cada conjunto. Las pseudo-máscaras de las lesiones son automáticas, generadas con \texttt{student\_r3}; cuando no había máscara elegible, se usó el borde de la imagen. Los intervalos I--VI son agrupaciones del estimador de ITA, no diagnósticos ni fototipos clínicos validados. Esta figura caracteriza las salidas del estimador y no evalúa la calidad de las máscaras.
+\end{figure}
+
+La transformación modifica la luminosidad de todos los píxeles fuera de la máscara de lesión, incluidos fondo y artefactos; es una modificación sintética de luminosidad, no una corrección validada del tono de piel. Su formulación se desarrolla en el Capítulo~\ref{chap:metodologia}, Sección~\ref{sec:desarrollo-tono}. Para comparar antes y después se requieren pares originales/transformados con identificadores coincidentes, hashes y mediciones colorimétricas obtenidas con el mismo protocolo. Los resultados locales revisados no contienen el manifiesto de transformaciones ni mediciones posteriores emparejadas. Por ello, el efecto posterior sobre ITA o luminosidad permanece pendiente y no se presenta un histograma simulado. Los conteos de fototipo clínico de PAD-UFES-20 conservan su valor tras cualquier transformación, porque son metadatos de la persona y no una propiedad que se reasigne a partir de los píxeles.
+
+\subsection{Perfil objetivo para el contexto de Santander}
+
+Los tipos III y IV se consideran un perfil objetivo de interés indicado para el proyecto. No se dispone en las fuentes locales revisadas de una distribución poblacional de fototipos de Santander que permita afirmar su predominio o asignarles porcentajes. En consecuencia, este perfil orienta preguntas de cobertura y evaluación futura, sin constituir una prevalencia demostrada ni justificar la conversión de los proxies ITA en etiquetas clínicas.
+
+En el ámbito clínico colombiano se menciona de forma no sistemática, sin estudio poblacional formal que lo confirme, un posible predominio de fototipos III y IV en la población general del país. El único estudio epidemiológico robusto disponible para Colombia \parencite{oliveros2025melanomacolombia} no midió fototipo directamente; su única inferencia relacionada es hipotética y se refiere a población afrodescendiente de zonas costeras de baja altitud (0--400 m), geográficamente distinta del perfil de Santander, y los propios autores declaran la ausencia de información de fototipo como limitación explícita del estudio.
+
+\subsection{Evaluación del estimador frente a Fitzpatrick}
+
+El método de transformación y de estimación de tono de piel se describe en el Capítulo~\ref{chap:metodologia}, Sección~\ref{sec:desarrollo-tono}; esta subsección presenta la evaluación del estimador ITA frente a las etiquetas Fitzpatrick (FST) de referencia. Esta evaluación no mide el efecto de la transformación.
 
 En Fitzpatrick17k-C (11.098 imágenes con anotación de referencia), el proxy ITA obtuvo una exactitud de 28,5\,\% a 30,8\,\%, frente a 32,9\,\% de la línea base trivial por mayoría, según el artefacto de validación externa del proyecto. En PAD-UFES-20, la evaluación exploratoria del proyecto incluyó 1.494 registros con fototipo experto válido. Para imagen completa hubo 1.265 casos evaluables y 229 sin estimación: la exactitud fue 21,74\,\%, frente a 59,37\,\% de la línea base por mayoría calculada sobre los mismos casos. Con fondo enmascarado mediante Otsu, hubo 1.189 casos evaluables y 305 sin estimación: la exactitud fue 22,88\,\%, frente a 59,80\,\% de la línea base en esos mismos casos. Esta comparación evalúa el estimador ITA frente a etiquetas de fototipo; no constituye una evaluación de la calidad de las máscaras de segmentación. Los valores de 22,9\,\% y 51,3\,\% corresponden a una evaluación publicada por Alipour et al. (2026) con otro protocolo y no son la comparación propia del proyecto \parencite{alipour2026italimitations}.
 
@@ -352,21 +414,29 @@ En Fitzpatrick17k-C y PAD-UFES-20, la exactitud del estimador ITA fue inferior a
 La tabla \ref{tab:v7-clasificacion} resume la evaluación congelada (el \textit{backbone} no actualiza pesos; solo se ajusta la regresión logística) sobre la partición de HAM10000 (n = 2.004, agrupada por lesión). B71 es el brazo propuesto (SimSiam anclado con término de tono); A71 es la ablación sin ese término; el público usa el mismo protocolo de extracción que B71.
 
 \begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
 \centering
 \caption{Clasificación congelada en HAM10000 (n = 2.004): \textit{accuracy}, exactitud balanceada, F1 macro, AUC, ECE y MCC.}
 \label{tab:v7-clasificacion}
 \begingroup
-\small
+\fontsize{11}{13}\selectfont
+\singlespacing
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{>{\raggedright\arraybackslash}p{4.1cm}rrrrrr}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.5cm}rrrrrr}
 \toprule
-Brazo & \textit{Accuracy} & Ex. balanceada & F1 macro & AUC OvR & ECE & MCC \\
+ & \multicolumn{4}{c}{Discriminación} & Calibración & Asociación \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+Brazo & Exactitud & Ex. bal. & F1 macro & AUC OvR & ECE & MCC \\
 \midrule
 DINOv2 público (protocolo B71) & 0,8278 & 0,6659 & 0,6837 & 0,9619 & 0,0688 & 0,6712 \\
 A71 (sin término de tono) & 0,8398 & 0,7305 & 0,7229 & 0,9644 & 0,0154 & 0,6996 \\
 B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,0529 & 0,6901 \\
 \bottomrule
 \end{tabular}
+\endgroup
 \endgroup
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
@@ -378,12 +448,16 @@ Los intervalos individuales de A71 y B71 se solapan en exactitud balanceada y F1
 En esta comparación, el \textit{backbone} preentrenado con SSL permaneció congelado y solo se ajustó una regresión logística sobre las representaciones extraídas. B71 y las ocho líneas base se evaluaron en la misma partición de HAM10000 (n = 2.004), agrupada por \texttt{lesion\_id}. Los intervalos pareados se estimaron con 1.000 remuestras bootstrap y semilla 20260923. No se aplicó una corrección global por multiplicidad; por ello, el patrón de ocho contrastes que excluyen cero se interpreta dentro de esta comparación, sin tratar cada contraste como una confirmación independiente. La Tabla~\ref{tab:comparacion-baselines-ham} presenta los contrastes estimados.
 
 \begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
 \centering
 \caption{Contrastes pareados de F1 macro entre el clasificador congelado (B71) y ocho líneas base en HAM10000 (n = 2.004).}
 \label{tab:comparacion-baselines-ham}
 \begin{tabular}{lrrl}
 \toprule
-Línea base & F1 macro propio & $\Delta$ F1 vs. B71 [IC 95\,\%] & Lectura \\
+Línea base & F1 macro propio & $\Delta$ F1 (B71 $-$ base) [IC 95\,\%] & Lectura \\
 \midrule
 VGG19 & 0,3810 & $+$0,3331 [$+$0,2844; $+$0,3800] & excluye cero \\
 AlexNet & 0,4728 & $+$0,2413 [$+$0,1942; $+$0,2898] & excluye cero \\
@@ -395,6 +469,7 @@ ViT-B/16 & 0,5633 & $+$0,1509 [$+$0,1005; $+$0,2068] & excluye cero \\
 DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 [$+$0,0728; $+$0,1585] & excluye cero \\
 \bottomrule
 \end{tabular}
+\endgroup
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
@@ -434,12 +509,18 @@ F4 concatena la imagen completa, un recorte de la lesión con margen del 10\,\% 
 La comparación de adaptación de dominio contrastó cuatro configuraciones (D0--D3). D2 continuó el preentrenamiento SSL durante 2.000 pasos con el \textit{pool} fuente, como control de cómputo; D3 añadió 1.141 imágenes sin etiquetas de \texttt{target\_adapt} de PAD-UFES-20 (aprox. 2,7\,\% del \textit{pool} de D3). Ambos brazos utilizaron el mismo \textit{backbone} inicial (A*, semilla 42) y la misma regresión logística, ajustada con HAM10000 (n = 8.011). La evaluación se realizó en \texttt{target\_test}, con 567 imágenes de BCC, melanoma y nevo, correspondientes a 363 pacientes y 25 melanomas. Estas imágenes no se usaron durante la adaptación ni el ajuste; sus etiquetas se reservaron para calcular las métricas. La Tabla~\ref{tab:adaptacion-pad} compara los resultados de las cuatro configuraciones.
 
 \begin{table}[htbp]
+\begingroup
+\fontsize{11}{13}\selectfont
+\singlespacing
+
 \centering
 \caption{Adaptación de dominio a PAD-UFES-20: comparación D0--D3.}
 \label{tab:adaptacion-pad}
 \begin{tabular}{lrrrr}
 \toprule
-Brazo & F1 macro & Exactitud balanceada & MCC & Fuera de rango \\
+ & \multicolumn{3}{c}{Desempeño en \texttt{target\_test}} & \multicolumn{1}{c}{Predicciones} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-5}
+Brazo & F1 macro & Ex. balanceada & MCC & Fuera de rango \\
 \midrule
 D0 (DINOv2 público) & 0,4410 & 0,5284 & 0,3740 & 0,3210 \\
 D1 (A* s42 limpio) & 0,2443 & 0,4244 & 0,1871 & 0,4039 \\
@@ -447,48 +528,13 @@ D2 (continuación, fuente) & 0,2877 & 0,4897 & 0,2309 & 0,3422 \\
 D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 \bottomrule
 \end{tabular}
+\endgroup
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
 ``Fuera de rango'' es la proporción de predicciones \texttt{argmax} fuera de BCC/MEL/NV.
 
 Frente al control D2, D3 mejoró en F1 ($\Delta=+0{,}0816$; IC del 95\,\% [$+0{,}0525$; $+0{,}1085$]) y MCC ($\Delta=+0{,}0730$; IC del 95\,\% [$+0{,}0419$; $+0{,}1034$]). Los intervalos de exactitud balanceada ($+0{,}0375$ [$-0{,}0161$; $+0{,}0875$]) y AUC ($+0{,}0162$ [$-0{,}0065$; $+0{,}0393$]) incluyeron cero. D3, sin embargo, permaneció por debajo de D0 en F1 y MCC. Además, sus \textit{recalls} fueron 0,302 para BCC, 0,320 para melanoma y 0,959 para nevo, y el 47,8\,\% de sus predicciones quedó fuera de esas tres clases. La mejora respecto de D2 constituye una señal piloto, no evidencia de que la adaptación al dominio clínico esté resuelta: la evaluación disponible utiliza una semilla, incluye pocos melanomas y cubre un mapeo parcial de diagnósticos.
-
-\subsection{Segmentación complementaria}
-\label{sec:segmentacion-complementaria}
-
-La evaluación incluyó dos variantes de segmentación. \texttt{student\_r3} se entrenó sin etiquetas diagnósticas ni máscaras expertas, mediante MoCo v2/ResNet-50, CCAM y tres rondas de refinamiento del U-Net con pseudo-máscaras. La configuración registrada no se comparó con otros números de rondas y las fuentes revisadas no explican por qué se fijaron tres. El equipo indicó que el tiempo disponible limitó la exploración de variantes adicionales. También se evaluó S4-A2, que utiliza DINOv2 ViT-B/14 congelado y un \textit{decoder} tipo DPT. La Tabla~\ref{tab:segmentacion-student-a2} presenta el Dice medio y su IC del 95\,\% respecto de las máscaras de referencia.
-
-\begin{table}[htbp]
-\centering
-\caption{Evaluación de los segmentadores \texttt{student\_r3} y S4-A2.}
-\label{tab:segmentacion-student-a2}
-\begin{tabular}{lrr}
-\toprule
-Segmentador & ISIC2018 ($n=2.594$) & HAM10000 ($n=10.015$) \\
-\midrule
-\texttt{student\_r3} & 0,718 [0,709; 0,726] & 0,785 [0,781; 0,788] \\
-S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
-\bottomrule
-\end{tabular}
-\end{table}
-\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
-
-La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Se muestran la imagen original, la máscara de referencia, la predicción y la superposición de contornos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
-
-\begin{figure}[!htbp]
-\caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
-\label{fig:segmentacion-ejemplos}
-\centering
-\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion_student_r3_isic2018.pdf}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Se muestra únicamente U-Net \texttt{student\_r3}; las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2 (p90, p50 y p10), no a categorías clínicas. Se conserva el mismo identificador y preprocesamiento de 224~px; los valores de Dice de U-Net se verificaron frente al CSV. Son tres ejemplos de las 2.594 imágenes evaluadas de ISIC 2018 y complementan, sin sustituir, las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
-\end{figure}
-
-\FloatBarrier
-
-S4-A2 cumplió el criterio definido antes de la evaluación: su Dice en ISIC2018 superó el valor de \texttt{student\_r3} menos 0,01 y también fue mayor en HAM10000. Entre las dos variantes evaluadas, S4-A2 obtuvo los mejores resultados de segmentación. Esta diferencia no se tradujo en una mejora demostrada de la clasificación: en la comparación C1, ninguno de los 15 intervalos de F1 macro del análisis primario con \texttt{student\_r3} excluyó cero, y el análisis secundario de S4-A2 mostró el mismo patrón. Por ello, los resultados respaldan la segmentación como módulo complementario, pero no como una mejora general de la clasificación.
 
 \section{Discusión}
 
