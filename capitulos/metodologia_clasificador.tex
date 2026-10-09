@@ -109,37 +109,16 @@ con $s$ el total de observaciones, $c$ el total de predicciones correctas, $p_k$
 
 Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiestos (identificadores, hashes y exclusiones de cada partición), se fija la separación por \texttt{lesion\_id} y se registran de antemano el conjunto de datos, la arquitectura, el preprocesamiento, las particiones, las semillas y la regla de decisión. La Figura~\ref{fig:protocolo-evaluacion} resume este flujo, incluida la separación entre la selección de variantes en el conjunto interno y la evaluación externa reservada en PAD-UFES-20 \texttt{target\_test}.
 
-\begin{figure}[htbp]
-\caption{Flujo de evaluación y separación entre selección interna y evaluación externa.}
+\begin{figure}[p]
+\caption{Protocolo de evaluación y reporte de las líneas de trabajo.}
 \label{fig:protocolo-evaluacion}
 \centering
-\begin{tikzpicture}[
-    box/.style={draw=cappdark, rounded corners=3pt, align=center, text width=11cm, minimum height=0.7cm, inner sep=4.5pt, font=\sffamily\small},
-    phase/.style={box, fill=shwhite1},
-    external/.style={box, dashed, fill=shwhite4},
-    flow/.style={-{Stealth[length=2mm]}, thick, color=cappdark},
-    node distance=0.18cm
-]
-\node[phase] (manifest) {Congelar manifiestos\\IDs, hashes y exclusiones};
-\node[phase, below=of manifest] (split) {Separar por lesión en HAM10000, manteniendo \texttt{lesion\_id} dentro de una sola partición};
-\node[phase, below=of split] (fit) {Adaptar el codificador SSL; en D3, incluir PAD \texttt{target\_adapt} sin etiquetas. Ajustar el clasificador con HAM10000};
-\node[phase, below=of fit] (select) {Seleccionar variantes solo con el conjunto interno de selección};
-\node[phase, below=of select] (final) {Evaluar según el protocolo registrado en la partición de validación};
-\draw[flow] (manifest) -- (split);
-\draw[flow] (split) -- (fit);
-\draw[flow] (fit) -- (select);
-\draw[flow] (select) -- (final);
-\node[external, below=of final] (pad) {PAD-UFES-20 \texttt{target\_test}: evaluación externa de dominio, sin ajuste del modelo};
-\node[phase, below=of pad] (metrics) {Reportar métricas, incertidumbre y límites por dominio};
-\draw[flow, dashed] (final) -- (pad);
-\draw[flow] (pad) -- (metrics);
-\end{tikzpicture}
+\includegraphics[width=0.90\textwidth,height=0.72\textheight,keepaspectratio]{images/protocolo-evaluacion.pdf}
 
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\textit{Nota.} Elaboración propia. El diagrama representa el protocolo confirmatorio aplicado. Las lecturas v7 y v7.1 incluyeron evaluaciones previas de validación; v7.1 es una lectura secundaria adicional registrada después de seleccionar variantes en el conjunto interno de selección.
+\textit{Nota.} Elaboración propia. El diagrama resume la preparación común y los protocolos de clasificación y adaptación de dominio, segmentación y caracterización de color. En PAD-UFES-20, \texttt{target\_test} se mantiene separado del entrenamiento y la selección. Las lecturas v7 y v7.1 incluyeron evaluaciones previas de validación; v7.1 corresponde a una lectura secundaria posterior a la selección interna.
 \par\endgroup
-
 \end{figure} Las comparaciones pareadas usan remuestreo bootstrap por lesión ($B=1\,000$ remuestras) con intervalo de confianza al 95\,\% por el método percentil, y corrección de Holm para contrastes múltiples: ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se rechaza la hipótesis asociada a $p_{(i)}$ si $p_{(i)}\leq \alpha/(m-i+1)$, deteniendo el procedimiento en el primer índice donde la condición falla.
 
 Este protocolo responde directamente a cuatro riesgos de integridad de la evidencia identificados para esta línea:

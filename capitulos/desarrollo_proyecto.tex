@@ -5,37 +5,15 @@ Este capítulo presenta el desarrollo técnico realizado para cada una de las tr
 La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí las tres líneas: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, con una posible integración (compuerta I) que requiere ablación propia y no se presenta como validada.
 
 \begin{figure}[htbp]
-\caption{Arquitectura modular del proyecto: clasificación SSL como núcleo y segmentación como componente independiente.}
+\caption{Arquitectura del clasificador autosupervisado y módulos complementarios de segmentación y adaptación de dominio.}
 \label{fig:arquitectura-modular}
 \centering
-\begin{tikzpicture}[
-    box/.style={draw=capptan, line width=0.8pt, rounded corners=3pt, align=center, text width=2.4cm, minimum height=1.15cm, inner sep=4pt, font=\sffamily\small, text=cappnearblack},
-    main/.style={box, fill=shwhite2},
-    aux/.style={box, dashed, draw=cappwine, fill=shwhite4},
-    flow/.style={-{Stealth[length=2mm]}, thick, color=capptan},
-    node distance=0.3cm
-]
-\node[main] (pool) {Imágenes sin etiqueta\\conjunto SSL versionado};
-\node[main, right=of pool] (views) {Dos vistas\\aumentadas};
-\node[main, right=of views] (encoder) {Codificador DINOv2 ViT-B/14\\+ adaptación SimSiam};
-\node[main, right=of encoder] (probe) {Representación\\+ regresión logística};
-\node[main, right=of probe] (classes) {Predicción\\de 7 clases};
-\draw[flow] (pool) -- (views);
-\draw[flow] (views) -- (encoder);
-\draw[flow] (encoder) -- (probe);
-\draw[flow] (probe) -- (classes);
-
-\node[aux, below=0.9cm of encoder, text width=5.6cm] (segment) {Módulo complementario de segmentación\\MoCo v2/ResNet-50 $\rightarrow$ CCAM $\rightarrow$ pseudo-máscaras $\rightarrow$ U-Net};
-\node[aux, right=0.8cm of segment, text width=4.1cm] (gate) {Compuerta S independiente\\Integración con clasificador: compuerta I, requiere ablación};
-\draw[flow, dashed] (pool.south) |- (segment.west);
-\draw[flow, dashed] (segment) -- (gate);
-\end{tikzpicture}
+\includegraphics[width=\textwidth,height=0.55\textheight,keepaspectratio]{images/arquitectura-clasificador.pdf}
 
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\textit{Nota.} Elaboración propia. El diagrama presenta el clasificador SSL como núcleo y la segmentación como módulo independiente. La flecha entre segmentación y la compuerta I indica una evaluación posterior, no una integración ya validada. El diseño de preentrenamiento se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
+\textit{Nota.} Elaboración propia. El diagrama muestra el flujo del clasificador SSL, la segmentación como módulo complementario y las ramas de adaptación de dominio y evaluación externa. El diseño se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
 \par\endgroup
-
 \end{figure}
 
 \section{Clasificación con aprendizaje autosupervisado y adaptación de dominio}
