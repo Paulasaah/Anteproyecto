@@ -105,6 +105,7 @@
 
 % Archivo de estilo personalizado con títulos (CRÍTICO: NO quitar)
 \usepackage{estiloUNAD}
+\setcounter{tocdepth}{2}
 
 % Configuración de sangría y espacio entre párrafos
 \setlength{\parindent}{1.5em}
@@ -192,8 +193,9 @@
 \input{conclusiones}
 
 % --------------------- BIBLIOGRAFÍA APA 7ma EDICIÓN -------------------------
-\nocite{*} % Includes original PDF references whose citations are literal source text.
-\printbibliography[heading=bibintoc,title={Referencias bibliográficas}]
+% Fuentes originales citadas en las notas de las figuras del marco teórico.
+\nocite{hcmarbella2020abcde,zamani2022skincancerframework,lee2024medicalimagingconcepts,azizi2024medicalsslreview}
+\printbibliography[heading=bibintoc,title={Referencias}]
 
 % Apéndices (el archivo debe llamarse exactamente apendices.tex)
 \input{apendices}
