@@ -441,6 +441,18 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
+La Figura~\ref{fig:ablacion-tono-ham} presenta las estimaciones de F1 macro y sus intervalos individuales.
+
+\begin{figure}[!htbp]
+\caption{F1 macro del control público y de los brazos A71 y B71 en HAM10000.}
+\label{fig:ablacion-tono-ham}
+\centering
+\includegraphics[width=\textwidth]{images/ablacion_tono_ham.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Estimaciones e IC individuales del 95\,\% del archivo \texttt{v71\_final\_eval.json}. Cada brazo conserva su protocolo de extracción y selección; los IC individuales no sustituyen un contraste pareado. La figura no demuestra por sí sola un beneficio del término de tono.
+\end{figure}
+
 Los intervalos individuales de A71 y B71 se solapan en exactitud balanceada y F1 macro. Por sí sola, esta comparación no permite afirmar que añadir el término de tono mejore el desempeño. Para evaluar la diferencia entre ambos brazos se requiere el contraste pareado correspondiente.
 
 \subsection{Comparación pareada: clasificador SSL congelado frente a ocho líneas base}
@@ -486,16 +498,36 @@ Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,
 En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustados y aplicó Holm por separado a cada familia de métricas. B71-limpio obtuvo mayor F1 macro que siete de los ocho modelos; la diferencia frente a VGG19 no alcanzó el umbral corregido ($p_{\text{Holm}}=0{,}066$). En cambio, la exactitud balanceada favoreció a siete de los ocho modelos ajustados. La diferencia más clara aparece en la detección de melanoma: B71 identificó 39 de 122 casos (\textit{recall} 0,3197), frente a 86 de 122 (\textit{recall} 0,7049) con AlexNet ajustado. Este análisis es post hoc y no formó parte del registro original. En conjunto, los resultados muestran que un F1 macro mayor no implica necesariamente mayor sensibilidad para melanoma; la elección entre estas métricas requiere un criterio clínico que el proyecto aún no ha definido.
 
 
-La Figura~\ref{fig:comparacion-modelos-multidataset} resume F1 macro y MCC para los modelos y conjuntos presentados en esta sección, y muestra los contrastes entre las variantes limpias y públicas cuando están disponibles. Sirve para observar patrones entre conjuntos; las tablas conservan los valores exactos y el protocolo de cada comparación. La figura muestra el ajuste fino solo para ISIC2020, tal como indica su leyenda; los resultados de ajuste fino en HAM10000 e ISIC2019 se reportan en el texto y no están representados en ella.
+Las Figuras~\ref{fig:clasificacion-ham-pareada} y \ref{fig:contrastes-ham-baselines} separan las estimaciones de desempeño de los contrastes pareados en HAM10000. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
 
 \begin{figure}[!htbp]
-\caption{Comparación de las métricas de clasificación y de los contrastes entre variantes limpias y públicas.}
-\label{fig:comparacion-modelos-multidataset}
+\caption{F1 macro de B71 y ocho líneas base congeladas en la partición común de HAM10000.}
+\label{fig:clasificacion-ham-pareada}
 \centering
-\includegraphics[width=0.97\textwidth,height=0.80\textheight,keepaspectratio,trim=0pt 0pt 205pt 0pt,clip]{images/comparacion_modelos_clasificacion.pdf}
+\includegraphics[width=\textwidth]{images/clasificacion_ham_pareada.pdf}
 \par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo (v8.0.0-clean). Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Evaluación sobre 2.004 imágenes, con IC del 95\,\% agrupados por \texttt{lesion\_id}, a partir de \texttt{e3b\_summary.json}. B71 usa TTA canónica; las líneas base conservan el protocolo de su banco. Los valores describen estas configuraciones y no una comparación aislada de arquitecturas.
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Diferencias pareadas de F1 macro entre B71 y las ocho líneas base congeladas.}
+\label{fig:contrastes-ham-baselines}
+\centering
+\includegraphics[width=\textwidth]{images/contrastes_ham_baselines.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} La dirección es B71 menos línea base. Puntos e IC del 95\,\% proceden de la familia \texttt{vs\_proposed\_registered}; la línea discontinua indica diferencia nula. Bootstrap de 1.000 remuestras por \texttt{lesion\_id}, semilla 20260923. No se aplicó corrección global por multiplicidad.
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Matriz de confusión de B71 en HAM10000, normalizada por clase de referencia.}
+\label{fig:confusion-b71-ham}
+\centering
+\includegraphics[width=\textwidth]{images/confusion_b71_ham.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Las celdas muestran porcentajes por fila y las etiquetas incluyen el número de imágenes de cada clase. Fuente: exportación \texttt{b71\_\_congelado.json}, pesos originales, evaluación congelada (n = 2.004). Los porcentajes no son precisión por columna. La clase \texttt{mel} presenta 118 aciertos de 222 casos; la figura permite identificar sus confusiones con otras clases.
 \end{figure}
 
 \FloatBarrier
@@ -532,6 +564,18 @@ D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
+La Figura~\ref{fig:adaptacion-pad-d0-d3} representa F1 macro y MCC con sus intervalos individuales.
+
+\begin{figure}[!htbp]
+\caption{F1 macro y MCC de las configuraciones D0--D3 en PAD-UFES-20.}
+\label{fig:adaptacion-pad-d0-d3}
+\centering
+\includegraphics[width=\textwidth]{images/adaptacion_pad_d0_d3.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Puntos e IC del 95\,\% de \texttt{pad\_e2\_eval.json}, con bootstrap agrupado por paciente (567 imágenes, 363 pacientes, 25 melanomas). D0: codificador público; D1: A* limpio; D2: continuación con fuente; D3: continuación con fuente y PAD sin etiquetas. D3 mejora frente a D2, pero no supera a D0. Los resultados usan el mapeo parcial BCC/MEL/NV y no demuestran adaptación validada a Santander.
+\end{figure}
+
 ``Fuera de rango'' es la proporción de predicciones \texttt{argmax} fuera de BCC/MEL/NV.
 
 Frente al control D2, D3 mejoró en F1 ($\Delta=+0{,}0816$; IC del 95\,\% [$+0{,}0525$; $+0{,}1085$]) y MCC ($\Delta=+0{,}0730$; IC del 95\,\% [$+0{,}0419$; $+0{,}1034$]). Los intervalos de exactitud balanceada ($+0{,}0375$ [$-0{,}0161$; $+0{,}0875$]) y AUC ($+0{,}0162$ [$-0{,}0065$; $+0{,}0393$]) incluyeron cero. D3, sin embargo, permaneció por debajo de D0 en F1 y MCC. Además, sus \textit{recalls} fueron 0,302 para BCC, 0,320 para melanoma y 0,959 para nevo, y el 47,8\,\% de sus predicciones quedó fuera de esas tres clases. La mejora respecto de D2 constituye una señal piloto, no evidencia de que la adaptación al dominio clínico esté resuelta: la evaluación disponible utiliza una semilla, incluye pocos melanomas y cubre un mapeo parcial de diagnósticos.
@@ -556,4 +600,5 @@ Los hallazgos principales son tres. En HAM10000, B71 superó a las ocho líneas 
     \item \textbf{Criterio clínico de selección.} El banco muestra una tensión entre F1 macro y sensibilidad de melanoma. No hay una decisión clínica documentada que permita priorizar una de estas métricas; por ello se reportan ambas y no se declara un ganador clínico.
     \item \textbf{Prototipo.} La implementación prevista en el objetivo 4 aún no se ha realizado. Permanece pendiente hasta seleccionar el modelo y la configuración finales.
 \end{enumerate}
+
 

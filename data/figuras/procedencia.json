@@ -1,0 +1,26 @@
+{
+  "repository": "nicolas2601/proyecto-grado-ssl-lesiones",
+  "commit": "a3c3a6ed6670745c6687ae3d3430998c380d0dea",
+  "files": [
+    {
+      "local": "data/figuras/e3b_summary.json",
+      "source": "resultados/banco_completo/e3b_bs64/e3b_summary.json",
+      "sha256": "5bae4f16d36cae9540dd5b889dab8af9e978e39d08279d67fb64e159f1cef933"
+    },
+    {
+      "local": "data/figuras/v71_final_eval.json",
+      "source": "resultados/clasificacion/v71/v71_final_eval.json",
+      "sha256": "28035841de0dbdcc72c2845512948c80ea51c09c704f5c5d2a42fa5e51391aa0"
+    },
+    {
+      "local": "data/figuras/pad_e2_eval.json",
+      "source": "resultados/banco_completo/pad_da/pad_e2_eval.json",
+      "sha256": "2666fdb183b54738a5e1d0d1d3236afd8fa05236297909a216589df5e9f22113"
+    },
+    {
+      "local": "data/figuras/b71_confusion.json",
+      "source": "resultados/banco_completo/confusion/ham10000/b71__congelado.json",
+      "sha256": "4a268032fbb9c71ed7b2402bab36704545227c6b5b7c068f01cde04cf741a208"
+    }
+  ]
+}

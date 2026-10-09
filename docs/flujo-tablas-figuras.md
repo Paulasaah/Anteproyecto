@@ -11,8 +11,9 @@ Rama: feature/flujo-tablas-figuras.
 - [x] Agrupar encabezados de segmentacion, clasificacion y D0-D3.
 - [x] Establecer 11 pt y espaciado sencillo en tablas del capitulo.
 - [x] Aclarar direccion del contraste: B71 menos linea base.
-- [ ] Regenerar graficas con fuentes numericas verificadas.
-- [ ] Resolver umbrales ITA con codigo y fuente citada.
+- [x] Regenerar cinco graficas de clasificacion/adaptacion con JSON verificables.
+- [ ] Regenerar distribuciones y figuras E5 desde registros individuales verificables.
+- [x] Resolver umbrales ITA con codigo y fuente citada.
 - [ ] Compilar documento completo y revisar todas las paginas.
 
 ## Inventario de figuras activas en resultados
@@ -51,3 +52,11 @@ Conservar todas las etiquetas existentes, cifras y notas de limitacion.
 Tablas comparativas compiladas de forma aislada; revisar tambien tabla larga de particiones.
 Compilacion completa bloqueada por spanish.ldf ausente en entorno local; no se declara compilacion completa aprobada.
 Fuentes del marco teorico y diagramas metodologicos requieren revision propia antes de reemplazarlos.
+
+
+## Segunda entrega
+Cinco figuras vectoriales PDF/SVG, generadas por scripts/generar_figuras_resultados.py; procedencia y SHA-256 de las cuatro fuentes en data/figuras/procedencia.json.
+El montaje multidataset anterior se conserva en apendices.tex con su etiqueta original. Los paneles ISIC requieren regeneracion propia. El violin E5 se conserva.
+Tabla de intervalos ITA basada en fst_bucket y FST_THRESHOLDS del commit fuente; grupos internos no equivalentes a fototipo clinico.
+La fuente usada en esta generacion es Nimbus Roman porque Times New Roman no esta instalada. Para la version final, instalar Times New Roman y ejecutar python scripts/generar_figuras_resultados.py. El script verifica la disponibilidad y no sustituye fuentes silenciosamente.
+Verificacion: cinco figuras inspeccionadas visualmente; matriz de confusion validada frente a 2004 casos; inversiones de diferencias e intervalos hechas conjuntamente. La compilacion integral sigue pendiente por spanish.ldf ausente.

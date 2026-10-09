@@ -47,3 +47,17 @@ La mejora de segmentación no implica una mejora del clasificador; el contraste 
 \section{Materiales adicionales}
 
 No se agregan materiales independientes que no estén citados en el cuerpo del documento. Las tablas, figuras y registros suplementarios se identifican junto a los procedimientos y resultados correspondientes.
+\section{Resumen multidataset de clasificación}
+
+Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 mientras se regeneran sus paneles desde las fuentes correspondientes. Sus comparaciones conservan los límites de protocolo indicados en la nota; no deben combinarse como una única partición común.
+
+\begin{figure}[!htbp]
+\caption{Comparación de las métricas de clasificación y de los contrastes entre variantes limpias y públicas.}
+\label{fig:comparacion-modelos-multidataset}
+\centering
+\includegraphics[width=0.97\textwidth,height=0.80\textheight,keepaspectratio,trim=0pt 0pt 205pt 0pt,clip]{images/comparacion_modelos_clasificacion.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo (v8.0.0-clean). Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
+\end{figure}
+
