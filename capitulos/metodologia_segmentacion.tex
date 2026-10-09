@@ -1,6 +1,6 @@
 Esta línea de trabajo es un módulo complementario al clasificador: genera, sin usar máscaras expertas ni etiquetas de diagnóstico en ningún punto del proceso, una segmentación aproximada de la lesión que puede alimentar al módulo de incertidumbre y a la caracterización de tono descrita en la Sección~\ref{sec:desarrollo-tono}. No sustituye una validación clínica de la segmentación.
 
-\subsection{Actividades y fases}
+\subsubsection{Actividades y fases}
 
 El \textit{pipeline} se organiza en dos etapas secuenciales dentro de la Fase 2 de la Tabla~\ref{tab:trazabilidad-fases}: una generación inicial de la pseudo-máscara y un refinamiento iterativo que repite el entrenamiento del U-Net estudiante sobre versiones sucesivamente mejoradas de esa pseudo-máscara.
 
@@ -25,26 +25,26 @@ Las tres rondas de estudiante (\texttt{student\_r1}--\texttt{student\_r3}) compa
 
 \texttt{student\_r3} se tomó como candidato final por ser la última ronda ejecutada, no por una comparación de métricas entre \texttt{student\_r1}, \texttt{student\_r2} y \texttt{student\_r3}. La configuración registrada especifica tres rondas de re-etiquetado, 20 épocas por ronda de estudiante y 30 épocas contrastivas. Los artefactos no incluyen una comparación experimental entre distintos números de rondas ni documentan por qué se fijaron exactamente tres; por tanto, no se presenta esa cantidad como óptima. El equipo informó que el tiempo disponible limitó la exploración de variantes adicionales, lo cual se reporta como limitación experimental y no como justificación documentada del número de rondas. Dentro de cada ronda, el punto de verificación se seleccionó según la pérdida de pseudo-validación.
 
-\subsection{Herramientas y arquitectura}
+\subsubsection{Herramientas y arquitectura}
 
-El \textit{backbone} es un ResNet-50 preentrenado de forma contrastiva con MoCo v2 \parencite{chen2020mocov2}, independiente del SimSiam que adapta el \textit{backbone} del clasificador (Sección~\ref{sec:desarrollo-clasificador}). Sobre ese \textit{backbone}, CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}, \parencite{xie2022ccam}) produce un mapa de activación sin etiquetas de segmentación, que se umbraliza para entrenar al U-Net estudiante. \textit{Framework} y \textit{hardware}: ver configuración experimental en el Capítulo~8; a diferencia del preentrenamiento del clasificador (cluster UNABIA vía SLURM, 4 GPU), este módulo se ejecuta en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128} --una versión de PyTorch distinta a la del clasificador porque son dos entornos de cómputo independientes, no por inconsistencia.
+El \textit{backbone} es un ResNet-50 preentrenado de forma contrastiva con MoCo v2 \parencite{chen2020mocov2}, independiente del SimSiam que adapta el \textit{backbone} del clasificador (Sección~\ref{sec:desarrollo-clasificador}). Sobre ese \textit{backbone}, CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}, \parencite{xie2022ccam}) produce un mapa de activación sin etiquetas de segmentación, que se umbraliza para entrenar al U-Net estudiante. \textit{Framework} y \textit{hardware}: ver configuración experimental en el Capítulo~\ref{chap:resultados}; a diferencia del preentrenamiento del clasificador (cluster UNABIA vía SLURM, 4 GPU), este módulo se ejecuta en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128} --una versión de PyTorch distinta a la del clasificador porque son dos entornos de cómputo independientes, no por inconsistencia.
 
 \paragraph{Alternativa S4-A2.} Como variante posterior se evaluó un \textit{decoder} tipo DPT con un \textit{encoder} público DINOv2 ViT-B/14 congelado. El \textit{decoder} combina las salidas de los bloques 3, 6, 9 y 12 y se entrena con las pseudo-máscaras iniciales \texttt{pseudo\_r0} generadas por CCAM, sin máscaras expertas. Su criterio, registrado antes de la evaluación, fue alcanzar en ISIC2018 un Dice no inferior a \texttt{student\_r3} por más de 0,01; se evalúa además en HAM10000. S4-A2 es una alternativa distinta del refinamiento iterativo \texttt{student\_r1}--\texttt{student\_r3}, no una cuarta ronda.
 
-\subsection{Datos empleados}
+\subsubsection{Datos empleados}
 
 El \textit{pool} desduplicado de imágenes sin etiquetas contiene 58.457 imágenes: 10.015 de HAM10000, 15.316 de ISIC2019 que no duplican HAM10000 y 33.126 de ISIC2020. Esta cifra corresponde al módulo de segmentación y no al \textit{pool} de preentrenamiento del clasificador. Para la caché compartida por \texttt{student\_r3} y S4-A2, el registro de ejecución especifica 57.288 imágenes de entrenamiento y 1.169 de pseudo-validación; de ellas, 52.453 y 1.082, respectivamente, cuentan con píxeles confiables. En \texttt{pseudo\_r2}, 2.508 imágenes (4,29\,\%) quedaron excluidas por los criterios de región y área de la máscara. Ninguna etapa de entrenamiento utiliza las máscaras expertas de ISIC2018 ni etiquetas de diagnóstico. La evaluación final compara las predicciones con máscaras de referencia de ISIC2018 (2.594 imágenes) y HAM10000 (10.015). Como parte de ISIC2018 coincide por identificador con imágenes incluidas sin etiquetas en el \textit{pool}, esta evaluación es parcialmente transductiva y no debe describirse como completamente independiente.
 
-\subsection{Criterios de evaluación}
+\subsubsection{Criterios de evaluación}
 
 La selección de cada punto de verificación de \texttt{student\_r1}--\texttt{student\_r3} se basa en la pérdida de pseudo-validación, no en las máscaras expertas. La evaluación posterior contra las máscaras de referencia reporta Dice, IoU, sensibilidad, especificidad y distancia de Hausdorff al percentil 95 (HD95). Para S4-A2 se fijó antes de la evaluación el umbral de adopción Dice $\geq$ Dice(\texttt{student\_r3}) $-0{,}01$ en ISIC2018; cumplirlo permite considerarlo candidato de segmentación, pero no demuestra una mejora del clasificador. El coeficiente Dice entre la máscara predicha $A$ y la máscara de referencia $B$ se define como:
 \begin{equation}
  \mathrm{Dice}(A,B)=\frac{2|A\cap B|}{|A|+|B|}=\frac{2\,\mathrm{TP}}{2\,\mathrm{TP}+\mathrm{FP}+\mathrm{FN}},
  \label{eq:dice-s6}
 \end{equation}
-donde $\mathrm{TP}$, $\mathrm{FP}$ y $\mathrm{FN}$ se calculan a nivel de píxel entre ambas máscaras. Los valores de Dice obtenidos se presentan como resultado en el Capítulo~8, no en este apartado.
+donde $\mathrm{TP}$, $\mathrm{FP}$ y $\mathrm{FN}$ se calculan a nivel de píxel entre ambas máscaras. Los valores de Dice obtenidos se presentan como resultado en el Capítulo~7, no en este apartado.
 
-\subsection{Modelamiento matemático}
+\subsubsection{Modelamiento matemático}
 
 \paragraph{MoCo v2.} Un codificador de consulta $f_q$ procesa la vista $x^q$ y un codificador de clave $f_k$, actualizado por media móvil exponencial del codificador de consulta ($\theta_k\leftarrow m\,\theta_k+(1-m)\theta_q$, con $m=0{,}99$), procesa la vista $x^k$. Las representaciones $q=f_q(x^q)$ y $k=f_k(x^k)$ se comparan contra una cola de $Q=16\,384$ claves negativas $\{k_j\}_{j=1}^{Q}$ acumuladas de lotes anteriores, con temperatura $\tau=0{,}2$:
 \begin{equation}
@@ -66,7 +66,7 @@ La pérdida combina un término negativo (separar primer plano de fondo dentro d
 \end{align}
 con peso $w_{ij}=\exp(-\alpha\cdot\operatorname{rank}_{ij})$, de modo que solo los pares más parecidos del lote contribuyen de forma apreciable. La pérdida total es $\mathcal L_{\mathrm{CCAM}}=\mathcal L_{\mathrm{POS}}+\mathcal L_{\mathrm{NEG}}$. El mapa $P$ resultante se umbraliza para producir la pseudo-máscara inicial.
 
-\subsection{Algoritmos}
+\subsubsection{Algoritmos}
 
 \begin{algorithm}[htbp]
 \caption{MoCo v2 (preentrenamiento contrastivo del backbone)}

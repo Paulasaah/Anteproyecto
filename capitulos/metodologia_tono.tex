@@ -1,10 +1,10 @@
 Esta línea de trabajo comprende dos procedimientos distintos que comparten el mismo espacio de color (CIELAB) pero cumplen funciones diferentes dentro del proyecto: la \textbf{estimación} del ángulo de tipología individual (ITA) como proxy colorimétrico para caracterizar los conjuntos de datos, y la \textbf{transformación} determinística de tono usada como augmentación durante el preentrenamiento SSL del clasificador (brazo B*, sección~\ref{sec:desarrollo-clasificador}). Ninguno de los dos procedimientos es un modelo entrenado: ambos son operaciones de cómputo directo sobre los canales CIELAB de cada imagen, sin parámetros que se ajusten con datos.
 
-\subsection{Actividades y datos}
+\subsubsection{Actividades y datos}
 
 Las actividades de esta línea, ejecutadas dentro de las Fases 2 y 3 de la Tabla~\ref{tab:trazabilidad-fases}, fueron: (i) calcular el proxy ITA por imagen sobre los conjuntos HAM10000, ISIC2019 e ISIC2020 para caracterizar su distribución de tono; (ii) aplicar la transformación determinística de tono como augmentación de la tercera vista del brazo B* durante el preentrenamiento SimSiam; y (iii) validar el proxy ITA contra fototipo Fitzpatrick (FST) real en dos conjuntos externos con anotación experta. Los datos usados son los mismos conjuntos de la línea de clasificación (HAM10000, 10.015 imágenes; \textit{pool} local de ISIC2019, 15.316 imágenes; \textit{pool} local de ISIC2020, 33.126 imágenes) más dos conjuntos externos exclusivos de validación: Fitzpatrick17k-C (11.098 imágenes con FST asignado por expertos) y la partición de PAD-UFES-20 con fototipo clínico disponible (1.494 de 2.298 imágenes totales).
 
-\subsection{Estimación del ángulo de tipología individual (ITA)}
+\subsubsection{Estimación del ángulo de tipología individual (ITA)}
 
 El ITA se calcula sobre píxeles de piel seleccionados por máscara, usando las medianas de los canales CIELAB $L^*$ y $b^*$ de la región muestreada:
 \begin{equation}
@@ -32,7 +32,11 @@ El cálculo se repite sobre tres regiones de muestreo de piel por imagen --másc
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Transformación determinística de tono}
+\subsubsection{Procedimiento de caracterización colorimétrica}
+
+La caracterización de clase, fototipo y tono se realizó de forma descriptiva sobre los conjuntos disponibles, sin generar ni asignar nuevas etiquetas clínicas. Para cada imagen de HAM10000, ISIC2019 e ISIC2020 se calcularon valores de ITA a resolución canónica sobre tres regiones: máscara por Otsu, imagen completa y anillo perilesional. Se emplearon pseudo-máscaras del segmentador cuando estuvieron disponibles y se registraron las abstenciones cuando la región de piel era insuficiente o la máscara estaba degenerada. Los conteos diagnósticos se conservaron a partir de las etiquetas editoriales de cada conjunto; no se derivaron del ITA ni de la calidad de las pseudo-máscaras. Los resultados descriptivos por conjunto se presentan en el Capítulo~\ref{chap:resultados}.
+
+\subsubsection{Transformación determinística de tono}
 
 La transformación recibe una máscara de lesión $M(p)$ (valor uno en la lesión) y un desplazamiento entero solicitado $s$, acotado a $s_c=\max(-2,\min(2,s))$. Modifica el canal CIELAB $L^*$ únicamente fuera de la lesión:
 \begin{equation}
@@ -69,10 +73,10 @@ Los canales $a^*$ y $b^*$ se conservan sin cambios. Es una operación \textbf{de
 
 La operación modifica todos los píxeles fuera de la máscara de lesión, incluidos el fondo y los artefactos que permanezcan allí; no utiliza una selección adicional que identifique exclusivamente piel. Por ello, el desplazamiento representa una \textbf{modificación sintética de luminosidad}, no una corrección validada del tono de piel: no cambia el fototipo clínico de la imagen ni garantiza el paso a otro fototipo. Esta transformación alimenta únicamente la tercera vista del brazo B* durante el preentrenamiento (pérdida $\mathcal L_{\mathrm{tono}}$, sección~\ref{sec:desarrollo-clasificador}); no se usa en el \textit{pipeline} de estimación de ITA de la subsección anterior.
 
-\subsection{Validación externa y limitaciones}
+\subsubsection{Validación externa y limitaciones}
 
 El proxy ITA \textbf{no está validado} como estimador del fototipo Fitzpatrick real. En Fitzpatrick17k-C (11.098 imágenes con FST experto), la exactitud del proxy fue de 28,5\,\% a 30,8\,\%, frente a 32,9\,\% de la línea base por mayoría. En la evaluación exploratoria propia de PAD-UFES-20 se partió de 1.494 registros con fototipo clínico válido. Para la imagen completa, 1.265 casos tuvieron estimación y 229 no; la exactitud fue 21,74\,\% (IC del 95\,\%: 19,18\,\%--24,48\,\%), frente a 59,37\,\% de la línea base calculada sobre los mismos casos. Con el fondo enmascarado mediante Otsu, 1.189 casos tuvieron estimación y 305 no; la exactitud fue 22,88\,\% (IC del 95\,\%: 20,12\,\%--25,88\,\%), frente a 59,80\,\% de la línea base para esos mismos casos. Las cifras de 22,9\,\% y 51,3\,\% corresponden a un estudio de Alipour et al. (2026) con condiciones distintas, no a la validación propia \parencite{alipour2026italimitations}. En ambas evaluaciones del proyecto, el ITA quedó por debajo de la línea base por mayoría; no hay evidencia de que represente el fototipo clínico mejor que predecir la clase más frecuente.
 
-Esta limitación corresponde al riesgo de evidencia \enquote{ITA presentado como fototipo}: nombrarlo incorrectamente como FST produciría conclusiones inválidas sobre equidad por fototipo. El control aplicado en este documento y en el repositorio es nombrar siempre el proxy como ITA y no afirmar fototipo Fitzpatrick sin anotación experta y validación --como se hace en esta sección y en la caracterización de conjuntos del Capítulo~8 (Sección~\ref{sec:caracterizacion-tono}).
+Esta limitación corresponde al riesgo de evidencia \enquote{ITA presentado como fototipo}: nombrarlo incorrectamente como FST produciría conclusiones inválidas sobre equidad por fototipo. El control aplicado en este documento y en el repositorio es nombrar siempre el proxy como ITA y no afirmar fototipo Fitzpatrick sin anotación experta y validación --como se hace en esta sección y en la caracterización de conjuntos del Capítulo~7 (Sección~\ref{sec:caracterizacion-tono}).
 
 La comparación entre Otsu, la imagen completa y el anillo perilesional es descriptiva: los registros disponibles no incluyen una máscara de piel experta que permita medir cuál región estima mejor la piel, ni un criterio validado para seleccionar una de ellas. La cobertura, las abstenciones y las diferencias de ITA se reportan como características operacionales, no como validación de calidad ni como asignación de fototipo. Por esta razón, esta comparación no sustenta afirmaciones de equidad por tono de piel.

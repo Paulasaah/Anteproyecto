@@ -1,6 +1,6 @@
-\chapter{Desarrollo del proyecto}
+\section{Desarrollo técnico del proyecto}\label{sec:desarrollo-tecnico}
 
-Este capítulo presenta el desarrollo técnico realizado para cada una de las tres líneas de trabajo del proyecto, en continuidad con el diseño metodológico del Capítulo~6: clasificación con aprendizaje autosupervisado y adaptación de dominio, segmentación de lesiones cutáneas, y transformación y estimación del tono de piel. Para cada línea se presentan las actividades realizadas, los datos y las entradas, las herramientas, los criterios, el modelamiento matemático y los algoritmos y procedimientos aplicados, incluida la descripción técnica del protocolo de evaluación. Los valores numéricos obtenidos y su interpretación se presentan en el Capítulo~8, que no repite aquí el procedimiento ya descrito.
+Esta sección presenta el desarrollo técnico realizado para cada una de las tres líneas de trabajo del proyecto, en continuidad con el diseño metodológico de las secciones anteriores de este capítulo: clasificación con aprendizaje autosupervisado y adaptación de dominio, segmentación de lesiones cutáneas, y transformación y estimación del tono de piel. Para cada línea se presentan las actividades realizadas, los datos y las entradas, las herramientas, los criterios, el modelamiento matemático y los algoritmos y procedimientos aplicados, incluida la descripción técnica del protocolo de evaluación. Los valores numéricos obtenidos y su interpretación se presentan en el Capítulo~\ref{chap:resultados}, que no repite aquí el procedimiento ya descrito.
 
 La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí las tres líneas: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, con una posible integración (compuerta I) que requiere ablación propia y no se presenta como validada.
 
@@ -18,14 +18,14 @@ La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí la
 
 \FloatBarrier
 
-\section{Clasificación con aprendizaje autosupervisado y adaptación de dominio}
+\subsection{Clasificación con aprendizaje autosupervisado y adaptación de dominio}
 \label{sec:desarrollo-clasificador}
 \input{capitulos/metodologia_clasificador}
 
-\section{Segmentación de lesiones cutáneas}
+\subsection{Segmentación de lesiones cutáneas}
 \label{sec:desarrollo-segmentacion}
 \input{capitulos/metodologia_segmentacion}
 
-\section{Transformación y estimación del tono de piel}
+\subsection{Transformación y estimación del tono de piel}
 \label{sec:desarrollo-tono}
 \input{capitulos/metodologia_tono}
