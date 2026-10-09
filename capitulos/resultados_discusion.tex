@@ -70,6 +70,8 @@ ISIC2019 reúne 25.331 imágenes dermatoscópicas (20.264 de entrenamiento y 5.0
 La Figura~\ref{fig:distribuciones-clase-combinadas} reúne las distribuciones diagnósticas de los cuatro conjuntos: (a) HAM10000, (b) ISIC2019, (c) ISIC2020 y (d) PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el \textit{pool} local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
 
 \begin{figure}[!htbp]
+\caption{Distribución de diagnósticos en los conjuntos de datos analizados.}
+\label{fig:distribuciones-clase-combinadas}
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
     \centering
@@ -99,8 +101,6 @@ La Figura~\ref{fig:distribuciones-clase-combinadas} reúne las distribuciones di
     \caption{PAD-UFES-20}
     \label{fig:pad-categorias-fig}
 \end{subfigure}
-\caption{Distribución de diagnósticos en los conjuntos de datos analizados.}
-\label{fig:distribuciones-clase-combinadas}
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) muestran los conteos y porcentajes de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Se conservan las categorías originales de cada conjunto; los conteos son descriptivos y no representan prevalencias poblacionales.
@@ -192,10 +192,10 @@ La exportación del proyecto verifica identificadores únicos. La etiqueta clín
 La Figura~\ref{fig:pad-fototipo-clinico} reúne la distribución de fototipos clínicos registrados y la distribución del proxy ITA según esas etiquetas en PAD-UFES-20.
 
 \begin{figure}[!htbp]
-\centering
-\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/distribucion-ita-pad-ufes-20.jpg}
 \caption{Distribución de fototipos clínicos registrados y de valores estimados del ITA en PAD-UFES-20.}
 \label{fig:pad-fototipo-clinico}
+\centering
+\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/distribucion-ita-pad-ufes-20.jpg}
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia. El panel (a) presenta las etiquetas clínicas de fototipo registradas; el panel (b), los valores del proxy ITA agrupados por fototipo registrado. El ITA es una medida colorimétrica y no equivale a una etiqueta clínica ni valida la calidad de las máscaras.
@@ -417,10 +417,10 @@ S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
 La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Se muestran la imagen original, la máscara de referencia, la predicción y la superposición de contornos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
 
 \begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion-ejemplos-student-r3.jpg}
 \caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
 \label{fig:segmentacion-ejemplos}
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion-ejemplos-student-r3.jpg}
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia. Las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2; el valor indicado en cada fila corresponde a \texttt{student\_r3}. La selección ilustra casos del conjunto y no sustituye las métricas agregadas ni representa una validación clínica.
