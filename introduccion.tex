@@ -1,7 +1,11 @@
 \chapter{Introducción}
 
+\section{Contexto y motivación}
+
 El análisis de imágenes dermatológicas mediante aprendizaje profundo se ha investigado como apoyo a la clasificación de lesiones cutáneas. Algunos modelos han alcanzado resultados comparables con dermatólogos en tareas delimitadas y con conjuntos de evaluación específicos; estos resultados no implican que el sistema pueda sustituir la valoración clínica ni que generalice automáticamente a otros contextos \parencite{esteva2017dermatologist,chaturvedi2020multiclassskin}.
 
 El entrenamiento supervisado requiere imágenes con diagnósticos anotados. En medicina, la disponibilidad de esas etiquetas limita el desarrollo de modelos, mientras que el aprendizaje autosupervisado permite aprovechar imágenes sin anotar para aprender representaciones útiles \parencite{krishnan2022selfsupervisedmedicine,wang2023pymic}. Además, las diferencias entre las imágenes de entrenamiento y las del contexto de uso pueden afectar el desempeño; por ello, la generalización debe evaluarse en los dominios pertinentes \parencite{tschandl2018ham10000,yang2024crosshospital}.
+
+\section{Propósito y alcance del trabajo}
 
 Con el objetivo de abordar estas limitaciones, este trabajo de grado desarrolla y evalúa un algoritmo de clasificación de lesiones cutáneas basado en aprendizaje autosupervisado, con experimentos de adaptación de dominio. También explora de manera complementaria la segmentación de lesiones y la caracterización colorimétrica del tono de piel. El prototipo funcional previsto en los objetivos permanece pendiente mientras continúan los experimentos para seleccionar el modelo y la configuración finales.
