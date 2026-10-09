@@ -25,6 +25,7 @@ Para regenerar las figuras, instalar NumPy y Matplotlib y disponer de Times New 
 ```bash
 python scripts/generar_figuras_resultados.py
 python scripts/generar_figuras_e5.py
+python scripts/generar_esquema_ita.py
 ```
 
 Los PDF/SVG actuales usan Nimbus Roman, explícitamente indicada en el registro tipográfico. El generador exige la fuente solicitada; no cambia silenciosamente a otra. Se puede reproducir el borrador con `--font 'Nimbus Roman'`.
