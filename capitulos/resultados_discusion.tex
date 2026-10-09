@@ -16,49 +16,6 @@ Los experimentos se ejecutaron en dos entornos de cómputo independientes, uno p
 
 HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete categorías diagnósticas: nevos melanocíticos (\texttt{nv}), melanoma (\texttt{mel}), lesiones similares a queratosis benignas (\texttt{bkl}), carcinoma basocelular (\texttt{bcc}), queratosis actínica y carcinoma intraepidérmico (\texttt{akiec}), lesiones vasculares (\texttt{vasc}) y dermatofibroma (\texttt{df}) \parencite{tschandl2018ham10000}. La categoría \texttt{bkl} comprende lesiones como queratosis seborreicas, lentigos solares y queratosis liquenoides; su denominación abreviada en la figura no reduce la clase a queratosis seborreica. La clase \texttt{nv} concentra la mayoría de las imágenes. \texttt{akiec} no representa una clase independiente de carcinoma escamocelular invasor. El conjunto constituye la fuente principal de entrenamiento y evaluación del clasificador, pero su composición no demuestra representatividad epidemiológica de Santander. Tampoco proporciona etiquetas clínicas de fototipo Fitzpatrick.
 
-``Sin \textit{bucket}'' (blanco) son imágenes sin estimación de tono confiable (piel insuficiente o máscara degenerada) y es la porción mayoritaria en varias clases; se muestra explícitamente para no ocultar la cobertura real. Los colores I--VI son la salida de un estimador de ITA no validado contra fototipo Fitzpatrick real \parencite{alipour2026italimitations}, no una medición clínica.
-
-La Figura~\ref{fig:ham10000-clase-tono} presenta los conteos de las clases de HAM10000 desglosados por categorías de tono estimadas mediante ITA. Estas categorías tienen un propósito descriptivo y no representan fototipos clínicos validados.
-
-\begin{figure}[!htbp]
-\caption{Distribución de clases diagnósticas de HAM10000 por \textit{bucket} de tono (estimador ITA por Otsu, no validado como fototipo real).}
-\label{fig:ham10000-clase-tono}
-\centering
-\begin{adjustbox}{max width=\linewidth}
-\begin{tikzpicture}
-\begin{axis}[
-    xbar stacked,
-    width=0.95\linewidth,
-    height=7.2cm,
-    bar width=11pt,
-    xlabel={Número de imágenes},
-    symbolic y coords={df,vasc,akiec,bcc,bkl,mel,nv},
-    ytick=data,
-    yticklabels={Dermatofibroma (df), Lesión vascular (vasc), Queratosis actínica (akiec), Carcinoma basocelular (bcc), Queratosis seborreica (bkl), Melanoma (mel), Nevo (nv)},
-    tick label style={font=\scriptsize},
-    axis lines*=left,
-    enlarge y limits=0.09,
-    legend columns=4,
-    legend style={at={(0.5,-0.22)}, anchor=north, font=\scriptsize, draw=none},
-]
-\addplot[fill=fitzI,draw=cappnearblack,line width=0.3pt] coordinates {(40,df) (31,vasc) (109,akiec) (125,bcc) (177,bkl) (219,mel) (3022,nv)};
-\addplot[fill=fitzII,draw=cappnearblack,line width=0.3pt] coordinates {(2,df) (1,vasc) (2,akiec) (2,bcc) (11,bkl) (11,mel) (435,nv)};
-\addplot[fill=fitzIII,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (1,vasc) (0,akiec) (3,bcc) (4,bkl) (3,mel) (102,nv)};
-\addplot[fill=fitzIV,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (0,vasc) (0,akiec) (0,bcc) (0,bkl) (1,mel) (30,nv)};
-\addplot[fill=fitzV,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (0,vasc) (0,akiec) (0,bcc) (0,bkl) (0,mel) (7,nv)};
-\addplot[fill=fitzVI,draw=cappnearblack,line width=0.3pt] coordinates {(0,df) (0,vasc) (0,akiec) (0,bcc) (0,bkl) (0,mel) (1,nv)};
-\addplot[fill=white,draw=cappnearblack,line width=0.3pt] coordinates {(73,df) (109,vasc) (216,akiec) (384,bcc) (907,bkl) (879,mel) (3108,nv)};
-\legend{I,II,III,IV,V,VI,Sin bucket}
-\end{axis}
-\end{tikzpicture}
-\end{adjustbox}
-
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia.
-
-\end{figure}
-
 \FloatBarrier
 \Needspace{0.88\textheight}
 \subsection{Caracterización de ISIC2019}
@@ -180,6 +137,20 @@ CO2Wounds-V2 & No caracterizado en este trabajo & Excluido del alcance actual. \
 \end{table}
 
 BCN20000 no se utiliza como conjunto independiente en este trabajo; las imágenes presentes en ISIC2019 se consideran dentro de ese conjunto. HAM10000 no reporta fototipo clínico para sus 10.015 imágenes, por lo que no se asignan tipos Fitzpatrick a partir de su apariencia.
+
+La falta de una estimación ITA válida se reporta como abstención del estimador. Los grupos I--VI son intervalos derivados del ITA y no representan fototipos clínicos Fitzpatrick.
+
+La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del ITA estimado en HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20. Las estimaciones válidas se muestran por intervalos de 10 grados y las abstenciones se reportan por conjunto.
+
+\begin{figure}[!htbp]
+\caption{Distribución del ITA estimado en los conjuntos de datos analizados.}
+\label{fig:ita-distribucion-multidataset}
+\centering
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{images/distribucion_ita_2x2.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) corresponden a HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Los conteos de imágenes sin ITA válido se presentan como abstenciones. Los grupos I--VI son salidas del estimador y no equivalen a fototipos clínicos Fitzpatrick.
+\end{figure}
 
 En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 identificadores de imagen únicos con etiquetas clínicas: I, 153; II, 876; III, 392; IV, 62; V, 10; y VI, 1. Otras 804 imágenes no tienen fototipo. Estos recuentos por tipo provienen de la exportación del proyecto, no de una tabla del artículo. Su total de 2.298 imágenes coincide con el tamaño del conjunto descrito por la publicación primaria \parencite{pacheco2020padufes}. La unidad del histograma es la imagen, no el paciente: varias imágenes de una misma persona pueden compartir la etiqueta, sin que ello constituya un duplicado de identificador. Los tamaños de V y VI solo permiten descripción, no conclusiones de desempeño para esos fototipos.
 
@@ -368,15 +339,15 @@ En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustado
 
 La Figura~\ref{fig:comparacion-modelos-multidataset} resume F1 macro y MCC para los modelos y conjuntos presentados en esta sección, y muestra los contrastes entre las variantes limpias y públicas cuando están disponibles. Sirve para observar patrones entre conjuntos; las tablas conservan los valores exactos y el protocolo de cada comparación. La figura muestra el ajuste fino solo para ISIC2020, tal como indica su leyenda; los resultados de ajuste fino en HAM10000 e ISIC2019 se reportan en el texto y no están representados en ella.
 
-\begin{sidewaysfigure}
+\begin{figure}[!htbp]
 \caption{Comparación de las métricas de clasificación y de los contrastes entre variantes limpias y públicas.}
 \label{fig:comparacion-modelos-multidataset}
 \centering
-\includegraphics[width=0.94\textheight]{images/comparacion_modelos_clasificacion.pdf}
+\includegraphics[width=0.96\textwidth,height=0.76\textheight,keepaspectratio]{images/comparacion_modelos_clasificacion.pdf}
 \par\smallskip
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo (v8.0.0-clean). Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
-\end{sidewaysfigure}
+\end{figure}
 
 \FloatBarrier
 
