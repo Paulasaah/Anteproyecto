@@ -67,150 +67,43 @@ La Figura~\ref{fig:ham10000-clase-tono} presenta los conteos de las clases de HA
 
 ISIC2019 reúne 25.331 imágenes dermatoscópicas (20.264 de entrenamiento y 5.067 de validación) distribuidas en ocho categorías diagnósticas: nevos melanocíticos (\texttt{NV}), melanoma (\texttt{MEL}), carcinoma basocelular (\texttt{BCC}), lesiones similares a queratosis benignas (\texttt{BKL}), queratosis actínica (\texttt{AK}), carcinoma escamocelular (\texttt{SCC}), dermatofibroma (\texttt{DF}) y lesión vascular (\texttt{VASC}) \parencite{combalia2024bcn20000}. A diferencia de HAM10000, que agrupa la queratosis actínica y el carcinoma intraepidérmico en una sola clase (\texttt{akiec}), ISIC2019 separa \texttt{AK} de \texttt{SCC} como categorías independientes; ambas taxonomías no son directamente intercambiables en un entrenamiento conjunto. La clase \texttt{NV} concentra igualmente la mayoría de las imágenes, un desbalance compartido con HAM10000.
 
-La distribución de clases de ISIC2019 se presenta en la figura \ref{fig:isic2019-clases}, junto con las de HAM10000 (Figura~\ref{fig:ham10000-clases}), ISIC2020 y PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el \textit{pool} local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
+La Figura~\ref{fig:distribuciones-clase-combinadas} reúne las distribuciones diagnósticas de los cuatro conjuntos: (a) HAM10000, (b) ISIC2019, (c) ISIC2020 y (d) PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el \textit{pool} local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
 
 \begin{figure}[!htbp]
-\caption{HAM10000}
-\label{fig:ham10000-clases}
 \centering
-\definecolor{technicalnavy}{HTML}{23394D}
-\begin{subfigure}[t]{0.49\linewidth}
-\centering
-\begin{tikzpicture}[x=0.68cm,y=0.70cm]
-\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
-\foreach \tick in {0,1,2,3,4,5} {
-\draw[gray!25] (0,\tick) -- (7.6,\tick);
-\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
-}
-\draw[->] (0,0) -- (0,5.2);
-\draw (0,0) -- (7.6,0);
-\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (0.2529,0) rectangle (0.8329,3.82639878);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (0.5429,3.82639878) {6705};
-\node[below,font=\scriptsize,inner sep=3pt] at (0.5429,0) {nv};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.3386,0) rectangle (1.9186,3.04649516);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (1.6286,3.04649516) {1113};
-\node[below,font=\scriptsize,inner sep=3pt] at (1.6286,0) {mel};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (2.4243,0) rectangle (3.0043,3.04099769);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (2.7143,3.04099769) {1099};
-\node[below,font=\scriptsize,inner sep=3pt] at (2.7143,0) {bkl};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (3.5100,0) rectangle (4.0900,2.71096312);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (3.8000,2.71096312) {514};
-\node[below,font=\scriptsize,inner sep=3pt] at (3.8000,0) {bcc};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.5957,0) rectangle (5.1757,2.51454775);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (4.8857,2.51454775) {327};
-\node[below,font=\scriptsize,inner sep=3pt] at (4.8857,0) {akiec};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.6814,0) rectangle (6.2614,2.15228834);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (5.9714,2.15228834) {142};
-\node[below,font=\scriptsize,inner sep=3pt] at (5.9714,0) {vasc};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (6.7671,0) rectangle (7.3471,2.06069784);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (7.0571,2.06069784) {115};
-\node[below,font=\scriptsize,inner sep=3pt] at (7.0571,0) {df};
-\end{tikzpicture}
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-ham10000.jpg}
+    \caption{HAM10000}
+    \label{fig:ham10000-clases}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-isic2019.jpg}
+    \caption{ISIC2019}
+    \label{fig:isic2019-clases}
+\end{subfigure}
 
-\end{subfigure}
-\hfill
-\begin{subfigure}[t]{0.49\linewidth}
-\centering
-\begin{tikzpicture}[x=0.68cm,y=0.70cm]
-\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
-\foreach \tick in {0,1,2,3,4,5} {
-\draw[gray!25] (0,\tick) -- (7.6,\tick);
-\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
-}
-\draw[->] (0,0) -- (0,5.2);
-\draw (0,0) -- (7.6,0);
-\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (0.2090,0) rectangle (0.7410,4.10974724);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (0.4750,4.10974724) {12875};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (0.4750,0) {NV};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.1590,0) rectangle (1.6910,3.65533056);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (1.4250,3.65533056) {4522};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (1.4250,0) {MEL};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (2.1090,0) rectangle (2.6410,3.52153034);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (2.3750,3.52153034) {3323};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (2.3750,0) {BCC};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (3.0590,0) rectangle (3.5910,3.41896383);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (3.3250,3.41896383) {2624};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (3.3250,0) {BKL};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.0090,0) rectangle (4.5410,2.93801910);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (4.2750,2.93801910) {867};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (4.2750,0) {AK};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.9590,0) rectangle (5.4910,2.79795964);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (5.2250,2.79795964) {628};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (5.2250,0) {SCC};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.9090,0) rectangle (6.4410,2.40312052);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (6.1750,2.40312052) {253};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (6.1750,0) {VASC};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (6.8590,0) rectangle (7.3910,2.37839790);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (7.1250,2.37839790) {239};
-\node[anchor=north east,rotate=45,font=\scriptsize,inner sep=3pt] at (7.1250,0) {DF};
-\end{tikzpicture}
-\caption{ISIC2019}
-\label{fig:isic2019-clases}
-\end{subfigure}
 \par\medskip
-\begin{subfigure}[t]{0.49\linewidth}
-\centering
-\begin{tikzpicture}[x=0.68cm,y=0.70cm]
-\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
-\foreach \tick in {0,1,2,3,4,5} {
-\draw[gray!25] (0,\tick) -- (7.6,\tick);
-\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
-}
-\draw[->] (0,0) -- (0,5.2);
-\draw (0,0) -- (7.6,0);
-\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.6100,0) rectangle (2.1900,4.51244424);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (1.9000,4.51244424) {32542};
-\node[below,font=\scriptsize,inner sep=3pt] at (1.9000,0) {Benigno};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.4100,0) rectangle (5.9900,2.76641285);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (5.7000,2.76641285) {584};
-\node[below,font=\scriptsize,inner sep=3pt] at (5.7000,0) {Maligno};
-\end{tikzpicture}
-\caption{ISIC2020}
-\label{fig:isic2020-clases}
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-isic2020.jpg}
+    \caption{ISIC2020}
+    \label{fig:isic2020-clases}
 \end{subfigure}
 \hfill
-\begin{subfigure}[t]{0.49\linewidth}
-\centering
-\begin{tikzpicture}[x=0.68cm,y=0.70cm]
-\path[use as bounding box] (-0.8,-1.0) rectangle (7.8,5.7);
-\foreach \tick in {0,1,2,3,4,5} {
-\draw[gray!25] (0,\tick) -- (7.6,\tick);
-\node[left,font=\scriptsize] at (0,\tick) {$10^{\tick}$};
-}
-\draw[->] (0,0) -- (0,5.2);
-\draw (0,0) -- (7.6,0);
-\node[font=\scriptsize] at (3.8,5.5) {Imágenes (escala logarítmica)};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (0.3433,0) rectangle (0.9233,2.92685671);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (0.6333,2.92685671) {845};
-\node[below,font=\scriptsize,inner sep=3pt] at (0.6333,0) {BCC};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (1.6100,0) rectangle (2.1900,2.86332286);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (1.9000,2.86332286) {730};
-\node[below,font=\scriptsize,inner sep=3pt] at (1.9000,0) {ACK};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (2.8767,0) rectangle (3.4567,2.38738983);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (3.1667,2.38738983) {244};
-\node[below,font=\scriptsize,inner sep=3pt] at (3.1667,0) {NEV};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (4.1433,0) rectangle (4.7233,2.37106786);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (4.4333,2.37106786) {235};
-\node[below,font=\scriptsize,inner sep=3pt] at (4.4333,0) {SEK};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (5.4100,0) rectangle (5.9900,2.28330123);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (5.7000,2.28330123) {192};
-\node[below,font=\scriptsize,inner sep=3pt] at (5.7000,0) {SCC};
-\draw[fill=technicalnavy,draw=technicalnavy,line width=0.5pt] (6.6767,0) rectangle (7.2567,1.71600334);
-\node[above,font=\scriptsize,inner sep=1.5pt] at (6.9667,1.71600334) {52};
-\node[below,font=\scriptsize,inner sep=3pt] at (6.9667,0) {MEL};
-\end{tikzpicture}
-\caption{PAD-UFES-20}
-\label{fig:pad-categorias-fig}
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-pad-ufes-20.jpg}
+    \caption{PAD-UFES-20}
+    \label{fig:pad-categorias-fig}
 \end{subfigure}
-\caption{Distribución de clases por conjunto en escala logarítmica.}
+\caption{Distribución de diagnósticos en los conjuntos de datos analizados.}
 \label{fig:distribuciones-clase-combinadas}
 \par\smallskip
 \raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Los valores sobre las barras indican el número de imágenes. Las abreviaturas conservan las etiquetas de cada conjunto: nv/NV y NEV, nevo; mel/MEL, melanoma; bkl/BKL, lesiones similares a queratosis benignas; SEK, queratosis seborreica; bcc/BCC, carcinoma basocelular; akiec/AK/ACK, queratosis actínica; vasc/VASC, lesión vascular; df/DF, dermatofibroma; SCC, carcinoma escamocelular. En HAM10000, akiec también incluye carcinoma intraepitelial. Los conteos y fuentes corresponden a la descripción precedente.
-
+\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) muestran los conteos y porcentajes de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Se conservan las categorías originales de cada conjunto; los conteos son descriptivos y no representan prevalencias poblacionales.
 \end{figure}
 
 \FloatBarrier
@@ -296,31 +189,16 @@ En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 
 
 La exportación del proyecto verifica identificadores únicos. La etiqueta clínica no cambia al transformar el color de una imagen.
 
-La Figura~\ref{fig:pad-fototipo-clinico} muestra la cantidad de imágenes de PAD-UFES-20 según las etiquetas clínicas de fototipo registradas en el conjunto de datos.
+La Figura~\ref{fig:pad-fototipo-clinico} reúne la distribución de fototipos clínicos registrados y la distribución del proxy ITA según esas etiquetas en PAD-UFES-20.
 
 \begin{figure}[!htbp]
-\caption{Número de imágenes por fototipo clínico registrado en PAD-UFES-20.}
-\label{fig:pad-fototipo-clinico}
 \centering
-\begin{adjustbox}{max width=\linewidth}
-\begin{tikzpicture}[x=1.45cm,y=0.004cm]
-  \draw[->] (0,0) -- (7.5,0);
-  \draw[->] (0,0) -- (0,1000) node[above] {Imágenes};
-  \foreach \tick in {0,200,400,600,800} {
-    \draw (-0.08,\tick) -- (0,\tick) node[left] {\scriptsize \tick};
-  }
-  \foreach \x/\tipo/\valor/\col in {1/I/153/fitzI,2/II/876/fitzII,3/III/392/fitzIII,4/IV/62/fitzIV,5/V/10/fitzV,6/VI/1/fitzVI,7/Sin\ dato/804/white} {
-    \draw[fill=\col,draw=cappnearblack,line width=0.7pt] (\x-0.28,0) rectangle (\x+0.28,\valor);
-    \node[above,font=\scriptsize] at (\x,\valor) {\valor};
-    \node[below,font=\scriptsize] at (\x,0) {\tipo};
-  }
-\end{tikzpicture}
-\end{adjustbox}
-
+\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/distribucion-ita-pad-ufes-20.jpg}
+\caption{Distribución de fototipos clínicos registrados y de valores estimados del ITA en PAD-UFES-20.}
+\label{fig:pad-fototipo-clinico}
 \par\smallskip
 \raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia.
-
+\noindent\textit{Nota.} Elaboración propia. El panel (a) presenta las etiquetas clínicas de fototipo registradas; el panel (b), los valores del proxy ITA agrupados por fototipo registrado. El ITA es una medida colorimétrica y no equivale a una etiqueta clínica ni valida la calidad de las máscaras.
 \end{figure}
 
 \subsection{Caracterización colorimétrica antes y después de la transformación}
@@ -469,6 +347,18 @@ S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
 \end{tabular}
 \end{table}
 \noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
+
+La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Se muestran la imagen original, la máscara de referencia, la predicción y la superposición de contornos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion-ejemplos-student-r3.jpg}
+\caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
+\label{fig:segmentacion-ejemplos}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2; el valor indicado en cada fila corresponde a \texttt{student\_r3}. La selección ilustra casos del conjunto y no sustituye las métricas agregadas ni representa una validación clínica.
+\end{figure}
 
 S4-A2 superó el criterio registrado antes de la evaluación: su Dice en ISIC2018 quedó por encima del umbral de \texttt{student\_r3} menos 0,01; también obtuvo un Dice mayor en HAM10000. Se considera el candidato de segmentación con mejor resultado entre estas dos variantes. Sin embargo, la comparación de integración C1 no mostró una mejora general del clasificador al usar las máscaras: ninguna de las 15 celdas del análisis primario de \texttt{student\_r3} mejoró con un intervalo de F1 macro que excluyera cero, y el análisis secundario de S4-A2 mostró el mismo patrón. En consecuencia, la segmentación se mantiene como módulo complementario y no como una mejora demostrada de la clasificación.
 
