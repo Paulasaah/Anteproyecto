@@ -16,20 +16,6 @@ Los experimentos se ejecutaron en dos entornos de cómputo independientes, uno p
 
 HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete categorías diagnósticas: nevos melanocíticos (\texttt{nv}), melanoma (\texttt{mel}), lesiones similares a queratosis benignas (\texttt{bkl}), carcinoma basocelular (\texttt{bcc}), queratosis actínica y carcinoma intraepidérmico (\texttt{akiec}), lesiones vasculares (\texttt{vasc}) y dermatofibroma (\texttt{df}) \parencite{tschandl2018ham10000}. La categoría \texttt{bkl} comprende lesiones como queratosis seborreicas, lentigos solares y queratosis liquenoides; su denominación abreviada en la figura no reduce la clase a queratosis seborreica. La clase \texttt{nv} concentra la mayoría de las imágenes. \texttt{akiec} no representa una clase independiente de carcinoma escamocelular invasor. El conjunto constituye la fuente principal de entrenamiento y evaluación del clasificador, pero su composición no demuestra representatividad epidemiológica de Santander. Tampoco proporciona etiquetas clínicas de fototipo Fitzpatrick.
 
-La falta de una estimación ITA válida se reporta como abstención del estimador. Los grupos I--VI son intervalos derivados del ITA y no representan fototipos clínicos Fitzpatrick.
-
-La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del ITA estimado en HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20. Las estimaciones válidas se muestran por intervalos de 10 grados y las abstenciones se reportan por conjunto.
-
-\begin{figure}[!htbp]
-\caption{Distribución del ITA estimado en los conjuntos de datos analizados.}
-\label{fig:ita-distribucion-multidataset}
-\centering
-\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{images/distribucion_ita_2x2.pdf}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) corresponden a HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Los conteos de imágenes sin ITA válido se presentan como abstenciones. Los grupos I--VI son salidas del estimador y no equivalen a fototipos clínicos Fitzpatrick.
-\end{figure}
-
 \FloatBarrier
 \Needspace{0.88\textheight}
 \subsection{Caracterización de ISIC2019}
@@ -151,6 +137,20 @@ CO2Wounds-V2 & No caracterizado en este trabajo & Excluido del alcance actual. \
 \end{table}
 
 BCN20000 no se utiliza como conjunto independiente en este trabajo; las imágenes presentes en ISIC2019 se consideran dentro de ese conjunto. HAM10000 no reporta fototipo clínico para sus 10.015 imágenes, por lo que no se asignan tipos Fitzpatrick a partir de su apariencia.
+
+La falta de una estimación ITA válida se reporta como abstención del estimador. Los grupos I--VI son intervalos derivados del ITA y no representan fototipos clínicos Fitzpatrick.
+
+La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del ITA estimado en HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20. Las estimaciones válidas se muestran por intervalos de 10 grados y las abstenciones se reportan por conjunto.
+
+\begin{figure}[!htbp]
+\caption{Distribución del ITA estimado en los conjuntos de datos analizados.}
+\label{fig:ita-distribucion-multidataset}
+\centering
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{images/distribucion_ita_2x2.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) corresponden a HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Los conteos de imágenes sin ITA válido se presentan como abstenciones. Los grupos I--VI son salidas del estimador y no equivalen a fototipos clínicos Fitzpatrick.
+\end{figure}
 
 En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 identificadores de imagen únicos con etiquetas clínicas: I, 153; II, 876; III, 392; IV, 62; V, 10; y VI, 1. Otras 804 imágenes no tienen fototipo. Estos recuentos por tipo provienen de la exportación del proyecto, no de una tabla del artículo. Su total de 2.298 imágenes coincide con el tamaño del conjunto descrito por la publicación primaria \parencite{pacheco2020padufes}. La unidad del histograma es la imagen, no el paciente: varias imágenes de una misma persona pueden compartir la etiqueta, sin que ello constituya un duplicado de identificador. Los tamaños de V y VI solo permiten descripción, no conclusiones de desempeño para esos fototipos.
 
