@@ -300,6 +300,41 @@ La identificación y el análisis exploratorio de conjuntos constituyen evidenci
 
 \FloatBarrier
 
+\section{Métricas de evaluación}
+Las métricas usadas para evaluar la clasificación se presentan a continuación, donde los valores a calcular dependen de los verdaderos positivos $TP$, verdaderos negativos $TN$, falsos positivos $FP$, y falsos negativos $FN$, asociados a la clase de cada ejemplo del conjunto de datos.
+
+
+\begin{itemize}
+    \item Exactitud: esta medida corresponde a la proporción de predicciones predichas correctamente,
+
+    \begin{equation}
+        \mathrm{Exactitud}= \frac{TP+TN}{TP+TN+FP+FN}.
+        \label{eq:acc}
+    \end{equation}
+
+
+    \item Precisión: esta medida es la proporción de ejemplos pertenecientes a una clase que fueron correctamente predichos en dicha clase,
+    
+        \begin{equation}
+            \mathrm{Precisi\acute{o}n} = \frac{TP}{TP+FP}.
+            \label{eq:pre}
+        \end{equation}
+        
+    \item Exhaustividad: esta medida es la proporción entre las predicciones que fueron correctamente clasificadas en una clase sobre los ejemplos que pertenecían a esa clase,
+    
+    \begin{equation}
+        \mathrm{Exhaustividad}= \frac{TP}{TP+FN}.
+        \label{eq:re}
+    \end{equation}
+
+    \item Métrica-F1: esta medida está diseñada para ponderar de manera equilibrada entre las métricas de precisión (\ref{eq:pre}) y exhaustividad (\ref{eq:re}),
+    
+    \begin{equation}
+        \mathrm{F1} = \frac{2\cdot\mathrm{Precisi\acute{o}n}\cdot\mathrm{Exhaustividad}}{\mathrm{Precisi\acute{o}n}+\mathrm{Exhaustividad}}.
+        \label{eq:f1}
+    \end{equation}
+
+\end{itemize}
 \section{Resultados de transformación de tono de piel}\label{sec:resultados-tono}
 
 El método de transformación y de estimación de tono de piel se describe en el Capítulo~\ref{chap:metodologia}, Sección~\ref{sec:desarrollo-tono}; esta sección presenta el resultado de su validación externa contra fototipo Fitzpatrick (FST) real.
