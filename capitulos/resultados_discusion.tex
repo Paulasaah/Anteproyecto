@@ -94,7 +94,9 @@ Total & & 2.298 \\
 \endgroup
 \end{table}
 
+\begin{sloppypar}
 La Figura~\ref{fig:distribuciones-clase-combinadas} reúne los conteos de las categorías diagnósticas originales de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, organizados en los paneles (a)--(d), respectivamente. La figura permite comparar la composición de cada corpus, pero no estimar prevalencias poblacionales: los conjuntos proceden de contextos y protocolos de captura distintos, y sus taxonomías no son idénticas. En particular, ISIC2020 conserva una clasificación binaria entre lesiones benignas y malignas, no un diagnóstico por subtipo. Las categorías corresponden a las definidas por las fuentes de cada conjunto \parencite{tschandl2018ham10000,combalia2024bcn20000,rotemberg2021isic2020,pacheco2020padufes}.
+\end{sloppypar}
 
 \begin{figure}[!htbp]
 \caption{Distribución de diagnósticos en los conjuntos de datos analizados.}
@@ -377,17 +379,58 @@ ISIC2020 (\textit{pool}) & 33.126 & 20.833 & 10.587 & 1.706 & 52,36 \\
 
 El resumen usa la estratificación del 21 de septiembre de 2026. HAM10000 agrega sus carpetas de 5.000 y 5.015 imágenes; su media ITA pondera los 2.547 y 1.730 casos válidos, respectivamente. Las cifras describen ese \textit{pool} y esa versión de máscaras; no son prevalencias de fototipo ni se trasladan automáticamente a otras corridas.
 
-La Figura~\ref{fig:ita-roi-e5} presenta un análisis complementario de la salida E5, calculada sobre una región de interés perilesional (ROI). Sus valores corresponden a otra configuración y cobertura que la Tabla~\ref{tab:ita-originales}: esta resume la estratificación del 21 de septiembre de 2026 sobre el \textit{pool} local, mientras que la figura muestra HAM10000, ISIC2019 e ISIC2020 completos y usa el anillo perilesional o, cuando no había una máscara elegible, el borde de la imagen. Por tanto, sus conteos no son una actualización directa de los de la tabla ni permiten atribuir diferencias al desempeño del estimador sin comparar entradas equivalentes. En el panel (a), $n$ corresponde a imágenes con ITA calculable; en el panel (b), los porcentajes incluyen también las abstenciones. Las categorías derivadas del ITA son descriptivas y no equivalen a fototipos clínicos.
+La Figura~\ref{fig:ita-roi-e5} conserva la representación de violín y se regenera desde los registros individuales de E5. La Figura~\ref{fig:ita-e5-cobertura} separa las categorías internas y las abstenciones. E5 incluye los conjuntos completos, con otra configuración y cobertura que la Tabla~\ref{tab:ita-originales}; las diferencias no se atribuyen a la transformación ni al desempeño del estimador sin comparar entradas equivalentes.
 
 \begin{figure}[!htbp]
-\caption{Distribución del ITA estimado en regiones perilesionales de tres conjuntos de imágenes.}
+\caption{Distribución continua del ITA de la salida ROI de E5.}
 \label{fig:ita-roi-e5}
 \centering
-\includegraphics[width=0.94\textwidth,height=0.43\textheight,keepaspectratio]{images/ita_roi_e5_multidataset.pdf}
+\includegraphics[width=\textwidth]{images/ita_roi_e5_violin.pdf}
 \par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia con los resultados descriptivos E5. El panel (a) muestra la distribución continua del ITA en la ROI perilesional para los casos con estimación válida; el panel (b) muestra la proporción de las categorías I--VI y de abstención sobre el total de cada conjunto. Las pseudo-máscaras de las lesiones son automáticas, generadas con \texttt{student\_r3}; cuando no había máscara elegible, se usó el borde de la imagen. Los intervalos I--VI son agrupaciones del estimador de ITA, no diagnósticos ni fototipos clínicos validados. Esta figura caracteriza las salidas del estimador y no evalúa la calidad de las máscaras.
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Los violines muestran la densidad estimada de los registros válidos; el punto marca la mediana y el segmento, los percentiles 25 y 75. Se incluyen entrenamiento y validación. La salida ROI combina el anillo perilesional con el borde de la imagen cuando no existe una máscara elegible. No son mediciones posteriores a la transformación ni fototipos clínicos.
 \end{figure}
+
+\begin{figure}[!htbp]
+\caption{Categorías internas del ITA y abstenciones en E5.}
+\label{fig:ita-e5-cobertura}
+\centering
+\includegraphics[width=\textwidth]{images/ita_roi_e5_cobertura.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Cada barra usa como denominador todas las imágenes: HAM10000, 10.015; ISIC2019, 25.331; e ISIC2020, 33.126. La escala I--VI identifica intervalos internos del ITA y conserva la paleta acordada; no identifica fototipos clínicos. El gris representa abstención. En ISIC2019, 1.727 imágenes usan el borde como alternativa al anillo; en ISIC2020, 1.696. No se evalúa la calidad de las máscaras.
+\end{figure}
+
+\begin{table}[!htbp]
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\centering
+\caption{Cobertura de los estimadores ITA en E5.}
+\label{tab:e5-cobertura}
+\begin{tabular}{lrrrr}
+\toprule
+Conjunto & Total & Otsu válido & ROI válido & Ambos válidos \\
+\midrule
+HAM10000 & 10.015 & 4.339 & 4.539 & 4.184 \\
+ISIC2019 & 25.331 & 11.266 & 12.558 & 10.640 \\
+ISIC2020 & 33.126 & 21.692 & 21.973 & 19.284 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Conteos de registros individuales E5; las abstenciones de cada estimador son el total menos sus casos válidos. ROI incluye la alternativa de borde. Las versiones y los archivos fuente se registran en el manifiesto de procedencia de las figuras.
+\endgroup
+\end{table}
+
+\begin{figure}[!htbp]
+\caption{Mediana y dispersión del ITA según el estimador en E5.}
+\label{fig:ita-e5-otsu-roi}
+\centering
+\includegraphics[width=\textwidth]{images/ita_e5_otsu_roi.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Cada punto es la mediana y cada segmento cubre los percentiles 25--75 de los casos válidos del estimador correspondiente. Son distribuciones marginales con coberturas diferentes, no intervalos de confianza ni diferencias pareadas. La Tabla~\ref{tab:e5-cobertura} informa las intersecciones. Otsu y ROI emplean selecciones de píxeles y, en ISIC, resoluciones distintas; la comparación es descriptiva y no demuestra superioridad, equivalencia clínica ni efecto de la transformación.
+\end{figure}
+
+\FloatBarrier
 
 La transformación modifica la luminosidad de todos los píxeles fuera de la máscara de lesión, incluidos fondo y artefactos; es una modificación sintética de luminosidad, no una corrección validada del tono de piel. Su formulación se desarrolla en el Capítulo~\ref{chap:metodologia}, Sección~\ref{sec:desarrollo-tono}. Para comparar antes y después se requieren pares originales/transformados con identificadores coincidentes, hashes y mediciones colorimétricas obtenidas con el mismo protocolo. Los resultados locales revisados no contienen el manifiesto de transformaciones ni mediciones posteriores emparejadas. Por ello, el efecto posterior sobre ITA o luminosidad permanece pendiente y no se presenta un histograma simulado. Los conteos de fototipo clínico de PAD-UFES-20 conservan su valor tras cualquier transformación, porque son metadatos de la persona y no una propiedad que se reasigne a partir de los píxeles.
 
@@ -441,6 +484,18 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
+La Figura~\ref{fig:ablacion-tono-ham} presenta las estimaciones de F1 macro y sus intervalos individuales.
+
+\begin{figure}[!htbp]
+\caption{F1 macro del control público y de los brazos A71 y B71 en HAM10000.}
+\label{fig:ablacion-tono-ham}
+\centering
+\includegraphics[width=\textwidth]{images/ablacion_tono_ham.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Estimaciones e IC individuales del 95\,\% del archivo \texttt{v71\_final\_eval.json}. Cada brazo conserva su protocolo de extracción y selección; los IC individuales no sustituyen un contraste pareado. La figura no demuestra por sí sola un beneficio del término de tono.
+\end{figure}
+
 Los intervalos individuales de A71 y B71 se solapan en exactitud balanceada y F1 macro. Por sí sola, esta comparación no permite afirmar que añadir el término de tono mejore el desempeño. Para evaluar la diferencia entre ambos brazos se requiere el contraste pareado correspondiente.
 
 \subsection{Comparación pareada: clasificador SSL congelado frente a ocho líneas base}
@@ -486,16 +541,36 @@ Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,
 En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustados y aplicó Holm por separado a cada familia de métricas. B71-limpio obtuvo mayor F1 macro que siete de los ocho modelos; la diferencia frente a VGG19 no alcanzó el umbral corregido ($p_{\text{Holm}}=0{,}066$). En cambio, la exactitud balanceada favoreció a siete de los ocho modelos ajustados. La diferencia más clara aparece en la detección de melanoma: B71 identificó 39 de 122 casos (\textit{recall} 0,3197), frente a 86 de 122 (\textit{recall} 0,7049) con AlexNet ajustado. Este análisis es post hoc y no formó parte del registro original. En conjunto, los resultados muestran que un F1 macro mayor no implica necesariamente mayor sensibilidad para melanoma; la elección entre estas métricas requiere un criterio clínico que el proyecto aún no ha definido.
 
 
-La Figura~\ref{fig:comparacion-modelos-multidataset} resume F1 macro y MCC para los modelos y conjuntos presentados en esta sección, y muestra los contrastes entre las variantes limpias y públicas cuando están disponibles. Sirve para observar patrones entre conjuntos; las tablas conservan los valores exactos y el protocolo de cada comparación. La figura muestra el ajuste fino solo para ISIC2020, tal como indica su leyenda; los resultados de ajuste fino en HAM10000 e ISIC2019 se reportan en el texto y no están representados en ella.
+Las Figuras~\ref{fig:clasificacion-ham-pareada} y \ref{fig:contrastes-ham-baselines} separan las estimaciones de desempeño de los contrastes pareados en HAM10000. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
 
 \begin{figure}[!htbp]
-\caption{Comparación de las métricas de clasificación y de los contrastes entre variantes limpias y públicas.}
-\label{fig:comparacion-modelos-multidataset}
+\caption{F1 macro de B71 y ocho líneas base congeladas en la partición común de HAM10000.}
+\label{fig:clasificacion-ham-pareada}
 \centering
-\includegraphics[width=0.97\textwidth,height=0.80\textheight,keepaspectratio,trim=0pt 0pt 205pt 0pt,clip]{images/comparacion_modelos_clasificacion.pdf}
+\includegraphics[width=\textwidth]{images/clasificacion_ham_pareada.pdf}
 \par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo (v8.0.0-clean). Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Evaluación sobre 2.004 imágenes, con IC del 95\,\% agrupados por \texttt{lesion\_id}, a partir de \texttt{e3b\_summary.json}. B71 usa TTA canónica; las líneas base conservan el protocolo de su banco. Los valores describen estas configuraciones y no una comparación aislada de arquitecturas.
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Diferencias pareadas de F1 macro entre B71 y las ocho líneas base congeladas.}
+\label{fig:contrastes-ham-baselines}
+\centering
+\includegraphics[width=\textwidth]{images/contrastes_ham_baselines.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} La dirección es B71 menos línea base. Puntos e IC del 95\,\% proceden de la familia \texttt{vs\_proposed\_registered}; la línea discontinua indica diferencia nula. Bootstrap de 1.000 remuestras por \texttt{lesion\_id}, semilla 20260923. No se aplicó corrección global por multiplicidad.
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Matriz de confusión de B71 en HAM10000, normalizada por clase de referencia.}
+\label{fig:confusion-b71-ham}
+\centering
+\includegraphics[width=\textwidth]{images/confusion_b71_ham.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Las celdas muestran porcentajes por fila y las etiquetas incluyen el número de imágenes de cada clase. Fuente: exportación \texttt{b71\_\_congelado.json}, pesos originales, evaluación congelada (n = 2.004). Los porcentajes no son precisión por columna. La clase \texttt{mel} presenta 118 aciertos de 222 casos; la figura permite identificar sus confusiones con otras clases.
 \end{figure}
 
 \FloatBarrier
@@ -532,6 +607,18 @@ D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 \end{table}
 \noindent\textit{Nota.} Elaboración propia.
 
+La Figura~\ref{fig:adaptacion-pad-d0-d3} representa F1 macro y MCC con sus intervalos individuales.
+
+\begin{figure}[!htbp]
+\caption{F1 macro y MCC de las configuraciones D0--D3 en PAD-UFES-20.}
+\label{fig:adaptacion-pad-d0-d3}
+\centering
+\includegraphics[width=\textwidth]{images/adaptacion_pad_d0_d3.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Puntos e IC del 95\,\% de \texttt{pad\_e2\_eval.json}, con bootstrap agrupado por paciente (567 imágenes, 363 pacientes, 25 melanomas). D0: codificador público; D1: A* limpio; D2: continuación con fuente; D3: continuación con fuente y PAD sin etiquetas. D3 mejora frente a D2, pero no supera a D0. Los resultados usan el mapeo parcial BCC/MEL/NV y no demuestran adaptación validada a Santander.
+\end{figure}
+
 ``Fuera de rango'' es la proporción de predicciones \texttt{argmax} fuera de BCC/MEL/NV.
 
 Frente al control D2, D3 mejoró en F1 ($\Delta=+0{,}0816$; IC del 95\,\% [$+0{,}0525$; $+0{,}1085$]) y MCC ($\Delta=+0{,}0730$; IC del 95\,\% [$+0{,}0419$; $+0{,}1034$]). Los intervalos de exactitud balanceada ($+0{,}0375$ [$-0{,}0161$; $+0{,}0875$]) y AUC ($+0{,}0162$ [$-0{,}0065$; $+0{,}0393$]) incluyeron cero. D3, sin embargo, permaneció por debajo de D0 en F1 y MCC. Además, sus \textit{recalls} fueron 0,302 para BCC, 0,320 para melanoma y 0,959 para nevo, y el 47,8\,\% de sus predicciones quedó fuera de esas tres clases. La mejora respecto de D2 constituye una señal piloto, no evidencia de que la adaptación al dominio clínico esté resuelta: la evaluación disponible utiliza una semilla, incluye pocos melanomas y cubre un mapeo parcial de diagnósticos.
@@ -556,4 +643,5 @@ Los hallazgos principales son tres. En HAM10000, B71 superó a las ocho líneas 
     \item \textbf{Criterio clínico de selección.} El banco muestra una tensión entre F1 macro y sensibilidad de melanoma. No hay una decisión clínica documentada que permita priorizar una de estas métricas; por ello se reportan ambas y no se declara un ganador clínico.
     \item \textbf{Prototipo.} La implementación prevista en el objetivo 4 aún no se ha realizado. Permanece pendiente hasta seleccionar el modelo y la configuración finales.
 \end{enumerate}
+
 

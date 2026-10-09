@@ -11,8 +11,10 @@ Rama: feature/flujo-tablas-figuras.
 - [x] Agrupar encabezados de segmentacion, clasificacion y D0-D3.
 - [x] Establecer 11 pt y espaciado sencillo en tablas del capitulo.
 - [x] Aclarar direccion del contraste: B71 menos linea base.
-- [ ] Regenerar graficas con fuentes numericas verificadas.
-- [ ] Resolver umbrales ITA con codigo y fuente citada.
+- [x] Regenerar cinco graficas de clasificacion/adaptacion con JSON verificables.
+- [x] Regenerar violin E5, cobertura y comparacion Otsu--ROI desde todas las filas individuales.
+- [ ] Regenerar otras distribuciones e ISIC desde sus fuentes especificas.
+- [x] Resolver umbrales ITA con codigo y fuente citada.
 - [ ] Compilar documento completo y revisar todas las paginas.
 
 ## Inventario de figuras activas en resultados
@@ -49,5 +51,24 @@ Fichas separadas para esquema ITA, tabla de rangos y antes/despues. No insertar 
 ## Verificacion
 Conservar todas las etiquetas existentes, cifras y notas de limitacion.
 Tablas comparativas compiladas de forma aislada; revisar tambien tabla larga de particiones.
-Compilacion completa bloqueada por spanish.ldf ausente en entorno local; no se declara compilacion completa aprobada.
+Dependencias de compilacion recuperadas en la tercera entrega. Copia de verificacion compila con Biber y referencias resueltas; falta comprobar la compilacion remota con todas las imagenes originales.
 Fuentes del marco teorico y diagramas metodologicos requieren revision propia antes de reemplazarlos.
+
+
+## Segunda entrega
+Cinco figuras vectoriales PDF/SVG, generadas por scripts/generar_figuras_resultados.py; procedencia y SHA-256 de las cuatro fuentes en data/figuras/procedencia.json.
+El montaje multidataset anterior se conserva en apendices.tex con su etiqueta original. Los paneles ISIC requieren regeneracion propia. El original E5 se conserva como archivo; el violin activo se regenera desde los registros en la tercera entrega.
+Tabla de intervalos ITA basada en fst_bucket y FST_THRESHOLDS del commit fuente; grupos internos no equivalentes a fototipo clinico.
+La fuente usada en esta generacion es Nimbus Roman porque Times New Roman no esta instalada. Para la version final, instalar Times New Roman y ejecutar python scripts/generar_figuras_resultados.py. El script verifica la disponibilidad y no sustituye fuentes silenciosamente.
+Verificacion: cinco figuras inspeccionadas visualmente; matriz de confusion validada frente a 2004 casos; inversiones de diferencias e intervalos hechas conjuntamente. El bloqueo por spanish.ldf se resuelve en la tercera entrega.
+
+## Tercera entrega: E5 y compilacion
+Los registros E5 de HAM10000, ISIC2019 e ISIC2020 se recuperaron como blobs Git; los extractos conservan todas las filas, identificadores, valores y estados de ambos estimadores. Su procedencia incluye revision experimental y revision de archivo.
+Tres figuras nuevas: violin con mediana/IQR; proporciones internas con abstencion sobre el total; mediana/IQR Otsu--ROI. Tabla de cobertura con total, cada estimador valido y la interseccion. Las medianas son marginales; no se presenta una diferencia pareada ni un intervalo de confianza.
+La salida ROI incluye el borde alternativo y se documentan sus 1727/1696 casos en ISIC2019/2020. No mezclar este protocolo con la estratificacion de septiembre.
+Soporte de español, BibLaTeX, Biber y paquetes de algoritmos recuperados en el entorno local. Instrucciones en docs/compilacion.md y compilacion en GitHub Actions con las imagenes originales. El resultado remoto debe revisarse en el PR antes del merge.
+
+Verificacion local de la tercera entrega: la copia temporal de la tesis compila hasta el final con XeLaTeX/Biber (123 paginas), sin referencias ni citas pendientes. Solo se sustituye temporalmente figura01-ejemplos-lesiones-dermatologicas.png porque el conector devuelve vacio para ese archivo de 1,34 MB; no se modifica ni se publica esa sustitucion. Se verificaron hashes Git de los restantes binarios y se corrigio una descarga local incompleta de pad_fst_ita.pdf. Se inspeccionaron las paginas de E5 y la tabla ITA; las notas y leyendas no se recortan. Dos lineas largas se ajustaron localmente sin alterar contenido mediante sloppypar.
+
+## Explicación ITA
+Esquema geométrico propio de la ecuación, sin observaciones experimentales, ubicado antes de los intervalos y generado por scripts/generar_esquema_ita.py. Ejes: mediana de b* y mediana de L* menos 50. Se ilustra un ángulo positivo y se explica el caso negativo y la abstención. El gráfico no representa un cambio observado después de transformar las imágenes. La copia de verificación actual compila 124 páginas sin referencias pendientes ni desbordamientos.

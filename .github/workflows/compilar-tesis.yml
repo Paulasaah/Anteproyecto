@@ -1,0 +1,57 @@
+name: Compilar tesis
+
+on:
+  pull_request:
+    paths:
+      - '**.tex'
+      - '**.sty'
+      - '**.bib'
+      - 'images/**'
+      - '.github/workflows/compilar-tesis.yml'
+  push:
+    branches: [main, feature/flujo-tablas-figuras]
+    paths:
+      - '**.tex'
+      - '**.sty'
+      - '**.bib'
+      - 'images/**'
+      - '.github/workflows/compilar-tesis.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tesis-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Obtener repositorio e imágenes originales
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Compilar con XeLaTeX y Biber
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # v4
+        with:
+          root_file: main.tex
+          texlive_version: 2024
+          latexmk_use_xelatex: true
+      - name: Guardar PDF compilado
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: tesis-pdf
+          path: main.pdf
+          if-no-files-found: error
+          retention-days: 14
+      - name: Guardar registros de compilación
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: tesis-registros
+          path: |
+            main.log
+            main.blg
+          if-no-files-found: ignore
+          retention-days: 14

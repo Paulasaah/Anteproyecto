@@ -12,6 +12,43 @@ El ITA se calcula sobre píxeles de piel seleccionados por máscara, usando las 
 \end{equation}
 El cálculo se repite sobre tres regiones de muestreo de piel por imagen --máscara por Otsu, imagen completa y anillo perilesional--, usando pseudo-máscaras automáticas del segmentador (sección~\ref{sec:desarrollo-segmentacion}) cuando están disponibles. El resultado se marca como indeterminado si $\widetilde b^*<5$, y la imagen queda en cuarentena cuando no hay piel suficiente o la máscara es degenerada.
 
+La Figura~\ref{fig:ita-esquema-geometrico} explica el ángulo formado por las medianas colorimétricas de la región seleccionada, antes de agrupar sus valores.
+
+\begin{figure}[!htbp]
+\caption{Interpretación geométrica del ángulo tipológico individual.}
+\label{fig:ita-esquema-geometrico}
+\centering
+\includegraphics[width=\textwidth]{images/ita_esquema_geometrico.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Esquema conceptual de la ecuación, sin observaciones experimentales. El eje horizontal corresponde a $\widetilde b^*$ y el vertical a $\widetilde L^*-50$; se ilustra un ángulo positivo. Con $\widetilde b^*\geq5$, valores de $\widetilde L^*<50$ producen un ángulo negativo. Los controles de región y de $\widetilde b^*$ pueden conducir a abstención antes de asignar un intervalo. La selección de píxeles se registra por estimador; el ángulo no asigna fototipo clínico.
+\end{figure}
+\FloatBarrier
+
+Los intervalos utilizados por la implementación se presentan en la Tabla~\ref{tab:intervalos-ita-implementados}. Son agrupaciones colorimétricas internas; la numeración I--VI no les confiere equivalencia clínica con Fitzpatrick. Los límites exactos pertenecen al intervalo de número mayor, según las comparaciones estrictas de la función \texttt{fst\_bucket}.
+
+\begin{table}[!htbp]
+\centering
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\caption{Intervalos de ITA utilizados por la implementación del proyecto.}
+\label{tab:intervalos-ita-implementados}
+\begin{tabular}{ll}
+\toprule
+Grupo interno & Intervalo de ITA ($^\circ$) \\
+\midrule
+I & $\mathrm{ITA}>40$ \\
+II & $23<\mathrm{ITA}\leq40$ \\
+III & $12<\mathrm{ITA}\leq23$ \\
+IV & $0<\mathrm{ITA}\leq12$ \\
+V & $-25<\mathrm{ITA}\leq0$ \\
+VI & $\mathrm{ITA}\leq-25$ \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright
+\textit{Nota.} Fuente: \texttt{FST\_THRESHOLDS} y \texttt{fst\_bucket} en \path{src/dermssl/fitzpatrick.py}, repositorio de implementación, commit \texttt{a3c3a6ed}. Estos límites no deben intercambiarse con otros esquemas de categorización de ITA. Las abstenciones no se asignan a ninguno de estos grupos.
+\endgroup
+\end{table}
+
 \begin{algorithm}[htbp]
 \caption{Estimación del ángulo de tipología individual (ITA)}
 \label{alg:estimacion-ita}

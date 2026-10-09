@@ -33,7 +33,9 @@ El \textit{backbone} es un ResNet-50 preentrenado de forma contrastiva con MoCo 
 
 \subsubsection{Datos empleados}
 
+\begin{sloppypar}
 El \textit{pool} desduplicado de imágenes sin etiquetas contiene 58.457 imágenes: 10.015 de HAM10000, 15.316 de ISIC2019 que no duplican HAM10000 y 33.126 de ISIC2020. Esta cifra corresponde al módulo de segmentación y no al \textit{pool} de preentrenamiento del clasificador. Para la caché compartida por \texttt{student\_r3} y S4-A2, el registro de ejecución especifica 57.288 imágenes de entrenamiento y 1.169 de pseudo-validación; de ellas, 52.453 y 1.082, respectivamente, cuentan con píxeles confiables. En \texttt{pseudo\_r2}, 2.508 imágenes (4,29\,\%) quedaron excluidas por los criterios de región y área de la máscara. Ninguna etapa de entrenamiento utiliza las máscaras expertas de ISIC2018 ni etiquetas de diagnóstico. La evaluación final compara las predicciones con máscaras de referencia de ISIC2018 (2.594 imágenes) y HAM10000 (10.015). Como parte de ISIC2018 coincide por identificador con imágenes incluidas sin etiquetas en el \textit{pool}, esta evaluación es parcialmente transductiva y no debe describirse como completamente independiente.
+\end{sloppypar}
 
 \subsubsection{Criterios de evaluación}
 
