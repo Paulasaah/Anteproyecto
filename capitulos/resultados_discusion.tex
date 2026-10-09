@@ -328,42 +328,6 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 
 Los intervalos individuales de A71 y B71 se solapan en exactitud balanceada y F1 macro. Por sí sola, esta comparación no permite afirmar que añadir el término de tono mejore el desempeño. Para evaluar la diferencia entre ambos brazos se requiere el contraste pareado correspondiente.
 
-\subsection{Segmentación complementaria}
-\label{sec:segmentacion-complementaria}
-
-La evaluación incluyó dos variantes de segmentación. \texttt{student\_r3} se entrenó sin etiquetas diagnósticas ni máscaras expertas, mediante MoCo v2/ResNet-50, CCAM y tres rondas de refinamiento del U-Net con pseudo-máscaras. La configuración registrada no se comparó con otros números de rondas y las fuentes revisadas no explican por qué se fijaron tres. El equipo indicó que el tiempo disponible limitó la exploración de variantes adicionales. También se evaluó S4-A2, que utiliza DINOv2 ViT-B/14 congelado y un \textit{decoder} tipo DPT. La Tabla~\ref{tab:segmentacion-student-a2} presenta el Dice medio y su IC del 95\,\% respecto de las máscaras de referencia.
-
-\begin{table}[htbp]
-\centering
-\caption{Evaluación de los segmentadores \texttt{student\_r3} y S4-A2.}
-\label{tab:segmentacion-student-a2}
-\begin{tabular}{lrr}
-\toprule
-Segmentador & ISIC2018 ($n=2.594$) & HAM10000 ($n=10.015$) \\
-\midrule
-\texttt{student\_r3} & 0,718 [0,709; 0,726] & 0,785 [0,781; 0,788] \\
-S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
-\bottomrule
-\end{tabular}
-\end{table}
-\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
-
-La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Se muestran la imagen original, la máscara de referencia, la predicción y la superposición de contornos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion-ejemplos-student-r3.jpg}
-\caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
-\label{fig:segmentacion-ejemplos}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2; el valor indicado en cada fila corresponde a \texttt{student\_r3}. La selección ilustra casos del conjunto y no sustituye las métricas agregadas ni representa una validación clínica.
-\end{figure}
-
-S4-A2 cumplió el criterio definido antes de la evaluación: su Dice en ISIC2018 superó el valor de \texttt{student\_r3} menos 0,01 y también fue mayor en HAM10000. Entre las dos variantes evaluadas, S4-A2 obtuvo los mejores resultados de segmentación. Esta diferencia no se tradujo en una mejora demostrada de la clasificación: en la comparación C1, ninguno de los 15 intervalos de F1 macro del análisis primario con \texttt{student\_r3} excluyó cero, y el análisis secundario de S4-A2 mostró el mismo patrón. Por ello, los resultados respaldan la segmentación como módulo complementario, pero no como una mejora general de la clasificación.
-
-\section{Discusión}
-
 \subsection{Comparación pareada: clasificador SSL congelado frente a ocho líneas base}
 
 En esta comparación, el \textit{backbone} preentrenado con SSL permaneció congelado y solo se ajustó una regresión logística sobre las representaciones extraídas. B71 y las ocho líneas base se evaluaron en la misma partición de HAM10000 (n = 2.004), agrupada por \texttt{lesion\_id}. Los intervalos pareados se estimaron con 1.000 remuestras bootstrap y semilla 20260923. No se aplicó una corrección global por multiplicidad; por ello, el patrón de ocho contrastes que excluyen cero se interpreta dentro de esta comparación, sin tratar cada contraste como una confirmación independiente.
@@ -429,6 +393,46 @@ D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 ``Fuera de rango'' es la proporción de predicciones \texttt{argmax} fuera de BCC/MEL/NV.
 
 Frente al control D2, D3 mejoró en F1 ($\Delta=+0{,}0816$; IC del 95\,\% [$+0{,}0525$; $+0{,}1085$]) y MCC ($\Delta=+0{,}0730$; IC del 95\,\% [$+0{,}0419$; $+0{,}1034$]). Los intervalos de exactitud balanceada ($+0{,}0375$ [$-0{,}0161$; $+0{,}0875$]) y AUC ($+0{,}0162$ [$-0{,}0065$; $+0{,}0393$]) incluyeron cero. D3, sin embargo, permaneció por debajo de D0 en F1 y MCC. Además, sus \textit{recalls} fueron 0,302 para BCC, 0,320 para melanoma y 0,959 para nevo, y el 47,8\,\% de sus predicciones quedó fuera de esas tres clases. La mejora respecto de D2 constituye una señal piloto, no evidencia de que la adaptación al dominio clínico esté resuelta: la evaluación disponible utiliza una semilla, incluye pocos melanomas y cubre un mapeo parcial de diagnósticos.
+
+\subsection{Segmentación complementaria}
+\label{sec:segmentacion-complementaria}
+
+La evaluación incluyó dos variantes de segmentación. \texttt{student\_r3} se entrenó sin etiquetas diagnósticas ni máscaras expertas, mediante MoCo v2/ResNet-50, CCAM y tres rondas de refinamiento del U-Net con pseudo-máscaras. La configuración registrada no se comparó con otros números de rondas y las fuentes revisadas no explican por qué se fijaron tres. El equipo indicó que el tiempo disponible limitó la exploración de variantes adicionales. También se evaluó S4-A2, que utiliza DINOv2 ViT-B/14 congelado y un \textit{decoder} tipo DPT. La Tabla~\ref{tab:segmentacion-student-a2} presenta el Dice medio y su IC del 95\,\% respecto de las máscaras de referencia.
+
+\begin{table}[htbp]
+\centering
+\caption{Evaluación de los segmentadores \texttt{student\_r3} y S4-A2.}
+\label{tab:segmentacion-student-a2}
+\begin{tabular}{lrr}
+\toprule
+Segmentador & ISIC2018 ($n=2.594$) & HAM10000 ($n=10.015$) \\
+\midrule
+\texttt{student\_r3} & 0,718 [0,709; 0,726] & 0,785 [0,781; 0,788] \\
+S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
+\bottomrule
+\end{tabular}
+\end{table}
+\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
+
+La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Se muestran la imagen original, la máscara de referencia, la predicción y la superposición de contornos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion-ejemplos-student-r3.jpg}
+\caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
+\label{fig:segmentacion-ejemplos}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia. Las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2; el valor indicado en cada fila corresponde a \texttt{student\_r3}. La selección ilustra casos del conjunto y no sustituye las métricas agregadas ni representa una validación clínica.
+\end{figure}
+
+S4-A2 cumplió el criterio definido antes de la evaluación: su Dice en ISIC2018 superó el valor de \texttt{student\_r3} menos 0,01 y también fue mayor en HAM10000. Entre las dos variantes evaluadas, S4-A2 obtuvo los mejores resultados de segmentación. Esta diferencia no se tradujo en una mejora demostrada de la clasificación: en la comparación C1, ninguno de los 15 intervalos de F1 macro del análisis primario con \texttt{student\_r3} excluyó cero, y el análisis secundario de S4-A2 mostró el mismo patrón. Por ello, los resultados respaldan la segmentación como módulo complementario, pero no como una mejora general de la clasificación.
+
+\section{Discusión}
+
+Los resultados deben leerse según la tarea y el protocolo de cada evaluación. En la comparación congelada de HAM10000, B71 obtuvo intervalos pareados que excluyeron cero frente a las ocho líneas base, sin corrección global por multiplicidad. En el ajuste fino, algunos modelos alcanzaron o superaron a B71 en HAM10000 e ISIC2019. En ISIC2020, el F1 macro y la sensibilidad de melanoma favorecieron configuraciones distintas. Estos resultados no establecen un único modelo superior para todos los criterios.
+
+En adaptación de dominio, D3 mejoró frente al control D2, pero permaneció por debajo de D0. En segmentación, S4-A2 superó a \texttt{student\_r3} en las métricas reportadas, aunque el uso de máscaras no mostró una mejora general de la clasificación. El ITA tuvo un desempeño inferior a la línea base por mayoría, por lo que no se interpreta como estimación validada del fototipo clínico.
 
 \subsection{Limitaciones de ITA y Fitzpatrick}
 
