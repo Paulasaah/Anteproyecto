@@ -1,4 +1,4 @@
-% Archivo de estilo para títulos UNAD sin numeración y con formato específico
+% Archivo de estilo para títulos UNAB numerados según la estructura del documento
 
 \usepackage{titlesec}
 \usepackage{setspace}
@@ -9,8 +9,8 @@
 % Título 1: (chapter) Negrita, centrado, 12pt, doble espacio
 \titleformat{\chapter}[block]
   {\normalfont\bfseries\centering\fontsize{12pt}{14pt}\selectfont\singlespacing}
-  {} % Sin numeración
-  {0pt}
+  {\thechapter.}
+  {0.75em}
   {}
 \titlespacing*{\chapter}
   {0pt}{0pt}{18pt} % Inicio de capítulo sin espacio superior adicional
@@ -18,21 +18,21 @@
 % Título 2: (section) Negrita, 12pt, alineado a la izquierda, numerado, doble espacio
 \titleformat{\section}[block]
   {\normalfont\bfseries\fontsize{12pt}{14pt}\selectfont\singlespacing}
-  {}{0pt}{}
+  {\thesection}{0.75em}{}
 \titlespacing*{\section}
   {0pt}{18pt}{12pt}
 
 % Título 3: (subsection) Negrita, 12pt, alineado a la izquierda, numerado, doble espacio
 \titleformat{\subsection}[block]
   {\normalfont \bfseries\fontsize{12pt}{14pt}\selectfont\singlespacing}
-  {}{0pt}{}
+  {\thesubsection}{0.75em}{}
 \titlespacing*{\subsection}
   {0pt}{12pt}{6pt}
 
 % Título 4: (subsubsection) Negrita, 12pt, alineado al margen izquierdo y numerado
 \titleformat{\subsubsection}[block]
   {\normalfont\bfseries\fontsize{12pt}{14pt}\selectfont\singlespacing}
-  {}{0pt}{}
+  {\thesubsubsection}{0.75em}{}
 \titlespacing*{\subsubsection}
   {0pt}{12pt}{6pt}
 
@@ -43,8 +43,9 @@
 \titlespacing*{\paragraph}
   {0pt}{6pt}{6pt}
 
-% Quitar numeración de capítulos/secciones/subsecciones
-\setcounter{secnumdepth}{0}
+% Numerar capítulos, secciones, subsecciones y subsubsecciones.
+% La tabla de contenido controla por separado hasta qué nivel se muestran.
+\setcounter{secnumdepth}{3}
 
 % Doble espaciado general en el documento
 \AtBeginDocument{\doublespacing}
