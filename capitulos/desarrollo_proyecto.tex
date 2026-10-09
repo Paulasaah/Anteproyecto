@@ -4,7 +4,7 @@ Este capítulo presenta el desarrollo técnico realizado para cada una de las tr
 
 La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí las tres líneas: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, con una posible integración (compuerta I) que requiere ablación propia y no se presenta como validada.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \caption{Arquitectura del clasificador autosupervisado y módulos complementarios de segmentación y adaptación de dominio.}
 \label{fig:arquitectura-modular}
 \centering
@@ -15,6 +15,8 @@ La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí la
 \textit{Nota.} Elaboración propia. El diagrama muestra el flujo del clasificador SSL, la segmentación como módulo complementario y las ramas de adaptación de dominio y evaluación externa. El diseño se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
 \par\endgroup
 \end{figure}
+
+\FloatBarrier
 
 \section{Clasificación con aprendizaje autosupervisado y adaptación de dominio}
 \label{sec:desarrollo-clasificador}

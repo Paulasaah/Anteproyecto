@@ -201,6 +201,8 @@ La Figura~\ref{fig:pad-fototipo-clinico} reúne la distribución de fototipos cl
 \noindent\textit{Nota.} Elaboración propia. El panel (a) presenta las etiquetas clínicas de fototipo registradas; el panel (b), los valores del proxy ITA agrupados por fototipo registrado. El ITA es una medida colorimétrica y no equivale a una etiqueta clínica ni valida la calidad de las máscaras.
 \end{figure}
 
+\FloatBarrier
+
 \subsection{Caracterización colorimétrica antes y después de la transformación}
 
 El resumen local anterior a la transformación permite describir el proxy ITA de las imágenes originales (tabla \ref{tab:ita-originales}). Se calcula sobre píxeles de piel seleccionados por máscara, usando las medianas de los canales CIELAB: $\mathrm{ITA}=(180/\pi)\arctan((\widetilde L^*-50)/\widetilde b^*)$. El código marca el resultado como indeterminado si $\widetilde b^*<5$; otras imágenes quedan en cuarentena por los controles del módulo. Los seis intervalos empleados internamente para agrupar ITA no se interpretan como fototipos clínicos.
@@ -425,6 +427,8 @@ La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del mod
 \raggedright\footnotesize
 \noindent\textit{Nota.} Elaboración propia. Las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2; el valor indicado en cada fila corresponde a \texttt{student\_r3}. La selección ilustra casos del conjunto y no sustituye las métricas agregadas ni representa una validación clínica.
 \end{figure}
+
+\FloatBarrier
 
 S4-A2 cumplió el criterio definido antes de la evaluación: su Dice en ISIC2018 superó el valor de \texttt{student\_r3} menos 0,01 y también fue mayor en HAM10000. Entre las dos variantes evaluadas, S4-A2 obtuvo los mejores resultados de segmentación. Esta diferencia no se tradujo en una mejora demostrada de la clasificación: en la comparación C1, ninguno de los 15 intervalos de F1 macro del análisis primario con \texttt{student\_r3} excluyó cero, y el análisis secundario de S4-A2 mostró el mismo patrón. Por ello, los resultados respaldan la segmentación como módulo complementario, pero no como una mejora general de la clasificación.
 
