@@ -67,44 +67,7 @@ La Figura~\ref{fig:ham10000-clase-tono} presenta los conteos de las clases de HA
 
 ISIC2019 reúne 25.331 imágenes dermatoscópicas (20.264 de entrenamiento y 5.067 de validación) distribuidas en ocho categorías diagnósticas: nevos melanocíticos (\texttt{NV}), melanoma (\texttt{MEL}), carcinoma basocelular (\texttt{BCC}), lesiones similares a queratosis benignas (\texttt{BKL}), queratosis actínica (\texttt{AK}), carcinoma escamocelular (\texttt{SCC}), dermatofibroma (\texttt{DF}) y lesión vascular (\texttt{VASC}) \parencite{combalia2024bcn20000}. A diferencia de HAM10000, que agrupa la queratosis actínica y el carcinoma intraepidérmico en una sola clase (\texttt{akiec}), ISIC2019 separa \texttt{AK} de \texttt{SCC} como categorías independientes; ambas taxonomías no son directamente intercambiables en un entrenamiento conjunto. La clase \texttt{NV} concentra igualmente la mayoría de las imágenes, un desbalance compartido con HAM10000.
 
-La Figura~\ref{fig:distribuciones-clase-combinadas} reúne las distribuciones diagnósticas de los cuatro conjuntos: (a) HAM10000, (b) ISIC2019, (c) ISIC2020 y (d) PAD-UFES-20. Los conteos son descriptivos y no representan la prevalencia poblacional de Santander. ISIC2019 se representa mediante el conjunto editorial completo de 25.331 imágenes; el \textit{pool} local de 15.316 imágenes utilizado en preentrenamiento SSL es un subconjunto sin etiquetas y no reproduce necesariamente esta proporción. Los conteos de HAM10000 y PAD-UFES-20 corresponden a las etiquetas de sus publicaciones primarias \parencite{tschandl2018ham10000,pacheco2020padufes}.
 
-\begin{figure}[!htbp]
-\caption{Distribución de diagnósticos en los conjuntos de datos analizados.}
-\label{fig:distribuciones-clase-combinadas}
-\centering
-\begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-ham10000.jpg}
-    \caption{HAM10000}
-    \label{fig:ham10000-clases}
-\end{subfigure}
-\hfill
-\begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-isic2019.jpg}
-    \caption{ISIC2019}
-    \label{fig:isic2019-clases}
-\end{subfigure}
-
-\par\medskip
-\begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-isic2020.jpg}
-    \caption{ISIC2020}
-    \label{fig:isic2020-clases}
-\end{subfigure}
-\hfill
-\begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/distribucion-pad-ufes-20.jpg}
-    \caption{PAD-UFES-20}
-    \label{fig:pad-categorias-fig}
-\end{subfigure}
-\par\smallskip
-\raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Los paneles (a)--(d) muestran los conteos y porcentajes de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Se conservan las categorías originales de cada conjunto; los conteos son descriptivos y no representan prevalencias poblacionales.
-\end{figure}
 
 \FloatBarrier
 \subsection{Caracterización de ISIC2020}
@@ -138,7 +101,44 @@ Total & & 2.298 \\
 \end{tabular}
 \end{table}
 
-Las categorías diagnósticas de PAD-UFES-20 se muestran en la figura \ref{fig:pad-categorias-fig}, junto con las de HAM10000, ISIC2019 e ISIC2020. La figura \ref{fig:pad-fototipo-clinico} presenta, por separado, el fototipo clínico: una variable demográfica que no corresponde al diagnóstico de la lesión.
+La Figura~\ref{fig:distribuciones-clase-combinadas} reúne los conteos de las categorías diagnósticas originales de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, organizados en los paneles (a)--(d), respectivamente. La figura permite comparar la composición de cada corpus, pero no estimar prevalencias poblacionales: los conjuntos proceden de contextos y protocolos de captura distintos, y sus taxonomías no son idénticas. En particular, ISIC2020 conserva una clasificación binaria entre lesiones benignas y malignas, no un diagnóstico por subtipo. Las categorías corresponden a las definidas por las fuentes de cada conjunto \parencite{tschandl2018ham10000,combalia2024bcn20000,rotemberg2021isic2020,pacheco2020padufes}.
+
+\begin{figure}[!htbp]
+\caption{Distribución de diagnósticos en los conjuntos de datos analizados.}
+\label{fig:distribuciones-clase-combinadas}
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/dist_clases_ham10000.pdf}
+    \caption{HAM10000}
+    \label{fig:ham10000-clases}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/dist_clases_isic2019.pdf}
+    \caption{ISIC2019}
+    \label{fig:isic2019-clases}
+\end{subfigure}
+
+\par\medskip
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/dist_clases_isic2020.pdf}
+    \caption{ISIC2020}
+    \label{fig:isic2020-clases}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth,height=0.29\textheight,keepaspectratio]{images/dist_clases_pad_ufes_20.pdf}
+    \caption{PAD-UFES-20}
+    \label{fig:pad-categorias-fig}
+\end{subfigure}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia a partir de las etiquetas originales de cada conjunto. Los paneles (a)--(d) muestran los conteos y porcentajes de HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20, respectivamente. Se conservan las categorías originales; en ISIC2020, benigno y maligno son las dos clases de una clasificación binaria. Los conteos describen la composición de los conjuntos y no representan prevalencias poblacionales.
+\end{figure}
 
 \subsection{Metodología de caracterización de los conjuntos}
 
@@ -189,16 +189,16 @@ En PAD-UFES-20, la exportación local de validación de fototipo conserva 1.494 
 
 La exportación del proyecto verifica identificadores únicos. La etiqueta clínica no cambia al transformar el color de una imagen.
 
-La Figura~\ref{fig:pad-fototipo-clinico} reúne la distribución de fototipos clínicos registrados y la distribución del proxy ITA según esas etiquetas en PAD-UFES-20.
+La Figura~\ref{fig:pad-fototipo-clinico} contrasta las etiquetas de fototipo registradas en PAD-UFES-20 con la distribución del ITA estimado en el fondo de las imágenes. La comparación describe la relación entre dos fuentes distintas: una etiqueta consignada en los metadatos y una medida colorimétrica calculada a partir de píxeles. El origen de la asignación de FST no está verificado y el ITA no se ha validado como estimador del fototipo; por ello, la figura no acredita la calidad de las máscaras ni el desempeño clínico del estimador.
 
 \begin{figure}[!htbp]
-\caption{Distribución de fototipos clínicos registrados y de valores estimados del ITA en PAD-UFES-20.}
+\caption{Distribución de las etiquetas de fototipo registradas y de las estimaciones del ITA en PAD-UFES-20.}
 \label{fig:pad-fototipo-clinico}
 \centering
-\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/distribucion-ita-pad-ufes-20.jpg}
+\includegraphics[width=\textwidth,height=0.36\textheight,keepaspectratio]{images/pad_fst_ita.pdf}
 \par\smallskip
 \raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. El panel (a) presenta las etiquetas clínicas de fototipo registradas; el panel (b), los valores del proxy ITA agrupados por fototipo registrado. El ITA es una medida colorimétrica y no equivale a una etiqueta clínica ni valida la calidad de las máscaras.
+\noindent\textit{Nota.} Elaboración propia. El panel (a) muestra los fototipos registrados en los metadatos y el panel (b), el ITA estimado en el fondo de las imágenes agrupado según esos registros. De las 2.298 imágenes, 1.494 tienen una etiqueta FST y 804 no cuentan con ese dato; se obtuvo un ITA válido para 1.189 imágenes con FST. La fuente de la asignación del FST no está verificada. El ITA se calculó con umbral de Otsu en el fondo y no está validado como fototipo; las categorías V y VI se presentan solo de forma descriptiva, sin inferencias. La comparación evalúa el estimador ITA frente a las etiquetas FST, no la calidad de las máscaras de segmentación.
 \end{figure}
 
 \FloatBarrier
@@ -225,6 +225,18 @@ ISIC2020 (\textit{pool}) & 33.126 & 20.833 & 10.587 & 1.706 & 52,36 \\
 \end{table}
 
 El resumen usa la estratificación del 21 de septiembre de 2026. HAM10000 agrega sus carpetas de 5.000 y 5.015 imágenes; su media ITA pondera los 2.547 y 1.730 casos válidos, respectivamente. Las cifras describen ese \textit{pool} y esa versión de máscaras; no son prevalencias de fototipo ni se trasladan automáticamente a otras corridas.
+
+La Figura~\ref{fig:ita-roi-e5} presenta un análisis complementario de la salida E5, calculada sobre una región de interés perilesional (ROI). Sus valores corresponden a otra configuración y cobertura que la Tabla~\ref{tab:ita-originales}: esta resume la estratificación del 21 de septiembre de 2026 sobre el \textit{pool} local, mientras que la figura muestra HAM10000, ISIC2019 e ISIC2020 completos y usa el anillo perilesional o, cuando no había una máscara elegible, el borde de la imagen. Por tanto, sus conteos no son una actualización directa de los de la tabla ni permiten atribuir diferencias al desempeño del estimador sin comparar entradas equivalentes. En el panel (a), $n$ corresponde a imágenes con ITA calculable; en el panel (b), los porcentajes incluyen también las abstenciones. Las categorías derivadas del ITA son descriptivas y no equivalen a fototipos clínicos.
+
+\begin{figure}[!htbp]
+\caption{Distribución del ITA estimado en regiones perilesionales de tres conjuntos de imágenes.}
+\label{fig:ita-roi-e5}
+\centering
+\includegraphics[width=0.94\textwidth,height=0.43\textheight,keepaspectratio]{images/ita_roi_e5_multidataset.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia con los resultados descriptivos E5. El panel (a) muestra la distribución continua del ITA en la ROI perilesional para los casos con estimación válida; el panel (b) muestra la proporción de las categorías I--VI y de abstención sobre el total de cada conjunto. Las pseudo-máscaras de las lesiones son automáticas, generadas con \texttt{student\_r3}; cuando no había máscara elegible, se usó el borde de la imagen. Los intervalos I--VI son agrupaciones del estimador de ITA, no diagnósticos ni fototipos clínicos validados. Esta figura caracteriza las salidas del estimador y no evalúa la calidad de las máscaras.
+\end{figure}
 
 La transformación modifica la luminosidad de todos los píxeles fuera de la máscara de lesión, incluidos fondo y artefactos; es una modificación sintética de luminosidad, no una corrección validada del tono de piel. Su formulación se desarrolla en el Capítulo~7, Sección~\ref{sec:desarrollo-tono}. Para comparar antes y después se requieren pares originales/transformados con identificadores coincidentes, hashes y mediciones colorimétricas obtenidas con el mismo protocolo. Los resultados locales revisados no contienen el manifiesto de transformaciones ni mediciones posteriores emparejadas. Por ello, el efecto posterior sobre ITA o luminosidad permanece pendiente y no se presenta un histograma simulado. Los conteos de fototipo clínico de PAD-UFES-20 conservan su valor tras cualquier transformación, porque son metadatos de la persona y no una propiedad que se reasigne a partir de los píxeles.
 
@@ -367,6 +379,21 @@ Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,
 
 En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustados y aplicó Holm por separado a cada familia de métricas. B71-limpio obtuvo mayor F1 macro que siete de los ocho modelos; la diferencia frente a VGG19 no alcanzó el umbral corregido ($p_{\text{Holm}}=0{,}066$). En cambio, la exactitud balanceada favoreció a siete de los ocho modelos ajustados. La diferencia más clara aparece en la detección de melanoma: B71 identificó 39 de 122 casos (\textit{recall} 0,3197), frente a 86 de 122 (\textit{recall} 0,7049) con AlexNet ajustado. Este análisis es post hoc y no formó parte del registro original. En conjunto, los resultados muestran que un F1 macro mayor no implica necesariamente mayor sensibilidad para melanoma; la elección entre estas métricas requiere un criterio clínico que el proyecto aún no ha definido.
 
+
+La Figura~\ref{fig:comparacion-modelos-multidataset} resume F1 macro y MCC para los modelos y conjuntos presentados en esta sección, y muestra los contrastes entre las variantes limpias y públicas cuando están disponibles. Sirve para observar patrones entre conjuntos; las tablas conservan los valores exactos y el protocolo de cada comparación. La figura muestra el ajuste fino solo para ISIC2020, tal como indica su leyenda; los resultados de ajuste fino en HAM10000 e ISIC2019 se reportan en el texto y no están representados en ella.
+
+\begin{sidewaysfigure}
+\caption{Comparación de las métricas de clasificación y de los contrastes entre variantes limpias y públicas.}
+\label{fig:comparacion-modelos-multidataset}
+\centering
+\includegraphics[width=0.94\textheight]{images/comparacion_modelos_clasificacion.pdf}
+\par\smallskip
+\raggedright\footnotesize
+\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo (v8.0.0-clean). Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
+\end{sidewaysfigure}
+
+\FloatBarrier
+
 \subsection{Ablación de segmentación complementaria (F4)}
 
 F4 concatena la imagen completa, un recorte de la lesión con margen del 10\,\% y descriptores de forma y color de la pseudo-máscara del segmentador (\texttt{student\_r3}); no aplica enmascaramiento duro. En el contraste canónico B71+F4 frente a B71 en HAM10000, $\Delta$F1 macro $=+0{,}0300$ [$-0{,}0046$; $+0{,}0715$], exactitud balanceada $+0{,}0222$ [$-0{,}0159$; $+0{,}0624$] y \textit{recall} de melanoma $+0{,}0135$ [$-0{,}0446$; $+0{,}0714$]: ningún intervalo excluye cero. La sensibilidad por semilla confirma la falta de robustez: $+0{,}0300$ (semilla 42), $+0{,}0092$ (semilla 43) y $+0{,}0261$ (semilla 44), con 0 de 3 intervalos excluyendo cero. En el análisis exploratorio E3b, F4 sube el punto de F1 en 8 de 8 \textit{backbones}, pero solo 5 de 8 intervalos excluyen cero. F4 se mantiene como variante exploratoria; B71 sin segmentación sigue siendo la referencia principal del banco.
@@ -422,10 +449,10 @@ La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del mod
 \caption{Ejemplos de segmentación de lesiones cutáneas con \texttt{student\_r3} en ISIC 2018.}
 \label{fig:segmentacion-ejemplos}
 \centering
-\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion-ejemplos-student-r3.jpg}
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{images/segmentacion_student_r3_isic2018.pdf}
 \par\smallskip
 \raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia. Las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2; el valor indicado en cada fila corresponde a \texttt{student\_r3}. La selección ilustra casos del conjunto y no sustituye las métricas agregadas ni representa una validación clínica.
+\noindent\textit{Nota.} Elaboración propia. Se muestra únicamente U-Net \texttt{student\_r3}; las filas corresponden a casos seleccionados en los percentiles 90, 50 y 10 del Dice medio de U-Net/S4-A2 (p90, p50 y p10), no a categorías clínicas. Se conserva el mismo identificador y preprocesamiento de 224~px; los valores de Dice de U-Net se verificaron frente al CSV. Son tres ejemplos de las 2.594 imágenes evaluadas de ISIC 2018 y complementan, sin sustituir, las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
 \end{figure}
 
 \FloatBarrier
