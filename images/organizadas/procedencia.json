@@ -81,9 +81,10 @@
     },
     {
       "svg": "02_segmentacion_3x3.svg",
-      "svg_sha256": "c495e68b892090117fced8b8fc41178d311f04a9c0815675ea23356fb6ab6873",
+      "svg_sha256": "0b18ba4e4b06a4c13bf40d4052a4ef2d941df96b9725db0120c33c1275382511",
       "pdf": "02_segmentacion_3x3_svg-raw.pdf",
-      "pdf_sha256": "4b298df6360005faa9a801ed3bc0f62fadcc885d8f764e061c29beeba562aaaa"
+      "pdf_sha256": "b1c450ecc3f07bb80e3b0f6d1a4efac71f8bf83d028be1751c8c2caffb470938",
+      "fuente": "Exportaciones reales del pod: scripts/datos_segmentacion/exportacion_pod; Dice de ambos modelos verificado; CCAM crudo sobre su propia entrada de caché."
     },
     {
       "svg": "03_segmentacion_dice.svg",
@@ -242,6 +243,13 @@
       "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
       "svg_sha256": "4b3728a57db84d80a4199b5ea1532bf9f17d61fa7c5995cde531795404a29107",
       "pdf_sha256": "ffa2f9ca76a793879f16336831803a9c9b2619d0344465ce1b96611123625b31"
+    },
+    {
+      "svg": "28_segmentacion_ham10000.svg",
+      "pdf": "28_segmentacion_ham10000_svg-raw.pdf",
+      "svg_sha256": "5d71a64149ca554b21cb8290f4233a8f986d959dacb73fd2c947b412738f606a",
+      "pdf_sha256": "6e7949b4499bfbe158d13898dffbf4fa6fb628fe3955d31d491e3524ff4139ba",
+      "fuente": "Exportaciones reales del pod: scripts/datos_segmentacion/exportacion_pod; Dice de ambos modelos verificado; CCAM crudo sobre su propia entrada de caché."
     }
   ]
 }

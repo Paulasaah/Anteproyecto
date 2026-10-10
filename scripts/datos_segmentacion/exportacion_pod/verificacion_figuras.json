@@ -1,0 +1,65 @@
+{
+  "source_files": {
+    "ccam_casos.provenance.json": "e8059a1d6a823c5fb15cfae63a263c95acd7dc53e9b459d880ecb54a452ae017",
+    "fig3_casos.provenance.json": "1270e7ce6f562d54198f0d56b8bab045d5124ea94ff3129f2af20b4207d00dd1",
+    "ccam_casos.npz": "cbd7074f30b6e9197618bbe9cf99727967e33fde662626bb8bc5b21177d1e433",
+    "fig3_casos.npz": "a4faef1b981a61117026cb7ce3a8b57b185f5c3e2e6a4a6cb414486e196971d7"
+  },
+  "checks": [
+    {
+      "dataset": "isic2018",
+      "image_id": "ISIC_0014943",
+      "dice_recomputed": {
+        "student_r3": 0.9400744565870062,
+        "A2": 0.9273038146335711
+      },
+      "ccam_input_mae_vs_evaluation": 15.900138180272108
+    },
+    {
+      "dataset": "isic2018",
+      "image_id": "ISIC_0011095",
+      "dice_recomputed": {
+        "student_r3": 0.773601209764528,
+        "A2": 0.814941279942056
+      },
+      "ccam_input_mae_vs_evaluation": 13.971606611394558
+    },
+    {
+      "dataset": "isic2018",
+      "image_id": "ISIC_0013369",
+      "dice_recomputed": {
+        "student_r3": 0.38189955246146196,
+        "A2": 0.4010443864229765
+      },
+      "ccam_input_mae_vs_evaluation": 8.37463461947279
+    },
+    {
+      "dataset": "ham10000",
+      "image_id": "ISIC_0024442",
+      "dice_recomputed": {
+        "student_r3": 0.9470058554347291,
+        "A2": 0.9449608971521322
+      },
+      "ccam_input_mae_vs_evaluation": 0.5173588966836735
+    },
+    {
+      "dataset": "ham10000",
+      "image_id": "ISIC_0029448",
+      "dice_recomputed": {
+        "student_r3": 0.85223127279996,
+        "A2": 0.8579333937015796
+      },
+      "ccam_input_mae_vs_evaluation": 0.5958094175170068
+    },
+    {
+      "dataset": "ham10000",
+      "image_id": "ISIC_0026132",
+      "dice_recomputed": {
+        "student_r3": 0.5525474312513323,
+        "A2": 0.49753193960511033
+      },
+      "ccam_input_mae_vs_evaluation": 0.47222443664965985
+    }
+  ],
+  "ccam_visualization": "raw values on native cache input; fixed 0–1 display range; no orientation or per-image normalization"
+}
