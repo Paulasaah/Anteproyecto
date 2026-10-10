@@ -135,39 +135,39 @@
     },
     {
       "svg": "teoria_05_cad.svg",
-      "svg_sha256": "e7339fb1ff0afa31275e4ceb270451bd9d10ec4c2c6018cb7715f22599ef76d6",
+      "svg_sha256": "462977aad241891428f50da6f50e7eb1be745c2257485e16352685c4f99f32b1",
       "pdf": "teoria_05_cad_svg-raw.pdf",
-      "pdf_sha256": "c667519878f2c45e314728a9f77abc13c5c00ef659756566207af6e5f9d5e923"
+      "pdf_sha256": "8bbe4acca8f687aa152fdbdc28287245044072382d6b28f6e095e41a180d1fa6"
     },
     {
       "svg": "teoria_06_supervisado.svg",
-      "svg_sha256": "84fc97c718ca1defb5f3afc7705ab6c2754f5e9cbd85df16e5bfbdf107d9331c",
+      "svg_sha256": "ce5b6dc14d6982b14072f49189fd96a9856f48bf4353ea0772d1713bd2cae242",
       "pdf": "teoria_06_supervisado_svg-raw.pdf",
-      "pdf_sha256": "c14ef1a89aefefc7205f3baeec5b3970955494753845268f280581bcc9db1b0d"
+      "pdf_sha256": "63caf3dcf2c094049b7f0455596f53de104c8b9cbd952999dbf344fdbd099222"
     },
     {
       "svg": "teoria_07_kmeans.svg",
-      "svg_sha256": "26e9f531ccff905956b8e1b82c349c4c46674abe25c402777c212d419828df02",
+      "svg_sha256": "a9b613154cbffd830ab9eac55172750b9f2957c5eb44785638e50154cbd455d8",
       "pdf": "teoria_07_kmeans_svg-raw.pdf",
-      "pdf_sha256": "db33dfc0ecc6b0a7f6600e16724d19db938f3360f3ab31a8b4bca15dc9785af5"
+      "pdf_sha256": "461b7ff99dcfecde420f1499ef591fbef6d7f7cc416e1881fb08f75046758159"
     },
     {
       "svg": "teoria_08_vae.svg",
-      "svg_sha256": "a5c00b06dfa2a07f68c543f0ddfc52e43ec9621be78a9c07f487965d9767a534",
+      "svg_sha256": "71ff17d55cc6bc7bc9df90ea3d5b5546620b143907ce8c31abed7a3d7a5f7170",
       "pdf": "teoria_08_vae_svg-raw.pdf",
-      "pdf_sha256": "7ccf680abc6720a9d187533d48d119d4ed5c1a3f3e587a15b4388ec7276b2791"
+      "pdf_sha256": "ed947e03c9edaa5d15c6095d399d44f476fd23a62d0c8e794efbae87f8f16bd7"
     },
     {
       "svg": "teoria_09_gan.svg",
-      "svg_sha256": "6786e60b92d9d3e401fc23f5b74e7c5b8a07fb7abe60a36a48ca36641e35ae85",
+      "svg_sha256": "99a1fd46a27b0c690fcf0c5b5483dad9bc5cffc00de82f144ce7280876376fd0",
       "pdf": "teoria_09_gan_svg-raw.pdf",
-      "pdf_sha256": "53234780c037571d40732e633106c4596646bfb0e3789818eab95df69f755fbc"
+      "pdf_sha256": "e3e6804da9fcc98ea1da762926234dff96308d63e0de2776960fdb3ab99f1c7b"
     },
     {
       "svg": "teoria_10_ssl.svg",
-      "svg_sha256": "0cab8fdbe48820328285e9e48b5eadeffc3287a6437492e1fcf9e150e25d2d35",
+      "svg_sha256": "6257dd035de9d23b603db723562e1ce00a5eeff063a866f3421587da7bc340b1",
       "pdf": "teoria_10_ssl_svg-raw.pdf",
-      "pdf_sha256": "aba6ee265d0fc86be0e499a0ac64a423921bf38d875dd1c01ae0b1b8f0b04095"
+      "pdf_sha256": "0a6cad4cfdb0564500590aafdd4bdce955d6763965fbfd442632839eb27f4cb8"
     },
     {
       "svg": "22_cielab_anillo.svg",
