@@ -9,7 +9,7 @@ La piel, como órgano más extenso del cuerpo humano, está expuesta de manera p
 
 El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, concentra el 80\% de las muertes asociadas a esta enfermedad, lo que lo convierte en la forma más letal de las lesiones cutáneas malignas \parencite{urban2021globalburden}. El carcinoma basocelular, por su parte, es el más frecuente a nivel global y en el contexto local de Santander representa el 64,82\% de los diagnósticos de cáncer de piel \parencite{uribe2018bccbucaramanga}. Esta distinción entre tipos de lesiones no es meramente taxonómica: define el curso del tratamiento, la urgencia de la intervención y las posibilidades de recuperación del paciente, lo que subraya la importancia crítica de contar con herramientas diagnósticas precisas y accesibles para su identificación temprana.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \caption{Ejemplos de lesiones dermatológicas}
 \label{fig:original-1}
 \centering
@@ -21,7 +21,7 @@ El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, con
 
 \end{figure}
 
-\FloatBarrier
+
 
 En el estudio del cáncer de piel, la clasificación de las lesiones dermatológicas permite establecer las características clínicas y visuales que diferencian las lesiones benignas de las malignas. Esta clasificación es ampliamente utilizada en la literatura médica y en los \textit{datasets} dermatológicos empleados en modelos de inteligencia artificial. En la Tabla~\ref{tab:clasificacion-lesiones} se presentan los principales tipos de lesiones cutáneas y sus características clínicas.
 
@@ -29,7 +29,7 @@ En el estudio del cáncer de piel, la clasificación de las lesiones dermatológ
 \small
 \singlespacing
 \setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}@{}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.52\textwidth-4\tabcolsep\relax}@{}}
 \caption{Clasificación de lesiones dermatológicas y frecuencia en Colombia y Santander}\label{tab:clasificacion-lesiones}\\
 \toprule
 \textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
@@ -70,7 +70,7 @@ Nota. Elaboración propia a partir de \textcite{tschandl2018ham10000} y \textcit
 
 La inspección visual constituye el primer nivel de cribado. El método ABCDE (Asimetría, Borde, Color, Diámetro y Evolución) es el estándar semiológico para identificar signos tempranos de melanoma \parencite{ligacancer2024abcde}, ver Figura~\ref{fig:original-2}. A pesar de su utilidad, este método presenta limitaciones en la detección de melanomas amelanóticos o lesiones en etapas muy tempranas, donde la sensibilidad depende directamente de la experiencia del facultativo \parencite{niklitschek2025abcde}.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \caption{Regla ABCDE del melanoma}
 \label{fig:original-2}
 \centering
@@ -82,7 +82,7 @@ La inspección visual constituye el primer nivel de cribado. El método ABCDE (A
 
 \end{figure}
 
-\FloatBarrier
+
 
 \subsubsection{Dermatoscopía y Técnicas Avanzadas}
 
@@ -122,7 +122,7 @@ El resultado de este proceso es una preparación histológica que puede ser anal
 
 \end{figure}
 
-\FloatBarrier
+
 
 
 
@@ -148,7 +148,7 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 
 \end{figure}
 
-\FloatBarrier
+
 
 
 
@@ -226,7 +226,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 
 \end{figure}
 
-\FloatBarrier
+
 
 \subsection{Aprendizaje no supervisado}
 
@@ -249,7 +249,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 
 \end{figure}
 
-\FloatBarrier
+
 
 
 
@@ -271,7 +271,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 
 \end{figure}
 
-\FloatBarrier
+
 
 
 
@@ -279,7 +279,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 \paragraph{Redes generativas adversariales.} Las GAN entrenan una red generadora y otra discriminadora en competencia para producir muestras sintéticas. En dermatología se han estudiado para generación de imágenes, segmentación, reducción de ruido y superresolución. Su uso para ampliar clases minoritarias no garantiza por sí mismo una mejora del modelo; debe evaluarse con un protocolo que compruebe la calidad de las muestras y el efecto sobre la tarea posterior \parencite{ahmed2023gandermatology}, como se muestra en la Figura~\ref{fig:original-8}.
 
 % Reserved for original figure 8. Replace the empty frame with the final image.
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \caption{Arquitectura de redes generativas antagónicas (GAN) aplicada al análisis de lesiones cutáneas.}
 \label{fig:original-8}
 \centering
@@ -293,7 +293,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 
 \end{figure}
 
-\FloatBarrier
+
 
 
 
@@ -305,7 +305,7 @@ A pesar de su versatilidad, el aprendizaje no supervisado presenta limitaciones 
 El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este proyecto para el tratamiento de datos dermatológicos no etiquetados. A través de estrategias contrastivas (comparación de representaciones aumentadas) y de auto-predicción de propiedades espaciales \parencite{chaitanya2023localcontrastive}, el sistema extrae características morfológicas sin requerir intervención experta previa. El clasificador del proyecto adopta como núcleo un codificador DINOv2 ViT-B/14 adaptado mediante SimSiam, único algoritmo SSL de este componente; de forma complementaria, un módulo independiente de segmentación emplea MoCo v2 junto con CCAM (\emph{Contrastive learning of Class-agnostic Activation Maps}) para generar pseudo-máscaras sin etiquetas que entrenan un U-Net estudiante, sin que esta línea haya demostrado todavía una mejora general sobre el clasificador en la ablación realizada. Esta implementación técnica permite mitigar la dependencia de grandes conjuntos de datos médicos etiquetados, optimizando la identificación de patrones clínicos sutiles en entornos de teledermatología donde la supervisión constante es limitada, como se ilustra en la Figura~\ref{fig:original-9}.
 
 % Reserved for original figure 9. Replace the empty frame with the final image.
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \caption{Marco de aprendizaje autosupervisado (SSL) para análisis de imágenes.}
 \label{fig:original-9}
 \centering
@@ -319,7 +319,7 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
 
 \end{figure}
 
-\FloatBarrier
+
 
 \section{Relación de los conceptos teóricos con el proyecto}
 
@@ -330,7 +330,7 @@ La Tabla~\ref{tab:conceptos-marco-proyecto} agrupa los conceptos según las tres
 \singlespacing
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.25}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.63\textwidth}@{}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.71\textwidth-2\tabcolsep\relax}@{}}
 \caption{Relación entre los conceptos teóricos y su aplicación en el proyecto}
 \label{tab:conceptos-marco-proyecto}\\
 \toprule

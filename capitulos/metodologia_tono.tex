@@ -23,7 +23,7 @@ La Figura~\ref{fig:ita-esquema-geometrico} explica el ángulo formado por las me
 \raggedright\fontsize{11}{13}\selectfont
 \noindent\textit{Nota.} Esquema conceptual de la ecuación, sin observaciones experimentales. El eje horizontal corresponde a $\widetilde b^*$ y el vertical a $\widetilde L^*-50$; se ilustra un ángulo positivo. Con $\widetilde b^*\geq5$, valores de $\widetilde L^*<50$ producen un ángulo negativo. Los controles de región y de $\widetilde b^*$ pueden conducir a abstención antes de asignar un intervalo. La selección de píxeles se registra por estimador; el ángulo no asigna fototipo clínico.
 \end{figure}
-\FloatBarrier
+
 
 Los intervalos utilizados por la implementación se presentan en la Tabla~\ref{tab:intervalos-ita-implementados}. Son agrupaciones colorimétricas internas; la numeración I--VI no les confiere equivalencia clínica con Fitzpatrick. Los límites exactos pertenecen al intervalo de número mayor, según las comparaciones estrictas de la función \texttt{fst\_bucket}.
 
@@ -32,7 +32,7 @@ Los intervalos utilizados por la implementación se presentan en la Tabla~\ref{t
 \begingroup\fontsize{11}{13}\selectfont\singlespacing
 \caption{Intervalos de ITA utilizados por la implementación del proyecto.}
 \label{tab:intervalos-ita-implementados}
-\begin{tabular}{ll}
+\begin{tabularx}{\textwidth}{@{}L L@{}}
 \toprule
 Grupo interno & Intervalo de ITA ($^\circ$) \\
 \midrule
@@ -43,10 +43,10 @@ IV & $0<\mathrm{ITA}\leq12$ \\
 V & $-25<\mathrm{ITA}\leq0$ \\
 VI & $\mathrm{ITA}\leq-25$ \\
 \bottomrule
-\end{tabular}
+\end{tabularx}\par
 \par\smallskip\raggedright
-\textit{Nota.} Elaboración propia a partir de los umbrales del procedimiento de estimación colorimétrica utilizado en el proyecto. Estos límites no deben intercambiarse con otros esquemas de categorización de ITA. Las abstenciones no se asignan a ninguno de estos grupos.
-\endgroup
+\noindent\textit{Nota.} Elaboración propia a partir de los umbrales del procedimiento de estimación colorimétrica utilizado en el proyecto. Estos límites no deben intercambiarse con otros esquemas de categorización de ITA. Las abstenciones no se asignan a ninguno de estos grupos.
+\par\endgroup
 \end{table}
 
 \paragraph{Cálculo del ITA.}\label{alg:estimacion-ita}
@@ -102,3 +102,4 @@ El proxy ITA \textbf{no está validado} como estimador del fototipo Fitzpatrick 
 Esta limitación corresponde al riesgo de evidencia \enquote{ITA presentado como fototipo}: nombrarlo incorrectamente como FST produciría conclusiones inválidas sobre equidad por fototipo. El control aplicado en este documento y en el repositorio es nombrar siempre el proxy como ITA y no afirmar fototipo Fitzpatrick sin anotación experta y validación --como se hace en esta sección y en la caracterización de conjuntos del Capítulo~7 (Sección~\ref{sec:caracterizacion-tono}).
 
 La comparación entre Otsu, la imagen completa y el anillo perilesional es descriptiva: los registros disponibles no incluyen una máscara de piel experta que permita medir cuál región estima mejor la piel, ni un criterio validado para seleccionar una de ellas. La cobertura, las abstenciones y las diferencias de ITA se reportan como características operacionales, no como validación de calidad ni como asignación de fototipo. Por esta razón, esta comparación no sustenta afirmaciones de equidad por tono de piel.
+

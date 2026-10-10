@@ -10,7 +10,7 @@ Los resultados experimentales se contrastaron con el repositorio de implementaci
 \singlespacing
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.18}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}@{}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.41\textwidth-4\tabcolsep\relax}@{}}
 \caption{Fuentes de trazabilidad de los protocolos y resultados.}
 \label{tab:trazabilidad-experimental}\\
 \toprule
@@ -62,7 +62,7 @@ Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 mien
 \end{figure}
 
 
-\FloatBarrier
+
 \section{Comparación descriptiva de estimadores ITA}
 
 La Figura~\ref{fig:ita-e5-otsu-roi} conserva las distribuciones marginales de Otsu y ROI. Sus coberturas y selecciones de píxeles difieren; los percentiles no son intervalos de confianza ni contrastes pareados. Esta comparación complementa la Tabla~\ref{tab:e5-cobertura}, sin demostrar efecto de la transformación ni superioridad clínica.
@@ -76,7 +76,7 @@ La Figura~\ref{fig:ita-e5-otsu-roi} conserva las distribuciones marginales de Ot
 \raggedright\fontsize{11}{13}\selectfont
 \noindent\textit{Nota.} Cada punto es la mediana y cada segmento cubre los percentiles 25--75 de los casos válidos del estimador correspondiente. Son distribuciones marginales con coberturas diferentes, no intervalos de confianza ni diferencias pareadas. La Tabla~\ref{tab:e5-cobertura} informa las intersecciones. Otsu y ROI emplean selecciones de píxeles y, en ISIC, resoluciones distintas; la comparación es descriptiva y no demuestra superioridad, equivalencia clínica ni efecto de la transformación.
 \end{figure}
-\FloatBarrier
+
 \section{Confiabilidad de las configuraciones congeladas}
 
 La Figura~\ref{fig:confiabilidad-configuraciones} compara el control público con protocolo B71, A71 y B71 sobre las mismas 2.004 imágenes de HAM10000. Cada fila conserva los 15 intervalos uniformes y presenta confiabilidad y frecuencia de confianza. El ECE depende del protocolo de discretización; la comparación es descriptiva, sin contraste de incertidumbre y sin ajuste posterior de calibración. La menor discrepancia agregada de A71 no demuestra por sí sola una ventaja clínica o un efecto causal del término de tono.
@@ -90,7 +90,7 @@ La Figura~\ref{fig:confiabilidad-configuraciones} compara el control público co
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \noindent\textit{Nota.} Elaboración propia. HAM10000, validación n=2.004; 15 intervalos uniformes. Cada fila corresponde al control público con protocolo B71, A71 o B71. Las diferencias no aíslan el efecto causal de tono. ECE: público, 0,0688; A71, 0,0154; B71, 0,0529.
 \end{figure}
-\FloatBarrier
+
 
 \clearpage
 \chapter{Cronograma de actividades}\label{anexo:gantt}
@@ -98,22 +98,18 @@ Se incorpora el diagrama de Gantt suministrado por los autores, junto con una vi
 
 \noindent Fuente: \url{https://docs.google.com/spreadsheets/d/1riBrldjBw--arDAuiPlr_tp2vrBtyzv-ovS12aFi7Ao/edit}.
 \clearpage
-\newgeometry{margin=1.27cm}
 \begin{landscape}
 \thispagestyle{plain}
 \centering
 \includegraphics[page=1,width=\linewidth,height=0.94\textheight,keepaspectratio]{anexos/cronograma-gantt.pdf}
 \end{landscape}
-\restoregeometry
 
 \clearpage
-\newgeometry{margin=1.27cm}
 \begin{landscape}
 \thispagestyle{plain}
 \centering
 \includegraphics[page=1,width=\linewidth,height=0.94\textheight,keepaspectratio]{anexos/cronograma-actividades.pdf}
 \end{landscape}
-\restoregeometry
 
 
 \chapter{Presupuesto del proyecto}\label{anexo:presupuesto}
@@ -121,20 +117,18 @@ Se incorpora el presupuesto suministrado por los autores, conservando los rubros
 
 \noindent Fuente: \url{https://docs.google.com/spreadsheets/d/1d_q8XjhZF7osl6Xmcdiz-C35CzagNf8xoDqnfN30ols/edit}.
 \clearpage
-\newgeometry{margin=1.27cm}
 \begin{landscape}
 \thispagestyle{plain}
 \centering
 \includegraphics[page=1,width=\linewidth,height=0.94\textheight,keepaspectratio]{anexos/presupuesto.pdf}
 \end{landscape}
-\restoregeometry
 \clearpage
-\newgeometry{margin=1.27cm}
 \begin{landscape}
 \thispagestyle{plain}
 \centering
 \includegraphics[page=2,width=\linewidth,height=0.94\textheight,keepaspectratio]{anexos/presupuesto.pdf}
 \end{landscape}
-\restoregeometry
+
+
 
 

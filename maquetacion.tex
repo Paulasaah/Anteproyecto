@@ -1,0 +1,30 @@
+% Maquetación común: mismos márgenes del documento y alineación consistente.
+\usepackage{tabularx}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\DeclareCaptionFont{tabla}{\fontsize{11}{13}\selectfont}
+\captionsetup[table]{font=tabla,position=top,skip=6pt,justification=raggedright,singlelinecheck=false}
+\AtBeginEnvironment{table}{\centering\fontsize{11}{13}\selectfont\singlespacing\renewcommand{\arraystretch}{1.12}}
+\AtEndEnvironment{table}{\par}
+\setlength{\LTleft}{0pt plus 1fill}
+\setlength{\LTright}{0pt plus 1fill}
+\setlength{\LTpre}{8pt}
+\setlength{\LTpost}{8pt}
+% Los elementos flotantes pueden acompañar al texto sin quedarse en páginas solas.
+\renewcommand{\topfraction}{0.90}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.80}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\setlength{\floatsep}{12pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{14pt plus 2pt minus 2pt}
+\setlength{\intextsep}{12pt plus 2pt minus 2pt}
+% Páginas de flotantes alineadas arriba, sin huecos elásticos sobre una figura.
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{14pt plus 2pt minus 2pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+\AtBeginDocument{\raggedbottom\clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000}

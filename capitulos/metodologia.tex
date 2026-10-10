@@ -9,7 +9,7 @@ CRISP-ML(Q) se utiliza como marco de organización del trabajo. La descripción 
 
 El desarrollo del proyecto se organizó según el cumplimiento de los cuatro objetivos específicos formulados en el Capítulo~\ref{chap:objetivos}, siguiendo el modelo CRISP-ML(Q), estructurado originalmente en seis fases: comprensión del negocio y de los datos, ingeniería de datos, ingeniería del modelo, evaluación del modelo, despliegue y monitoreo y mantenimiento \parencite{wirth2000crispdm,studer2021crispmlq}. Para este trabajo, las seis fases del marco se organizaron en cuatro etapas iterativas, representadas en la Figura~\ref{fig:flujo-crispmlq} y vinculadas con los objetivos específicos y su estado de ejecución en la Tabla~\ref{tab:trazabilidad-fases}: (i) comprensión del problema y de los datos (objetivo 1); (ii) ingeniería de datos y modelado de las tres líneas de trabajo (objetivo 2); (iii) evaluación de los modelos y procedimientos (objetivo 3); y (iv) implementación del prototipo de apoyo al análisis de imágenes (objetivo 4). Las tres primeras etapas cuentan con actividades ejecutadas y evidencia documentada; esto no implica que todos sus objetivos estén cerrados. La caracterización conserva pendientes de trazabilidad y la evaluación de tono se limita al estimador ITA. La cuarta permanece pendiente mientras continúan los experimentos para seleccionar el modelo y la configuración finales. Su inclusión como etapa planificada no implica que se haya realizado un despliegue clínico ni que se hayan ejecutado actividades de monitoreo en producción.
 
-\begin{figure}[p]
+\begin{figure}[!htbp]
 \caption{Diagrama de flujo de la aplicación de CRISP-ML(Q)}
 \label{fig:flujo-crispmlq}
 \centering
@@ -23,7 +23,7 @@ El desarrollo del proyecto se organizó según el cumplimiento de los cuatro obj
 
 \end{figure}
 
-\FloatBarrier
+
 
 La Tabla~\ref{tab:trazabilidad-fases} resume la relación entre las fases de CRISP-ML(Q), los objetivos específicos y las actividades realizadas. Los datos, algoritmos, criterios y procedimientos se describen en las secciones correspondientes del Capítulo~\ref{chap:metodologia}.
 
@@ -31,7 +31,7 @@ La Tabla~\ref{tab:trazabilidad-fases} resume la relación entre las fases de CRI
 \small
 \singlespacing
 \setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}@{}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.36\textwidth-4\tabcolsep\relax}@{}}
 \caption{Trazabilidad entre las fases metodológicas y la ejecución del proyecto}\label{tab:trazabilidad-fases}\\
 \toprule
 \textbf{Fase y objetivo relacionado} & \textbf{Actividades y líneas de trabajo} & \textbf{Producto y estado} \\
@@ -81,7 +81,7 @@ El presente apartado consolida los principales riesgos identificados durante la 
 \small
 \singlespacing
 \setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.09\textwidth}>{\raggedright\arraybackslash}p{0.51\textwidth}@{}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.09\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.57\textwidth-4\tabcolsep\relax}@{}}
 \caption{Riesgos del proyecto y planes de contingencia}\label{tab:riesgos-proyecto}\\
 \toprule
 \textbf{Riesgo} & \textbf{Nivel} & \textbf{Plan de contingencia} \\

@@ -157,7 +157,7 @@ Para $K=7$ clases, la matriz de confusión $C\in\mathbb{N}^{K\times K}$ define l
 
 Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiestos (identificadores, hashes y exclusiones de cada partición), se fija la separación por \texttt{lesion\_id} y se registran de antemano el conjunto de datos, la arquitectura, el preprocesamiento, las particiones, las semillas y la regla de decisión. La Figura~\ref{fig:protocolo-evaluacion} resume este flujo, incluida la separación entre la selección de variantes en el conjunto interno y la evaluación externa reservada en PAD-UFES-20 \texttt{target\_test}.
 
-\begin{figure}[p]
+\begin{figure}[!htbp]
 \caption{Protocolo de evaluación y reporte de las líneas de trabajo.}
 \label{fig:protocolo-evaluacion}
 \centering
@@ -169,7 +169,7 @@ Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiest
 \par\endgroup
 \end{figure}
 
-\FloatBarrier Las comparaciones pareadas usan remuestreo bootstrap por lesión ($B=1\,000$ remuestras) con intervalo de confianza al 95\,\% por el método percentil, y corrección de Holm para contrastes múltiples: ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se rechaza la hipótesis asociada a $p_{(i)}$ si $p_{(i)}\leq \alpha/(m-i+1)$, deteniendo el procedimiento en el primer índice donde la condición falla.
+ Las comparaciones pareadas usan remuestreo bootstrap por lesión ($B=1\,000$ remuestras) con intervalo de confianza al 95\,\% por el método percentil, y corrección de Holm para contrastes múltiples: ordenados los valores $p_{(1)}\leq\cdots\leq p_{(m)}$, se rechaza la hipótesis asociada a $p_{(i)}$ si $p_{(i)}\leq \alpha/(m-i+1)$, deteniendo el procedimiento en el primer índice donde la condición falla.
 
 Este protocolo responde directamente a cuatro riesgos de integridad de la evidencia identificados para esta línea:
 \begin{itemize}
@@ -178,3 +178,4 @@ Este protocolo responde directamente a cuatro riesgos de integridad de la eviden
  \item \textbf{Conjuntos de datos y modalidades diferentes} (HAM10000 dermatoscópico frente a PAD-UFES-20 clínico), que podrían simular una transferencia aparente o un deterioro fuera de dominio: se describe la modalidad, la fuente y la población de cada conjunto, y PAD-UFES-20 se reporta por separado.
  \item \textbf{Línea base supervisada con partición distinta}, que haría la comparación no pareada y no atribuible solo al régimen de aprendizaje: se iguala el conjunto de datos, la arquitectura, la partición, el presupuesto de cómputo y las métricas antes de concluir.
 \end{itemize}
+
