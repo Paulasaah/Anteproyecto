@@ -49,25 +49,9 @@ VI & $\mathrm{ITA}\leq-25$ \\
 \endgroup
 \end{table}
 
-\begin{algorithm}[htbp]
-\caption{Estimación del ángulo de tipología individual (ITA)}
-\label{alg:estimacion-ita}
-\begin{algorithmic}[1]
-\Statex \textbf{Input:} Imagen $x$ a resolución canónica, máscara de piel candidata $M_s$ (Otsu, imagen completa o anillo perilesional), pseudo-máscara de lesión del segmentador (si disponible)
-\Statex \textbf{Initialize:} región de muestreo $R \gets M_s \setminus \text{lesión}$
-\If{$|R|$ insuficiente \textbf{or} máscara degenerada}
-  \State \Return indeterminado \Comment{abstención explícita, imagen en cuarentena}
-\EndIf
-\State Convertir $x$ a CIELAB y restringir a $R$
-\State $\widetilde L^* \gets$ mediana de $L^*$ en $R$ \Comment{robusto a artefactos puntuales}
-\State $\widetilde b^* \gets$ mediana de $b^*$ en $R$
-\If{$\widetilde b^* < 5$}
-  \State \Return indeterminado \Comment{denominador numéricamente inestable}
-\EndIf
-\State $\mathrm{ITA} \gets (180/\pi)\arctan\!\big((\widetilde L^*-50)/\widetilde b^*\big)$
-\State \Return $\mathrm{ITA}$ \Comment{proxy colorimétrico, no un fototipo clínico}
-\end{algorithmic}
-\end{algorithm}
+\paragraph{Cálculo del ITA.}\label{alg:estimacion-ita}
+La estimación parte de una región candidata de piel y excluye la lesión cuando hay una pseudo-máscara disponible. Tras convertir a CIELAB, calcula las medianas de $L^*$ y $b^*$ y aplica la ecuación del ITA. Se registra abstención si la región es insuficiente, la máscara es degenerada o $\widetilde b^*<5$. Este procedimiento de caracterización se mantiene separado de la transformación de luminosidad.
+
 
 \subsubsection{Procedimiento de caracterización colorimétrica}
 
