@@ -1,0 +1,45 @@
+\subsubsection{Configuraciones limpias: comparación por dataset}
+Para presentar HAM10000 con la misma estructura que ISIC2019 e ISIC2020, se incluyen las configuraciones limpias y sus controles públicos. La partición comprende 8.011 imágenes de entrenamiento y 2.004 de validación, agrupada por lesión. La identidad de validación coincide con la evaluación registrada. Este análisis de sensibilidad es posterior: conserva las configuraciones y los umbrales seleccionados con los pesos originales y no sustituye el resultado principal de B71 (F1 macro 0,7141). El descriptor ``limpio identifica pesos cuyo pool SSL excluye las imágenes de validación de ISIC, según el registro de verificación; no significa un nuevo ajuste de hiperparámetros.
+
+\begin{table}[!htbp]
+\centering
+\caption{Configuraciones limpias y controles públicos en HAM10000 (n = 2.004).}
+\label{tab:ham-limpio}
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\begin{tabularx}{\textwidth}{@{}Lrrrrr@{}}
+\toprule
+Configuración & F1 macro & MCC & Ex. bal. & AUC & ECE \\
+\midrule
+A71-limpio & 0,7025 & 0,7047 & 0,7103 & 0,9630 & 0,0156 \\
+B71-limpio & 0,7104 & 0,6790 & 0,6936 & 0,9612 & 0,0581 \\
+Público · prot. A71 & 0,6320 & 0,6110 & 0,6174 & 0,9432 & 0,0806 \\
+Público · prot. B71 & 0,6837 & 0,6712 & 0,6659 & 0,9619 & 0,0688 \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\raggedright\textit{Nota.} Elaboración propia. Análisis posterior de sensibilidad; no reemplaza las cifras registradas de la Tabla~\ref{tab:v7-clasificacion}.\par\endgroup
+\end{table}
+\FloatBarrier
+La Figura~\ref{fig:clasificacion-ham-completa} muestra F1 macro y MCC para los modelos limpios, sus dos controles públicos y las ocho líneas base congeladas. Triángulos: A71-limpio; rombos: B71-limpio; círculos: controles y líneas base. El panel (a) presenta IC individuales de F1; el panel (b) muestra MCC puntual, sin intervalos añadidos. Los controles públicos utilizan el protocolo de su brazo correspondiente y no se equiparan a los DINOv2 del banco.
+
+\begin{figure}[!htbp]
+\caption{F1 macro y MCC de configuraciones limpias y líneas base congeladas en HAM10000.}
+\label{fig:clasificacion-ham-completa}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/33_clasificacion_ham10000}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde los registros canónicos. Comparación descriptiva entre protocolos de extracción y sonda; modelos sin ajuste fino. Las filas de los dos paneles coinciden. Pesos limpios: análisis posterior de sensibilidad; B71 registrado se presenta por separado.\par}
+\end{figure}
+\FloatBarrier
+La Figura~\ref{fig:contrastes-ham-limpio} compara cada modelo limpio con su control público. Los intervalos pareados se estimaron por lesión con 1.000 remuestras; la línea de cero representa ausencia de diferencia. A71-limpio presenta $\Delta$F1 = 0,0705 (IC del 95\,\% [0,0255; 0,1132]); el intervalo excluye cero. B71-limpio presenta $\Delta$F1 = 0,0267 (IC del 95\,\% [-0,0122; 0,0686]); el intervalo incluye cero. Estos contrastes no aíslan el efecto causal del tono ni constituyen una corrección global por multiplicidad.
+
+\begin{figure}[!htbp]
+\caption{Contrastes pareados de las configuraciones limpias frente a sus controles públicos en HAM10000.}
+\label{fig:contrastes-ham-limpio}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/34_contrastes_ham10000}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia. IC del 95\,\% por lesión; análisis posterior de sensibilidad. Los IC de diferencias de MCC proceden del registro pareado y no son intervalos individuales de MCC.\par}
+\end{figure}
+\FloatBarrier

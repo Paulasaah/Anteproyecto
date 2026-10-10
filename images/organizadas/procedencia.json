@@ -86,10 +86,6 @@
       "svg_sha256": "4dcf2bbbfc191c692b7d3af3e674fb54f07a452332b5ae387a743a4c6e20e2d6"
     },
     {
-      "svg": "26_f1_configuraciones.svg",
-      "svg_sha256": "fcf3e30fc65def39434002bdf1929fc743a3ab293ce3de44527722d7983ddfb7"
-    },
-    {
       "svg": "27_f1_contrastes.svg",
       "svg_sha256": "fcbcd269e6f76b83d816a37ad444660f8c743d51a209c11217a040a6d83e4e16"
     },
@@ -100,10 +96,6 @@
     {
       "svg": "A01_confiabilidad_comparacion.svg",
       "svg_sha256": "82a37c4eb817413450a7f2d10a0d96a36b89cb3b954cd7934209d6204f295977"
-    },
-    {
-      "svg": "A02_ham10000.svg",
-      "svg_sha256": "e4c37bd90738f2e3f9357025760a75878cfcec962858705e20dcc804c4ddd59f"
     },
     {
       "svg": "A03_ita_e5_otsu_roi.svg",
@@ -147,19 +139,27 @@
     },
     {
       "svg": "29_clasificacion_isic2019.svg",
-      "svg_sha256": "f8bd7b9687238239582eb6f70185cb37ea846b9ba58237d131f39ec8c56c4681"
+      "svg_sha256": "46a0c209e1274a5d516041896e51d5bedfb50faeb72a951c697ec3178390d53b"
     },
     {
       "svg": "30_clasificacion_isic2020.svg",
-      "svg_sha256": "2d876261c877e1e8e31d62b6b91eec6cb14cba80e9c6ddad3e38a18aef960ede"
+      "svg_sha256": "1c9b1d15d22e4610b612fa7d90bfbe48c665ca2eb6d2e3a2c2f81b1f91979456"
     },
     {
       "svg": "31_contrastes_isic2019.svg",
-      "svg_sha256": "507d168d27b92eef5f48c5dab292121118a3ab129abe4ca0f7a4989d64c8443a"
+      "svg_sha256": "ab0d3645ad6534604225d626e99484ad7337d3ae4ba5564859566c559bd732e2"
     },
     {
       "svg": "32_contrastes_isic2020.svg",
-      "svg_sha256": "41ccc11bb020343522d7753403675c6737f71a1f38c6ade80bc9666dc622a7b9"
+      "svg_sha256": "6007cea796ec5f2fddf513712a08f56de9135efe408359fcc6e51bfe0dd01269"
+    },
+    {
+      "svg": "33_clasificacion_ham10000.svg",
+      "svg_sha256": "e278acc602b067a4e6fda0a2b9b2b614d78b11f8ce35d52551860d7ce99ce758"
+    },
+    {
+      "svg": "34_contrastes_ham10000.svg",
+      "svg_sha256": "5d5aa54003b34eac0cde1a34addc15f710b2afbbb09b2019c44d2d462c7d1855"
     }
   ]
 }

@@ -459,7 +459,10 @@ La Figura~\ref{fig:ita-exactitud-pad} compara la exactitud del ITA y la línea b
 
 \section{Resultados de clasificación}\label{sec:resultados-clasificacion}
 
-\subsection{Evaluación congelada y ablación del término de tono}
+\subsection{Clasificación congelada en HAM10000}
+\label{sec:clasificacion-ham10000}
+
+\subsubsection{Evaluación registrada y comparación de configuraciones}
 
 \noindent\textbf{Protocolo de evaluación.} Las cifras de esta sección corresponden a la auditoría consolidada del banco completo, con cómputo agrupado por \texttt{lesion\_id}. No corresponden a la evaluación previa, que reportaba medias de tres semillas con remuestreo por imagen.
 
@@ -496,13 +499,14 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 \end{table}
 
 
-El panel (a) de la Figura~\ref{fig:f1-ham-integrado} presenta los valores puntuales de F1 macro del control público, A71 y B71. Además del término de tono, las configuraciones difieren en extracción y selección de sonda; esta comparación no aísla el efecto causal de la transformación.
-
-
+Las cifras de la Tabla~\ref{tab:v7-clasificacion} corresponden a los pesos originales registrados. Además del término de tono, A71 y B71 difieren en extracción y selección de sonda; esta comparación no aísla el efecto causal de la transformación.
 
 Los intervalos individuales de A71 y B71 se solapan en exactitud balanceada y F1 macro. Por sí sola, esta comparación no permite afirmar que añadir el término de tono mejore el desempeño. Para evaluar la diferencia entre ambos brazos se requiere el contraste pareado correspondiente.
 
-\subsection{Comparación pareada: clasificador SSL congelado frente a ocho líneas base}
+\FloatBarrier
+\input{capitulos/resultados_clasificacion_ham}
+
+\subsubsection{Comparación pareada: B71 registrado frente a ocho líneas base}
 
 En esta comparación, el \textit{backbone} preentrenado con SSL permaneció congelado y solo se ajustó una regresión logística sobre las representaciones extraídas. B71 y las ocho líneas base se evaluaron en la misma partición de HAM10000 (n = 2.004), agrupada por \texttt{lesion\_id}. Los intervalos pareados se estimaron con 1.000 remuestras bootstrap y semilla 20260923. No se aplicó una corrección global por multiplicidad; por ello, el patrón de ocho contrastes que excluyen cero se interpreta dentro de esta comparación, sin tratar cada contraste como una confirmación independiente. La Tabla~\ref{tab:comparacion-baselines-ham} presenta los contrastes estimados.
 
@@ -541,23 +545,7 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 
 En esta partición, B71 obtuvo un F1 macro de 0,7141. Los ocho intervalos pareados del 95\,\% excluyeron cero a favor de B71 frente a las líneas base. Dado que no hubo corrección global por multiplicidad, este patrón describe el resultado de la comparación y no equivale a ocho pruebas confirmatorias independientes.
 
-La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones en (a) y el desempeño de las líneas base con IC individuales en (b). La Figura~\ref{fig:contrastes-ham-baselines} presenta los contrastes pareados en (a) y la ablación F4 en (b). Los paneles (a) y (b) mantienen sus respectivos protocolos de extracción y sonda; el control público del panel (a) no se equipara a los DINOv2 del banco. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. Las evaluaciones canónicas de ISIC2019 e ISIC2020 se presentan en las Secciones~\ref{sec:clasificacion-isic2019} y~\ref{sec:clasificacion-isic2020}; el resumen de configuraciones limpias de HAM10000 se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
-
-
-
-
-
-\begin{figure}[!htbp]
-\caption{F1 macro de las configuraciones y líneas base en HAM10000.}
-\label{fig:f1-ham-integrado}
-\label{fig:ablacion-tono-ham}
-\label{fig:clasificacion-ham-pareada}
-\centering
-\includesvg[width=\linewidth]{images/organizadas/26_f1_configuraciones}
-\par\smallskip
-{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Estimaciones puntuales del control público, A71 y B71, sin intervalos añadidos. Las diferencias entre configuraciones no aíslan el efecto causal del tono. (b) F1 macro e IC individuales del 95\,\% del banco congelado. Ambos paneles conservan sus respectivos protocolos de extracción y sonda; el control público de (a) no se equipara a los DINOv2 del banco.\par}
-\end{figure}
+La Figura~\ref{fig:contrastes-ham-baselines} presenta los contrastes de B71 registrado frente a las líneas base en (a) y la ablación F4 en (b). Esta comparación conserva el resultado principal de B71 y se distingue de los modelos limpios de la Figura~\ref{fig:clasificacion-ham-completa}. Las evaluaciones de ISIC2019 e ISIC2020 se presentan en las Secciones~\ref{sec:clasificacion-isic2019} y~\ref{sec:clasificacion-isic2020}.
 
 \begin{figure}[!htbp]
 \caption{Contrastes pareados de F1 macro y ablación complementaria F4 en HAM10000.}
@@ -583,7 +571,7 @@ La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones e
 
 
 
-\subsection{Análisis por clase, curvas precisión--sensibilidad y calibración}
+\subsubsection{Análisis por clase, curvas precisión--sensibilidad y calibración en HAM10000}
 
 La Figura~\ref{fig:metricas-clase-b71} complementa la matriz de confusión con precisión, sensibilidad y F1 por diagnóstico, calculadas en la misma evaluación congelada de 2.004 imágenes. El soporte junto a cada clase permite interpretar el desequilibrio: NV reúne 1.341 casos, mientras que DF y VASC tienen 23 y 29. MEL alcanza una sensibilidad de 118/222 = 0,532; el promedio global no describe por sí solo su detección. Las métricas son estimaciones puntuales, sin intervalos por clase.
 
