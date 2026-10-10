@@ -63,9 +63,9 @@
     },
     {
       "svg": "24_arbol_problema.svg",
-      "svg_sha256": "408871f60ccd6c4fad4a82aece84d2eeddf7f944483b4f6bf4a80fa7963488af",
+      "svg_sha256": "6326d146c84bfced46626eb6913c40a8d68e8cd7bd3bf0d3af3e6b5d140b1c59",
       "pdf": "24_arbol_problema_svg-raw.pdf",
-      "pdf_sha256": "df5db6c3c66a4fd2ebaab92b9cc1175389d67a7492f1fa5f7fade8afc024cf18"
+      "pdf_sha256": "d449090364634ff0294a9c635b3154912a57d053eb88685f2b81558c04ba712d"
     },
     {
       "svg": "25_diseno_metodologico.svg",
