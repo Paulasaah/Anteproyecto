@@ -51,9 +51,9 @@
     },
     {
       "svg": "19_transformacion_tono.svg",
-      "svg_sha256": "36a5fccf46fa615735084a535dc7c0ced3aef7e30fa0364be846376be1188b2c",
+      "svg_sha256": "39ba19d15c886236b8fd26835ff7429925e96e9bab4f7d16156bdacfeaf1dd22",
       "pdf": "19_transformacion_tono_svg-raw.pdf",
-      "pdf_sha256": "6df9df49f05b326f57bdada3bdcede7c2942529bdee0f72fcac00385b67d73e1"
+      "pdf_sha256": "6c953902af3657d50635a094ba5232b3d6c9a6f184be14821a2e3b2b54519a98"
     },
     {
       "svg": "20_adaptacion_dominio.svg",
