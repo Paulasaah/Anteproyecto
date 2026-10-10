@@ -206,9 +206,11 @@ Maskne (post-COVID) & Inflamatoria aguda & Baja \\
 Heridas crónicas (lepra/Hansen) & Crónica (lepra) & Trabajo futuro \\
 \bottomrule
 \end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Elaboración propia a partir de la revisión epidemiológica cruzada documentada en la propuesta original del proyecto, con fuentes primarias en el Instituto del Cáncer del HIC, SIVIGILA y estudios de la Universidad Industrial de Santander.
 \endgroup
 \end{table}
-\noindent\textit{Nota.} Elaboración propia a partir de la revisión epidemiológica cruzada documentada en la propuesta original del proyecto, con fuentes primarias en el Instituto del Cáncer del HIC, SIVIGILA y estudios de la Universidad Industrial de Santander.
+
 
 De las quince patologías, cuatro corresponden a lesiones malignas (27\,\%), cuatro a lesiones benignas (27\,\%), tres a inflamatorias crónicas (20\,\%) y las cuatro restantes se distribuyen entre categorías parasitaria, inflamatoria aguda, hospitalaria y crónica asociada a lepra. Esta composición evidencia que el universo dermatológico santandereano no se limita al espectro oncológico clásicamente representado en los \textit{datasets} internacionales: incluye patologías inflamatorias, infecciosas tropicales y crónicas con carga clínica documentada en la región, que los conjuntos HAM10000, ISIC2019, ISIC2020 y PAD-UFES-20 no cubren.
 
@@ -263,9 +265,11 @@ Segmentador & ISIC2018 ($n=2.594$) & HAM10000 ($n=10.015$) \\
 S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
 \bottomrule
 \end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
 \endgroup
 \end{table}
-\noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.
+
 
 \FloatBarrier
 
@@ -471,9 +475,11 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 \bottomrule
 \end{tabular}
 \endgroup
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Elaboración propia.
 \endgroup
 \end{table}
-\noindent\textit{Nota.} Elaboración propia.
+
 
 La Figura~\ref{fig:ablacion-tono-ham} presenta las estimaciones de F1 macro y sus intervalos individuales.
 
@@ -518,9 +524,12 @@ ViT-B/16 & 0,5633 & $+$0,1509 & [$+$0,1005; $+$0,2068] & excluye cero \\
 DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 \bottomrule
 \end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Elaboración propia.
 \endgroup
 \end{table}
-\noindent\textit{Nota.} Elaboración propia.
+\FloatBarrier
+
 
 En esta partición, B71 obtuvo un F1 macro de 0,7141. Los ocho intervalos pareados del 95\,\% excluyeron cero a favor de B71 frente a las líneas base. Dado que no hubo corrección global por multiplicidad, este patrón describe el resultado de la comparación y no equivale a ocho pruebas confirmatorias independientes.
 
@@ -593,6 +602,7 @@ Sensibilidad de melanoma & $+0{,}0135$ & [$-0{,}0446$; $+0{,}0714$] & Incluye ce
 \noindent\textit{Nota.} Contraste canónico ya reportado; los componentes de F4 no se evaluaron por separado. Esta tabla no reúne los contrastes exploratorios de los ocho \textit{backbones}.
 \endgroup
 \end{table}
+\FloatBarrier
 
 La sensibilidad por semilla confirma la falta de robustez: $+0{,}0300$ (semilla 42), $+0{,}0092$ (semilla 43) y $+0{,}0261$ (semilla 44), con 0 de 3 intervalos excluyendo cero. En el análisis exploratorio E3b, F4 sube el punto de F1 en 8 de 8 \textit{backbones}, pero solo 5 de 8 intervalos excluyen cero. F4 se mantiene como variante exploratoria; B71 sin segmentación sigue siendo la referencia principal del banco.
 
@@ -620,9 +630,11 @@ D2 (continuación, fuente) & 0,2877 & 0,4897 & 0,2309 & 0,3422 \\
 D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 \bottomrule
 \end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Elaboración propia.
 \endgroup
 \end{table}
-\noindent\textit{Nota.} Elaboración propia.
+
 
 La Figura~\ref{fig:adaptacion-pad-d0-d3} representa F1 macro y MCC con sus intervalos individuales.
 
@@ -688,6 +700,7 @@ Objetivo & Evidencia presentada & Estado y alcance \\
 \noindent\textit{Nota.} El balance conserva el estado descrito en las conclusiones. La existencia de evaluaciones experimentales no implica validación clínica ni cierre de los pendientes de trazabilidad.
 \endgroup
 \end{table}
+\FloatBarrier
 
 Siguen abiertos los siguientes aspectos:
 \begin{enumerate}
