@@ -221,6 +221,13 @@
         "microtomia": "Fotografía aportada por la usuaria: image(20261010-203354).png",
         "lectura": "Referencias aportadas por la usuaria: image(20261010-211037).png e image(20261010-211144).png"
       }
+    },
+    {
+      "svg": "images/organizadas/teoria_03_abcde.svg",
+      "svg_sha256": "61f7c98ea5c07cb5007593615e111d7950d415757ccac07bf2fdd34e71a74929",
+      "pdf": "images/organizadas/teoria_03_abcde_svg-raw.pdf",
+      "pdf_sha256": "53b0ec98a3aad7d4b5fedd98e9d8fd9af459441224b79d774ee75ff985234cec",
+      "fuente": "Fotografías reutilizadas de figura02-regla-abcde-melanoma.png; HC Marbella 2020; https://www.hcmarbella.com/es/abcde-del-melanoma/"
     }
   ]
 }
