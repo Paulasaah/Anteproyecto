@@ -39,39 +39,39 @@
     },
     {
       "svg": "17_arquitectura_general.svg",
-      "svg_sha256": "d0079cb9330dc64c5dd4d3e2e9ecdd0f4d3105678dd0b74ced8afc930d0bb240",
+      "svg_sha256": "cf23ba49f29f4a0bb6b90fe8926e13ce2448a30faac346bd1f70191a169caed0",
       "pdf": "17_arquitectura_general_svg-raw.pdf",
-      "pdf_sha256": "6e70f9edcfd2709a5ab032e20806430c840a854c074ef4d22808e4361aeacd28"
+      "pdf_sha256": "75a6e04755125513645ac2215df68b6701c3842cf5b973b454a4c7c6c6454cb5"
     },
     {
       "svg": "18_segmentacion_arquitecturas.svg",
-      "svg_sha256": "f4d923699d9843e653f83fa2353454801e84ae553af9a010d4a670a1e8c048a0",
+      "svg_sha256": "4dd09c022c2d06b4c3278bc6304e6ed949ee572b561b5ebcf076415290879f1b",
       "pdf": "18_segmentacion_arquitecturas_svg-raw.pdf",
-      "pdf_sha256": "b753c4c1ed9a4dd6cf81e94a299c47ea3eb10687123a150cdd6800fe125d76e7"
+      "pdf_sha256": "4b5d296464b9d48d728bce2cf1a95c7f126e6f0a6f94ae55c630e19107747af8"
     },
     {
       "svg": "19_transformacion_tono.svg",
-      "svg_sha256": "ab26773257fb4915413a50a2b5467f9d2643ba49223d18a1071da8bb42e6abee",
+      "svg_sha256": "36a5fccf46fa615735084a535dc7c0ced3aef7e30fa0364be846376be1188b2c",
       "pdf": "19_transformacion_tono_svg-raw.pdf",
-      "pdf_sha256": "179e2e304b279b08fbacb75f8ae9c5ecdf4618ee5a01e94ab8d74e7b13877a67"
+      "pdf_sha256": "6df9df49f05b326f57bdada3bdcede7c2942529bdee0f72fcac00385b67d73e1"
     },
     {
       "svg": "20_adaptacion_dominio.svg",
-      "svg_sha256": "42adf81a61c50e29895937a12deec9100e61674534e94b426d516edf24e6ad98",
+      "svg_sha256": "075ac9dff21f44ebc6a625a6169b8dd1cf4471f29be6b32bba9013848b88f204",
       "pdf": "20_adaptacion_dominio_svg-raw.pdf",
-      "pdf_sha256": "b68703b9783187972c6ffc77025881e49f6e91a7ba6a1fc377143c079cd5c017"
+      "pdf_sha256": "0dc959b85aa7c6ffd332a1e5e650fa5b5e117b877104435790552c04ecbd782d"
     },
     {
       "svg": "24_arbol_problema.svg",
-      "svg_sha256": "f0c3152216485f6c4acd45d0c79a1db4ca36d9c9ec0006b176b25a9b72c7dd0e",
+      "svg_sha256": "5aeee40cddcba6596d6012784065552abca07992df8748bad92e7bec5eebe15a",
       "pdf": "24_arbol_problema_svg-raw.pdf",
-      "pdf_sha256": "a2eb53464dce68ffcd28afd450d586f766f9a132c82cceb48976cc3249e1d0fc"
+      "pdf_sha256": "a7bb90df0faa87a0f2e14a27eb253cbc1ad1d29c69d08b61c42b19c645b6186d"
     },
     {
       "svg": "25_diseno_metodologico.svg",
-      "svg_sha256": "640a87e4c7a869c4a836d4e1964488ba6285e3c562635a9d4bf0e3bc144fb654",
+      "svg_sha256": "473864f69d79a680aa609954a908b741b6ed3b37afb0b3f4fc5ecc3845f24e64",
       "pdf": "25_diseno_metodologico_svg-raw.pdf",
-      "pdf_sha256": "72bfa3f4b42e48000dee31ac817de639ce442119bfb7f1f356cf1db6a51faf1b"
+      "pdf_sha256": "6b516ce0bcba56b862bfdb327eac2519da5aadebe6b16a1509163308b3fc3029"
     },
     {
       "svg": "01_diagnosticos_2x2.svg",
@@ -171,9 +171,9 @@
     },
     {
       "svg": "21_protocolo_vertical.svg",
-      "svg_sha256": "698d5abc5f1996a5ec6df9469918dca0170c6760ea16c223405558f5f385338f",
+      "svg_sha256": "0ad4591406e4fb8cea4620e7e95780ecc60c227ca2c738e95d8a27e28fdc5d05",
       "pdf": "21_protocolo_vertical_svg-raw.pdf",
-      "pdf_sha256": "a9399d4b7969da6839f170085df829b6976ac1186d8bdd6be4d41666e1b81a45"
+      "pdf_sha256": "0128c33512db9e9c28eb2b0ab4b1669ed8107b7676056be4c4a9c2cd2c99b601"
     },
     {
       "svg": "22_cielab_anillo.svg",
