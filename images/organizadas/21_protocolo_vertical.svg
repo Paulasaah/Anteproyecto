@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1350" viewBox="0 0 1000 1350"><title>Protocolo experimental: datos, entrenamiento y prueba externa</title><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10" fill="#65564b"/></marker></defs><rect width="1000" height="1350" fill="white"/><style>text{font-family:"Times New Roman","Nimbus Roman",serif;fill:#302b27;font-weight:400}.e{fill:none;stroke:#65564b;stroke-width:1.7;marker-end:url(#a)}</style>
+<text x="500" y="45" text-anchor="middle" font-size="32">Protocolo experimental</text>
+<rect x="70" y="85" width="400" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="270.0" y="133.96" text-anchor="middle" font-size="28">HAM10000</text>
+<text x="270.0" y="168.96" text-anchor="middle" font-size="28">Entrenamiento + validación</text>
+<rect x="530" y="85" width="400" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="730.0" y="133.96" text-anchor="middle" font-size="28">PAD-UFES-20</text>
+<text x="730.0" y="168.96" text-anchor="middle" font-size="28">Separación por paciente</text>
+<path d="M730 200 V235 H650 V270" class="e"/>
+<path d="M730 235 H870 V270" class="e"/>
+<rect x="540" y="270" width="220" height="95" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="650.0" y="309.14" text-anchor="middle" font-size="27">target_adapt</text>
+<text x="650.0" y="343.14" text-anchor="middle" font-size="27">Sin etiquetas</text>
+<rect x="790" y="270" width="170" height="95" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#faf8f5"/>
+<text x="875.0" y="309.5" text-anchor="middle" font-size="25">target_test</text>
+<text x="875.0" y="341.5" text-anchor="middle" font-size="25">Reservado</text>
+<path d="M270 200 V435" class="e"/>
+<path d="M650 365 V435" class="e"/>
+<rect x="145" y="435" width="250" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="270.0" y="484.32" text-anchor="middle" font-size="26">D2 · fuente</text>
+<text x="270.0" y="517.3199999999999" text-anchor="middle" font-size="26">SimSiam · pool fuente</text>
+<rect x="525" y="435" width="250" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="650.0" y="483.6" text-anchor="middle" font-size="30">D3 · destino</text>
+<text x="650.0" y="520.6" text-anchor="middle" font-size="30">SimSiam</text>
+<text x="500" y="1320" text-anchor="middle" font-size="25">D2 y D3: misma inicialización DINOv2 pública</text>
+<path d="M270 550 V600 H650 V550" fill="none" stroke="#65564b" stroke-width="2"/>
+<path d="M460 600 V665" class="e"/>
+<rect x="170" y="665" width="580" height="135" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="460.0" y="706.46" text-anchor="middle" font-size="28">Encoder congelado</text>
+<text x="460.0" y="741.46" text-anchor="middle" font-size="28">Escalador + regresión logística</text>
+<text x="460.0" y="776.46" text-anchor="middle" font-size="28">Ajuste independiente con HAM10000</text>
+<path d="M70 142 H35 V733 H170" class="e"/>
+<rect x="790" y="435" width="170" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="875.0" y="484.32" text-anchor="middle" font-size="26">Referencia</text>
+<text x="875.0" y="517.3199999999999" text-anchor="middle" font-size="26">DINOv2</text>
+<path d="M875 550 V625 H700 V665" class="e"/>
+<path d="M460 800 V880" class="e"/>
+<rect x="170" y="880" width="580" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="460.0" y="928.6" text-anchor="middle" font-size="30">Inferencia · pipeline congelado</text>
+<text x="460.0" y="965.6" text-anchor="middle" font-size="30">Mismo target_test</text>
+<path d="M960 317 H985 V937 H750" class="e"/>
+<path d="M460 995 V1075" class="e"/>
+<rect x="170" y="1075" width="580" height="115" rx="4" stroke="#a38a77" stroke-width="1.2" fill="#f4eadf"/>
+<text x="460.0" y="1123.78" text-anchor="middle" font-size="29">Comparación de las 3 condiciones</text>
+<text x="460.0" y="1159.78" text-anchor="middle" font-size="29">Macro-F1 · AUC-ROC · exactitud</text>
+<text x="500" y="1250" text-anchor="middle" font-size="25">Hiperparámetros: validación HAM · prueba sin reajuste</text>
+<text x="500" y="1282" text-anchor="middle" font-size="25">target_adapt y target_test: pacientes distintos</text>
+</svg>

@@ -126,6 +126,12 @@
       "svg_sha256": "28ec6635557baa7bbabed780538ec807dafb84523cb12ea3ad261c5d90c3c000",
       "pdf": "20_adaptacion_dominio_svg-raw.pdf",
       "pdf_sha256": "286ce4b5f50ca7a0da80dc0a35f4100d498fdd0ec173105e7438dfe4d19965cd"
+    },
+    {
+      "svg": "21_protocolo_vertical.svg",
+      "svg_sha256": "57e9736e13d5be1c01a60fd836b634cc7a1f6bb60691143f618007b61e647d5f",
+      "pdf": "21_protocolo_vertical_svg-raw.pdf",
+      "pdf_sha256": "3b6673d74578b328c2abbf9d9bd6dcd01a654709e86831af622906fbde84a989"
     }
   ]
 }
