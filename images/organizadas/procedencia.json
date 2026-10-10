@@ -1,260 +1,157 @@
 {
-  "fuente": "SVG canónico; exportación Inkscape con textos convertidos a trazados para conservar Nimbus Roman.",
+  "fuente": "SVG vigentes citados en la tesis; PDF auxiliares generados al compilar, no versionados.",
   "figuras": [
     {
-      "svg": "teoria_05_cad.svg",
-      "svg_sha256": "462977aad241891428f50da6f50e7eb1be745c2257485e16352685c4f99f32b1",
-      "pdf": "teoria_05_cad_svg-raw.pdf",
-      "pdf_sha256": "8bbe4acca8f687aa152fdbdc28287245044072382d6b28f6e095e41a180d1fa6"
-    },
-    {
-      "svg": "teoria_06_supervisado.svg",
-      "svg_sha256": "ce5b6dc14d6982b14072f49189fd96a9856f48bf4353ea0772d1713bd2cae242",
-      "pdf": "teoria_06_supervisado_svg-raw.pdf",
-      "pdf_sha256": "63caf3dcf2c094049b7f0455596f53de104c8b9cbd952999dbf344fdbd099222"
-    },
-    {
-      "svg": "teoria_07_kmeans.svg",
-      "svg_sha256": "a9b613154cbffd830ab9eac55172750b9f2957c5eb44785638e50154cbd455d8",
-      "pdf": "teoria_07_kmeans_svg-raw.pdf",
-      "pdf_sha256": "461b7ff99dcfecde420f1499ef591fbef6d7f7cc416e1881fb08f75046758159"
-    },
-    {
-      "svg": "teoria_08_vae.svg",
-      "svg_sha256": "71ff17d55cc6bc7bc9df90ea3d5b5546620b143907ce8c31abed7a3d7a5f7170",
-      "pdf": "teoria_08_vae_svg-raw.pdf",
-      "pdf_sha256": "ed947e03c9edaa5d15c6095d399d44f476fd23a62d0c8e794efbae87f8f16bd7"
-    },
-    {
-      "svg": "teoria_09_gan.svg",
-      "svg_sha256": "99a1fd46a27b0c690fcf0c5b5483dad9bc5cffc00de82f144ce7280876376fd0",
-      "pdf": "teoria_09_gan_svg-raw.pdf",
-      "pdf_sha256": "e3e6804da9fcc98ea1da762926234dff96308d63e0de2776960fdb3ab99f1c7b"
-    },
-    {
-      "svg": "teoria_10_ssl.svg",
-      "svg_sha256": "6257dd035de9d23b603db723562e1ce00a5eeff063a866f3421587da7bc340b1",
-      "pdf": "teoria_10_ssl_svg-raw.pdf",
-      "pdf_sha256": "0a6cad4cfdb0564500590aafdd4bdce955d6763965fbfd442632839eb27f4cb8"
-    },
-    {
-      "svg": "17_arquitectura_general.svg",
-      "svg_sha256": "cf23ba49f29f4a0bb6b90fe8926e13ce2448a30faac346bd1f70191a169caed0",
-      "pdf": "17_arquitectura_general_svg-raw.pdf",
-      "pdf_sha256": "75a6e04755125513645ac2215df68b6701c3842cf5b973b454a4c7c6c6454cb5"
-    },
-    {
-      "svg": "18_segmentacion_arquitecturas.svg",
-      "svg_sha256": "4dd09c022c2d06b4c3278bc6304e6ed949ee572b561b5ebcf076415290879f1b",
-      "pdf": "18_segmentacion_arquitecturas_svg-raw.pdf",
-      "pdf_sha256": "4b5d296464b9d48d728bce2cf1a95c7f126e6f0a6f94ae55c630e19107747af8"
-    },
-    {
-      "svg": "19_transformacion_tono.svg",
-      "svg_sha256": "39ba19d15c886236b8fd26835ff7429925e96e9bab4f7d16156bdacfeaf1dd22",
-      "pdf": "19_transformacion_tono_svg-raw.pdf",
-      "pdf_sha256": "6c953902af3657d50635a094ba5232b3d6c9a6f184be14821a2e3b2b54519a98"
-    },
-    {
-      "svg": "20_adaptacion_dominio.svg",
-      "svg_sha256": "d993178b45b3827a27ec062fac983f3e376131f086c148bd7eec1f7adb0f2542",
-      "pdf": "20_adaptacion_dominio_svg-raw.pdf",
-      "pdf_sha256": "9cdf66d971380c95c3484ec835f64fd27758399bf76dc3bf3aa51dbc26f76140"
-    },
-    {
-      "svg": "24_arbol_problema.svg",
-      "svg_sha256": "6326d146c84bfced46626eb6913c40a8d68e8cd7bd3bf0d3af3e6b5d140b1c59",
-      "pdf": "24_arbol_problema_svg-raw.pdf",
-      "pdf_sha256": "d449090364634ff0294a9c635b3154912a57d053eb88685f2b81558c04ba712d"
-    },
-    {
-      "svg": "25_diseno_metodologico.svg",
-      "svg_sha256": "4dcf2bbbfc191c692b7d3af3e674fb54f07a452332b5ae387a743a4c6e20e2d6",
-      "pdf": "25_diseno_metodologico_svg-raw.pdf",
-      "pdf_sha256": "37627a227540f5a941a51e6061b27753dd6c17200f4bbf36c73fee50ccd818ed"
-    },
-    {
       "svg": "01_diagnosticos_2x2.svg",
-      "svg_sha256": "eab776c051656aed57d4e29bb547b4f4ad3014555f2ca51288da8a91ed7fa228",
-      "pdf": "01_diagnosticos_2x2_svg-raw.pdf",
-      "pdf_sha256": "e902b19804de8dcc220f5e10773598614669fad4575428c2eab5aaa8fdf816e6"
+      "svg_sha256": "eab776c051656aed57d4e29bb547b4f4ad3014555f2ca51288da8a91ed7fa228"
     },
     {
       "svg": "02_segmentacion_3x3.svg",
-      "svg_sha256": "952d0c61ebaf35564e1fca84d469c36e549ea76ae0fc0cecbf63de39769c9788",
-      "pdf": "02_segmentacion_3x3_svg-raw.pdf",
-      "pdf_sha256": "a1436107467fe74f03bd4b4d0703448bb4d7b49a451d2b50bde190f2c63c5a5d",
-      "fuente": "Exportaciones reales del pod: scripts/datos_segmentacion/exportacion_pod; Dice de ambos modelos verificado; CCAM crudo sobre su propia entrada de caché."
+      "svg_sha256": "952d0c61ebaf35564e1fca84d469c36e549ea76ae0fc0cecbf63de39769c9788"
     },
     {
       "svg": "03_segmentacion_dice.svg",
-      "svg_sha256": "fe44d76cc1307f42d33c4971dd999cb7c6e0da608992047b95a191eeba548e7e",
-      "pdf": "03_segmentacion_dice_svg-raw.pdf",
-      "pdf_sha256": "63c54a63380e99b6f5676bfc2502454b648d88c6b3600c144fa03ff7b335c623",
-      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
+      "svg_sha256": "fe44d76cc1307f42d33c4971dd999cb7c6e0da608992047b95a191eeba548e7e"
     },
     {
       "svg": "04_pad_fst_ita.svg",
-      "svg_sha256": "6538288c3957f269debdf3674601428c295413bd1f517387eb2e548d78c9e314",
-      "pdf": "04_pad_fst_ita_svg-raw.pdf",
-      "pdf_sha256": "5fc863358a7df235dfd290d6fad1de766e3848b3226945519ed62728ee0619b2"
+      "svg_sha256": "6538288c3957f269debdf3674601428c295413bd1f517387eb2e548d78c9e314"
     },
     {
       "svg": "05_ita_otsu_2x2.svg",
-      "svg_sha256": "36c4f19c1cebed2cc4ec0a2d6c1872be08c95b20affbc3d41fb69635f1ce7eff",
-      "pdf": "05_ita_otsu_2x2_svg-raw.pdf",
-      "pdf_sha256": "86cdad08176106f5816f8e3486109656512713d9fe69a312e78b7741fc3a6eb3"
+      "svg_sha256": "36c4f19c1cebed2cc4ec0a2d6c1872be08c95b20affbc3d41fb69635f1ce7eff"
     },
     {
       "svg": "06_ita_roi_e5.svg",
-      "svg_sha256": "18d88402e30fdc5b0ef75351e5b169ec2d62954622d628b21f7f4dd591c70565",
-      "pdf": "06_ita_roi_e5_svg-raw.pdf",
-      "pdf_sha256": "044c7c3ce1752ea805a1981084d8059f9359e7d06e10067510beff582b9db218",
-      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
+      "svg_sha256": "18d88402e30fdc5b0ef75351e5b169ec2d62954622d628b21f7f4dd591c70565"
     },
     {
       "svg": "07_ita_evaluacion_pad.svg",
-      "svg_sha256": "bec87f2d661ee49004e7984f8d3e42bd8cb894d2ec7d3cd35db3d57ce7785fda",
-      "pdf": "07_ita_evaluacion_pad_svg-raw.pdf",
-      "pdf_sha256": "0de651a031adb7ff5016ae694c5177c3310a7027a35ceb0e61a7c58d9a5d33f8",
-      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
-    },
-    {
-      "svg": "08_configuraciones_ham.svg",
-      "svg_sha256": "b7ad7b62dafa59739f1be0bbedcca8fd9363cd24ea8c8e1f8f6ddcac8b77341f",
-      "pdf": "08_configuraciones_ham_svg-raw.pdf",
-      "pdf_sha256": "209db4f52c875df00279b833262886ef2ba27b9ee1a1113cb1f5362a8efe229c"
-    },
-    {
-      "svg": "09_baselines_y_contrastes.svg",
-      "svg_sha256": "567cfce51ad956533733c74052b489863588379526d77b6a7d6f44c1ad1450e7",
-      "pdf": "09_baselines_y_contrastes_svg-raw.pdf",
-      "pdf_sha256": "4700002f56c8669aea23c23c36c6903f3d63d8b83d1c9214eb5a535d4ad281cc"
+      "svg_sha256": "bec87f2d661ee49004e7984f8d3e42bd8cb894d2ec7d3cd35db3d57ce7785fda"
     },
     {
       "svg": "10_confusion_b71.svg",
-      "svg_sha256": "66804b12fd36bfaeadaf31375bd347360aa5fbf64ac804491ddb2b89dae5a803",
-      "pdf": "10_confusion_b71_svg-raw.pdf",
-      "pdf_sha256": "89642548a35cb3bdd93b8a15acdcd9f77a203f404b2cf4675721d4eb66355ea8"
+      "svg_sha256": "66804b12fd36bfaeadaf31375bd347360aa5fbf64ac804491ddb2b89dae5a803"
     },
     {
       "svg": "11_metricas_por_clase.svg",
-      "svg_sha256": "108c13c0ef7f06a4895eb9c932c8ade6cef18213c571d22c89c205cf1e1ec505",
-      "pdf": "11_metricas_por_clase_svg-raw.pdf",
-      "pdf_sha256": "e38ca1871ac350ee4f6bbad9028559297a749c1707cdc5a2707ef5a548a16657"
+      "svg_sha256": "108c13c0ef7f06a4895eb9c932c8ade6cef18213c571d22c89c205cf1e1ec505"
     },
     {
       "svg": "12_precision_recall.svg",
-      "svg_sha256": "fed992a1f3e4b5fb35495ebcf0aa93ea42734bdb7ea7ffb98331671d5fc6433d",
-      "pdf": "12_precision_recall_svg-raw.pdf",
-      "pdf_sha256": "4fe735cd7a589c9007e381e964abec93b6c40583661d73e13dc125130c41fcb4"
+      "svg_sha256": "fed992a1f3e4b5fb35495ebcf0aa93ea42734bdb7ea7ffb98331671d5fc6433d"
     },
     {
       "svg": "13_confiabilidad_b71.svg",
-      "svg_sha256": "849f1ee0bd1fd9c35ac73d51b7fe7f69a406df71e51a8d5bb6d1eeb3db9d3c01",
-      "pdf": "13_confiabilidad_b71_svg-raw.pdf",
-      "pdf_sha256": "dd2843a59078d156294319da7df0a520eceab09f78388940c3d90b9d4a94d878"
-    },
-    {
-      "svg": "14_ablacion_f4.svg",
-      "svg_sha256": "6f73678b13a3429f672701250171dfbede771803653b30bc583bfa82373f19e0",
-      "pdf": "14_ablacion_f4_svg-raw.pdf",
-      "pdf_sha256": "a98101531ea26f804269c806df31b57b244feaf27ae29d715e4e3d9fe0f8f2ee"
+      "svg_sha256": "849f1ee0bd1fd9c35ac73d51b7fe7f69a406df71e51a8d5bb6d1eeb3db9d3c01"
     },
     {
       "svg": "15_adaptacion_pad.svg",
-      "svg_sha256": "7c491d8080a033aec8de101865c4180470016c3ddbb48889c59bbe3b9c70b6df",
-      "pdf": "15_adaptacion_pad_svg-raw.pdf",
-      "pdf_sha256": "79e397683ba1edadb0b72a7a14ae3bd74f2e10ea3b11ddb7a264ff1a1b609aee"
+      "svg_sha256": "7c491d8080a033aec8de101865c4180470016c3ddbb48889c59bbe3b9c70b6df"
     },
     {
-      "svg": "16_f1_ham_2x2.svg",
-      "svg_sha256": "781fcaef0ef10d63a9f7eb6b52f1b6bde6ab3f08e32add0cfe2552c996ad08d3",
-      "pdf": "16_f1_ham_2x2_svg-raw.pdf",
-      "pdf_sha256": "4420a1f8d66ae0e4328bdc2688730468201502d98b5f2034c49dcb06b0ebcda1"
+      "svg": "17_arquitectura_general.svg",
+      "svg_sha256": "cf23ba49f29f4a0bb6b90fe8926e13ce2448a30faac346bd1f70191a169caed0"
+    },
+    {
+      "svg": "18_segmentacion_arquitecturas.svg",
+      "svg_sha256": "4dd09c022c2d06b4c3278bc6304e6ed949ee572b561b5ebcf076415290879f1b"
+    },
+    {
+      "svg": "19_transformacion_tono.svg",
+      "svg_sha256": "39ba19d15c886236b8fd26835ff7429925e96e9bab4f7d16156bdacfeaf1dd22"
+    },
+    {
+      "svg": "20_adaptacion_dominio.svg",
+      "svg_sha256": "d993178b45b3827a27ec062fac983f3e376131f086c148bd7eec1f7adb0f2542"
     },
     {
       "svg": "21_protocolo_vertical.svg",
-      "svg_sha256": "0ad4591406e4fb8cea4620e7e95780ecc60c227ca2c738e95d8a27e28fdc5d05",
-      "pdf": "21_protocolo_vertical_svg-raw.pdf",
-      "pdf_sha256": "0128c33512db9e9c28eb2b0ab4b1669ed8107b7676056be4c4a9c2cd2c99b601"
+      "svg_sha256": "0ad4591406e4fb8cea4620e7e95780ecc60c227ca2c738e95d8a27e28fdc5d05"
     },
     {
       "svg": "22_cielab_anillo.svg",
-      "svg_sha256": "7cd240e4b9b63f745cd0141998c450d0ed1e4b68353a4fc3f3c740290e4d4477",
-      "pdf": "22_cielab_anillo_svg-raw.pdf",
-      "pdf_sha256": "f3b8727701a0445d580233bef35af71057fe73780602c659122c63e9a3b4d996"
+      "svg_sha256": "7cd240e4b9b63f745cd0141998c450d0ed1e4b68353a4fc3f3c740290e4d4477"
     },
     {
       "svg": "23_geometria_ita.svg",
-      "svg_sha256": "cf572a46e1084a2d8a62816d44d2dd537a342f8ed014c9715473b3f4f0abcf23",
-      "pdf": "23_geometria_ita_svg-raw.pdf",
-      "pdf_sha256": "da52dbb39e0092faf0ada5df6c0c00736ec02d452a2bc4a0d969f4ac3659ba0e"
+      "svg_sha256": "cf572a46e1084a2d8a62816d44d2dd537a342f8ed014c9715473b3f4f0abcf23"
     },
     {
-      "svg": "A01_confiabilidad_comparacion.svg",
-      "svg_sha256": "82a37c4eb817413450a7f2d10a0d96a36b89cb3b954cd7934209d6204f295977",
-      "pdf": "A01_confiabilidad_comparacion_svg-raw.pdf",
-      "pdf_sha256": "f1539bb7536371e7af449afba2e2d8d3d6b3d90398bd4458496031603d59f98c"
+      "svg": "24_arbol_problema.svg",
+      "svg_sha256": "6326d146c84bfced46626eb6913c40a8d68e8cd7bd3bf0d3af3e6b5d140b1c59"
     },
     {
-      "svg": "A02_ham10000.svg",
-      "svg_sha256": "e4c37bd90738f2e3f9357025760a75878cfcec962858705e20dcc804c4ddd59f",
-      "pdf": "A02_ham10000_svg-raw.pdf",
-      "pdf_sha256": "6fe7d8b2644aec42dca23b45117e22abddccf422d616b068b84e144a3800f2c3"
+      "svg": "25_diseno_metodologico.svg",
+      "svg_sha256": "4dcf2bbbfc191c692b7d3af3e674fb54f07a452332b5ae387a743a4c6e20e2d6"
     },
     {
-      "svg": "A02_isic2019.svg",
-      "svg_sha256": "f73c3aea68ac78203b945f42912446e0d0399aae6f5d29b17d8b5bd6f1e58a55",
-      "pdf": "A02_isic2019_svg-raw.pdf",
-      "pdf_sha256": "6dbc640cc7dabadcbb8b7adf4349213770135f10792b55af6bd8ff80c8c02ffb"
+      "svg": "26_f1_configuraciones.svg",
+      "svg_sha256": "fcf3e30fc65def39434002bdf1929fc743a3ab293ce3de44527722d7983ddfb7"
     },
     {
-      "svg": "A02_isic2020.svg",
-      "svg_sha256": "13912d66fa0eae2a6e710ef7c8a753d19c6769702a06a74f80f51b634683b65b",
-      "pdf": "A02_isic2020_svg-raw.pdf",
-      "pdf_sha256": "6a75291d4f7a6f41403e1b45ef75b93ff124c6af985350c30ed13c07b655cf12"
-    },
-    {
-      "svg": "images/organizadas/teoria_04_biopsia.svg",
-      "svg_sha256": "6bb7d3fcf17b60d09ebd30817773b9686021d6b2936f0d76140cdc45ed445e8a",
-      "pdf": "images/organizadas/teoria_04_biopsia_svg-raw.pdf",
-      "pdf_sha256": "0ebdea0bd578b99ab95f076a439fdf88997f2bcedf80fb3754448a3155833173",
-      "imagenes": {
-        "fijacion": "Ilustración fotográfica generada con IA; no corresponde a una muestra clínica real.",
-        "microtomia": "Fotografía aportada por la usuaria: image(20261010-203354).png",
-        "lectura": "Referencias aportadas por la usuaria: image(20261010-211037).png e image(20261010-211144).png"
-      }
-    },
-    {
-      "svg": "images/organizadas/teoria_03_abcde.svg",
-      "svg_sha256": "61f7c98ea5c07cb5007593615e111d7950d415757ccac07bf2fdd34e71a74929",
-      "pdf": "images/organizadas/teoria_03_abcde_svg-raw.pdf",
-      "pdf_sha256": "53b0ec98a3aad7d4b5fedd98e9d8fd9af459441224b79d774ee75ff985234cec",
-      "fuente": "Fotografías reutilizadas de figura02-regla-abcde-melanoma.png; HC Marbella 2020; https://www.hcmarbella.com/es/abcde-del-melanoma/"
-    },
-    {
-      "svg": "images/organizadas/26_f1_configuraciones.svg",
-      "pdf": "images/organizadas/26_f1_configuraciones_svg-raw.pdf",
-      "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
-      "svg_sha256": "fcf3e30fc65def39434002bdf1929fc743a3ab293ce3de44527722d7983ddfb7",
-      "pdf_sha256": "a6201fc4449f5ed259b66055e1c81bf81439606109e2450d2cec96b50c81e57d",
-      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
-    },
-    {
-      "svg": "images/organizadas/27_f1_contrastes.svg",
-      "pdf": "images/organizadas/27_f1_contrastes_svg-raw.pdf",
-      "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
-      "svg_sha256": "fcbcd269e6f76b83d816a37ad444660f8c743d51a209c11217a040a6d83e4e16",
-      "pdf_sha256": "daa5750f578aa0bad2c64d199cff8f51793565deb3efe62e70d14799c02ee0c1",
-      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
+      "svg": "27_f1_contrastes.svg",
+      "svg_sha256": "fcbcd269e6f76b83d816a37ad444660f8c743d51a209c11217a040a6d83e4e16"
     },
     {
       "svg": "28_segmentacion_ham10000.svg",
-      "pdf": "28_segmentacion_ham10000_svg-raw.pdf",
-      "svg_sha256": "cd6a36b488da70e0bd905fc135c99621a90e0e4b9e8b3ab5bb6018b127108121",
-      "pdf_sha256": "46df44988efef0a9f619f6eb348636af9681f4e69415ec78b2f2c18f09627375",
-      "fuente": "Exportaciones reales del pod: scripts/datos_segmentacion/exportacion_pod; Dice de ambos modelos verificado; CCAM crudo sobre su propia entrada de caché."
+      "svg_sha256": "cd6a36b488da70e0bd905fc135c99621a90e0e4b9e8b3ab5bb6018b127108121"
+    },
+    {
+      "svg": "A01_confiabilidad_comparacion.svg",
+      "svg_sha256": "82a37c4eb817413450a7f2d10a0d96a36b89cb3b954cd7934209d6204f295977"
+    },
+    {
+      "svg": "A02_ham10000.svg",
+      "svg_sha256": "e4c37bd90738f2e3f9357025760a75878cfcec962858705e20dcc804c4ddd59f"
+    },
+    {
+      "svg": "A02_isic2019.svg",
+      "svg_sha256": "f73c3aea68ac78203b945f42912446e0d0399aae6f5d29b17d8b5bd6f1e58a55"
+    },
+    {
+      "svg": "A02_isic2020.svg",
+      "svg_sha256": "13912d66fa0eae2a6e710ef7c8a753d19c6769702a06a74f80f51b634683b65b"
+    },
+    {
+      "svg": "A03_ita_e5_otsu_roi.svg",
+      "svg_sha256": "93b38d1e5d3681c4de6177c55fa3ca61e9c4247571115e85ee2216219ae6a2c3"
+    },
+    {
+      "svg": "teoria_02_lesiones.svg",
+      "svg_sha256": "3648987e262bbacd0495ee1109a9c7fd84c91cbdd18b704d2d913353af20ebc6"
+    },
+    {
+      "svg": "teoria_03_abcde.svg",
+      "svg_sha256": "61f7c98ea5c07cb5007593615e111d7950d415757ccac07bf2fdd34e71a74929"
+    },
+    {
+      "svg": "teoria_04_biopsia.svg",
+      "svg_sha256": "6bb7d3fcf17b60d09ebd30817773b9686021d6b2936f0d76140cdc45ed445e8a"
+    },
+    {
+      "svg": "teoria_05_cad.svg",
+      "svg_sha256": "462977aad241891428f50da6f50e7eb1be745c2257485e16352685c4f99f32b1"
+    },
+    {
+      "svg": "teoria_06_supervisado.svg",
+      "svg_sha256": "ce5b6dc14d6982b14072f49189fd96a9856f48bf4353ea0772d1713bd2cae242"
+    },
+    {
+      "svg": "teoria_07_kmeans.svg",
+      "svg_sha256": "a9b613154cbffd830ab9eac55172750b9f2957c5eb44785638e50154cbd455d8"
+    },
+    {
+      "svg": "teoria_08_vae.svg",
+      "svg_sha256": "71ff17d55cc6bc7bc9df90ea3d5b5546620b143907ce8c31abed7a3d7a5f7170"
+    },
+    {
+      "svg": "teoria_09_gan.svg",
+      "svg_sha256": "99a1fd46a27b0c690fcf0c5b5483dad9bc5cffc00de82f144ce7280876376fd0"
+    },
+    {
+      "svg": "teoria_10_ssl.svg",
+      "svg_sha256": "6257dd035de9d23b603db723562e1ce00a5eeff063a866f3421587da7bc340b1"
     }
   ]
 }

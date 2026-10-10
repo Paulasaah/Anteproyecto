@@ -30,8 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Obtener repositorio e imágenes originales
+      - name: Obtener repositorio y SVG vigentes
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Preparar conversiones SVG
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y inkscape fonts-urw-base35
+          python3 scripts/exportar_figuras_svg.py
       - name: Compilar con XeLaTeX y Biber
         uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # v4
         with:
@@ -55,3 +60,4 @@ jobs:
             main.blg
           if-no-files-found: ignore
           retention-days: 14
+

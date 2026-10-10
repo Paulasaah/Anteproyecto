@@ -7,13 +7,13 @@ En Ubuntu/Debian, instalar las dependencias:
 
 ```bash
 sudo apt-get update
-sudo apt-get install latexmk texlive-xetex texlive-latex-extra texlive-lang-spanish texlive-bibtex-extra texlive-science biber
+sudo apt-get install latexmk texlive-xetex texlive-latex-extra texlive-lang-spanish texlive-bibtex-extra texlive-science biber inkscape fonts-urw-base35
 ```
 
 Desde la raíz del repositorio:
 
 ```bash
-latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
+latexmk -xelatex -shell-escape -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 Latexmk ejecuta Biber y repite XeLaTeX para resolver citas y referencias.
@@ -28,7 +28,7 @@ python scripts/generar_figuras_e5.py
 python scripts/generar_esquema_ita.py
 ```
 
-Los PDF/SVG actuales usan Nimbus Roman, explícitamente indicada en el registro tipográfico. El generador exige la fuente solicitada; no cambia silenciosamente a otra. Se puede reproducir el borrador con `--font 'Nimbus Roman'`.
+Los SVG actuales usan Nimbus Roman, explícitamente indicada en el registro tipográfico. El generador exige la fuente solicitada; no cambia silenciosamente a otra. Se puede reproducir el borrador con `--font 'Nimbus Roman'`.
 
 Los errores `spanish.ldf`, `biblatex.sty` o `algorithm.sty` ausentes corresponden, respectivamente, a `texlive-lang-spanish`, `texlive-bibtex-extra` y `texlive-science`. Conservar las imágenes originales del repositorio al compilar; los conectores que solo devuelven texto pueden no descargar todos los archivos binarios.
 
