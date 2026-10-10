@@ -571,7 +571,7 @@ Las Figuras~\ref{fig:clasificacion-ham-pareada} y \ref{fig:contrastes-ham-baseli
 
 En el ajuste fino, todas las ponderaciones de cada línea base se actualizaron usando etiquetas. Se empleó una partición distinta (n = 2.014) y se seleccionó la época según el desempeño en validación, lo que introduce el sesgo optimista señalado en el protocolo. Debido a estas diferencias, la comparación con B71 es descriptiva y no constituye un contraste pareado.
 
-Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,7962 con ViT-B/16 en ISIC2019 y 0,5889 con VGG19 en ISIC2020. En HAM10000 e ISIC2019, estos valores alcanzan o superan el resultado de B71. La comparación muestra que los dos regímenes responden a condiciones distintas: B71 aprende representaciones mediante SSL sin etiquetas para esa etapa, mientras que el ajuste fino actualiza los pesos con las etiquetas disponibles. Por tanto, los resultados no sustentan una superioridad absoluta de B71, sino el uso de representaciones autosupervisadas cuando se busca reducir la dependencia de etiquetas durante el aprendizaje de la representación.
+Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,7962 con ViT-B/16 en ISIC2019 y 0,5889 con VGG19 en ISIC2020. En HAM10000, el F1 macro de 0,7058 es numéricamente inferior al 0,7141 de B71; estas cifras proceden de particiones distintas y no constituyen un contraste pareado. La comparación entre regímenes debe distinguir el conjunto, la partición y el uso de etiquetas antes de atribuir diferencias al método. La comparación muestra que los dos regímenes responden a condiciones distintas: B71 aprende representaciones mediante SSL sin etiquetas para esa etapa, mientras que el ajuste fino actualiza los pesos con las etiquetas disponibles. Por tanto, los resultados no sustentan una superioridad absoluta de B71, sino el uso de representaciones autosupervisadas cuando se busca reducir la dependencia de etiquetas durante el aprendizaje de la representación.
 
 \subsection{Caso especial: ISIC2020, F1 contra sensibilidad clínica}
 
@@ -669,7 +669,7 @@ Las distribuciones del ITA caracterizan las imágenes originales con los protoco
 
 \subsection{Clasificación y adaptación de dominio}
 
-En la comparación congelada de HAM10000, B71 obtuvo intervalos pareados que excluyeron cero frente a las ocho líneas base, sin corrección global por multiplicidad. En el ajuste fino, algunos modelos alcanzaron o superaron a B71 en HAM10000 e ISIC2019. En ISIC2020, el F1 macro y la sensibilidad de melanoma favorecieron configuraciones distintas. Estos resultados no establecen un único modelo superior para todos los criterios.
+En la comparación congelada de HAM10000, B71 obtuvo intervalos pareados que excluyeron cero frente a las ocho líneas base, sin corrección global por multiplicidad. Los resultados de ajuste fino proceden de particiones distintas y no permiten establecer una superioridad pareada frente a B71 ni aislar el efecto del régimen de entrenamiento. En ISIC2020, el F1 macro y la sensibilidad de melanoma favorecieron configuraciones distintas. Estos resultados no establecen un único modelo superior para todos los criterios.
 
 En adaptación de dominio, D3 mejoró frente al control D2, pero permaneció por debajo de D0. La evaluación piloto en PAD-UFES-20 usa una semilla, pocos melanomas y un mapeo parcial de diagnósticos. Su alcance corresponde a ese protocolo y no permite declarar una adaptación clínica validada a Santander.
 
