@@ -35,6 +35,7 @@
 
 % Gráficos y tablas
 \usepackage{graphicx}
+\usepackage{pdflscape}
 \graphicspath{{images/}}
 \usepackage{booktabs}
 \usepackage{array}
@@ -152,6 +153,9 @@
 \renewcommand{\thetable}{\arabic{table}}
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
+% Ecuaciones consecutivas en toda la tesis, sin prefijo de capítulo.
+\counterwithout{equation}{chapter}
+\renewcommand{\theequation}{\arabic{equation}}
 
 % Portada (plantilla del profesor)
 \hypersetup{pageanchor=false}
