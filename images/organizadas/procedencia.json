@@ -213,9 +213,14 @@
     },
     {
       "svg": "images/organizadas/teoria_04_biopsia.svg",
-      "svg_sha256": "089163370aa2c9b37a8bdb2d207869278954dd0818c438d34f71928c3f2d27f1",
+      "svg_sha256": "6bb7d3fcf17b60d09ebd30817773b9686021d6b2936f0d76140cdc45ed445e8a",
       "pdf": "images/organizadas/teoria_04_biopsia_svg-raw.pdf",
-      "pdf_sha256": "72d9dbbac83537bfedeafe4171e235bd1271a89af9ac3260d033b0181fe5cc17"
+      "pdf_sha256": "0ebdea0bd578b99ab95f076a439fdf88997f2bcedf80fb3754448a3155833173",
+      "imagenes": {
+        "fijacion": "Ilustración fotográfica generada con IA; no corresponde a una muestra clínica real.",
+        "microtomia": "Fotografía aportada por la usuaria: image(20261010-203354).png",
+        "lectura": "Referencias aportadas por la usuaria: image(20261010-211037).png e image(20261010-211144).png"
+      }
     }
   ]
 }
