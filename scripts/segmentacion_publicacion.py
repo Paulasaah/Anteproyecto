@@ -22,7 +22,7 @@ for dataset,name in [('isic2018','02_segmentacion_3x3'),('ham10000','28_segmenta
  cases=[c for c in provenance['cases'] if c['dataset']==dataset]
  fig=plt.figure(figsize=(7.2,5.35))
  for col,title in enumerate(['Imagen','Referencia','student_r3','S4-A2','Contornos','CCAM crudo']):
-  fig.text(.02+col*.161+.072,.973,title,ha='center',va='top',fontsize=14)
+  fig.text(.02+col*.161+.072,1.035,title,ha='center',va='top',fontsize=14)
  for row,c in enumerate(cases):
   key=dataset+'__'+c['image_id'];im=a[key+'__image'];ref=a[key+'__reference'];r3=a[key+'__student_r3'];a2=a[key+'__A2'];cache=b[key+'__ccam_input'];heat=b[key+'__ccam'].astype(float)
   assert all(x.shape==ref.shape for x in [r3,a2]) and im.shape[:2]==ref.shape

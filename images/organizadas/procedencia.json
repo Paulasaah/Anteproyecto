@@ -81,9 +81,9 @@
     },
     {
       "svg": "02_segmentacion_3x3.svg",
-      "svg_sha256": "0b18ba4e4b06a4c13bf40d4052a4ef2d941df96b9725db0120c33c1275382511",
+      "svg_sha256": "952d0c61ebaf35564e1fca84d469c36e549ea76ae0fc0cecbf63de39769c9788",
       "pdf": "02_segmentacion_3x3_svg-raw.pdf",
-      "pdf_sha256": "b1c450ecc3f07bb80e3b0f6d1a4efac71f8bf83d028be1751c8c2caffb470938",
+      "pdf_sha256": "a1436107467fe74f03bd4b4d0703448bb4d7b49a451d2b50bde190f2c63c5a5d",
       "fuente": "Exportaciones reales del pod: scripts/datos_segmentacion/exportacion_pod; Dice de ambos modelos verificado; CCAM crudo sobre su propia entrada de caché."
     },
     {
@@ -247,8 +247,8 @@
     {
       "svg": "28_segmentacion_ham10000.svg",
       "pdf": "28_segmentacion_ham10000_svg-raw.pdf",
-      "svg_sha256": "5d71a64149ca554b21cb8290f4233a8f986d959dacb73fd2c947b412738f606a",
-      "pdf_sha256": "6e7949b4499bfbe158d13898dffbf4fa6fb628fe3955d31d491e3524ff4139ba",
+      "svg_sha256": "cd6a36b488da70e0bd905fc135c99621a90e0e4b9e8b3ab5bb6018b127108121",
+      "pdf_sha256": "46df44988efef0a9f619f6eb348636af9681f4e69415ec78b2f2c18f09627375",
       "fuente": "Exportaciones reales del pod: scripts/datos_segmentacion/exportacion_pod; Dice de ambos modelos verificado; CCAM crudo sobre su propia entrada de caché."
     }
   ]
