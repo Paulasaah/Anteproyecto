@@ -75,9 +75,9 @@
     },
     {
       "svg": "01_diagnosticos_2x2.svg",
-      "svg_sha256": "28267f3abf3b79252163e7c09607d6d9ba6d4d4ea66874baa120c5230cac6043",
+      "svg_sha256": "eab776c051656aed57d4e29bb547b4f4ad3014555f2ca51288da8a91ed7fa228",
       "pdf": "01_diagnosticos_2x2_svg-raw.pdf",
-      "pdf_sha256": "df7f7717ac1c917431f7bdf8ac731055406a9eddeb51d8c20863583d99513f6f"
+      "pdf_sha256": "e902b19804de8dcc220f5e10773598614669fad4575428c2eab5aaa8fdf816e6"
     },
     {
       "svg": "02_segmentacion_3x3.svg",
@@ -87,33 +87,33 @@
     },
     {
       "svg": "03_segmentacion_dice.svg",
-      "svg_sha256": "0c9344b702ae072f404fc66b65d32ec547add82bffde176a7675c91761bfbb99",
+      "svg_sha256": "061f9211dec419b5cdb49bff92f84d8d3a171d43bee24280f1910e944df77185",
       "pdf": "03_segmentacion_dice_svg-raw.pdf",
-      "pdf_sha256": "492e8bd497f58a75074e7dbb653fbe175ef1af2265f2dedd58b33502e7f64f88"
+      "pdf_sha256": "b6e924102b942f6786de33a9f15ca14e6651be8ec5a0bb43066d2823f7726e65"
     },
     {
       "svg": "04_pad_fst_ita.svg",
-      "svg_sha256": "f7bce28bfbe18c8bab0cd559ecd7bda5eda3450e8740c9311ec763a328892fe9",
+      "svg_sha256": "6538288c3957f269debdf3674601428c295413bd1f517387eb2e548d78c9e314",
       "pdf": "04_pad_fst_ita_svg-raw.pdf",
-      "pdf_sha256": "dedc83419b8bba8ebb9c6f50aa745ba3b25659124a60a53c955788a872b44b00"
+      "pdf_sha256": "5fc863358a7df235dfd290d6fad1de766e3848b3226945519ed62728ee0619b2"
     },
     {
       "svg": "05_ita_otsu_2x2.svg",
-      "svg_sha256": "a3f516674589db6e8a3eef1deb14f3f8408db00b447078ac4d055fb475be5040",
+      "svg_sha256": "36c4f19c1cebed2cc4ec0a2d6c1872be08c95b20affbc3d41fb69635f1ce7eff",
       "pdf": "05_ita_otsu_2x2_svg-raw.pdf",
-      "pdf_sha256": "25449b00b6a9456a3214dfb596d758c04fb1b746c3e8ddb2f2c5315fe6cb7190"
+      "pdf_sha256": "86cdad08176106f5816f8e3486109656512713d9fe69a312e78b7741fc3a6eb3"
     },
     {
       "svg": "06_ita_roi_e5.svg",
-      "svg_sha256": "7ee6359ab562a1dd6d5d419e2c139b225ad68c8c08697105826642b01f8b76db",
+      "svg_sha256": "34306504830da3d0cd7e3f9d278edd0a4b9390712ba2d884dbd25361c1dac6f2",
       "pdf": "06_ita_roi_e5_svg-raw.pdf",
-      "pdf_sha256": "c27dd0465753b69a80d393c43b2abb566e637e14a46aba69293671a2d5963725"
+      "pdf_sha256": "7fed2c3f9f1b69f8fd2c553f3d4a114da8df3573bf2033b9ca53a9ded7d4345f"
     },
     {
       "svg": "07_ita_evaluacion_pad.svg",
-      "svg_sha256": "c6a75836d86368912737841910fff20ebb9a4f4c302cfbe4f129d0d98100d4ac",
+      "svg_sha256": "bb18cff4ac71dc20cd4d4911f1046fe5ccadf5810674b326e5993bd299f88377",
       "pdf": "07_ita_evaluacion_pad_svg-raw.pdf",
-      "pdf_sha256": "c930cdfa84c9c27f17d3660985ba76ac0adb52017b321a3402a4bcec38b0b2ec"
+      "pdf_sha256": "a5492d582abff79fb30b3197f464b6c7a82c2b8f9e765fd409d00751fc2514ce"
     },
     {
       "svg": "08_configuraciones_ham.svg",
@@ -129,27 +129,27 @@
     },
     {
       "svg": "10_confusion_b71.svg",
-      "svg_sha256": "cedcdf53ab5cde9a8c0741b628ba5296bfaf17cd8cde266c0eefca182dc41609",
+      "svg_sha256": "66804b12fd36bfaeadaf31375bd347360aa5fbf64ac804491ddb2b89dae5a803",
       "pdf": "10_confusion_b71_svg-raw.pdf",
-      "pdf_sha256": "297367d9703a4dd311570e7891a39e4a858dff9e45e6c4e2ca79d76f475deee1"
+      "pdf_sha256": "89642548a35cb3bdd93b8a15acdcd9f77a203f404b2cf4675721d4eb66355ea8"
     },
     {
       "svg": "11_metricas_por_clase.svg",
-      "svg_sha256": "3cc8631f5691940d1babfc7b72ce560626aed2bd60c1d55f80fc361746d0dc24",
+      "svg_sha256": "108c13c0ef7f06a4895eb9c932c8ade6cef18213c571d22c89c205cf1e1ec505",
       "pdf": "11_metricas_por_clase_svg-raw.pdf",
-      "pdf_sha256": "1a279f137f5d011bbef5c31172c493b572afb5e432e03d6aa63175af8a101e50"
+      "pdf_sha256": "e38ca1871ac350ee4f6bbad9028559297a749c1707cdc5a2707ef5a548a16657"
     },
     {
       "svg": "12_precision_recall.svg",
-      "svg_sha256": "0023f6a133c79ad1a8f69800908b89f5adecf2c476d97aab4a84529890b3f424",
+      "svg_sha256": "fed992a1f3e4b5fb35495ebcf0aa93ea42734bdb7ea7ffb98331671d5fc6433d",
       "pdf": "12_precision_recall_svg-raw.pdf",
-      "pdf_sha256": "a2087c38744ca1d5a0b1f7bdabf8b8093181387bac5f2b88754af44b79a594ed"
+      "pdf_sha256": "4fe735cd7a589c9007e381e964abec93b6c40583661d73e13dc125130c41fcb4"
     },
     {
       "svg": "13_confiabilidad_b71.svg",
-      "svg_sha256": "b7b759f331f56adb726ff5bfed2d32c2b46e5a44efaa854f5469799eb711110e",
+      "svg_sha256": "5ac5cc85268a91ea9e4ca13e3b2b758294bd3584ea43dd5601c6cafaa999a2fa",
       "pdf": "13_confiabilidad_b71_svg-raw.pdf",
-      "pdf_sha256": "fa523742d7e6a490624a81b9ec0641bf8b680676e585f41c2b71370594b61744"
+      "pdf_sha256": "b587c817e8d78a65f0ca27c0017a80809eb527326b89425b9d91e7a8d3169374"
     },
     {
       "svg": "14_ablacion_f4.svg",
@@ -159,9 +159,9 @@
     },
     {
       "svg": "15_adaptacion_pad.svg",
-      "svg_sha256": "e577b7badaa3c64055f645e2f261b41c7676a25fcd0e42a30b4266a1b6a47dfe",
+      "svg_sha256": "769a1a6fa219583ea455e621d2799972f38fa95bca507532f1a8c60ee286c0ea",
       "pdf": "15_adaptacion_pad_svg-raw.pdf",
-      "pdf_sha256": "c2c4821f935879909fe90fb53633d371fd4f7d9455644af6646fa6627c68d048"
+      "pdf_sha256": "798f931606e96d74b447f48bef385d5d647d3b7834214d62485fe716a9326de3"
     },
     {
       "svg": "16_f1_ham_2x2.svg",
@@ -189,9 +189,9 @@
     },
     {
       "svg": "A01_confiabilidad_comparacion.svg",
-      "svg_sha256": "a61060b6b240fa56222a633b589a3d77a45ac46deaa201e7fbba5b9b81c09223",
+      "svg_sha256": "82a37c4eb817413450a7f2d10a0d96a36b89cb3b954cd7934209d6204f295977",
       "pdf": "A01_confiabilidad_comparacion_svg-raw.pdf",
-      "pdf_sha256": "fe6a6fc3622b485f4029059701e584e308d3029e7cf317dd832d13e64f75803a"
+      "pdf_sha256": "f1539bb7536371e7af449afba2e2d8d3d6b3d90398bd4458496031603d59f98c"
     },
     {
       "svg": "A02_ham10000.svg",
@@ -228,6 +228,20 @@
       "pdf": "images/organizadas/teoria_03_abcde_svg-raw.pdf",
       "pdf_sha256": "53b0ec98a3aad7d4b5fedd98e9d8fd9af459441224b79d774ee75ff985234cec",
       "fuente": "Fotografías reutilizadas de figura02-regla-abcde-melanoma.png; HC Marbella 2020; https://www.hcmarbella.com/es/abcde-del-melanoma/"
+    },
+    {
+      "svg": "images/organizadas/26_f1_configuraciones.svg",
+      "pdf": "images/organizadas/26_f1_configuraciones_svg-raw.pdf",
+      "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
+      "svg_sha256": "3cdf71b5e849e88da340848a574e8e090b00bf4f1234e061fa0eef4bb8b69d57",
+      "pdf_sha256": "7b76b846502edc59622173823b8ab7a35acb984c95321ec161f786b12ac294a0"
+    },
+    {
+      "svg": "images/organizadas/27_f1_contrastes.svg",
+      "pdf": "images/organizadas/27_f1_contrastes_svg-raw.pdf",
+      "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
+      "svg_sha256": "8826bec7e622926a34492368027f8d4b4243ddc347c022466942405136cd748e",
+      "pdf_sha256": "3df2739b9a27d4c1b0752877d38ab36563ffd8e89ddfc2013c0f59ac192e1817"
     }
   ]
 }

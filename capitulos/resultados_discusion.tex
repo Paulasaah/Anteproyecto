@@ -531,25 +531,33 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 
 En esta partición, B71 obtuvo un F1 macro de 0,7141. Los ocho intervalos pareados del 95\,\% excluyeron cero a favor de B71 frente a las líneas base. Dado que no hubo corrección global por multiplicidad, este patrón describe el resultado de la comparación y no equivale a ocho pruebas confirmatorias independientes.
 
-La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones en (a), el desempeño de las líneas base con IC individuales en (b), los contrastes pareados en (c) y la ablación F4 en (d). Los paneles (a) y (b) mantienen sus respectivos protocolos de extracción y sonda; el control público del panel (a) no se equipara a los DINOv2 del banco. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
+La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones en (a) y el desempeño de las líneas base con IC individuales en (b). La Figura~\ref{fig:contrastes-ham-baselines} presenta los contrastes pareados en (a) y la ablación F4 en (b). Los paneles (a) y (b) mantienen sus respectivos protocolos de extracción y sonda; el control público del panel (a) no se equipara a los DINOv2 del banco. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
 
 
 
 
 
 \begin{figure}[!htbp]
-\caption{F1 macro y contrastes de clasificación congelada en HAM10000.}
+\caption{F1 macro de las configuraciones y líneas base en HAM10000.}
 \label{fig:f1-ham-integrado}
 \label{fig:ablacion-tono-ham}
 \label{fig:clasificacion-ham-pareada}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/26_f1_configuraciones}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Estimaciones puntuales del control público, A71 y B71, sin intervalos añadidos. Las diferencias entre configuraciones no aíslan el efecto causal del tono. (b) F1 macro e IC individuales del 95\,\% del banco congelado. Ambos paneles conservan sus respectivos protocolos de extracción y sonda; el control público de (a) no se equipara a los DINOv2 del banco.\par}
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Contrastes pareados de F1 macro y ablación complementaria F4 en HAM10000.}
 \label{fig:contrastes-ham-baselines}
 \label{fig:ablacion-f4}
 \centering
-\noindent\makebox[\linewidth][c]{\includesvg[width=\linewidth,height=.74\textheight,keepaspectratio]{images/organizadas/16_f1_ham_2x2}}
+\includesvg[width=\linewidth]{images/organizadas/27_f1_contrastes}
 \par\smallskip
-\raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Valores puntuales del control público, A71 y B71; sus diferencias no aíslan el efecto causal del tono. (b) F1 macro e IC individuales del 95\,\% del banco congelado. (c) Diferencias pareadas B71 menos línea base e IC del 95\,\%; remuestreo por lesión, 1.000 remuestras, sin corrección global por multiplicidad. (d) Diferencia de F1 al añadir F4 a B71: el IC incluye cero. Las referencias discontinuas indican diferencia nula. F4 integra imagen completa, recorte y descriptores; no evalúa por separado sus componentes. PAD-UFES-20 se presenta aparte por su población y protocolo distintos.\par}
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Diferencias pareadas B71 menos línea base e IC del 95\,\%; remuestreo por lesión, 1.000 remuestras, sin corrección global por multiplicidad. (b) Diferencia de F1 al añadir F4 a B71; el intervalo incluye cero. Las líneas discontinuas indican diferencia nula. F4 integra imagen completa, recorte y descriptores; no evalúa por separado sus componentes. PAD-UFES-20 se presenta aparte por su población y protocolo distintos.\par}
 \end{figure}
 
 \begin{figure}[!htbp]
@@ -645,7 +653,7 @@ Sensibilidad de melanoma & $+0{,}0135$ & [$-0{,}0446$; $+0{,}0714$] & Incluye ce
 \end{table}
 
 
-El panel (d) de la Figura~\ref{fig:f1-ham-integrado} muestra el contraste canónico de F1 macro frente a la referencia de diferencia nula; la Tabla~\ref{tab:ablacion-f4-ham} conserva los tres contrastes. Ningún intervalo excluye cero, por lo que los cambios puntuales no se interpretan como una mejora demostrada.
+El panel (b) de la Figura~\ref{fig:ablacion-f4} muestra el contraste canónico de F1 macro frente a la referencia de diferencia nula; la Tabla~\ref{tab:ablacion-f4-ham} conserva los tres contrastes. Ningún intervalo excluye cero, por lo que los cambios puntuales no se interpretan como una mejora demostrada.
 
 
 
