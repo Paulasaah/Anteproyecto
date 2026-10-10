@@ -210,7 +210,7 @@ Las definiciones de las métricas de clasificación se presentan en la Sección~
 
 La evaluación incluyó dos variantes de segmentación. \texttt{student\_r3} se entrenó sin etiquetas diagnósticas ni máscaras expertas, mediante MoCo v2/ResNet-50, CCAM y tres rondas de refinamiento del U-Net con pseudo-máscaras. La configuración registrada no se comparó con otros números de rondas y las fuentes revisadas no explican por qué se fijaron tres. El equipo indicó que el tiempo disponible limitó la exploración de variantes adicionales. También se evaluó S4-A2, que utiliza DINOv2 ViT-B/14 congelado y un \textit{decoder} tipo DPT. Los ejemplos visuales se presentan primero; la Tabla~\ref{tab:segmentacion-student-a2} presenta el Dice medio y su IC del 95\,\% respecto de las máscaras de referencia.
 
-La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Las columnas muestran la imagen original, la máscara de referencia y la predicción; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
+La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del modelo \texttt{student\_r3} en ISIC 2018. Las columnas muestran la imagen original, la máscara de referencia, la predicción y los contornos superpuestos; estos casos complementan las métricas agregadas de la Tabla~\ref{tab:segmentacion-student-a2}.
 
 \begin{figure}[!htbp]
 \caption{Ejemplos cualitativos de segmentación en ISIC2018.}
@@ -220,7 +220,7 @@ La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del mod
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia. Filas: casos p90, p50 y p10 seleccionados mediante percentiles del Dice medio U-Net/S4-A2; columnas: imagen original, máscara de referencia y predicción student\_r3. Los valores mostrados son los Dice publicados de student\_r3, no recalculados. Se conservan las imágenes embebidas en la figura anterior; no son nuevas exportaciones del pipeline. Los ejemplos complementan las métricas agregadas; ISIC2018 es parcialmente transductivo.\par}
+\noindent\textit{Nota.} Elaboración propia. Filas: casos p90, p50 y p10 seleccionados mediante percentiles del Dice medio U-Net/S4-A2; columnas: imagen original, máscara de referencia, predicción student\_r3 y contornos superpuestos. El contorno continuo corresponde a la referencia y el discontinuo a la predicción; ambos se extraen de las máscaras existentes. No se muestran mapas CCAM porque no se dispone de sus exportaciones para estos casos. Los valores mostrados son los Dice publicados de student\_r3, no recalculados. Se conservan las imágenes embebidas en la figura anterior; no son nuevas exportaciones del pipeline. Los ejemplos complementan las métricas agregadas; ISIC2018 es parcialmente transductivo.\par}
 \end{figure}
 
 

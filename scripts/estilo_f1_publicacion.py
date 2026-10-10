@@ -1,4 +1,4 @@
-"""Figura 2×2 de F1; conserva las estimaciones y protocolos documentados."""
+"""Comparaciones de F1 con paneles apilados; conserva las estimaciones y protocolos documentados."""
 from pathlib import Path
 import json
 import matplotlib
@@ -22,9 +22,9 @@ plt.rcParams.update({'font.family':'Nimbus Roman', 'font.size':11,
  'ytick.labelsize':11, 'axes.spines.top':True, 'axes.spines.right':True,
  'axes.edgecolor':'#796657', 'axes.linewidth':.75, 'svg.fonttype':'none',
  'figure.facecolor':'white', 'axes.facecolor':'white'})
-fig1, a1 = plt.subplots(1, 2, figsize=(8.0, 4.3))
-fig2, a2 = plt.subplots(1, 2, figsize=(8.0, 4.3))
-for fig in [fig1,fig2]:fig.subplots_adjust(left=.18,right=.97,bottom=.19,top=.86,wspace=.92)
+fig1, a1 = plt.subplots(2, 1, figsize=(6.5, 6.0), gridspec_kw={'height_ratios':[1.25,2.5]})
+fig2, a2 = plt.subplots(2, 1, figsize=(6.5, 6.0), gridspec_kw={'height_ratios':[2.5,1.25]})
+for fig in [fig1,fig2]:fig.subplots_adjust(left=.25,right=.97,bottom=.10,top=.92,hspace=.8)
 axes=np.array([a1,a2])
 
 def decorate(ax, title, xlabel):
@@ -45,8 +45,8 @@ ax=axes[0,0]
 values=[evaluation['results'][k]['macro_f1'] for k in ['public_B71','A71','B71']]
 ax.scatter(values,range(3),s=42,c=[C,C,B],edgecolors=B,linewidths=1.1,zorder=3)
 ax.set_yticks(range(3), ['Público\nprotocolo B71','A71','B71'])
-ax.set_ylim(2.6,-.6); ax.set_xlim(0,1); ax.set_xticks([0,.5,1])
-for y, v in enumerate(values):ax.text(v+.05,y,f'{v:.4f}'.replace('.',','),va='center',fontsize=11)
+ax.set_ylim(2.6,-.6); ax.set_xlim(0,1); ax.set_xticks(np.arange(0,1.01,.2))
+for y, v in enumerate(values):ax.text(v+.025,y,f'{v:.4f}'.replace('.',','),va='center',fontsize=11)
 decorate(ax,'(a) Configuraciones','F1 macro · estimación puntual')
 
 records=[bank['proposed']['rows']['B71_tta']]+[bank['models'][k]['rows']['full'] for k in order]
@@ -54,7 +54,7 @@ assert np.isclose(records[0]['macro_f1'], values[2])
 ax=axes[0,1]; ci=[r['ci95_grouped']['macro_f1'] for r in records]
 error(ax,[r['macro_f1'] for r in records],[c[0] for c in ci],[c[1] for c in ci],range(9))
 ax.set_yticks(range(9),['B71']+[names[k] for k in order]);ax.set_ylim(8.6,-.6)
-ax.set_xlim(0,1); ax.set_xticks([0,.5,1])
+ax.set_xlim(0,1); ax.set_xticks(np.arange(0,1.01,.2))
 decorate(ax,'(b) Líneas base','F1 macro · IC del 95 %')
 
 ax=axes[1,0]
@@ -73,7 +73,7 @@ ax.xaxis.set_major_formatter(FuncFormatter(lambda v,pos:f'{v:.2f}'.replace('.','
 decorate(ax,'(b) Ablación F4','ΔF1 macro (B71 + F4 − B71)')
 ax.xaxis.set_major_formatter(FuncFormatter(lambda v,pos:f'{v:.2f}'.replace('.',',')))
 ax.axvline(0,color=G,ls='--',lw=.8)
-ax.text(.5,.19,'Δ = +0,0300\nIC 95 %: [−0,0046; +0,0715]',ha='center',va='center',transform=ax.transAxes,fontsize=11)
+ax.text(.5,.23,'Δ = +0,0300\nIC 95 %: [−0,0046; +0,0715]',ha='center',va='center',transform=ax.transAxes,fontsize=11)
 
 for fig,name in [(fig1,'26_f1_configuraciones'),(fig2,'27_f1_contrastes')]:
  fig.savefig(ROOT/'images/organizadas'/(name+'.svg'),facecolor='white',bbox_inches='tight',pad_inches=.08)

@@ -81,9 +81,9 @@
     },
     {
       "svg": "02_segmentacion_3x3.svg",
-      "svg_sha256": "36364501a9b90546e7bea01c6ac3d72b40f26fbcf030759a6de6c521e7fbda7a",
+      "svg_sha256": "c495e68b892090117fced8b8fc41178d311f04a9c0815675ea23356fb6ab6873",
       "pdf": "02_segmentacion_3x3_svg-raw.pdf",
-      "pdf_sha256": "e83ab71f692165bee4c5c27699d08932b6c7ef60be59e97f0c5a4ecd1b7f4d4e"
+      "pdf_sha256": "4b298df6360005faa9a801ed3bc0f62fadcc885d8f764e061c29beeba562aaaa"
     },
     {
       "svg": "03_segmentacion_dice.svg",
@@ -233,15 +233,15 @@
       "svg": "images/organizadas/26_f1_configuraciones.svg",
       "pdf": "images/organizadas/26_f1_configuraciones_svg-raw.pdf",
       "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
-      "svg_sha256": "3cdf71b5e849e88da340848a574e8e090b00bf4f1234e061fa0eef4bb8b69d57",
-      "pdf_sha256": "7b76b846502edc59622173823b8ab7a35acb984c95321ec161f786b12ac294a0"
+      "svg_sha256": "5638727529e7b0e4ef271b938a1696fb8de75e8720f8adce1b8e78d791493ea5",
+      "pdf_sha256": "9972969b8e82869697d132db419dbb31dd11aaf18d64aca8ef7d78418001ab3c"
     },
     {
       "svg": "images/organizadas/27_f1_contrastes.svg",
       "pdf": "images/organizadas/27_f1_contrastes_svg-raw.pdf",
       "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
-      "svg_sha256": "8826bec7e622926a34492368027f8d4b4243ddc347c022466942405136cd748e",
-      "pdf_sha256": "3df2739b9a27d4c1b0752877d38ab36563ffd8e89ddfc2013c0f59ac192e1817"
+      "svg_sha256": "4b3728a57db84d80a4199b5ea1532bf9f17d61fa7c5995cde531795404a29107",
+      "pdf_sha256": "ffa2f9ca76a793879f16336831803a9c9b2619d0344465ce1b96611123625b31"
     }
   ]
 }
