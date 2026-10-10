@@ -470,17 +470,9 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 \end{table}
 
 
-La Figura~\ref{fig:ablacion-tono-ham} presenta los valores puntuales de F1 macro del control público, A71 y B71. Además del término de tono, las configuraciones difieren en extracción y selección de sonda; esta comparación no aísla el efecto causal de la transformación.
+El panel (a) de la Figura~\ref{fig:f1-ham-integrado} presenta los valores puntuales de F1 macro del control público, A71 y B71. Además del término de tono, las configuraciones difieren en extracción y selección de sonda; esta comparación no aísla el efecto causal de la transformación.
 
-\begin{figure}[!htbp]
-\caption{F1 macro del control público y de A71 y B71 en HAM10000.}
-\label{fig:ablacion-tono-ham}
-\centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/08_configuraciones_ham}
-\par\smallskip
-\raggedright\fontsize{11}{13}\selectfont\singlespacing
-\noindent\textit{Nota.} Elaboración propia. Validación congelada: n=2.004, v71\_final\_eval. Valores puntuales. A71 y B71 cambian extracción y configuración de sonda, además del término de tono; la comparación no aísla un efecto causal de esa transformación.
-\end{figure}
+
 
 Los intervalos individuales de A71 y B71 se solapan en exactitud balanceada y F1 macro. Por sí sola, esta comparación no permite afirmar que añadir el término de tono mejore el desempeño. Para evaluar la diferencia entre ambos brazos se requiere el contraste pareado correspondiente.
 
@@ -522,20 +514,25 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 
 En esta partición, B71 obtuvo un F1 macro de 0,7141. Los ocho intervalos pareados del 95\,\% excluyeron cero a favor de B71 frente a las líneas base. Dado que no hubo corrección global por multiplicidad, este patrón describe el resultado de la comparación y no equivale a ocho pruebas confirmatorias independientes.
 
-La Figura~\ref{fig:clasificacion-ham-pareada} separa el desempeño con IC individuales, panel (a), de los contrastes pareados, panel (b), en HAM10000. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
+La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones en (a), el desempeño de las líneas base con IC individuales en (b), los contrastes pareados en (c) y la ablación F4 en (d). Los paneles (a) y (b) mantienen sus respectivos protocolos de extracción y sonda; el control público del panel (a) no se equipara a los DINOv2 del banco. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
+
+
+
+
 
 \begin{figure}[!htbp]
-\caption{Desempeño y diferencias pareadas de B71 frente a ocho líneas base.}
+\caption{F1 macro y contrastes de clasificación congelada en HAM10000.}
+\label{fig:f1-ham-integrado}
+\label{fig:ablacion-tono-ham}
 \label{fig:clasificacion-ham-pareada}
 \label{fig:contrastes-ham-baselines}
+\label{fig:ablacion-f4}
 \centering
-\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/09_baselines_y_contrastes}
+\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/16_f1_ham_2x2}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\noindent\textit{Nota.} Elaboración propia a partir de los registros de la comparación congelada (B71: 0,7141). (a) F1 macro e IC individuales del 95 \%. (b) Diferencias pareadas B71 menos línea base e IC del 95 \%; referencia discontinua en cero. HAM10000, 2.004 imágenes; bootstrap por lesion\_id, 1.000 remuestras, semilla 20260923. Sin corrección global por multiplicidad. Los controles del banco no se equiparan al control público con protocolo B71.
+\noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Valores puntuales del control público, A71 y B71; sus diferencias no aíslan el efecto causal del tono. (b) F1 macro e IC individuales del 95\,\% del banco congelado. (c) Diferencias pareadas B71 menos línea base e IC del 95\,\%; remuestreo por lesión, 1.000 remuestras, sin corrección global por multiplicidad. (d) Diferencia de F1 al añadir F4 a B71: el IC incluye cero. Las referencias discontinuas indican diferencia nula. F4 integra imagen completa, recorte y descriptores; no evalúa por separado sus componentes. PAD-UFES-20 se presenta aparte por su población y protocolo distintos.
 \end{figure}
-
-
 
 \begin{figure}[!htbp]
 \caption{Matriz de confusión de B71 normalizada por clase real.}
@@ -609,11 +606,10 @@ F4 concatena la imagen completa, un recorte de la lesión con margen del 10\,\% 
 \centering
 \caption{Ablación canónica F4 frente a B71 en HAM10000.}
 \label{tab:ablacion-f4-ham}
-\begin{tabularx}{\textwidth}{@{}Lrll@{}}
+\setlength{\tabcolsep}{5pt}
+\begin{tabularx}{\textwidth}{@{}>{\hsize=1.20\hsize\linewidth=\hsize}L>{\hsize=.62\hsize\linewidth=\hsize}C>{\hsize=1.24\hsize\linewidth=\hsize}C>{\hsize=.94\hsize\linewidth=\hsize}L@{}}
 \toprule
- & \multicolumn{3}{c}{B71+F4 menos B71} \\
-\cmidrule(lr){2-4}
-Métrica & Diferencia & IC del 95\,\% & Lectura \\
+Métrica & $\Delta$ & IC del 95\,\% & Interpretación \\
 \midrule
 F1 macro & $+0{,}0300$ & [$-0{,}0046$; $+0{,}0715$] & Incluye cero \\
 Exactitud balanceada & $+0{,}0222$ & [$-0{,}0159$; $+0{,}0624$] & Incluye cero \\
@@ -621,22 +617,14 @@ Sensibilidad de melanoma & $+0{,}0135$ & [$-0{,}0446$; $+0{,}0714$] & Incluye ce
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\noindent\textit{Nota.} Contraste canónico ya reportado; los componentes de F4 no se evaluaron por separado. Esta tabla no reúne los contrastes exploratorios de los ocho \textit{backbones}.
+\noindent\textit{Nota.} Diferencias B71+F4 menos B71. Contraste canónico ya reportado; los componentes de F4 no se evaluaron por separado. Esta tabla no reúne los contrastes exploratorios de los ocho \textit{backbones}.
 \par\endgroup
 \end{table}
 
 
-La Figura~\ref{fig:ablacion-f4} muestra los tres contrastes canónicos frente a la referencia de diferencia nula. Ningún intervalo excluye cero, por lo que los cambios puntuales no se interpretan como una mejora demostrada.
+El panel (d) de la Figura~\ref{fig:f1-ham-integrado} muestra el contraste canónico de F1 macro frente a la referencia de diferencia nula; la Tabla~\ref{tab:ablacion-f4-ham} conserva los tres contrastes. Ningún intervalo excluye cero, por lo que los cambios puntuales no se interpretan como una mejora demostrada.
 
-\begin{figure}[!htbp]
-\caption{Diferencias pareadas al incorporar F4 a B71.}
-\label{fig:ablacion-f4}
-\centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/14_ablacion_f4}
-\par\smallskip
-\raggedright\fontsize{11}{13}\selectfont\singlespacing
-\noindent\textit{Nota.} Elaboración propia. HAM10000, contraste canónico e3b\_bs64, n=2.004. IC del 95 \% de diferencias; todos incluyen cero. F4 integra imagen completa, recorte y descriptores, no solo segmentación. B71 sin segmentación sigue como referencia principal.
-\end{figure}
+
 
 
 

@@ -96,6 +96,12 @@
       "svg_sha256": "384d44af5c863416d5fe4cee139ff07b9c95a712439da63c2ca4c68db92c029a",
       "pdf": "A01_confiabilidad_comparacion_svg-raw.pdf",
       "pdf_sha256": "70bcd754fe8631a38837712b1c3d0e35a49c5cef83c83418e042c40cf2422553"
+    },
+    {
+      "svg": "16_f1_ham_2x2.svg",
+      "svg_sha256": "efb922d93b6738e251e44bf4bcc07e639d50e94b12e0a7f9f5a8ab9e5b7bd644",
+      "pdf": "16_f1_ham_2x2_svg-raw.pdf",
+      "pdf_sha256": "c03a990953e2409c7709b90dab230854b9d5b7d71cf5ad33d88c883452dfed2f"
     }
   ]
 }
