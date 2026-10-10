@@ -702,7 +702,9 @@ D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 \end{table}
 
 
-La Figura~\ref{fig:adaptacion-pad-d0-d3} representa el F1 macro puntual de D0--D3 en el panel (a) y el contraste pareado D3 menos D2 con su IC del 95\,\% en el panel (b). El MCC permanece en la Tabla~\ref{tab:adaptacion-pad}.
+La Figura~\ref{fig:adaptacion-pad-d0-d3} permite distinguir el desempeño de las cuatro configuraciones de la mejora estimada en el contraste de adaptación. En el panel (a), cada barra representa el F1 macro en el mismo conjunto de prueba: cuanto más larga, mayor es el valor de esta métrica, que promedia el F1 de las clases evaluadas con igual peso. D0 utiliza el encoder público; D1 corresponde a A* limpio; D2 continúa el aprendizaje con imágenes fuente y D3 incorpora, además, imágenes clínicas de PAD sin etiquetas. D3 alcanza 0,3693 frente a 0,2877 de D2, aunque permanece por debajo de D0 (0,4410). Las barras muestran estimaciones puntuales; su longitud no representa la incertidumbre.
+
+En el panel (b), el punto indica la diferencia de F1 macro D3 menos D2 y el segmento horizontal representa su intervalo de confianza del 95\,\%, agrupado por paciente. La línea vertical discontinua en cero señala ausencia de diferencia: los valores a su derecha favorecen a D3. La mejora estimada es de 0,0816 unidades de F1 (8,16 puntos porcentuales), con un intervalo de 0,0525 a 0,1085 que no incluye cero. Este contraste respalda una mejora frente al control de continuación D2 bajo el protocolo evaluado; no demuestra superioridad frente a D0 ni permite generalizar el resultado a pacientes de Santander. El MCC y las demás métricas se presentan en la Tabla~\ref{tab:adaptacion-pad}.
 
 \begin{figure}[!htbp]
 \caption{F1 macro de D0-D3 y diferencia pareada D3-D2 en PAD-UFES-20.}
@@ -714,6 +716,7 @@ La Figura~\ref{fig:adaptacion-pad-d0-d3} representa el F1 macro puntual de D0--D
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia desde pad\_e2\_eval.json. (a) F1 macro puntual de D0--D3. (b) Contraste pareado D3 menos D2 con IC del 95 \%, agrupado por paciente. Evaluación: 567 imágenes, 363 pacientes y 25 melanomas; mapeo parcial BCC/MEL/NV. Las 1.141 imágenes de target\_adapt se mantienen separadas por paciente de target\_test, que no participa en entrenamiento ni selección. D3 mejora frente a D2, pero no supera D0; no constituye adaptación validada a Santander.\par}
 \end{figure}
+\FloatBarrier
 
 ``Fuera de rango'' es la proporción de predicciones \texttt{argmax} fuera de BCC/MEL/NV.
 
