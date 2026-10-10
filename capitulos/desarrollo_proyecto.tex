@@ -12,7 +12,8 @@ La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí la
 
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\textit{Nota.} Elaboración propia. El panel (a) representa las dos vistas y el objetivo SimSiam; el control público omite esta adaptación. El panel (b) conserva el encoder congelado y ajusta el escalador y la regresión logística con HAM10000 para cada condición. La imagen ISIC es ilustrativa y no identifica una partición experimental. La evaluación externa no actualiza parámetros y mantiene la separación por paciente entre \texttt{target\_adapt} y \texttt{target\_test}. Los módulos complementarios se resumen aparte; el esquema encoder--DPT corresponde a S4-A2, mientras que \texttt{student\_r3} utiliza U-Net. El objetivo mostrado resume SimSiam; los términos adicionales de anclaje, destilación y tono se describen en la Sección~\ref{sec:desarrollo-clasificador}. El diseño se apoya en DINOv2 y SimSiam \parencite{oquab2024dinov2,chen2021simsiam}.
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia. El panel (a) representa las dos vistas y el objetivo SimSiam; el control público omite esta adaptación. El panel (b) conserva el encoder congelado y ajusta el escalador y la regresión logística con HAM10000 para cada condición. La imagen ISIC es ilustrativa y no identifica una partición experimental. La evaluación externa no actualiza parámetros y mantiene la separación por paciente entre \texttt{target\_adapt} y \texttt{target\_test}. Los módulos complementarios se resumen aparte; el esquema encoder--DPT corresponde a S4-A2, mientras que \texttt{student\_r3} utiliza U-Net. El objetivo mostrado resume SimSiam; los términos adicionales de anclaje, destilación y tono se describen en la Sección~\ref{sec:desarrollo-clasificador}. El diseño se apoya en DINOv2 y SimSiam \parencite{oquab2024dinov2,chen2021simsiam}.\par}
 \par\endgroup
 \end{figure}
 
