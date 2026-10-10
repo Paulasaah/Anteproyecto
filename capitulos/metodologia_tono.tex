@@ -45,7 +45,7 @@ VI & $\mathrm{ITA}\leq-25$ \\
 \bottomrule
 \end{tabular}
 \par\smallskip\raggedright
-\textit{Nota.} Fuente: \texttt{FST\_THRESHOLDS} y \texttt{fst\_bucket} en \path{src/dermssl/fitzpatrick.py}, repositorio de implementación, commit \texttt{a3c3a6ed}. Estos límites no deben intercambiarse con otros esquemas de categorización de ITA. Las abstenciones no se asignan a ninguno de estos grupos.
+\textit{Nota.} Elaboración propia a partir de los umbrales del procedimiento de estimación colorimétrica utilizado en el proyecto. Estos límites no deben intercambiarse con otros esquemas de categorización de ITA. Las abstenciones no se asignan a ninguno de estos grupos.
 \endgroup
 \end{table}
 
@@ -73,13 +73,13 @@ Los canales $a^*$ y $b^*$ se conservan sin cambios. Es una operación \textbf{de
 \caption{Transformación determinística de tono de piel}
 \label{alg:transformacion-tono}
 \begin{algorithmic}[1]
-\Statex \textbf{Entrada:} Imagen $x$ en sRGB, máscara de lesión $M$, desplazamiento solicitado $s$
-\Statex \textbf{Inicialización:} $s_c \gets \max(-2,\min(2,s))$ \Comment{acotar el desplazamiento}
+\State \textbf{Input:} Imagen $x$ en sRGB, máscara de lesión $M$, desplazamiento solicitado $s$
+\State \textbf{Initialize:} $s_c \gets \max(-2,\min(2,s))$ \Comment{acotar el desplazamiento}
 \If{máscara no elegible según el manifiesto}
   \State \Return rechazar \Comment{versión protegida por manifiesto}
 \EndIf
 \State Convertir $x$ de sRGB a CIELAB $(L^*,a^*,b^*)$
-\For{cada píxel $p$}
+\For{each pixel $p$}
   \If{$M(p)=1$}
     \State $L^{*\prime}(p) \gets L^*(p)$ \Comment{lesión sin modificar}
   \Else

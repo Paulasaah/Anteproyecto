@@ -88,14 +88,13 @@ El Algoritmo~\ref{alg:segmentacion-flujo} integra el preentrenamiento, la genera
 \label{alg:mocov2}
 \label{alg:ccam}
 \begin{algorithmic}[1]
-\Statex \textbf{Entrada:} imágenes sin etiquetas y configuración registrada
-\Statex \textbf{Salida:} segmentador entrenado y máscaras predichas
+\State \textbf{Input:} imágenes sin etiquetas y configuración registrada
 \State Preentrenar ResNet-50 con MoCo v2 y dos vistas por imagen
 \State Actualizar el codificador de clave por media móvil y la cola de negativos
 \State Entrenar CCAM con los vectores de primer plano y fondo
 \State Umbralizar sus activaciones para obtener \texttt{pseudo\_r0}
 \State Aplicar los controles de región, área e incertidumbre; registrar exclusiones
-\For{cada una de las tres rondas registradas}
+\For{$r=1$ \textbf{to} $3$}
  \State Entrenar el U-Net estudiante con pseudo-máscaras y píxeles confiables
  \State Seleccionar el punto de verificación por pérdida de pseudo-validación
  \State Actualizar las pseudo-máscaras para el refinamiento registrado
