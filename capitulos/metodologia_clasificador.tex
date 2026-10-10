@@ -20,10 +20,11 @@ La Figura~\ref{fig:flujo-adaptacion-dominio} presenta el contraste entre D2 y D3
 \caption{Adaptación autosupervisada de dominio: control fuente D2 y condición D3.}
 \label{fig:flujo-adaptacion-dominio}
 \centering
-\includesvg[width=\textwidth,height=.66\textheight,keepaspectratio]{images/organizadas/20_adaptacion_dominio}
+\includesvg[width=\textwidth]{images/organizadas/20_adaptacion_dominio}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\noindent\textit{Nota.} Elaboración propia a partir del protocolo del proyecto. DINOv2 y SimSiam se apoyan en \textcite{oquab2024dinov2,chen2021simsiam}; PAD-UFES-20 se describe en \textcite{pacheco2020padufes}. La pérdida dibujada resume el objetivo SimSiam; los términos activos adicionales se especifican en el modelamiento matemático. D3 conserva datos fuente además de los clínicos. La evaluación externa comprende 567 imágenes de 363 pacientes y un mapeo parcial BCC/MEL/NV; no constituye validación clínica en Santander.
+\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\noindent\textit{Nota.} Elaboración propia a partir del protocolo del proyecto. DINOv2 y SimSiam se apoyan en \textcite{oquab2024dinov2,chen2021simsiam}; PAD-UFES-20 se describe en \textcite{pacheco2020padufes}. La pérdida dibujada resume el objetivo SimSiam; los términos activos adicionales se especifican en el modelamiento matemático. D3 conserva datos fuente además de los clínicos. La evaluación externa comprende 567 imágenes de 363 pacientes y un mapeo parcial BCC/MEL/NV; no constituye validación clínica en Santander.\par}
 \par
 \end{figure}
 
@@ -174,11 +175,12 @@ Antes de ejecutar cualquier comparación confirmatoria se congelan los manifiest
 \caption{Protocolo de clasificación, adaptación de dominio y evaluación externa.}
 \label{fig:protocolo-evaluacion}
 \centering
-\includesvg[width=\textwidth,height=0.73\textheight,keepaspectratio]{images/organizadas/21_protocolo_vertical}
+\includesvg[width=\textwidth]{images/organizadas/21_protocolo_vertical}
 
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\textit{Nota.} Elaboración propia. El esquema se centra en el protocolo de clasificación y adaptación: D2 continúa SimSiam con el pool fuente; D3 añade \texttt{target\_adapt} a ese pool. HAM10000 aporta el ajuste supervisado y la validación interna. Cada condición ajusta su propio escalador y regresión logística; la referencia utiliza el encoder público sin adaptación. \texttt{target\_test} solo interviene en la inferencia y evaluación, con separación por paciente y sin reajuste. El esquema se apoya en DINOv2 y SimSiam \parencite{oquab2024dinov2,chen2021simsiam}. Los procedimientos de segmentación y tono se presentan en sus secciones específicas.
+\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\textit{Nota.} Elaboración propia. El esquema se centra en el protocolo de clasificación y adaptación: D2 continúa SimSiam con el pool fuente; D3 añade \texttt{target\_adapt} a ese pool. HAM10000 aporta el ajuste supervisado y la validación interna. Cada condición ajusta su propio escalador y regresión logística; la referencia utiliza el encoder público sin adaptación. \texttt{target\_test} solo interviene en la inferencia y evaluación, con separación por paciente y sin reajuste. El esquema se apoya en DINOv2 y SimSiam \parencite{oquab2024dinov2,chen2021simsiam}. Los procedimientos de segmentación y tono se presentan en sus secciones específicas.\par}
 \par\endgroup
 \end{figure}
 
