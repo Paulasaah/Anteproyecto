@@ -30,3 +30,7 @@ La compilación habitual con XeLaTeX y Biber no requiere shell-escape ni Inkscap
 - FST/ITA en PAD: recuentos de la exportación local y figura anterior. No se atribuye a FST una procedencia clínica verificada ni se valida la calidad de máscaras mediante ITA.
 
 Las notas del documento distinguen intervalos individuales, contrastes pareados, percentiles y valores puntuales. No se añaden intervalos de incertidumbre que no existan en las fuentes.
+
+## Tipografía uniforme
+
+Referencia al insertar en la tesis: etiquetas y fórmulas 10,5 pt; títulos internos 12 pt; notas internas 9 pt. Familia Nimbus Roman, equivalente serif a Times New Roman. Los diagramas densos se reorganizan para conservar la legibilidad. El tamaño final se verifica según ancho y altura de inclusión, no solo según las unidades del SVG.

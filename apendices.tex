@@ -50,17 +50,37 @@ La mejora de segmentación no implica una mejora del clasificador; el contraste 
 Las tablas, figuras y registros suplementarios se identifican junto a los procedimientos y resultados correspondientes. Los Anexos~\ref{anexo:gantt} y~\ref{anexo:presupuesto} enlazan el cronograma y el presupuesto de planificación del proyecto.
 \section{Resumen multidataset de clasificación}
 
-Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 mientras se regeneran sus paneles desde las fuentes correspondientes. Sus comparaciones conservan los límites de protocolo indicados en la nota; no deben combinarse como una única partición común.
+Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 con paneles separados por conjunto para conservar la legibilidad. Sus comparaciones conservan los límites de protocolo indicados en la nota; no deben combinarse como una única partición común.
 
 \begin{figure}[!htbp]
-\caption{Comparación de las métricas de clasificación y de los contrastes entre variantes limpias y públicas.}
+\caption{Resumen suplementario de clasificación en HAM10000.}
 \label{fig:comparacion-modelos-multidataset}
 \centering
-\includegraphics[width=0.97\textwidth,height=0.80\textheight,keepaspectratio,trim=0pt 0pt 205pt 0pt,clip]{images/comparacion_modelos_clasificacion.pdf}
+\includesvg[width=\textwidth,height=.78\textheight,keepaspectratio]{images/organizadas/A02_ham10000}
 \par\smallskip
-\raggedright\footnotesize
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo. Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.\par}
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo. Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en el conjunto indicado; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad. Se conserva la evidencia previa y se separa por conjunto para mejorar la legibilidad.
+\par\endgroup
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Resumen suplementario de clasificación en ISIC2019.}
+\centering
+\includesvg[width=\textwidth,height=.78\textheight,keepaspectratio]{images/organizadas/A02_isic2019}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo. Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en el conjunto indicado; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad. Se conserva la evidencia previa y se separa por conjunto para mejorar la legibilidad.
+\par\endgroup
+\end{figure}
+
+\begin{figure}[!htbp]
+\caption{Resumen suplementario de clasificación en ISIC2020.}
+\centering
+\includesvg[width=\textwidth,height=.78\textheight,keepaspectratio]{images/organizadas/A02_isic2020}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo. Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en el conjunto indicado; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad. Se conserva la evidencia previa y se separa por conjunto para mejorar la legibilidad.
+\par\endgroup
 \end{figure}
 
 
