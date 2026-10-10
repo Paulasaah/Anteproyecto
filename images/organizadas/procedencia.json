@@ -132,6 +132,42 @@
       "svg_sha256": "57e9736e13d5be1c01a60fd836b634cc7a1f6bb60691143f618007b61e647d5f",
       "pdf": "21_protocolo_vertical_svg-raw.pdf",
       "pdf_sha256": "3b6673d74578b328c2abbf9d9bd6dcd01a654709e86831af622906fbde84a989"
+    },
+    {
+      "svg": "teoria_05_cad.svg",
+      "svg_sha256": "e7339fb1ff0afa31275e4ceb270451bd9d10ec4c2c6018cb7715f22599ef76d6",
+      "pdf": "teoria_05_cad_svg-raw.pdf",
+      "pdf_sha256": "c667519878f2c45e314728a9f77abc13c5c00ef659756566207af6e5f9d5e923"
+    },
+    {
+      "svg": "teoria_06_supervisado.svg",
+      "svg_sha256": "84fc97c718ca1defb5f3afc7705ab6c2754f5e9cbd85df16e5bfbdf107d9331c",
+      "pdf": "teoria_06_supervisado_svg-raw.pdf",
+      "pdf_sha256": "c14ef1a89aefefc7205f3baeec5b3970955494753845268f280581bcc9db1b0d"
+    },
+    {
+      "svg": "teoria_07_kmeans.svg",
+      "svg_sha256": "26e9f531ccff905956b8e1b82c349c4c46674abe25c402777c212d419828df02",
+      "pdf": "teoria_07_kmeans_svg-raw.pdf",
+      "pdf_sha256": "db33dfc0ecc6b0a7f6600e16724d19db938f3360f3ab31a8b4bca15dc9785af5"
+    },
+    {
+      "svg": "teoria_08_vae.svg",
+      "svg_sha256": "a5c00b06dfa2a07f68c543f0ddfc52e43ec9621be78a9c07f487965d9767a534",
+      "pdf": "teoria_08_vae_svg-raw.pdf",
+      "pdf_sha256": "7ccf680abc6720a9d187533d48d119d4ed5c1a3f3e587a15b4388ec7276b2791"
+    },
+    {
+      "svg": "teoria_09_gan.svg",
+      "svg_sha256": "6786e60b92d9d3e401fc23f5b74e7c5b8a07fb7abe60a36a48ca36641e35ae85",
+      "pdf": "teoria_09_gan_svg-raw.pdf",
+      "pdf_sha256": "53234780c037571d40732e633106c4596646bfb0e3789818eab95df69f755fbc"
+    },
+    {
+      "svg": "teoria_10_ssl.svg",
+      "svg_sha256": "0cab8fdbe48820328285e9e48b5eadeffc3287a6437492e1fcf9e150e25d2d35",
+      "pdf": "teoria_10_ssl_svg-raw.pdf",
+      "pdf_sha256": "aba6ee265d0fc86be0e499a0ac64a423921bf38d875dd1c01ae0b1b8f0b04095"
     }
   ]
 }
