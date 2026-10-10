@@ -57,9 +57,9 @@
     },
     {
       "svg": "20_adaptacion_dominio.svg",
-      "svg_sha256": "075ac9dff21f44ebc6a625a6169b8dd1cf4471f29be6b32bba9013848b88f204",
+      "svg_sha256": "d993178b45b3827a27ec062fac983f3e376131f086c148bd7eec1f7adb0f2542",
       "pdf": "20_adaptacion_dominio_svg-raw.pdf",
-      "pdf_sha256": "0dc959b85aa7c6ffd332a1e5e650fa5b5e117b877104435790552c04ecbd782d"
+      "pdf_sha256": "9cdf66d971380c95c3484ec835f64fd27758399bf76dc3bf3aa51dbc26f76140"
     },
     {
       "svg": "24_arbol_problema.svg",
