@@ -75,11 +75,12 @@ La predicción corresponde a la clase con mayor probabilidad:
 El Algoritmo~\ref{alg:simsiam-anclado} resume el flujo del clasificador: adaptación autosupervisada, extracción congelada y ajuste de la sonda supervisada.
 
 \begin{algorithm}[htbp]
+\fontsize{11}{13}\selectfont\singlespacing
 \caption{Flujo del clasificador SSL: adaptación y clasificación}
 \label{alg:simsiam-anclado}
 \begin{algorithmic}[1]
-\Statex \textbf{Input:} Conjunto de imágenes sin etiqueta $\{x_i\}_{i=1}^N$ (HAM10000 + PAD-UFES-20 \texttt{target\_adapt}); codificador público preentrenado $f_{\theta^0}$; pesos $\lambda_t,\lambda_a,\lambda_d$; número de pasos $T$
-\Statex \textbf{Initialize:} $\theta\leftarrow\theta^0$ \Comment{copia entrenable del codificador público}
+\Statex \textbf{Entrada:} Conjunto de imágenes sin etiqueta $\{x_i\}_{i=1}^N$ (HAM10000 + PAD-UFES-20 \texttt{target\_adapt}); codificador público preentrenado $f_{\theta^0}$; pesos $\lambda_t,\lambda_a,\lambda_d$; número de pasos $T$
+\Statex \textbf{Inicialización:} $\theta\leftarrow\theta^0$ \Comment{copia entrenable del codificador público}
 \For{$t=1$ \textbf{hasta} $T$}
   \State Muestrear lote de imágenes; generar vistas aumentadas $v_{i1},v_{i2}$ (y $v_{it}$ si la variante usa término de tono) \Comment{Aumentación}
   \State Calcular $h_{ij}=f_\theta(v_{ij})$, $z_{ij}=g_\phi(h_{ij})$, $p_{ij}=q_\psi(z_{ij})$ \Comment{Paso hacia adelante}

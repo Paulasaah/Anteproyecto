@@ -69,11 +69,12 @@ La transformación recibe una máscara de lesión $M(p)$ (valor uno en la lesió
 Los canales $a^*$ y $b^*$ se conservan sin cambios. Es una operación \textbf{determinística}: no hay parámetros aprendidos ni ajuste con datos, solo un desplazamiento fijo de luminosidad seguido de recorte a rango válido.
 
 \begin{algorithm}[htbp]
+\fontsize{11}{13}\selectfont\singlespacing
 \caption{Transformación determinística de tono de piel}
 \label{alg:transformacion-tono}
 \begin{algorithmic}[1]
-\Statex \textbf{Input:} Imagen $x$ en sRGB, máscara de lesión $M$, desplazamiento solicitado $s$
-\Statex \textbf{Initialize:} $s_c \gets \max(-2,\min(2,s))$ \Comment{acotar el desplazamiento}
+\Statex \textbf{Entrada:} Imagen $x$ en sRGB, máscara de lesión $M$, desplazamiento solicitado $s$
+\Statex \textbf{Inicialización:} $s_c \gets \max(-2,\min(2,s))$ \Comment{acotar el desplazamiento}
 \If{máscara no elegible según el manifiesto}
   \State \Return rechazar \Comment{versión protegida por manifiesto}
 \EndIf
