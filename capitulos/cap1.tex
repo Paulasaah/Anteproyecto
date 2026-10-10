@@ -17,8 +17,7 @@ El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, con
     
 \par\smallskip
 \raggedright\footnotesize
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Adaptado de PAD-UFES-20: \emph{A skin lesion dataset composed of patient data and clinical images collected from smartphones}, por A. G. C. Pacheco et al., 2020, Data in Brief. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7479321/}\par}
+\textit{Nota.} Adaptado de PAD-UFES-20: \emph{A skin lesion dataset composed of patient data and clinical images collected from smartphones}, por A. G. C. Pacheco et al., 2020, Data in Brief. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7479321/}
 
 \end{figure}
 
@@ -79,8 +78,7 @@ La inspección visual constituye el primer nivel de cribado. El método ABCDE (A
     
 \par\smallskip
 \raggedright\footnotesize
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Modificado de ABCDE del melanoma, por HC Marbella International Hospital, 2020, \url{https://www.hcmarbella.com/es/abcde-del-melanoma/}\par}
+\textit{Nota.} Modificado de ABCDE del melanoma, por HC Marbella International Hospital, 2020, \url{https://www.hcmarbella.com/es/abcde-del-melanoma/}
 
 \end{figure}
 
@@ -96,33 +94,17 @@ La dermatoscopía permite visualizar estructuras subepidérmicas invisibles al o
 
 La primera etapa corresponde a la fijación, en la que el tejido extraído es estabilizado mediante una solución química o por congelación, con el objetivo de detener los procesos metabólicos celulares y preservar la integridad morfológica de la muestra. Posteriormente, en la etapa de inclusión, el tejido es deshidratado mediante soluciones de etanol y embebido en parafina fundida, que al solidificarse genera un bloque de consistencia firme que facilita su manipulación. En la tercera etapa, denominada microtomía, el bloque de parafina es seccionado transversalmente mediante un micrótomo en láminas de aproximadamente 5 micrómetros de grosor, obteniendo cortes histológicos de alta precisión. Finalmente, en la etapa de tinción, se eliminan los residuos de parafina y la muestra es rehidratada e impregnada con pigmentos como hematoxilina y eosina (HE), que permiten diferenciar los componentes biológicos del tejido al aumentar el contraste entre estructuras celulares y extracelulares.
 
-El resultado de este proceso es una preparación histológica que puede ser analizada mediante microscopía óptica, electrónica o sistemas de digitalización de alta resolución. Esta última modalidad ha cobrado especial relevancia en el contexto de la inteligencia artificial aplicada al diagnóstico médico, dado que la digitalización de las preparaciones histológicas genera imágenes de alta resolución que pueden ser procesadas computacionalmente para la clasificación automatizada de patrones morfológicos asociados a patologías malignas, como el melanoma y el carcinoma basocelular. En este sentido, el análisis histopatológico digital constituye uno de los dominios de mayor aplicación de los sistemas CAD y los modelos de aprendizaje profundo en dermatología. El análisis histopatológico digital constituye un dominio de aplicación de sistemas CAD y modelos de aprendizaje profundo en dermatología \parencite{sauter2023dermatopathologyreview}. El proceso anteriormente descrito se puede observar de manera gráfica en la Figura~\ref{fig:original-3}.
+El resultado de este proceso es una preparación histológica que puede ser analizada mediante microscopía óptica o sistemas de digitalización de alta resolución. Esta última modalidad ha cobrado especial relevancia en el contexto de la inteligencia artificial aplicada al diagnóstico médico, dado que la digitalización de las preparaciones histológicas genera imágenes de alta resolución que pueden ser procesadas computacionalmente para la clasificación automatizada de patrones morfológicos asociados a patologías malignas, como el melanoma y el carcinoma basocelular. En este sentido, el análisis histopatológico digital constituye uno de los dominios de mayor aplicación de los sistemas CAD y los modelos de aprendizaje profundo en dermatología. \parencite{sauter2023dermatopathologyreview}. El proceso anteriormente descrito se puede observar de manera gráfica en la Figura~\ref{fig:original-3}.
 
 \begin{figure}[!htbp]
-\caption{Escalera de precisión diagnóstica: de la inspección clínica a la biopsia histopatológica}
+\caption{Proceso de biopsia cutánea y preparación para el análisis histopatológico}
 \label{fig:original-3}
 \centering
-\begin{tikzpicture}[
-    paso/.style={draw=capptan, line width=0.9pt, rounded corners=3pt, align=center, fill=shwhite2, text width=2.6cm, minimum height=2.1cm, inner sep=5pt, font=\sffamily\scriptsize, text=cappnearblack},
-    flujo/.style={-{Stealth[length=2mm]}, thick, color=capptan},
-    node distance=0.55cm
-]
-\node[paso] (p1) {\textbf{Inspección clínica}\\Método ABCDE\\a simple vista};
-\node[paso, right=of p1] (p2) {\textbf{Dermatoscopía}\\Estructuras subepidérmicas\\+49\,\% de precisión};
-\node[paso, right=of p2] (p3) {\textbf{RCM}\\``Biopsia virtual''\\95,3\,\% de especificidad};
-\node[paso, right=of p3] (p4) {\textbf{Histopatología}\\Biopsia + tinción\\estándar de oro};
-\draw[flujo] (p1) -- (p2);
-\draw[flujo] (p2) -- (p3);
-\draw[flujo] (p3) -- (p4);
-\draw[-{Stealth[length=1.8mm]},thin,color=cappnearblack!55] ([yshift=-1.7cm]p1.south west) -- node[below,font=\scriptsize,text=cappnearblack!75] {invasividad y costo crecientes} ([yshift=-1.7cm]p4.south east);
-\end{tikzpicture}
-    
-    \par\smallskip
-    \begingroup\footnotesize\singlespacing\raggedright
-    \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia a partir de los datos de precisión citados en el texto \parencite{santavelez2020dermatoscopia,fundacionpielsana2024confocal} y del proceso histológico de cuatro etapas descrito arriba.\par}
-    \par\endgroup
-
+\includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_04_biopsia}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} Elaboración propia. Se representa el procesamiento convencional de tejido fijado e incluido en parafina: obtención de la muestra, fijación, procesamiento e inclusión, microtomía, tinción con hematoxilina y eosina (H\&E) e interpretación histopatológica. La imagen dermatoscópica ISIC es ilustrativa y no se vincula a una preparación histológica del mismo paciente; los instrumentos y el campo H\&E son esquemáticos. La digitalización es opcional y posterior a la preparación de la lámina \parencite{sauter2023dermatopathologyreview}.
+\par\endgroup
 \end{figure}
 
 
@@ -143,8 +125,7 @@ Los sistemas de Diagnóstico Asistido por Computador (CAD, por sus siglas en ing
 \includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_05_cad}
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia con base en \parencite{rehman2024cadskin}. Las ramas son alternativas de extracción de características. La máscara ilustra una región de interés y no es una predicción de las rutas mostradas. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.\par}
+\textit{Nota.} Elaboración propia con base en \parencite{rehman2024cadskin}. Las ramas son alternativas de extracción de características. La máscara ilustra una región de interés y no es una predicción de las rutas mostradas. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.
 \par\endgroup
 \end{figure}
 
@@ -218,8 +199,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 \includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_06_supervisado}
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia con base en \parencite{goodfellow2016deeplearning,tschandl2018ham10000}. La predicción se compara con una etiqueta conocida para calcular la pérdida y actualizar los parámetros. La etiqueta y las probabilidades son simbólicas. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.\par}
+\textit{Nota.} Elaboración propia con base en \parencite{goodfellow2016deeplearning,tschandl2018ham10000}. La predicción se compara con una etiqueta conocida para calcular la pérdida y actualizar los parámetros. La etiqueta y las probabilidades son simbólicas. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.
 \par\endgroup
 \end{figure}
 
@@ -238,8 +218,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 \includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_07_kmeans}
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia con base en \parencite{bishop2006patternrecognition}. Los vectores de color o textura se agrupan por similitud. La selección de una región como lesión requiere interpretación y validación; el mapa mostrado es esquemático. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.\par}
+\textit{Nota.} Elaboración propia con base en \parencite{bishop2006patternrecognition}. Los vectores de color o textura se agrupan por similitud. La selección de una región como lesión requiere interpretación y validación; el mapa mostrado es esquemático. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.
 \par\endgroup
 \end{figure}
 
@@ -257,8 +236,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 \includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_08_vae}
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia con base en \parencite{kingma2014vae}. El codificador produce los parámetros de una distribución latente; una muestra obtenida mediante reparametrización alimenta el decodificador. La reconstrucción es simbólica. Se presenta como antecedente, no como módulo implementado. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.\par}
+\textit{Nota.} Elaboración propia con base en \parencite{kingma2014vae}. El codificador produce los parámetros de una distribución latente; una muestra obtenida mediante reparametrización alimenta el decodificador. La reconstrucción es simbólica. Se presenta como antecedente, no como módulo implementado. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.
 \par\endgroup
 \end{figure}
 
@@ -276,8 +254,7 @@ El \textit{transfer learning} reutiliza representaciones aprendidas previamente 
 \includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_09_gan}
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia con base en \parencite{goodfellow2014gan}. El discriminador recibe imágenes reales y salidas del generador; el esquema corresponde al objetivo adversarial original. La salida sintética es simbólica. Se presenta como antecedente, no como módulo implementado. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.\par}
+\textit{Nota.} Elaboración propia con base en \parencite{goodfellow2014gan}. El discriminador recibe imágenes reales y salidas del generador; el esquema corresponde al objetivo adversarial original. La salida sintética es simbólica. Se presenta como antecedente, no como módulo implementado. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.
 \par\endgroup
 \end{figure}
 
@@ -299,8 +276,7 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
 \includesvg[width=\textwidth,height=0.64\textheight,keepaspectratio]{images/organizadas/teoria_10_ssl}
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia con base en \parencite{chen2021simsiam}. Las dos ramas comparten pesos y alinean sus representaciones mediante una pérdida simétrica con detención del gradiente en el objetivo. Las vistas repiten una entrada ilustrativa y no representan aumentos ejecutados. El esquema describe SimSiam, no todos los métodos autosupervisados. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.\par}
+\textit{Nota.} Elaboración propia con base en \parencite{chen2021simsiam}. Las dos ramas comparten pesos y alinean sus representaciones mediante una pérdida simétrica con detención del gradiente en el objetivo. Las vistas repiten una entrada ilustrativa y no representan aumentos ejecutados. El esquema describe SimSiam, no todos los métodos autosupervisados. Las imágenes dermatológicas son ilustrativas; su procedencia se documenta en el archivo de referencias de las figuras.
 \par\endgroup
 \end{figure}
 
@@ -347,7 +323,6 @@ Se presentan como antecedentes para contextualizar otros métodos de análisis y
 \end{longtable}
 
 \vspace{4pt}
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} CAD = diagnóstico asistido por computador; CNN = red neuronal convolucional; ViT = transformador visual; SSL = aprendizaje autosupervisado; CIELAB = espacio de color CIE L*a*b*; ITA = ángulo tipológico individual; DPT = transformador de predicción densa; CCAM = mapas de activación agnósticos a la clase mediante aprendizaje contrastivo; VAE = autoencoder variacional; GAN = red generativa adversarial.\par}
+\noindent\textit{Nota.} CAD = diagnóstico asistido por computador; CNN = red neuronal convolucional; ViT = transformador visual; SSL = aprendizaje autosupervisado; CIELAB = espacio de color CIE L*a*b*; ITA = ángulo tipológico individual; DPT = transformador de predicción densa; CCAM = mapas de activación agnósticos a la clase mediante aprendizaje contrastivo; VAE = autoencoder variacional; GAN = red generativa adversarial.
 \endgroup
 

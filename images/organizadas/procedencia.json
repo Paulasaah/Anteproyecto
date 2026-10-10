@@ -210,6 +210,12 @@
       "svg_sha256": "13912d66fa0eae2a6e710ef7c8a753d19c6769702a06a74f80f51b634683b65b",
       "pdf": "A02_isic2020_svg-raw.pdf",
       "pdf_sha256": "6a75291d4f7a6f41403e1b45ef75b93ff124c6af985350c30ed13c07b655cf12"
+    },
+    {
+      "svg": "images/organizadas/teoria_04_biopsia.svg",
+      "svg_sha256": "089163370aa2c9b37a8bdb2d207869278954dd0818c438d34f71928c3f2d27f1",
+      "pdf": "images/organizadas/teoria_04_biopsia_svg-raw.pdf",
+      "pdf_sha256": "72d9dbbac83537bfedeafe4171e235bd1271a89af9ac3260d033b0181fe5cc17"
     }
   ]
 }
