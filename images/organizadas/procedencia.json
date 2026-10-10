@@ -168,6 +168,18 @@
       "svg_sha256": "0cab8fdbe48820328285e9e48b5eadeffc3287a6437492e1fcf9e150e25d2d35",
       "pdf": "teoria_10_ssl_svg-raw.pdf",
       "pdf_sha256": "aba6ee265d0fc86be0e499a0ac64a423921bf38d875dd1c01ae0b1b8f0b04095"
+    },
+    {
+      "svg": "22_cielab_anillo.svg",
+      "svg_sha256": "577477c27debdffdf93c3ff07a9b9e76721bd19bf1ec63eea51c469370baebcb",
+      "pdf": "22_cielab_anillo_svg-raw.pdf",
+      "pdf_sha256": "94c6e62cec90b75478092c25ee7553488ddedf2c64e037ee928240bcd99a0b21"
+    },
+    {
+      "svg": "23_geometria_ita.svg",
+      "svg_sha256": "8bf84d8136f4d5d3a455b19299399fda91be59669491efa2c05ad6d10cc07812",
+      "pdf": "23_geometria_ita_svg-raw.pdf",
+      "pdf_sha256": "0594d7c2307501ba4e73246a4b3a246b6ec5ca5a001243ac10473eaae89a93c4"
     }
   ]
 }

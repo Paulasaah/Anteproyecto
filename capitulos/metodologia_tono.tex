@@ -18,10 +18,10 @@ La Figura~\ref{fig:ita-esquema-geometrico} explica el ángulo formado por las me
 \caption{Interpretación geométrica del ángulo tipológico individual.}
 \label{fig:ita-esquema-geometrico}
 \centering
-\includegraphics[width=\textwidth]{images/ita_esquema_geometrico.pdf}
+\includesvg[width=\textwidth,height=.58\textheight,keepaspectratio]{images/organizadas/23_geometria_ita}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont
-\noindent\textit{Nota.} Esquema conceptual de la ecuación, sin observaciones experimentales. El eje horizontal corresponde a $\widetilde b^*$ y el vertical a $\widetilde L^*-50$; se ilustra un ángulo positivo. Con $\widetilde b^*\geq5$, valores de $\widetilde L^*<50$ producen un ángulo negativo. Los controles de región y de $\widetilde b^*$ pueden conducir a abstención antes de asignar un intervalo. La selección de píxeles se registra por estimador; el ángulo no asigna fototipo clínico.
+\noindent\textit{Nota.} Elaboración propia con base en \textcite{delbino2013variations}. Esquema conceptual de la ecuación, sin observaciones experimentales. El eje horizontal corresponde a $\widetilde b^*$ y el vertical a $\widetilde L^*-50$; se ilustran ángulos positivos y negativos. Con $\widetilde b^*\geq5$, valores de $\widetilde L^*<50$ producen un ángulo negativo. Los controles de región y de $\widetilde b^*$ pueden conducir a abstención antes de asignar un intervalo. La selección de píxeles se registra por estimador; el ángulo no asigna fototipo clínico.
 \end{figure}
 
 
@@ -56,6 +56,19 @@ La estimación parte de una región candidata de piel y excluye la lesión cuand
 \subsubsection{Procedimiento de caracterización colorimétrica}
 
 La caracterización de clase, fototipo y tono se realizó de forma descriptiva sobre los conjuntos disponibles, sin generar ni asignar nuevas etiquetas clínicas. Para cada imagen de HAM10000, ISIC2019 e ISIC2020 se calcularon valores de ITA a resolución canónica sobre tres regiones: máscara por Otsu, imagen completa y anillo perilesional. Se emplearon pseudo-máscaras del segmentador cuando estuvieron disponibles y se registraron las abstenciones cuando la región de piel era insuficiente o la máscara estaba degenerada. Los conteos diagnósticos se conservaron a partir de las etiquetas editoriales de cada conjunto; no se derivaron del ITA ni de la calidad de las pseudo-máscaras. Los resultados descriptivos por conjunto se presentan en el Capítulo~\ref{chap:resultados}.
+
+La Figura~\ref{fig:cielab-anillo} presenta la distribución de los canales CIELAB en el anillo perilesional de los tres conjuntos. Cada distribución se normaliza por el total de píxeles del conjunto correspondiente; por tanto, las imágenes con anillos más extensos aportan más observaciones. Estos paneles describen píxeles de la región seleccionada, mientras que el ITA anterior resume medianas por imagen.
+
+\begin{figure}[!htbp]
+\caption[Distribución CIELAB del anillo perilesional.]{Distribución colorimétrica del anillo perilesional en HAM10000, ISIC2019 e ISIC2020.}
+\label{fig:cielab-anillo}
+\centering
+\includesvg[width=\textwidth,height=.65\textheight,keepaspectratio]{images/organizadas/22_cielab_anillo}
+\par\smallskip
+\begingroup\footnotesize\singlespacing\raggedright
+\textit{Nota.} Figura suministrada por Nicolás. El panel (a) presenta la distribución de luminosidad $L^*$; los paneles inferiores muestran la distribución conjunta de $b^*$ y $a^*$ como porcentaje de píxeles por celda, con escala logarítmica común. Los totales indicados son 355.218.452 píxeles para HAM10000, 142.609.501 para ISIC2019 y 206.068.107 para ISIC2020. Los conteos se transcriben del SVG suministrado; no se han recalculado desde las imágenes y máscaras originales. El anillo no constituye una anotación experta de piel. La figura no compara imágenes antes y después de la transformación ni valida fototipos clínicos.
+\par\endgroup
+\end{figure}
 
 \subsubsection{Transformación determinística de tono}
 
