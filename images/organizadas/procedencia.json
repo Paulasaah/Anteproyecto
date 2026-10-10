@@ -106,14 +106,6 @@
       "svg_sha256": "e4c37bd90738f2e3f9357025760a75878cfcec962858705e20dcc804c4ddd59f"
     },
     {
-      "svg": "A02_isic2019.svg",
-      "svg_sha256": "f73c3aea68ac78203b945f42912446e0d0399aae6f5d29b17d8b5bd6f1e58a55"
-    },
-    {
-      "svg": "A02_isic2020.svg",
-      "svg_sha256": "13912d66fa0eae2a6e710ef7c8a753d19c6769702a06a74f80f51b634683b65b"
-    },
-    {
       "svg": "A03_ita_e5_otsu_roi.svg",
       "svg_sha256": "93b38d1e5d3681c4de6177c55fa3ca61e9c4247571115e85ee2216219ae6a2c3"
     },
@@ -152,6 +144,22 @@
     {
       "svg": "teoria_10_ssl.svg",
       "svg_sha256": "6257dd035de9d23b603db723562e1ce00a5eeff063a866f3421587da7bc340b1"
+    },
+    {
+      "svg": "29_clasificacion_isic2019.svg",
+      "svg_sha256": "f8bd7b9687238239582eb6f70185cb37ea846b9ba58237d131f39ec8c56c4681"
+    },
+    {
+      "svg": "30_clasificacion_isic2020.svg",
+      "svg_sha256": "2d876261c877e1e8e31d62b6b91eec6cb14cba80e9c6ddad3e38a18aef960ede"
+    },
+    {
+      "svg": "31_contrastes_isic2019.svg",
+      "svg_sha256": "507d168d27b92eef5f48c5dab292121118a3ab129abe4ca0f7a4989d64c8443a"
+    },
+    {
+      "svg": "32_contrastes_isic2020.svg",
+      "svg_sha256": "41ccc11bb020343522d7753403675c6737f71a1f38c6ade80bc9666dc622a7b9"
     }
   ]
 }

@@ -1,0 +1,124 @@
+\subsection{Clasificación congelada en ISIC2019}
+\label{sec:clasificacion-isic2019}
+
+La evaluación comprende ocho diagnósticos, con 20.264 imágenes para ajustar la sonda y 5.067 para validación. La partición es estratificada por imagen, sin agrupación por paciente; por tanto, persiste el riesgo de dependencia entre imágenes. HAM10000 está contenido en ISIC2019: ambos conjuntos no constituyen evaluaciones independientes ni esta comparación equivale a una validación externa.
+
+A71-limpio y B71-limpio excluyen las imágenes de validación de su preentrenamiento SSL, según la verificación del registro canónico (batch 64 y autocast). El encoder permanece congelado y la regresión logística se ajusta con las etiquetas de entrenamiento del propio dataset. Cada brazo se contrasta con su control DINOv2 público bajo el protocolo correspondiente; A71 y B71 no deben interpretarse como una ablación aislada del tono, pues también difieren en extracción y sonda.
+
+\begin{table}[!htbp]
+\centering
+\caption{Configuraciones congeladas en ISIC2019 (n = 5.067).}
+\label{tab:clasificacion-isic2019}
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\begin{tabularx}{\textwidth}{@{}Lrrrrr@{}}
+\toprule
+Configuración & F1 macro & MCC & Ex. bal. & AUC & ECE \\
+\midrule
+A71-limpio & 0,6549 & 0,6698 & 0,6829 & 0,9548 & 0,0198 \\
+B71-limpio & 0,6662 & 0,6628 & 0,6761 & 0,9541 & 0,0498 \\
+Público · prot. A71 & 0,6281 & 0,6234 & 0,6444 & 0,9373 & 0,0483 \\
+Público · prot. B71 & 0,6583 & 0,6474 & 0,6596 & 0,9478 & 0,0706 \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\raggedright\textit{Nota.} Elaboración propia desde las celdas canónicas; estimaciones puntuales. Público A71 y público B71 son controles de protocolos distintos.\par\endgroup
+\end{table}
+La Figura~\ref{fig:clasificacion-isic2019} compara F1 macro y MCC. Triángulos: A71-limpio; rombos: B71-limpio; círculos: controles y líneas base congelados. Los segmentos indican intervalos individuales disponibles; los puntos sin segmento no tienen un intervalo publicado. El MCC de las líneas base se obtiene de su matriz de confusión, sin añadir intervalos. El solapamiento de intervalos individuales no sustituye un contraste pareado.
+
+\begin{figure}[!htbp]
+\caption{F1 macro y MCC de los clasificadores congelados en ISIC2019.}
+\label{fig:clasificacion-isic2019}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/29_clasificacion_isic2019}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde los registros numéricos. No se incluyen modelos con ajuste fino. Los protocolos de extracción y sonda de los controles propios y del banco se conservan; la comparación con las líneas base es descriptiva. IC individuales del 95\,\%; no son IC de diferencias.\par}
+\end{figure}
+\FloatBarrier
+Los contrastes de la Figura~\ref{fig:contrastes-isic2019} comparan cada modelo limpio con su control público, mediante 1.000 remuestras. La línea de cero representa ausencia de diferencia; los valores positivos favorecen al modelo limpio. A71 presenta $\Delta$F1 = 0,0268 (IC del 95\,\% [0,0011; 0,0506]); el intervalo excluye cero. B71 presenta $\Delta$F1 = 0,0079 (IC del 95\,\% [-0,0143; 0,0284]); el intervalo incluye cero. Estos intervalos no representan una corrección global por multiplicidad.
+
+\begin{figure}[!htbp]
+\caption{Contrastes pareados de los modelos limpios frente a sus controles públicos en ISIC2019.}
+\label{fig:contrastes-isic2019}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/31_contrastes_isic2019}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia. Controles emparejados por protocolo; bootstrap por imagen, 1.000 remuestras, IC del 95\,\%. No se combinan particiones ni se compara A71 contra el control de B71.\par}
+\end{figure}
+\FloatBarrier
+
+\subsection{Clasificación congelada en ISIC2020}
+\label{sec:clasificacion-isic2020}
+
+La tarea es binaria (benigno y melanoma), con 26.466 imágenes para ajustar la sonda y 6.660 para validación; esta última contiene 6.538 imágenes benignas y 122 melanomas. La partición se agrupa por paciente. El desbalance exige interpretar el F1 macro junto con las métricas específicas de melanoma.
+
+A71-limpio y B71-limpio excluyen las imágenes de validación de su preentrenamiento SSL, según la verificación del registro canónico (batch 64 y autocast). El encoder permanece congelado y la regresión logística se ajusta con las etiquetas de entrenamiento del propio dataset. Cada brazo se contrasta con su control DINOv2 público bajo el protocolo correspondiente; A71 y B71 no deben interpretarse como una ablación aislada del tono, pues también difieren en extracción y sonda.
+
+\begin{table}[!htbp]
+\centering
+\caption{Configuraciones congeladas en ISIC2020 (n = 6.660).}
+\label{tab:clasificacion-isic2020}
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\begin{tabularx}{\textwidth}{@{}Lrrrrr@{}}
+\toprule
+Configuración & F1 macro & MCC & Ex. bal. & AUC & ECE \\
+\midrule
+A71-limpio & 0,6467 & 0,3040 & 0,6934 & 0,9085 & 0,0339 \\
+B71-limpio & 0,6229 & 0,2506 & 0,6494 & 0,8758 & 0,0111 \\
+Público · prot. A71 & 0,5971 & 0,1998 & 0,6234 & 0,8323 & 0,0119 \\
+Público · prot. B71 & 0,5842 & 0,1684 & 0,5828 & 0,8790 & 0,0125 \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\raggedright\textit{Nota.} Elaboración propia desde las celdas canónicas; estimaciones puntuales. Público A71 y público B71 son controles de protocolos distintos.\par\endgroup
+\end{table}
+La Figura~\ref{fig:clasificacion-isic2020} compara F1 macro y MCC. Triángulos: A71-limpio; rombos: B71-limpio; círculos: controles y líneas base congelados. Los segmentos indican intervalos individuales disponibles; los puntos sin segmento no tienen un intervalo publicado. El MCC de las líneas base se obtiene de su matriz de confusión, sin añadir intervalos. El solapamiento de intervalos individuales no sustituye un contraste pareado.
+
+\begin{figure}[!htbp]
+\caption{F1 macro y MCC de los clasificadores congelados en ISIC2020.}
+\label{fig:clasificacion-isic2020}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/30_clasificacion_isic2020}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde los registros numéricos. No se incluyen modelos con ajuste fino. Los protocolos de extracción y sonda de los controles propios y del banco se conservan; la comparación con las líneas base es descriptiva. IC individuales del 95\,\%; no son IC de diferencias.\par}
+\end{figure}
+\FloatBarrier
+Los contrastes de la Figura~\ref{fig:contrastes-isic2020} comparan cada modelo limpio con su control público, mediante 1.000 remuestras. La línea de cero representa ausencia de diferencia; los valores positivos favorecen al modelo limpio. A71 presenta $\Delta$F1 = 0,0497 (IC del 95\,\% [0,0145; 0,0837]); el intervalo excluye cero. B71 presenta $\Delta$F1 = 0,0387 (IC del 95\,\% [0,0047; 0,0721]); el intervalo excluye cero. Estos intervalos no representan una corrección global por multiplicidad.
+
+\begin{figure}[!htbp]
+\caption{Contrastes pareados de los modelos limpios frente a sus controles públicos en ISIC2020.}
+\label{fig:contrastes-isic2020}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/32_contrastes_isic2020}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia. Controles emparejados por protocolo; bootstrap por paciente, 1.000 remuestras, IC del 95\,\%. No se combinan particiones ni se compara A71 contra el control de B71.\par}
+\end{figure}
+\FloatBarrier
+\begin{table}[!htbp]
+\centering
+\caption{Desempeño para melanoma de los clasificadores congelados en ISIC2020.}
+\label{tab:melanoma-isic2020}
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\begin{tabularx}{\textwidth}{@{}Lrrr@{}}
+\toprule
+Configuración & Precisión MEL & Sensibilidad MEL & F1 MEL \\
+\midrule
+A71-limpio & 0,2500 & 0,4098 & 0,3106 \\
+B71-limpio & 0,2229 & 0,3197 & 0,2626 \\
+Público · prot. A71 & 0,1755 & 0,2705 & 0,2129 \\
+Público · prot. B71 & 0,1864 & 0,1803 & 0,1833 \\
+DINOv2 B/14 & 0,0823 & 0,4426 & 0,1388 \\
+ViT-B/16 & 0,0919 & 0,5738 & 0,1584 \\
+EfficientNet-B0 & 0,0833 & 0,3443 & 0,1342 \\
+DINOv2 S/14 & 0,0765 & 0,6639 & 0,1372 \\
+ResNet-50 & 0,1005 & 0,4508 & 0,1644 \\
+AlexNet & 0,0642 & 0,7541 & 0,1183 \\
+VGG19 & 0,0651 & 0,6475 & 0,1184 \\
+SimSiam R50 & 0,0552 & 0,7787 & 0,1031 \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\raggedright\textit{Nota.} Elaboración propia; soporte real de melanoma: 122 imágenes. Valores puntuales, sin intervalos por clase.\par\endgroup
+\end{table}
+B71-limpio identifica 39 de los 122 melanomas (sensibilidad 0,3197), con precisión 0,2229. A71-limpio alcanza sensibilidad 0,4098. Estos valores muestran que una mejora en F1 macro no basta para establecer utilidad de tamizaje ni un umbral clínico. La comparación post hoc con modelos ajustados se analiza por separado.
+

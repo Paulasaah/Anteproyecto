@@ -1,0 +1,6284 @@
+{
+  "repository": "nicolas2601/proyecto-grado-ssl-lesiones",
+  "revision": "07bb49761e6522451b025a341ee20d55aed525f9",
+  "records": [
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2019/A71__clean.json",
+      "data": {
+        "cell": "A71__clean",
+        "key": {
+          "dataset": "isic2019",
+          "cell": "A71__clean",
+          "config_id": "A_soup_a1.0@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "weights_sha256": "9a4b88f415da66349646fb68a2b3ad3ac50845f04b1179f1aa871639c0c5e2c8+7994ffa54ad08b7aedfbe0a3e0bcda02d125e6903aea75a862238c3d39b9bcfc",
+          "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+          "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f",
+          "n_val": 5067,
+          "n_train": 20264,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "f9fbaa0a683a5cddeabf2525c16c8b832c818db2e56a64491c704227f97a81ed",
+        "result": {
+          "code_revision": "64eb2d86e1177a13604abdc44378791fbcdda752",
+          "pool_check": {
+            "variant": "clean",
+            "exclude_ids_sha256": {
+              "A_s42": "3b7e883392ba5ae0cb290166fa2d4e2dfbb325d4bce0bca3e96562f8c39dfc1d",
+              "A_s43": "3b7e883392ba5ae0cb290166fa2d4e2dfbb325d4bce0bca3e96562f8c39dfc1d"
+            },
+            "verified": true
+          },
+          "dataset": "isic2019",
+          "config_id": "A_soup_a1.0@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "n_train": 20264,
+          "n_val": 5067,
+          "limit": null,
+          "cell": "A71__clean",
+          "pool_excludes_val": true,
+          "protocol": {
+            "weights": "A_soup_a1.0",
+            "resolution": 224,
+            "feature": "cls_attn",
+            "weighting": "la0.5",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 20264,
+            "n_val": 5067,
+            "val_supports": [
+              905,
+              2575,
+              665,
+              174,
+              525,
+              47,
+              50,
+              126
+            ],
+            "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.654948149079727,
+            "balanced_accuracy": 0.6828941922836115,
+            "accuracy": 0.7730412472863627,
+            "auc": 0.954846470765404,
+            "ece": 0.019760593709087924,
+            "mcc": 0.6698154783126147,
+            "per_class": {
+              "MEL": {
+                "precision": 0.6947976878612717,
+                "recall": 0.6640883977900552,
+                "f1": 0.6790960451977401,
+                "support": 905
+              },
+              "NV": {
+                "precision": 0.8955759266640095,
+                "recall": 0.872621359223301,
+                "f1": 0.8839496459480723,
+                "support": 2575
+              },
+              "BCC": {
+                "precision": 0.7646176911544228,
+                "recall": 0.7669172932330827,
+                "f1": 0.7657657657657657,
+                "support": 665
+              },
+              "AK": {
+                "precision": 0.4481132075471698,
+                "recall": 0.5459770114942529,
+                "f1": 0.49222797927461137,
+                "support": 174
+              },
+              "BKL": {
+                "precision": 0.5989110707803993,
+                "recall": 0.6285714285714286,
+                "f1": 0.6133828996282528,
+                "support": 525
+              },
+              "DF": {
+                "precision": 0.5517241379310345,
+                "recall": 0.6808510638297872,
+                "f1": 0.6095238095238096,
+                "support": 47
+              },
+              "VASC": {
+                "precision": 0.6833333333333333,
+                "recall": 0.82,
+                "f1": 0.7454545454545455,
+                "support": 50
+              },
+              "SCC": {
+                "precision": 0.4206896551724138,
+                "recall": 0.48412698412698413,
+                "f1": 0.45018450184501846,
+                "support": 126
+              }
+            },
+            "matriz_confusion": [
+              [
+                601,
+                158,
+                32,
+                17,
+                80,
+                3,
+                4,
+                10
+              ],
+              [
+                186,
+                2247,
+                39,
+                8,
+                79,
+                6,
+                7,
+                3
+              ],
+              [
+                22,
+                27,
+                510,
+                36,
+                26,
+                5,
+                4,
+                35
+              ],
+              [
+                7,
+                3,
+                29,
+                95,
+                21,
+                5,
+                0,
+                14
+              ],
+              [
+                40,
+                60,
+                30,
+                36,
+                330,
+                6,
+                4,
+                19
+              ],
+              [
+                2,
+                3,
+                3,
+                1,
+                3,
+                32,
+                0,
+                3
+              ],
+              [
+                0,
+                7,
+                2,
+                0,
+                0,
+                0,
+                41,
+                0
+              ],
+              [
+                7,
+                4,
+                22,
+                19,
+                12,
+                1,
+                0,
+                61
+              ]
+            ],
+            "macro_precision": 0.6322203388055068,
+            "macro_recall": 0.6828941922836115,
+            "ci95": {
+              "macro_f1": [
+                0.6277947170199021,
+                0.6771285886865648
+              ],
+              "balanced_accuracy": [
+                0.6528578922746332,
+                0.7084148622046733
+              ],
+              "accuracy": [
+                0.7611949871718966,
+                0.7838957963291888
+              ],
+              "auc": [
+                0.9506284910738794,
+                0.9586318742317379
+              ],
+              "ece": [
+                0.015536027168319755,
+                0.03216253471615682
+              ],
+              "mcc": [
+                0.652921999098718,
+                0.6848652405633243
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "image"
+            }
+          },
+          "probas_sha256": "0894d47a2f2729eabb07283970351e342fd63cf5da54cc910ccedbe0012366fe"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2019/B71__clean.json",
+      "data": {
+        "cell": "B71__clean",
+        "key": {
+          "dataset": "isic2019",
+          "cell": "B71__clean",
+          "config_id": "B_s42_a1.0@224|cls4|balanced|tta",
+          "transductivo": false,
+          "weights_sha256": "a392ebe8eedcc519a6131e3930bed5ea232d4be7084010f82740e55cadbe39c1",
+          "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+          "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f",
+          "n_val": 5067,
+          "n_train": 20264,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "442b3d6accef80b3c6a934f37838bcca699fd3998ec07a4843b7099cf4d97a15",
+        "result": {
+          "code_revision": "c3eb887a28101afb3a64d0f9747ae91d104a4845",
+          "pool_check": {
+            "variant": "clean",
+            "exclude_ids_sha256": {
+              "B_s42": "3b7e883392ba5ae0cb290166fa2d4e2dfbb325d4bce0bca3e96562f8c39dfc1d"
+            },
+            "verified": true
+          },
+          "dataset": "isic2019",
+          "config_id": "B_s42_a1.0@224|cls4|balanced|tta",
+          "transductivo": false,
+          "n_train": 20264,
+          "n_val": 5067,
+          "limit": null,
+          "cell": "B71__clean",
+          "pool_excludes_val": true,
+          "protocol": {
+            "weights": "B_s42_a1.0",
+            "resolution": 224,
+            "feature": "cls4",
+            "weighting": "balanced",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 20264,
+            "n_val": 5067,
+            "val_supports": [
+              905,
+              2575,
+              665,
+              174,
+              525,
+              47,
+              50,
+              126
+            ],
+            "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.6661779606906607,
+            "balanced_accuracy": 0.6760933590449438,
+            "accuracy": 0.7659364515492402,
+            "auc": 0.9540983884536747,
+            "ece": 0.04984740358139595,
+            "mcc": 0.6628496877705602,
+            "per_class": {
+              "MEL": {
+                "precision": 0.6466244725738397,
+                "recall": 0.6773480662983425,
+                "f1": 0.6616297895304911,
+                "support": 905
+              },
+              "NV": {
+                "precision": 0.8946932006633499,
+                "recall": 0.8380582524271845,
+                "f1": 0.8654501704431522,
+                "support": 2575
+              },
+              "BCC": {
+                "precision": 0.757754800590842,
+                "recall": 0.7714285714285715,
+                "f1": 0.7645305514157973,
+                "support": 665
+              },
+              "AK": {
+                "precision": 0.5126903553299492,
+                "recall": 0.5804597701149425,
+                "f1": 0.5444743935309974,
+                "support": 174
+              },
+              "BKL": {
+                "precision": 0.6070234113712375,
+                "recall": 0.6914285714285714,
+                "f1": 0.6464826357969724,
+                "support": 525
+              },
+              "DF": {
+                "precision": 0.574468085106383,
+                "recall": 0.574468085106383,
+                "f1": 0.574468085106383,
+                "support": 47
+              },
+              "VASC": {
+                "precision": 0.782608695652174,
+                "recall": 0.72,
+                "f1": 0.75,
+                "support": 50
+              },
+              "SCC": {
+                "precision": 0.49295774647887325,
+                "recall": 0.5555555555555556,
+                "f1": 0.5223880597014925,
+                "support": 126
+              }
+            },
+            "matriz_confusion": [
+              [
+                613,
+                154,
+                41,
+                13,
+                70,
+                3,
+                2,
+                9
+              ],
+              [
+                248,
+                2158,
+                44,
+                6,
+                104,
+                6,
+                3,
+                6
+              ],
+              [
+                29,
+                29,
+                513,
+                35,
+                25,
+                7,
+                1,
+                26
+              ],
+              [
+                8,
+                4,
+                23,
+                101,
+                18,
+                0,
+                2,
+                18
+              ],
+              [
+                39,
+                49,
+                31,
+                30,
+                363,
+                3,
+                2,
+                8
+              ],
+              [
+                3,
+                6,
+                2,
+                1,
+                3,
+                27,
+                0,
+                5
+              ],
+              [
+                2,
+                9,
+                3,
+                0,
+                0,
+                0,
+                36,
+                0
+              ],
+              [
+                6,
+                3,
+                20,
+                11,
+                15,
+                1,
+                0,
+                70
+              ]
+            ],
+            "macro_precision": 0.658602595970831,
+            "macro_recall": 0.6760933590449438,
+            "ci95": {
+              "macro_f1": [
+                0.6401499824667848,
+                0.6911348994311113
+              ],
+              "balanced_accuracy": [
+                0.64933065939073,
+                0.7055334006888261
+              ],
+              "accuracy": [
+                0.7542924807578448,
+                0.7775804223406355
+              ],
+              "auc": [
+                0.9495021658274456,
+                0.9582754855764053
+              ],
+              "ece": [
+                0.04084559427933417,
+                0.06093751877663035
+              ],
+              "mcc": [
+                0.6465401065099855,
+                0.6791326770872326
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "image"
+            }
+          },
+          "probas_sha256": "f9b68fcf8da2f11e1571d3b77b58f0febe77f8a1634b94d1b74d4a4ba95aa3af"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2019/PUBLIC_A71.json",
+      "data": {
+        "cell": "PUBLIC_A71",
+        "key": {
+          "dataset": "isic2019",
+          "cell": "PUBLIC_A71",
+          "config_id": "public@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "weights_sha256": "torch.hub facebookresearch/dinov2 dinov2_vitb14 pretrained",
+          "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+          "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f",
+          "n_val": 5067,
+          "n_train": 20264,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "45403ab01dbfe0e17e36d70cb27bccb62853627d72d8dbd47d0cb31675f8a44b",
+        "result": {
+          "code_revision": "c3eb887a28101afb3a64d0f9747ae91d104a4845",
+          "pool_check": {},
+          "dataset": "isic2019",
+          "config_id": "public@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "n_train": 20264,
+          "n_val": 5067,
+          "limit": null,
+          "cell": "PUBLIC_A71",
+          "pool_excludes_val": null,
+          "protocol": {
+            "weights": "public",
+            "resolution": 224,
+            "feature": "cls_attn",
+            "weighting": "la0.5",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 20264,
+            "n_val": 5067,
+            "val_supports": [
+              905,
+              2575,
+              665,
+              174,
+              525,
+              47,
+              50,
+              126
+            ],
+            "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.6281399505577837,
+            "balanced_accuracy": 0.6443927898066929,
+            "accuracy": 0.7404776001578843,
+            "auc": 0.9373041853162689,
+            "ece": 0.04825411612407757,
+            "mcc": 0.6234099197010466,
+            "per_class": {
+              "MEL": {
+                "precision": 0.6310572687224669,
+                "recall": 0.6331491712707182,
+                "f1": 0.6321014892443464,
+                "support": 905
+              },
+              "NV": {
+                "precision": 0.8776746063786839,
+                "recall": 0.8442718446601942,
+                "f1": 0.8606492478226445,
+                "support": 2575
+              },
+              "BCC": {
+                "precision": 0.7230538922155688,
+                "recall": 0.7263157894736842,
+                "f1": 0.7246811702925732,
+                "support": 665
+              },
+              "AK": {
+                "precision": 0.39823008849557523,
+                "recall": 0.5172413793103449,
+                "f1": 0.45,
+                "support": 174
+              },
+              "BKL": {
+                "precision": 0.5545454545454546,
+                "recall": 0.580952380952381,
+                "f1": 0.5674418604651162,
+                "support": 525
+              },
+              "DF": {
+                "precision": 0.58,
+                "recall": 0.6170212765957447,
+                "f1": 0.5979381443298969,
+                "support": 47
+              },
+              "VASC": {
+                "precision": 0.7037037037037037,
+                "recall": 0.76,
+                "f1": 0.7307692307692307,
+                "support": 50
+              },
+              "SCC": {
+                "precision": 0.44776119402985076,
+                "recall": 0.47619047619047616,
+                "f1": 0.46153846153846156,
+                "support": 126
+              }
+            },
+            "matriz_confusion": [
+              [
+                573,
+                182,
+                45,
+                17,
+                71,
+                2,
+                4,
+                11
+              ],
+              [
+                213,
+                2174,
+                40,
+                19,
+                104,
+                9,
+                8,
+                8
+              ],
+              [
+                39,
+                27,
+                483,
+                41,
+                34,
+                6,
+                3,
+                32
+              ],
+              [
+                14,
+                5,
+                30,
+                90,
+                22,
+                0,
+                0,
+                13
+              ],
+              [
+                61,
+                67,
+                38,
+                41,
+                305,
+                2,
+                1,
+                10
+              ],
+              [
+                3,
+                5,
+                6,
+                1,
+                3,
+                29,
+                0,
+                0
+              ],
+              [
+                0,
+                9,
+                1,
+                1,
+                1,
+                0,
+                38,
+                0
+              ],
+              [
+                5,
+                8,
+                25,
+                16,
+                10,
+                2,
+                0,
+                60
+              ]
+            ],
+            "macro_precision": 0.614503276011413,
+            "macro_recall": 0.6443927898066929,
+            "ci95": {
+              "macro_f1": [
+                0.6037137372332226,
+                0.65336615904078
+              ],
+              "balanced_accuracy": [
+                0.6178123320599304,
+                0.67321576022721
+              ],
+              "accuracy": [
+                0.7288336293664891,
+                0.7525162818235642
+              ],
+              "auc": [
+                0.9306602193589645,
+                0.9433235842679336
+              ],
+              "ece": [
+                0.041529457936578695,
+                0.061242893798964325
+              ],
+              "mcc": [
+                0.6068214919180628,
+                0.6400215671249458
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "image"
+            }
+          },
+          "probas_sha256": "3eebea97dafbef2435fbf464586141ba9a210e4639e46f6ed4a9d17e91de3fc7"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2019/PUBLIC_B71.json",
+      "data": {
+        "cell": "PUBLIC_B71",
+        "key": {
+          "dataset": "isic2019",
+          "cell": "PUBLIC_B71",
+          "config_id": "public@224|cls4|balanced|tta",
+          "transductivo": false,
+          "weights_sha256": "torch.hub facebookresearch/dinov2 dinov2_vitb14 pretrained",
+          "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+          "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f",
+          "n_val": 5067,
+          "n_train": 20264,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "c3ec8345f0b8b2dc10d203d69aa3fad2abb89d84da9ef18fe358b9af7cd2fef7",
+        "result": {
+          "code_revision": "c3eb887a28101afb3a64d0f9747ae91d104a4845",
+          "pool_check": {},
+          "dataset": "isic2019",
+          "config_id": "public@224|cls4|balanced|tta",
+          "transductivo": false,
+          "n_train": 20264,
+          "n_val": 5067,
+          "limit": null,
+          "cell": "PUBLIC_B71",
+          "pool_excludes_val": null,
+          "protocol": {
+            "weights": "public",
+            "resolution": 224,
+            "feature": "cls4",
+            "weighting": "balanced",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 20264,
+            "n_val": 5067,
+            "val_supports": [
+              905,
+              2575,
+              665,
+              174,
+              525,
+              47,
+              50,
+              126
+            ],
+            "val_ids_sha256": "8cde8a71ccf5bf2e477ffdab445e8f1afbc37a164ee0cd1aba93ef785cc0b57f",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "739966ec1d52c7e1aa5b4c7abdb7ff7acdb2697d615580b8b1656fdeb2f86a6f"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.6582977171515021,
+            "balanced_accuracy": 0.6595857571402802,
+            "accuracy": 0.7580422340635484,
+            "auc": 0.9477614779670751,
+            "ece": 0.07064133799176017,
+            "mcc": 0.6474351303767671,
+            "per_class": {
+              "MEL": {
+                "precision": 0.6403033586132177,
+                "recall": 0.6530386740331492,
+                "f1": 0.6466083150984683,
+                "support": 905
+              },
+              "NV": {
+                "precision": 0.8763505402160864,
+                "recall": 0.8504854368932039,
+                "f1": 0.8632242806464328,
+                "support": 2575
+              },
+              "BCC": {
+                "precision": 0.7578947368421053,
+                "recall": 0.7578947368421053,
+                "f1": 0.7578947368421053,
+                "support": 665
+              },
+              "AK": {
+                "precision": 0.4742268041237113,
+                "recall": 0.5287356321839081,
+                "f1": 0.5,
+                "support": 174
+              },
+              "BKL": {
+                "precision": 0.5921985815602837,
+                "recall": 0.6361904761904762,
+                "f1": 0.6134067952249771,
+                "support": 525
+              },
+              "DF": {
+                "precision": 0.75,
+                "recall": 0.574468085106383,
+                "f1": 0.6506024096385542,
+                "support": 47
+              },
+              "VASC": {
+                "precision": 0.7037037037037037,
+                "recall": 0.76,
+                "f1": 0.7307692307692307,
+                "support": 50
+              },
+              "SCC": {
+                "precision": 0.49242424242424243,
+                "recall": 0.5158730158730159,
+                "f1": 0.5038759689922481,
+                "support": 126
+              }
+            },
+            "matriz_confusion": [
+              [
+                591,
+                181,
+                38,
+                10,
+                69,
+                0,
+                3,
+                13
+              ],
+              [
+                229,
+                2190,
+                45,
+                7,
+                90,
+                4,
+                7,
+                3
+              ],
+              [
+                26,
+                36,
+                504,
+                38,
+                31,
+                3,
+                2,
+                25
+              ],
+              [
+                14,
+                8,
+                24,
+                92,
+                22,
+                0,
+                0,
+                14
+              ],
+              [
+                51,
+                65,
+                31,
+                28,
+                334,
+                1,
+                3,
+                12
+              ],
+              [
+                6,
+                5,
+                2,
+                3,
+                3,
+                27,
+                1,
+                0
+              ],
+              [
+                2,
+                7,
+                1,
+                0,
+                2,
+                0,
+                38,
+                0
+              ],
+              [
+                4,
+                7,
+                20,
+                16,
+                13,
+                1,
+                0,
+                65
+              ]
+            ],
+            "macro_precision": 0.6608877459354188,
+            "macro_recall": 0.6595857571402802,
+            "ci95": {
+              "macro_f1": [
+                0.6311293381263868,
+                0.6824564774821735
+              ],
+              "balanced_accuracy": [
+                0.6308434457272247,
+                0.6864734033867175
+              ],
+              "accuracy": [
+                0.7463933293862246,
+                0.7702832050522992
+              ],
+              "auc": [
+                0.9420827468475035,
+                0.953402143932544
+              ],
+              "ece": [
+                0.06099325546881896,
+                0.08182849497195471
+              ],
+              "mcc": [
+                0.6310503508964116,
+                0.6640687910540927
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "image"
+            }
+          },
+          "probas_sha256": "9896e3341402b2036281cfac3adc50eada7fa5f75d9b8ded7262b85bd02de97a"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2019/contrasts/A71__clean__vs__PUBLIC_A71.json",
+      "data": {
+        "cell": "A71__clean__vs__PUBLIC_A71",
+        "key": {
+          "arm": "A71__clean",
+          "control": "PUBLIC_A71",
+          "arm_probas_sha256": "0894d47a2f2729eabb07283970351e342fd63cf5da54cc910ccedbe0012366fe",
+          "control_probas_sha256": "3eebea97dafbef2435fbf464586141ba9a210e4639e46f6ed4a9d17e91de3fc7",
+          "n_resamples": 1000,
+          "metrics": [
+            "macro_f1",
+            "balanced_accuracy",
+            "accuracy",
+            "auc",
+            "ece",
+            "mcc"
+          ]
+        },
+        "key_sha256": "bd716e402d20cefbef12469d402012fddc501401b8355bcc55ca761504574085",
+        "result": {
+          "paired": [
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "macro_f1",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.654948149079727,
+              "point_control": 0.6281399505577837,
+              "point_delta": 0.02680819852194327,
+              "ci95_low": 0.0010684943850797907,
+              "ci95_high": 0.050646711378836286,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "balanced_accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6828941922836115,
+              "point_control": 0.6443927898066929,
+              "point_delta": 0.03850140247691858,
+              "ci95_low": 0.011163462417676673,
+              "ci95_high": 0.06470220252442539,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.7730412472863627,
+              "point_control": 0.7404776001578843,
+              "point_delta": 0.03256364712847837,
+              "ci95_low": 0.019730609828300695,
+              "ci95_high": 0.045194395105585095,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "auc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.954846470765404,
+              "point_control": 0.9373041853162689,
+              "point_delta": 0.017542285449135053,
+              "ci95_low": 0.012032590479706432,
+              "ci95_high": 0.02350240675771884,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "ece",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.019760593709087924,
+              "point_control": 0.04825411612407757,
+              "point_delta": -0.028493522414989644,
+              "ci95_low": -0.04139076484153467,
+              "ci95_high": -0.013387406409872847,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "mcc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6698154783126147,
+              "point_control": 0.6234099197010466,
+              "point_delta": 0.04640555861156803,
+              "ci95_low": 0.027977114059988168,
+              "ci95_high": 0.06363430438756497,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            }
+          ],
+          "unit": "image"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2019/contrasts/B71__clean__vs__PUBLIC_B71.json",
+      "data": {
+        "cell": "B71__clean__vs__PUBLIC_B71",
+        "key": {
+          "arm": "B71__clean",
+          "control": "PUBLIC_B71",
+          "arm_probas_sha256": "f9b68fcf8da2f11e1571d3b77b58f0febe77f8a1634b94d1b74d4a4ba95aa3af",
+          "control_probas_sha256": "9896e3341402b2036281cfac3adc50eada7fa5f75d9b8ded7262b85bd02de97a",
+          "n_resamples": 1000,
+          "metrics": [
+            "macro_f1",
+            "balanced_accuracy",
+            "accuracy",
+            "auc",
+            "ece",
+            "mcc"
+          ]
+        },
+        "key_sha256": "edf25cdf6321f3c4788ba391d7d660f610b2227556cb11f573fbc13f8b386ab2",
+        "result": {
+          "paired": [
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "macro_f1",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6661779606906607,
+              "point_control": 0.6582977171515021,
+              "point_delta": 0.007880243539158616,
+              "ci95_low": -0.014288914524343443,
+              "ci95_high": 0.028359431535609023,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "balanced_accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6760933590449438,
+              "point_control": 0.6595857571402802,
+              "point_delta": 0.016507601904663605,
+              "ci95_low": -0.0028615417934053115,
+              "ci95_high": 0.035080286806251415,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.7659364515492402,
+              "point_control": 0.7580422340635484,
+              "point_delta": 0.007894217485691746,
+              "ci95_low": -0.004741464377343646,
+              "ci95_high": 0.0193408328399447,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "auc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.9540983884536747,
+              "point_control": 0.9477614779670751,
+              "point_delta": 0.006336910486599567,
+              "ci95_low": 0.002055126310276606,
+              "ci95_high": 0.010766028962455524,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "ece",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.04984740358139595,
+              "point_control": 0.07064133799176017,
+              "point_delta": -0.020793934410364222,
+              "ci95_low": -0.03256452199516993,
+              "ci95_high": -0.00791991527307377,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "mcc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6628496877705602,
+              "point_control": 0.6474351303767671,
+              "point_delta": 0.015414557393793049,
+              "ci95_low": -0.002288126057182771,
+              "ci95_high": 0.03165864158944318,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            }
+          ],
+          "unit": "image"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2020/A71__clean.json",
+      "data": {
+        "cell": "A71__clean",
+        "key": {
+          "dataset": "isic2020",
+          "cell": "A71__clean",
+          "config_id": "A_soup_a1.0@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "weights_sha256": "9a4b88f415da66349646fb68a2b3ad3ac50845f04b1179f1aa871639c0c5e2c8+7994ffa54ad08b7aedfbe0a3e0bcda02d125e6903aea75a862238c3d39b9bcfc",
+          "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+          "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb",
+          "n_val": 6660,
+          "n_train": 26466,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "f991964ee9a9066fa793a731cf1d96c0f8a0e38d650642cefb58024399ecd012",
+        "result": {
+          "code_revision": "64eb2d86e1177a13604abdc44378791fbcdda752",
+          "pool_check": {
+            "variant": "clean",
+            "exclude_ids_sha256": {
+              "A_s42": "3b7e883392ba5ae0cb290166fa2d4e2dfbb325d4bce0bca3e96562f8c39dfc1d",
+              "A_s43": "3b7e883392ba5ae0cb290166fa2d4e2dfbb325d4bce0bca3e96562f8c39dfc1d"
+            },
+            "verified": true
+          },
+          "dataset": "isic2020",
+          "config_id": "A_soup_a1.0@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "n_train": 26466,
+          "n_val": 6660,
+          "limit": null,
+          "cell": "A71__clean",
+          "pool_excludes_val": true,
+          "protocol": {
+            "weights": "A_soup_a1.0",
+            "resolution": 224,
+            "feature": "cls_attn",
+            "weighting": "la0.5",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 26466,
+            "n_val": 6660,
+            "val_supports": [
+              6538,
+              122
+            ],
+            "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.6467397277555362,
+            "balanced_accuracy": 0.6934466348058512,
+            "accuracy": 0.9666666666666667,
+            "auc": 0.9084895867287835,
+            "ece": 0.033936819034387805,
+            "mcc": 0.3039920957428441,
+            "per_class": {
+              "benign": {
+                "precision": 0.9888544891640867,
+                "recall": 0.9770572040379321,
+                "f1": 0.9829204492998923,
+                "support": 6538
+              },
+              "malignant": {
+                "precision": 0.25,
+                "recall": 0.4098360655737705,
+                "f1": 0.3105590062111801,
+                "support": 122
+              }
+            },
+            "matriz_confusion": [
+              [
+                6388,
+                150
+              ],
+              [
+                72,
+                50
+              ]
+            ],
+            "macro_precision": 0.6194272445820433,
+            "macro_recall": 0.6934466348058512,
+            "ci95": {
+              "macro_f1": [
+                0.6095043228376704,
+                0.6837303852098939
+              ],
+              "balanced_accuracy": [
+                0.64234453939491,
+                0.748066370333563
+              ],
+              "accuracy": [
+                0.9598536175105882,
+                0.9723538210631688
+              ],
+              "auc": [
+                0.8783493271369578,
+                0.9339374773975714
+              ],
+              "ece": [
+                0.029386153674504516,
+                0.04000707798209603
+              ],
+              "mcc": [
+                0.22647197544328604,
+                0.3781268713563247
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "patient_id"
+            }
+          },
+          "probas_sha256": "40ac993d22afee661c96a6f9ab51968df6939bb28257b96ff9ab8402379bf109"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2020/B71__clean.json",
+      "data": {
+        "cell": "B71__clean",
+        "key": {
+          "dataset": "isic2020",
+          "cell": "B71__clean",
+          "config_id": "B_s42_a1.0@224|cls4|balanced|tta",
+          "transductivo": false,
+          "weights_sha256": "a392ebe8eedcc519a6131e3930bed5ea232d4be7084010f82740e55cadbe39c1",
+          "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+          "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb",
+          "n_val": 6660,
+          "n_train": 26466,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "cb98f4034dac0a61283e8c799ceb3fb642dd2acf4f4f359fff780fc4777d766f",
+        "result": {
+          "code_revision": "c3eb887a28101afb3a64d0f9747ae91d104a4845",
+          "pool_check": {
+            "variant": "clean",
+            "exclude_ids_sha256": {
+              "B_s42": "3b7e883392ba5ae0cb290166fa2d4e2dfbb325d4bce0bca3e96562f8c39dfc1d"
+            },
+            "verified": true
+          },
+          "dataset": "isic2020",
+          "config_id": "B_s42_a1.0@224|cls4|balanced|tta",
+          "transductivo": false,
+          "n_train": 26466,
+          "n_val": 6660,
+          "limit": null,
+          "cell": "B71__clean",
+          "pool_excludes_val": true,
+          "protocol": {
+            "weights": "B_s42_a1.0",
+            "resolution": 224,
+            "feature": "cls4",
+            "weighting": "balanced",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 26466,
+            "n_val": 6660,
+            "val_supports": [
+              6538,
+              122
+            ],
+            "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.622904930437757,
+            "balanced_accuracy": 0.6494353314042998,
+            "accuracy": 0.9671171171171171,
+            "auc": 0.8758305793620148,
+            "ece": 0.011133408570747887,
+            "mcc": 0.2505599453325243,
+            "per_class": {
+              "benign": {
+                "precision": 0.987201233616037,
+                "recall": 0.9791985316610584,
+                "f1": 0.9831835982492513,
+                "support": 6538
+              },
+              "malignant": {
+                "precision": 0.22285714285714286,
+                "recall": 0.319672131147541,
+                "f1": 0.26262626262626265,
+                "support": 122
+              }
+            },
+            "matriz_confusion": [
+              [
+                6402,
+                136
+              ],
+              [
+                83,
+                39
+              ]
+            ],
+            "macro_precision": 0.6050291882365899,
+            "macro_recall": 0.6494353314042998,
+            "ci95": {
+              "macro_f1": [
+                0.5864888166443191,
+                0.6601927471535446
+              ],
+              "balanced_accuracy": [
+                0.6052431688721587,
+                0.6925741524937677
+              ],
+              "accuracy": [
+                0.9599619049767945,
+                0.9730732024356931
+              ],
+              "auc": [
+                0.8396646494886655,
+                0.9048682923547531
+              ],
+              "ece": [
+                0.00874672898303914,
+                0.01639688768724224
+              ],
+              "mcc": [
+                0.1765895312937121,
+                0.32694720012507683
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "patient_id"
+            }
+          },
+          "probas_sha256": "9ac5f9e85442bc2e47b085dd96e08b1083e4986401259765c8a279a5aa1aa650"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2020/PUBLIC_A71.json",
+      "data": {
+        "cell": "PUBLIC_A71",
+        "key": {
+          "dataset": "isic2020",
+          "cell": "PUBLIC_A71",
+          "config_id": "public@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "weights_sha256": "torch.hub facebookresearch/dinov2 dinov2_vitb14 pretrained",
+          "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+          "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb",
+          "n_val": 6660,
+          "n_train": 26466,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "f1061cce8bf703f0ca6af5389b2af344f998f62ffdcdd3cfaea140aafec773bc",
+        "result": {
+          "code_revision": "c3eb887a28101afb3a64d0f9747ae91d104a4845",
+          "pool_check": {},
+          "dataset": "isic2020",
+          "config_id": "public@224|cls_attn|la0.5|tta",
+          "transductivo": false,
+          "n_train": 26466,
+          "n_val": 6660,
+          "limit": null,
+          "cell": "PUBLIC_A71",
+          "pool_excludes_val": null,
+          "protocol": {
+            "weights": "public",
+            "resolution": 224,
+            "feature": "cls_attn",
+            "weighting": "la0.5",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 26466,
+            "n_val": 6660,
+            "val_supports": [
+              6538,
+              122
+            ],
+            "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.5970742109047631,
+            "balanced_accuracy": 0.6233921237256091,
+            "accuracy": 0.9633633633633634,
+            "auc": 0.8323006985642574,
+            "ece": 0.011948303222596808,
+            "mcc": 0.19981202868595377,
+            "per_class": {
+              "benign": {
+                "precision": 0.9862484548825711,
+                "recall": 0.9762924441725298,
+                "f1": 0.9812451960030746,
+                "support": 6538
+              },
+              "malignant": {
+                "precision": 0.17553191489361702,
+                "recall": 0.27049180327868855,
+                "f1": 0.2129032258064516,
+                "support": 122
+              }
+            },
+            "matriz_confusion": [
+              [
+                6383,
+                155
+              ],
+              [
+                89,
+                33
+              ]
+            ],
+            "macro_precision": 0.5808901848880941,
+            "macro_recall": 0.6233921237256091,
+            "ci95": {
+              "macro_f1": [
+                0.5635625252573119,
+                0.6272399930413398
+              ],
+              "balanced_accuracy": [
+                0.5828644915322844,
+                0.6630502728209259
+              ],
+              "accuracy": [
+                0.9563041075704549,
+                0.9693602215226448
+              ],
+              "auc": [
+                0.7904296612240049,
+                0.8719030024001158
+              ],
+              "ece": [
+                0.008634317669257197,
+                0.01701062773798847
+              ],
+              "mcc": [
+                0.1322532243343941,
+                0.2621740823916161
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "patient_id"
+            }
+          },
+          "probas_sha256": "50f273cb916fb6708776949178fc440de20fede1e4049412e839669de201b702"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2020/PUBLIC_B71.json",
+      "data": {
+        "cell": "PUBLIC_B71",
+        "key": {
+          "dataset": "isic2020",
+          "cell": "PUBLIC_B71",
+          "config_id": "public@224|cls4|balanced|tta",
+          "transductivo": false,
+          "weights_sha256": "torch.hub facebookresearch/dinov2 dinov2_vitb14 pretrained",
+          "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+          "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb",
+          "n_val": 6660,
+          "n_train": 26466,
+          "limit": null,
+          "n_resamples": 1000
+        },
+        "key_sha256": "0479fdbb26d592dbc54d2348954605de6ec9ae7a0e18bde6d0be6e039eb698d4",
+        "result": {
+          "code_revision": "c3eb887a28101afb3a64d0f9747ae91d104a4845",
+          "pool_check": {},
+          "dataset": "isic2020",
+          "config_id": "public@224|cls4|balanced|tta",
+          "transductivo": false,
+          "n_train": 26466,
+          "n_val": 6660,
+          "limit": null,
+          "cell": "PUBLIC_B71",
+          "pool_excludes_val": null,
+          "protocol": {
+            "weights": "public",
+            "resolution": 224,
+            "feature": "cls4",
+            "weighting": "balanced",
+            "tta": true
+          },
+          "split_identity": {
+            "sklearn_version": "1.7.2",
+            "n_train": 26466,
+            "n_val": 6660,
+            "val_supports": [
+              6538,
+              122
+            ],
+            "val_ids_sha256": "ec3f5408881aa4623493e95e2840f360bab3de300c6fc022a4b88e55d5a0567e",
+            "val_sha_construction": "join_newline",
+            "train_ids_sha256": "0284b47c93a1d2aeaaac182e928269529578abecb6e1dd261c4383194cb42fbb"
+          },
+          "probe": "logreg C=1 standardised, fitted on the dataset TRAIN split; no selection on val",
+          "metrics": {
+            "macro_f1": 0.5841743119266055,
+            "balanced_accuracy": 0.5828222397183678,
+            "accuracy": 0.9705705705705706,
+            "auc": 0.8790174967027566,
+            "ece": 0.012464456996347722,
+            "mcc": 0.16837711590016566,
+            "per_class": {
+              "benign": {
+                "precision": 0.9847141546927545,
+                "recall": 0.9853166105842766,
+                "f1": 0.9850152905198777,
+                "support": 6538
+              },
+              "malignant": {
+                "precision": 0.1864406779661017,
+                "recall": 0.18032786885245902,
+                "f1": 0.18333333333333332,
+                "support": 122
+              }
+            },
+            "matriz_confusion": [
+              [
+                6442,
+                96
+              ],
+              [
+                100,
+                22
+              ]
+            ],
+            "macro_precision": 0.5855774163294281,
+            "macro_recall": 0.5828222397183678,
+            "ci95": {
+              "macro_f1": [
+                0.5507049694474577,
+                0.6181297545853338
+              ],
+              "balanced_accuracy": [
+                0.5484913745653752,
+                0.6185070539406604
+              ],
+              "accuracy": [
+                0.9643249132070013,
+                0.9758570766983389
+              ],
+              "auc": [
+                0.8469113059514487,
+                0.9072540010167924
+              ],
+              "ece": [
+                0.009958084201455648,
+                0.017679526743586686
+              ],
+              "mcc": [
+                0.10152060211784433,
+                0.23818832171489876
+              ]
+            },
+            "bootstrap": {
+              "n_resamples": 1000,
+              "seed": 20260923,
+              "unit": "patient_id"
+            }
+          },
+          "probas_sha256": "3d8bce3ad7aaa24cc7fff22e00b525963a0b59850731fa23f62b63a34cbe223d"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2020/contrasts/A71__clean__vs__PUBLIC_A71.json",
+      "data": {
+        "cell": "A71__clean__vs__PUBLIC_A71",
+        "key": {
+          "arm": "A71__clean",
+          "control": "PUBLIC_A71",
+          "arm_probas_sha256": "40ac993d22afee661c96a6f9ab51968df6939bb28257b96ff9ab8402379bf109",
+          "control_probas_sha256": "50f273cb916fb6708776949178fc440de20fede1e4049412e839669de201b702",
+          "n_resamples": 1000,
+          "metrics": [
+            "macro_f1",
+            "balanced_accuracy",
+            "accuracy",
+            "auc",
+            "ece",
+            "mcc"
+          ]
+        },
+        "key_sha256": "ede7a479f482c955bfa90b74b9fcdbbeaec359fa3d9d74a0223b0cb080499355",
+        "result": {
+          "paired": [
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "macro_f1",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6467397277555362,
+              "point_control": 0.5970742109047631,
+              "point_delta": 0.04966551685077314,
+              "ci95_low": 0.014471584243099368,
+              "ci95_high": 0.08369519660673837,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "balanced_accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6934466348058512,
+              "point_control": 0.6233921237256091,
+              "point_delta": 0.07005451108024208,
+              "ci95_low": 0.022456681763760044,
+              "ci95_high": 0.12083470898671297,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.9666666666666667,
+              "point_control": 0.9633633633633634,
+              "point_delta": 0.0033033033033033066,
+              "ci95_low": -0.0016151835619712589,
+              "ci95_high": 0.0077341033991052315,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "auc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.9084895867287835,
+              "point_control": 0.8323006985642574,
+              "point_delta": 0.07618888816452618,
+              "ci95_low": 0.04443298713768575,
+              "ci95_high": 0.10775645305165087,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "ece",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.033936819034387805,
+              "point_control": 0.011948303222596808,
+              "point_delta": 0.021988515811790996,
+              "ci95_low": 0.015319239168383321,
+              "ci95_high": 0.028149104340152536,
+              "excludes_zero": true,
+              "direction": "control_better"
+            },
+            {
+              "arm": "A71__clean",
+              "control": "PUBLIC_A71",
+              "metric": "mcc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.3039920957428441,
+              "point_control": 0.19981202868595377,
+              "point_delta": 0.10418006705689031,
+              "ci95_low": 0.03244196463149314,
+              "ci95_high": 0.1757492685090675,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            }
+          ],
+          "unit": "patient_id"
+        }
+      }
+    },
+    {
+      "path": "resultados/banco_completo/isic_eval/limpio_canonico_bs64/isic2020/contrasts/B71__clean__vs__PUBLIC_B71.json",
+      "data": {
+        "cell": "B71__clean__vs__PUBLIC_B71",
+        "key": {
+          "arm": "B71__clean",
+          "control": "PUBLIC_B71",
+          "arm_probas_sha256": "9ac5f9e85442bc2e47b085dd96e08b1083e4986401259765c8a279a5aa1aa650",
+          "control_probas_sha256": "3d8bce3ad7aaa24cc7fff22e00b525963a0b59850731fa23f62b63a34cbe223d",
+          "n_resamples": 1000,
+          "metrics": [
+            "macro_f1",
+            "balanced_accuracy",
+            "accuracy",
+            "auc",
+            "ece",
+            "mcc"
+          ]
+        },
+        "key_sha256": "a8c0e350336e6ece2bd7e74c8419337256b27934b7f957b20f00bb5585fb0428",
+        "result": {
+          "paired": [
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "macro_f1",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.622904930437757,
+              "point_control": 0.5841743119266055,
+              "point_delta": 0.03873061851115145,
+              "ci95_low": 0.004737399663074935,
+              "ci95_high": 0.07209465288576826,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "balanced_accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.6494353314042998,
+              "point_control": 0.5828222397183678,
+              "point_delta": 0.06661309168593199,
+              "ci95_low": 0.030185039555342838,
+              "ci95_high": 0.10329912087008887,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "accuracy",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.9671171171171171,
+              "point_control": 0.9705705705705706,
+              "point_delta": -0.003453453453453492,
+              "ci95_low": -0.008406067167478052,
+              "ci95_high": 0.0009884101963650747,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "auc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.8758305793620148,
+              "point_control": 0.8790174967027566,
+              "point_delta": -0.003186917340741835,
+              "ci95_low": -0.03464808777076013,
+              "ci95_high": 0.026155448990594802,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "ece",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.011133408570747887,
+              "point_control": 0.012464456996347722,
+              "point_delta": -0.0013310484255998345,
+              "ci95_low": -0.005375792935014118,
+              "ci95_high": 0.002633567701962151,
+              "excludes_zero": false,
+              "direction": "indistinguishable"
+            },
+            {
+              "arm": "B71__clean",
+              "control": "PUBLIC_B71",
+              "metric": "mcc",
+              "probe": "logreg",
+              "fraction": 1,
+              "seed": 0,
+              "point_arm": 0.2505599453325243,
+              "point_control": 0.16837711590016566,
+              "point_delta": 0.08218282943235863,
+              "ci95_low": 0.016154861310387344,
+              "ci95_high": 0.14861214881241505,
+              "excludes_zero": true,
+              "direction": "arm_better"
+            }
+          ],
+          "unit": "patient_id"
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_alexnet_isic2019.json",
+      "data": {
+        "modelo": "alexnet",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 256,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.7114663508979673,
+            "balanced_accuracy": 0.43612624939599437,
+            "macro_f1": 0.4753060985707721,
+            "macro_precision": 0.7132158109591941,
+            "macro_recall": 0.43612624939599437,
+            "auc_ovr_macro": 0.8976019144502474,
+            "ece": 0.05324133640085388,
+            "recall_por_clase": {
+              "MEL": 0.5149171270718232,
+              "NV": 0.9056310679611651,
+              "BCC": 0.8015037593984963,
+              "AK": 0.3275862068965517,
+              "BKL": 0.32761904761904764,
+              "DF": 0.02127659574468085,
+              "VASC": 0.4,
+              "SCC": 0.19047619047619047
+            },
+            "precision_por_clase": {
+              "MEL": 0.6793002915451894,
+              "NV": 0.7948193592365371,
+              "BCC": 0.5400202634245187,
+              "AK": 0.5229357798165137,
+              "BKL": 0.5972222222222222,
+              "DF": 1,
+              "VASC": 1,
+              "SCC": 0.5714285714285714
+            },
+            "f1_por_clase": {
+              "MEL": 0.5857950974230044,
+              "NV": 0.8466146306044654,
+              "BCC": 0.6452784503631961,
+              "AK": 0.4028268551236749,
+              "BKL": 0.4231242312423124,
+              "DF": 0.041666666666666664,
+              "VASC": 0.5714285714285714,
+              "SCC": 0.2857142857142857
+            },
+            "matriz_confusion": [
+              [
+                466,
+                290,
+                93,
+                15,
+                39,
+                0,
+                0,
+                2
+              ],
+              [
+                105,
+                2332,
+                102,
+                3,
+                30,
+                0,
+                0,
+                3
+              ],
+              [
+                24,
+                66,
+                533,
+                16,
+                21,
+                0,
+                0,
+                5
+              ],
+              [
+                8,
+                17,
+                74,
+                57,
+                13,
+                0,
+                0,
+                5
+              ],
+              [
+                65,
+                176,
+                98,
+                11,
+                172,
+                0,
+                0,
+                3
+              ],
+              [
+                3,
+                19,
+                16,
+                1,
+                7,
+                1,
+                0,
+                0
+              ],
+              [
+                2,
+                18,
+                9,
+                0,
+                1,
+                0,
+                20,
+                0
+              ],
+              [
+                13,
+                16,
+                62,
+                6,
+                5,
+                0,
+                0,
+                24
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.41445192463590497,
+                0.4582406267646747
+              ],
+              "macro_f1": [
+                0.44845954061977644,
+                0.5002926512522141
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.5739096112097888,
+            "balanced_accuracy": 0.5330250146844708,
+            "macro_f1": 0.4208145645952662,
+            "macro_precision": 0.3975293824319657,
+            "macro_recall": 0.5330250146844708,
+            "auc_ovr_macro": 0.8733116334667943,
+            "ece": 0.04995152521883339,
+            "recall_por_clase": {
+              "MEL": 0.523756906077348,
+              "NV": 0.661747572815534,
+              "BCC": 0.47518796992481205,
+              "AK": 0.5287356321839081,
+              "BKL": 0.40190476190476193,
+              "DF": 0.5319148936170213,
+              "VASC": 0.76,
+              "SCC": 0.38095238095238093
+            },
+            "precision_por_clase": {
+              "MEL": 0.535593220338983,
+              "NV": 0.8884254431699687,
+              "BCC": 0.558303886925795,
+              "AK": 0.24932249322493225,
+              "BKL": 0.3504983388704319,
+              "DF": 0.08223684210526316,
+              "VASC": 0.36538461538461536,
+              "SCC": 0.15047021943573669
+            },
+            "f1_por_clase": {
+              "MEL": 0.529608938547486,
+              "NV": 0.7585132428221678,
+              "BCC": 0.5134037367993501,
+              "AK": 0.3388581952117864,
+              "BKL": 0.3744454303460515,
+              "DF": 0.14245014245014245,
+              "VASC": 0.4935064935064935,
+              "SCC": 0.2157303370786517
+            },
+            "matriz_confusion": [
+              [
+                474,
+                134,
+                42,
+                58,
+                112,
+                32,
+                5,
+                48
+              ],
+              [
+                294,
+                1704,
+                107,
+                35,
+                211,
+                132,
+                34,
+                58
+              ],
+              [
+                28,
+                17,
+                316,
+                92,
+                46,
+                53,
+                16,
+                97
+              ],
+              [
+                8,
+                4,
+                17,
+                92,
+                11,
+                12,
+                0,
+                30
+              ],
+              [
+                66,
+                52,
+                54,
+                67,
+                211,
+                33,
+                9,
+                33
+              ],
+              [
+                1,
+                2,
+                9,
+                0,
+                4,
+                25,
+                1,
+                5
+              ],
+              [
+                3,
+                2,
+                0,
+                1,
+                2,
+                4,
+                38,
+                0
+              ],
+              [
+                11,
+                3,
+                21,
+                24,
+                5,
+                13,
+                1,
+                48
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5034390191172845,
+                0.5621952573629706
+              ],
+              "macro_f1": [
+                0.40117325432431655,
+                0.440317946517329
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.39451351884744423,
+            "balanced_accuracy": 0.39414938262040716,
+            "macro_f1": 0.2618164383441819,
+            "macro_precision": 0.3007301383373576,
+            "macro_recall": 0.39414938262040716,
+            "auc_ovr_macro": 0.7945750629218773,
+            "ece": 0.19488712761478352,
+            "recall_por_clase": {
+              "MEL": 0.5104972375690607,
+              "NV": 0.44349514563106796,
+              "BCC": 0.1368421052631579,
+              "AK": 0.39655172413793105,
+              "BKL": 0.259047619047619,
+              "DF": 0.2978723404255319,
+              "VASC": 0.72,
+              "SCC": 0.3888888888888889
+            },
+            "precision_por_clase": {
+              "MEL": 0.39965397923875434,
+              "NV": 0.8465530022238695,
+              "BCC": 0.5652173913043478,
+              "AK": 0.14743589743589744,
+              "BKL": 0.21316614420062696,
+              "DF": 0.030634573304157548,
+              "VASC": 0.10256410256410256,
+              "SCC": 0.10061601642710473
+            },
+            "f1_por_clase": {
+              "MEL": 0.4483260553129549,
+              "NV": 0.582059123343527,
+              "BCC": 0.22033898305084745,
+              "AK": 0.21495327102803738,
+              "BKL": 0.23387790197764402,
+              "DF": 0.05555555555555555,
+              "VASC": 0.17955112219451372,
+              "SCC": 0.1598694942903752
+            },
+            "matriz_confusion": [
+              [
+                462,
+                102,
+                13,
+                73,
+                118,
+                22,
+                14,
+                101
+              ],
+              [
+                513,
+                1142,
+                27,
+                75,
+                231,
+                285,
+                236,
+                66
+              ],
+              [
+                50,
+                38,
+                91,
+                163,
+                94,
+                53,
+                35,
+                141
+              ],
+              [
+                9,
+                4,
+                7,
+                69,
+                31,
+                11,
+                2,
+                41
+              ],
+              [
+                101,
+                55,
+                17,
+                56,
+                136,
+                56,
+                25,
+                79
+              ],
+              [
+                5,
+                4,
+                3,
+                5,
+                7,
+                14,
+                3,
+                6
+              ],
+              [
+                2,
+                0,
+                1,
+                2,
+                0,
+                5,
+                36,
+                4
+              ],
+              [
+                14,
+                4,
+                2,
+                25,
+                21,
+                11,
+                0,
+                49
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.3659101570066522,
+                0.42171262567183787
+              ],
+              "macro_f1": [
+                0.24805609701610054,
+                0.27563266008544846
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_dinov2_vitb14_isic2019.json",
+      "data": {
+        "modelo": "dinov2_vitb14",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 768,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.7077165975922637,
+            "balanced_accuracy": 0.3896870020247016,
+            "macro_f1": 0.4368206973964838,
+            "macro_precision": 0.7683207120303374,
+            "macro_recall": 0.3896870020247016,
+            "auc_ovr_macro": 0.8982069429687631,
+            "ece": 0.040224026639341916,
+            "recall_por_clase": {
+              "MEL": 0.46519337016574586,
+              "NV": 0.9464077669902913,
+              "BCC": 0.7112781954887218,
+              "AK": 0.3333333333333333,
+              "BKL": 0.31238095238095237,
+              "DF": 0.0425531914893617,
+              "VASC": 0.1,
+              "SCC": 0.20634920634920634
+            },
+            "precision_por_clase": {
+              "MEL": 0.6682539682539682,
+              "NV": 0.7438949938949939,
+              "BCC": 0.5972222222222222,
+              "AK": 0.6744186046511628,
+              "BKL": 0.6748971193415638,
+              "DF": 1,
+              "VASC": 1,
+              "SCC": 0.7878787878787878
+            },
+            "f1_por_clase": {
+              "MEL": 0.5485342019543974,
+              "NV": 0.8330199965817809,
+              "BCC": 0.6492793411118737,
+              "AK": 0.4461538461538462,
+              "BKL": 0.4270833333333333,
+              "DF": 0.08163265306122448,
+              "VASC": 0.18181818181818182,
+              "SCC": 0.3270440251572327
+            },
+            "matriz_confusion": [
+              [
+                421,
+                396,
+                61,
+                5,
+                21,
+                0,
+                0,
+                1
+              ],
+              [
+                72,
+                2437,
+                46,
+                2,
+                18,
+                0,
+                0,
+                0
+              ],
+              [
+                47,
+                119,
+                473,
+                10,
+                14,
+                0,
+                0,
+                2
+              ],
+              [
+                15,
+                20,
+                63,
+                58,
+                17,
+                0,
+                0,
+                1
+              ],
+              [
+                58,
+                215,
+                80,
+                6,
+                164,
+                0,
+                0,
+                2
+              ],
+              [
+                3,
+                30,
+                10,
+                0,
+                1,
+                2,
+                0,
+                1
+              ],
+              [
+                1,
+                32,
+                11,
+                0,
+                1,
+                0,
+                5,
+                0
+              ],
+              [
+                13,
+                27,
+                48,
+                5,
+                7,
+                0,
+                0,
+                26
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.3712720990424131,
+                0.40840871829376374
+              ],
+              "macro_f1": [
+                0.4091732957187934,
+                0.46308557358094304
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.6810736135780541,
+            "balanced_accuracy": 0.619829429638199,
+            "macro_f1": 0.5625373034836211,
+            "macro_precision": 0.5283038369660794,
+            "macro_recall": 0.619829429638199,
+            "auc_ovr_macro": 0.9197870735098299,
+            "ece": 0.10562915410396967,
+            "recall_por_clase": {
+              "MEL": 0.6022099447513812,
+              "NV": 0.756504854368932,
+              "BCC": 0.6631578947368421,
+              "AK": 0.5114942528735632,
+              "BKL": 0.5695238095238095,
+              "DF": 0.5957446808510638,
+              "VASC": 0.76,
+              "SCC": 0.5
+            },
+            "precision_por_clase": {
+              "MEL": 0.5612770339855818,
+              "NV": 0.9018518518518519,
+              "BCC": 0.695583596214511,
+              "AK": 0.30272108843537415,
+              "BKL": 0.4462686567164179,
+              "DF": 0.4,
+              "VASC": 0.6129032258064516,
+              "SCC": 0.3058252427184466
+            },
+            "f1_por_clase": {
+              "MEL": 0.5810234541577826,
+              "NV": 0.8228088701161563,
+              "BCC": 0.6789838337182448,
+              "AK": 0.3803418803418803,
+              "BKL": 0.500418410041841,
+              "DF": 0.47863247863247865,
+              "VASC": 0.6785714285714286,
+              "SCC": 0.3795180722891566
+            },
+            "matriz_confusion": [
+              [
+                545,
+                131,
+                42,
+                43,
+                110,
+                4,
+                5,
+                25
+              ],
+              [
+                303,
+                1948,
+                66,
+                30,
+                176,
+                22,
+                7,
+                23
+              ],
+              [
+                38,
+                17,
+                441,
+                65,
+                40,
+                11,
+                8,
+                45
+              ],
+              [
+                10,
+                0,
+                27,
+                89,
+                28,
+                1,
+                0,
+                19
+              ],
+              [
+                59,
+                51,
+                30,
+                49,
+                299,
+                4,
+                4,
+                29
+              ],
+              [
+                7,
+                2,
+                3,
+                3,
+                3,
+                28,
+                0,
+                1
+              ],
+              [
+                2,
+                6,
+                1,
+                0,
+                2,
+                0,
+                38,
+                1
+              ],
+              [
+                7,
+                5,
+                24,
+                15,
+                12,
+                0,
+                0,
+                63
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5906176802053302,
+                0.6490624134792942
+              ],
+              "macro_f1": [
+                0.5383354483114667,
+                0.5871778094429262
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.46753503059009277,
+            "balanced_accuracy": 0.38813679123976486,
+            "macro_f1": 0.26983141223761514,
+            "macro_precision": 0.2910626309765217,
+            "macro_recall": 0.38813679123976486,
+            "auc_ovr_macro": 0.7899381907962859,
+            "ece": 0.24222297692983513,
+            "recall_por_clase": {
+              "MEL": 0.3027624309392265,
+              "NV": 0.6667961165048544,
+              "BCC": 0.13383458646616542,
+              "AK": 0.5057471264367817,
+              "BKL": 0.1961904761904762,
+              "DF": 0.2553191489361702,
+              "VASC": 0.6,
+              "SCC": 0.4444444444444444
+            },
+            "precision_por_clase": {
+              "MEL": 0.4023494860499266,
+              "NV": 0.7974918718067813,
+              "BCC": 0.43842364532019706,
+              "AK": 0.13793103448275862,
+              "BKL": 0.28851540616246496,
+              "DF": 0.06629834254143646,
+              "VASC": 0.07731958762886598,
+              "SCC": 0.12017167381974249
+            },
+            "f1_por_clase": {
+              "MEL": 0.3455233291298865,
+              "NV": 0.7263113367174281,
+              "BCC": 0.20506912442396313,
+              "AK": 0.21674876847290642,
+              "BKL": 0.23356009070294784,
+              "DF": 0.10526315789473684,
+              "VASC": 0.136986301369863,
+              "SCC": 0.1891891891891892
+            },
+            "matriz_confusion": [
+              [
+                274,
+                227,
+                28,
+                145,
+                69,
+                27,
+                43,
+                92
+              ],
+              [
+                317,
+                1717,
+                47,
+                101,
+                97,
+                79,
+                166,
+                51
+              ],
+              [
+                21,
+                62,
+                89,
+                193,
+                50,
+                35,
+                60,
+                155
+              ],
+              [
+                2,
+                12,
+                5,
+                88,
+                19,
+                2,
+                10,
+                36
+              ],
+              [
+                54,
+                113,
+                24,
+                76,
+                103,
+                19,
+                70,
+                66
+              ],
+              [
+                3,
+                6,
+                1,
+                7,
+                2,
+                12,
+                8,
+                8
+              ],
+              [
+                1,
+                11,
+                2,
+                2,
+                1,
+                1,
+                30,
+                2
+              ],
+              [
+                9,
+                5,
+                7,
+                26,
+                16,
+                6,
+                1,
+                56
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.3609666806966868,
+                0.4164312335531531
+              ],
+              "macro_f1": [
+                0.2559421394833971,
+                0.28412566597468314
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_dinov2_vits14_isic2019.json",
+      "data": {
+        "modelo": "dinov2_vits14",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 384,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.7158081705150977,
+            "balanced_accuracy": 0.41677297743401265,
+            "macro_f1": 0.4707192742231838,
+            "macro_precision": 0.7795180100145461,
+            "macro_recall": 0.41677297743401265,
+            "auc_ovr_macro": 0.9141469177846945,
+            "ece": 0.04358667767902714,
+            "recall_por_clase": {
+              "MEL": 0.46740331491712706,
+              "NV": 0.9413592233009709,
+              "BCC": 0.7428571428571429,
+              "AK": 0.39080459770114945,
+              "BKL": 0.34285714285714286,
+              "DF": 0.0425531914893617,
+              "VASC": 0.2,
+              "SCC": 0.20634920634920634
+            },
+            "precision_por_clase": {
+              "MEL": 0.6878048780487804,
+              "NV": 0.7460757156048015,
+              "BCC": 0.6245259165613148,
+              "AK": 0.7010309278350515,
+              "BKL": 0.6642066420664207,
+              "DF": 1,
+              "VASC": 1,
+              "SCC": 0.8125
+            },
+            "f1_por_clase": {
+              "MEL": 0.5565789473684211,
+              "NV": 0.8324175824175825,
+              "BCC": 0.6785714285714286,
+              "AK": 0.5018450184501845,
+              "BKL": 0.45226130653266333,
+              "DF": 0.08163265306122448,
+              "VASC": 0.3333333333333333,
+              "SCC": 0.3291139240506329
+            },
+            "matriz_confusion": [
+              [
+                423,
+                398,
+                58,
+                3,
+                21,
+                0,
+                0,
+                2
+              ],
+              [
+                73,
+                2424,
+                51,
+                1,
+                26,
+                0,
+                0,
+                0
+              ],
+              [
+                33,
+                112,
+                494,
+                10,
+                14,
+                0,
+                0,
+                2
+              ],
+              [
+                10,
+                21,
+                56,
+                68,
+                19,
+                0,
+                0,
+                0
+              ],
+              [
+                58,
+                207,
+                68,
+                11,
+                180,
+                0,
+                0,
+                1
+              ],
+              [
+                4,
+                30,
+                8,
+                0,
+                2,
+                2,
+                0,
+                1
+              ],
+              [
+                1,
+                31,
+                7,
+                0,
+                1,
+                0,
+                10,
+                0
+              ],
+              [
+                13,
+                26,
+                49,
+                4,
+                8,
+                0,
+                0,
+                26
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.3963891555541203,
+                0.4383177023541949
+              ],
+              "macro_f1": [
+                0.44141348336813885,
+                0.49841586502084423
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.6528517860667061,
+            "balanced_accuracy": 0.5971656405138972,
+            "macro_f1": 0.5177827555540406,
+            "macro_precision": 0.4807385600785892,
+            "macro_recall": 0.5971656405138972,
+            "auc_ovr_macro": 0.9100250304987006,
+            "ece": 0.06749972043049267,
+            "recall_por_clase": {
+              "MEL": 0.5657458563535912,
+              "NV": 0.7374757281553398,
+              "BCC": 0.5849624060150376,
+              "AK": 0.5689655172413793,
+              "BKL": 0.539047619047619,
+              "DF": 0.5531914893617021,
+              "VASC": 0.72,
+              "SCC": 0.5079365079365079
+            },
+            "precision_por_clase": {
+              "MEL": 0.5383806519453207,
+              "NV": 0.8961774421897122,
+              "BCC": 0.6615646258503401,
+              "AK": 0.2990936555891239,
+              "BKL": 0.4421875,
+              "DF": 0.3291139240506329,
+              "VASC": 0.45,
+              "SCC": 0.22939068100358423
+            },
+            "f1_por_clase": {
+              "MEL": 0.5517241379310345,
+              "NV": 0.8091180230080954,
+              "BCC": 0.6209098164405427,
+              "AK": 0.3920792079207921,
+              "BKL": 0.4858369098712446,
+              "DF": 0.4126984126984127,
+              "VASC": 0.5538461538461539,
+              "SCC": 0.3160493827160494
+            },
+            "matriz_confusion": [
+              [
+                512,
+                144,
+                53,
+                41,
+                105,
+                6,
+                9,
+                35
+              ],
+              [
+                327,
+                1899,
+                84,
+                22,
+                177,
+                26,
+                15,
+                25
+              ],
+              [
+                35,
+                10,
+                389,
+                92,
+                38,
+                10,
+                11,
+                80
+              ],
+              [
+                6,
+                3,
+                19,
+                99,
+                19,
+                3,
+                0,
+                25
+              ],
+              [
+                57,
+                48,
+                23,
+                58,
+                283,
+                6,
+                6,
+                44
+              ],
+              [
+                3,
+                4,
+                2,
+                2,
+                2,
+                26,
+                3,
+                5
+              ],
+              [
+                1,
+                8,
+                1,
+                0,
+                2,
+                1,
+                36,
+                1
+              ],
+              [
+                10,
+                3,
+                17,
+                17,
+                14,
+                1,
+                0,
+                64
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5678292330792155,
+                0.6262355307715337
+              ],
+              "macro_f1": [
+                0.49384317076832157,
+                0.5400957355265332
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.47602131438721135,
+            "balanced_accuracy": 0.41781942007733336,
+            "macro_f1": 0.29543069518973325,
+            "macro_precision": 0.3082554203747757,
+            "macro_recall": 0.41781942007733336,
+            "auc_ovr_macro": 0.8040245526975873,
+            "ece": 0.26424250940093635,
+            "recall_por_clase": {
+              "MEL": 0.3679558011049724,
+              "NV": 0.6353398058252427,
+              "BCC": 0.16090225563909774,
+              "AK": 0.46551724137931033,
+              "BKL": 0.30095238095238097,
+              "DF": 0.44680851063829785,
+              "VASC": 0.6,
+              "SCC": 0.36507936507936506
+            },
+            "precision_por_clase": {
+              "MEL": 0.42098609355246525,
+              "NV": 0.8055145248645987,
+              "BCC": 0.4652173913043478,
+              "AK": 0.1330049261083744,
+              "BKL": 0.3237704918032787,
+              "DF": 0.09292035398230089,
+              "VASC": 0.08042895442359249,
+              "SCC": 0.14420062695924765
+            },
+            "f1_por_clase": {
+              "MEL": 0.392688679245283,
+              "NV": 0.710377768128528,
+              "BCC": 0.23910614525139665,
+              "AK": 0.20689655172413793,
+              "BKL": 0.3119447186574531,
+              "DF": 0.15384615384615385,
+              "VASC": 0.14184397163120568,
+              "SCC": 0.20674157303370785
+            },
+            "matriz_confusion": [
+              [
+                333,
+                217,
+                32,
+                132,
+                74,
+                27,
+                35,
+                55
+              ],
+              [
+                349,
+                1636,
+                50,
+                105,
+                143,
+                85,
+                179,
+                28
+              ],
+              [
+                36,
+                57,
+                107,
+                182,
+                62,
+                57,
+                58,
+                106
+              ],
+              [
+                4,
+                7,
+                11,
+                81,
+                24,
+                8,
+                7,
+                32
+              ],
+              [
+                60,
+                90,
+                21,
+                81,
+                158,
+                14,
+                57,
+                44
+              ],
+              [
+                2,
+                5,
+                0,
+                6,
+                3,
+                21,
+                5,
+                5
+              ],
+              [
+                0,
+                9,
+                1,
+                2,
+                1,
+                4,
+                30,
+                3
+              ],
+              [
+                7,
+                10,
+                8,
+                20,
+                23,
+                10,
+                2,
+                46
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.38978149866441,
+                0.44523498118885063
+              ],
+              "macro_f1": [
+                0.28050732360140607,
+                0.3099405117636611
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_efficientnet_b0_isic2019.json",
+      "data": {
+        "modelo": "efficientnet_b0",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 1280,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.7102822182751135,
+            "balanced_accuracy": 0.40718429865317746,
+            "macro_f1": 0.4547332044060654,
+            "macro_precision": 0.7302358381712215,
+            "macro_recall": 0.40718429865317746,
+            "auc_ovr_macro": 0.900225940260879,
+            "ece": 0.058160750951573185,
+            "recall_por_clase": {
+              "MEL": 0.4850828729281768,
+              "NV": 0.9316504854368932,
+              "BCC": 0.750375939849624,
+              "AK": 0.3103448275862069,
+              "BKL": 0.3295238095238095,
+              "DF": 0.06382978723404255,
+              "VASC": 0.22,
+              "SCC": 0.16666666666666666
+            },
+            "precision_por_clase": {
+              "MEL": 0.6722817764165391,
+              "NV": 0.7657197574210023,
+              "BCC": 0.5644796380090498,
+              "AK": 0.5934065934065934,
+              "BKL": 0.6784313725490196,
+              "DF": 1,
+              "VASC": 1,
+              "SCC": 0.5675675675675675
+            },
+            "f1_por_clase": {
+              "MEL": 0.5635430038510911,
+              "NV": 0.8405746320953048,
+              "BCC": 0.6442866365397031,
+              "AK": 0.4075471698113208,
+              "BKL": 0.44358974358974357,
+              "DF": 0.12,
+              "VASC": 0.36065573770491804,
+              "SCC": 0.25766871165644173
+            },
+            "matriz_confusion": [
+              [
+                439,
+                346,
+                87,
+                6,
+                23,
+                0,
+                0,
+                4
+              ],
+              [
+                81,
+                2399,
+                66,
+                3,
+                25,
+                0,
+                0,
+                1
+              ],
+              [
+                33,
+                99,
+                499,
+                15,
+                12,
+                0,
+                0,
+                7
+              ],
+              [
+                15,
+                19,
+                72,
+                54,
+                12,
+                0,
+                0,
+                2
+              ],
+              [
+                69,
+                198,
+                77,
+                7,
+                173,
+                0,
+                0,
+                1
+              ],
+              [
+                6,
+                24,
+                12,
+                0,
+                1,
+                3,
+                0,
+                1
+              ],
+              [
+                0,
+                30,
+                8,
+                0,
+                1,
+                0,
+                11,
+                0
+              ],
+              [
+                10,
+                18,
+                63,
+                6,
+                8,
+                0,
+                0,
+                21
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.3851161678830564,
+                0.4292340112027637
+              ],
+              "macro_f1": [
+                0.42419259983657637,
+                0.48400129167475014
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.6609433589895402,
+            "balanced_accuracy": 0.5754352262280386,
+            "macro_f1": 0.5249904431324248,
+            "macro_precision": 0.4947282950110211,
+            "macro_recall": 0.5754352262280386,
+            "auc_ovr_macro": 0.9106258579558144,
+            "ece": 0.10619111131031368,
+            "recall_por_clase": {
+              "MEL": 0.5790055248618785,
+              "NV": 0.7324271844660194,
+              "BCC": 0.6676691729323309,
+              "AK": 0.5229885057471264,
+              "BKL": 0.5580952380952381,
+              "DF": 0.3829787234042553,
+              "VASC": 0.7,
+              "SCC": 0.4603174603174603
+            },
+            "precision_por_clase": {
+              "MEL": 0.5352400408580184,
+              "NV": 0.8972407231208372,
+              "BCC": 0.6577777777777778,
+              "AK": 0.3333333333333333,
+              "BKL": 0.41797432239657634,
+              "DF": 0.25,
+              "VASC": 0.5833333333333334,
+              "SCC": 0.28292682926829266
+            },
+            "f1_por_clase": {
+              "MEL": 0.5562632696390658,
+              "NV": 0.8064998930938636,
+              "BCC": 0.6626865671641791,
+              "AK": 0.407158836689038,
+              "BKL": 0.47797716150081565,
+              "DF": 0.3025210084033613,
+              "VASC": 0.6363636363636364,
+              "SCC": 0.3504531722054381
+            },
+            "matriz_confusion": [
+              [
+                524,
+                136,
+                41,
+                31,
+                144,
+                4,
+                4,
+                21
+              ],
+              [
+                321,
+                1886,
+                90,
+                36,
+                173,
+                29,
+                13,
+                27
+              ],
+              [
+                35,
+                20,
+                444,
+                54,
+                46,
+                12,
+                1,
+                53
+              ],
+              [
+                10,
+                6,
+                33,
+                91,
+                23,
+                0,
+                0,
+                11
+              ],
+              [
+                76,
+                40,
+                31,
+                41,
+                293,
+                7,
+                7,
+                30
+              ],
+              [
+                3,
+                6,
+                8,
+                1,
+                6,
+                18,
+                0,
+                5
+              ],
+              [
+                1,
+                6,
+                5,
+                1,
+                2,
+                0,
+                35,
+                0
+              ],
+              [
+                9,
+                2,
+                23,
+                18,
+                14,
+                2,
+                0,
+                58
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5461880642792977,
+                0.603111154786994
+              ],
+              "macro_f1": [
+                0.5003316966762786,
+                0.5480280853036897
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.43497138346161435,
+            "balanced_accuracy": 0.3775607518919466,
+            "macro_f1": 0.27823635157125737,
+            "macro_precision": 0.2936392225550456,
+            "macro_recall": 0.3775607518919466,
+            "auc_ovr_macro": 0.7851595915284115,
+            "ece": 0.19393050032170633,
+            "recall_por_clase": {
+              "MEL": 0.3624309392265193,
+              "NV": 0.5561165048543689,
+              "BCC": 0.21503759398496242,
+              "AK": 0.47126436781609193,
+              "BKL": 0.26666666666666666,
+              "DF": 0.2553191489361702,
+              "VASC": 0.6,
+              "SCC": 0.29365079365079366
+            },
+            "precision_por_clase": {
+              "MEL": 0.40294840294840295,
+              "NV": 0.7933518005540167,
+              "BCC": 0.4831081081081081,
+              "AK": 0.11549295774647887,
+              "BKL": 0.2443280977312391,
+              "DF": 0.03296703296703297,
+              "VASC": 0.10238907849829351,
+              "SCC": 0.17452830188679244
+            },
+            "f1_por_clase": {
+              "MEL": 0.3816172193135544,
+              "NV": 0.6538812785388128,
+              "BCC": 0.2976066597294485,
+              "AK": 0.18552036199095023,
+              "BKL": 0.2550091074681239,
+              "DF": 0.058394160583941604,
+              "VASC": 0.1749271137026239,
+              "SCC": 0.21893491124260356
+            },
+            "matriz_confusion": [
+              [
+                328,
+                180,
+                29,
+                143,
+                105,
+                28,
+                41,
+                51
+              ],
+              [
+                378,
+                1432,
+                59,
+                166,
+                225,
+                162,
+                135,
+                18
+              ],
+              [
+                31,
+                49,
+                143,
+                193,
+                59,
+                84,
+                36,
+                70
+              ],
+              [
+                5,
+                8,
+                18,
+                82,
+                21,
+                18,
+                7,
+                15
+              ],
+              [
+                63,
+                98,
+                22,
+                93,
+                140,
+                50,
+                39,
+                20
+              ],
+              [
+                3,
+                11,
+                6,
+                7,
+                5,
+                12,
+                2,
+                1
+              ],
+              [
+                0,
+                10,
+                3,
+                5,
+                0,
+                2,
+                30,
+                0
+              ],
+              [
+                6,
+                17,
+                16,
+                21,
+                18,
+                8,
+                3,
+                37
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.3476732755793129,
+                0.4054394648991201
+              ],
+              "macro_f1": [
+                0.26374791297654776,
+                0.29252972520718995
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_resnet50_isic2019.json",
+      "data": {
+        "modelo": "resnet50",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 2048,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.6978488257351491,
+            "balanced_accuracy": 0.39316508647049286,
+            "macro_f1": 0.4314869290301233,
+            "macro_precision": 0.5925535377494966,
+            "macro_recall": 0.39316508647049286,
+            "auc_ovr_macro": 0.8894787891721879,
+            "ece": 0.059651233596361056,
+            "recall_por_clase": {
+              "MEL": 0.4740331491712707,
+              "NV": 0.9122330097087379,
+              "BCC": 0.7699248120300752,
+              "AK": 0.26436781609195403,
+              "BKL": 0.3180952380952381,
+              "DF": 0,
+              "VASC": 0.24,
+              "SCC": 0.16666666666666666
+            },
+            "precision_por_clase": {
+              "MEL": 0.6864,
+              "NV": 0.7606865284974094,
+              "BCC": 0.5300207039337475,
+              "AK": 0.6052631578947368,
+              "BKL": 0.6349809885931559,
+              "DF": 0,
+              "VASC": 0.9230769230769231,
+              "SCC": 0.6
+            },
+            "f1_por_clase": {
+              "MEL": 0.5607843137254902,
+              "NV": 0.8295956206957443,
+              "BCC": 0.627835683629675,
+              "AK": 0.368,
+              "BKL": 0.42385786802030456,
+              "DF": 0,
+              "VASC": 0.38095238095238093,
+              "SCC": 0.2608695652173913
+            },
+            "matriz_confusion": [
+              [
+                429,
+                358,
+                83,
+                5,
+                24,
+                0,
+                0,
+                6
+              ],
+              [
+                84,
+                2349,
+                108,
+                3,
+                30,
+                1,
+                0,
+                0
+              ],
+              [
+                26,
+                107,
+                512,
+                6,
+                13,
+                0,
+                1,
+                0
+              ],
+              [
+                12,
+                21,
+                76,
+                46,
+                14,
+                0,
+                0,
+                5
+              ],
+              [
+                52,
+                191,
+                100,
+                12,
+                167,
+                0,
+                0,
+                3
+              ],
+              [
+                5,
+                22,
+                17,
+                0,
+                3,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                19,
+                14,
+                0,
+                3,
+                0,
+                12,
+                0
+              ],
+              [
+                15,
+                21,
+                56,
+                4,
+                9,
+                0,
+                0,
+                21
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.37224413401664347,
+                0.4127227681871539
+              ],
+              "macro_f1": [
+                0.4029394491151116,
+                0.45549713233529365
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.6376554174067496,
+            "balanced_accuracy": 0.5685428950269631,
+            "macro_f1": 0.4987557307723481,
+            "macro_precision": 0.46345766393529225,
+            "macro_recall": 0.5685428950269631,
+            "auc_ovr_macro": 0.9058158347349767,
+            "ece": 0.0955568017167274,
+            "recall_por_clase": {
+              "MEL": 0.5712707182320442,
+              "NV": 0.7114563106796117,
+              "BCC": 0.5789473684210527,
+              "AK": 0.5287356321839081,
+              "BKL": 0.5561904761904762,
+              "DF": 0.48936170212765956,
+              "VASC": 0.66,
+              "SCC": 0.4523809523809524
+            },
+            "precision_por_clase": {
+              "MEL": 0.5453586497890295,
+              "NV": 0.88374336710082,
+              "BCC": 0.5833333333333334,
+              "AK": 0.2902208201892745,
+              "BKL": 0.4294117647058823,
+              "DF": 0.23469387755102042,
+              "VASC": 0.4852941176470588,
+              "SCC": 0.2556053811659193
+            },
+            "f1_por_clase": {
+              "MEL": 0.5580140313005937,
+              "NV": 0.7882960413080895,
+              "BCC": 0.5811320754716981,
+              "AK": 0.37474541751527496,
+              "BKL": 0.4846473029045643,
+              "DF": 0.31724137931034485,
+              "VASC": 0.559322033898305,
+              "SCC": 0.32664756446991405
+            },
+            "matriz_confusion": [
+              [
+                517,
+                154,
+                50,
+                43,
+                105,
+                6,
+                3,
+                27
+              ],
+              [
+                324,
+                1832,
+                115,
+                32,
+                199,
+                38,
+                14,
+                21
+              ],
+              [
+                36,
+                28,
+                385,
+                77,
+                48,
+                12,
+                10,
+                69
+              ],
+              [
+                5,
+                2,
+                29,
+                92,
+                21,
+                4,
+                0,
+                21
+              ],
+              [
+                54,
+                41,
+                46,
+                52,
+                292,
+                11,
+                6,
+                23
+              ],
+              [
+                1,
+                8,
+                6,
+                3,
+                1,
+                23,
+                1,
+                4
+              ],
+              [
+                1,
+                4,
+                6,
+                1,
+                1,
+                3,
+                33,
+                1
+              ],
+              [
+                10,
+                4,
+                23,
+                17,
+                13,
+                1,
+                1,
+                57
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5387680578171898,
+                0.5983738045469872
+              ],
+              "macro_f1": [
+                0.47355743875097445,
+                0.5226644998851704
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.3935267416617328,
+            "balanced_accuracy": 0.3441004953749544,
+            "macro_f1": 0.24242679925364313,
+            "macro_precision": 0.2764207228311928,
+            "macro_recall": 0.3441004953749544,
+            "auc_ovr_macro": 0.7476083696921227,
+            "ece": 0.1650164148994327,
+            "recall_por_clase": {
+              "MEL": 0.3558011049723757,
+              "NV": 0.5122330097087379,
+              "BCC": 0.10526315789473684,
+              "AK": 0.45977011494252873,
+              "BKL": 0.25142857142857145,
+              "DF": 0.1702127659574468,
+              "VASC": 0.66,
+              "SCC": 0.23809523809523808
+            },
+            "precision_por_clase": {
+              "MEL": 0.3757292882147025,
+              "NV": 0.7950572634116938,
+              "BCC": 0.4046242774566474,
+              "AK": 0.11315417256011315,
+              "BKL": 0.2573099415204678,
+              "DF": 0.03333333333333333,
+              "VASC": 0.043478260869565216,
+              "SCC": 0.18867924528301888
+            },
+            "f1_por_clase": {
+              "MEL": 0.3654937570942111,
+              "NV": 0.6230514879546528,
+              "BCC": 0.16706443914081145,
+              "AK": 0.18161180476730987,
+              "BKL": 0.2543352601156069,
+              "DF": 0.05574912891986063,
+              "VASC": 0.0815822002472188,
+              "SCC": 0.21052631578947367
+            },
+            "matriz_confusion": [
+              [
+                322,
+                175,
+                27,
+                153,
+                94,
+                26,
+                84,
+                24
+              ],
+              [
+                428,
+                1319,
+                35,
+                151,
+                157,
+                116,
+                358,
+                11
+              ],
+              [
+                32,
+                37,
+                70,
+                200,
+                79,
+                43,
+                144,
+                60
+              ],
+              [
+                10,
+                7,
+                6,
+                80,
+                23,
+                7,
+                22,
+                19
+              ],
+              [
+                54,
+                90,
+                29,
+                84,
+                132,
+                28,
+                95,
+                13
+              ],
+              [
+                4,
+                8,
+                2,
+                7,
+                8,
+                8,
+                9,
+                1
+              ],
+              [
+                2,
+                5,
+                0,
+                5,
+                1,
+                3,
+                33,
+                1
+              ],
+              [
+                5,
+                18,
+                4,
+                27,
+                19,
+                9,
+                14,
+                30
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.31757098351348373,
+                0.37081554041003023
+              ],
+              "macro_f1": [
+                0.22896509898755527,
+                0.2551282499422601
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_simsiam_r50_isic2019.json",
+      "data": {
+        "modelo": "simsiam_r50",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 2048,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.7177817248865206,
+            "balanced_accuracy": 0.40627490925953375,
+            "macro_f1": 0.45095913431530354,
+            "macro_precision": 0.7474576930803435,
+            "macro_recall": 0.40627490925953375,
+            "auc_ovr_macro": 0.9053785496707898,
+            "ece": 0.047401848804522084,
+            "recall_por_clase": {
+              "MEL": 0.518232044198895,
+              "NV": 0.9347572815533981,
+              "BCC": 0.7669172932330827,
+              "AK": 0.2988505747126437,
+              "BKL": 0.30666666666666664,
+              "DF": 0.0425531914893617,
+              "VASC": 0.16,
+              "SCC": 0.2222222222222222
+            },
+            "precision_por_clase": {
+              "MEL": 0.6866764275256223,
+              "NV": 0.7722168752005133,
+              "BCC": 0.5848623853211009,
+              "AK": 0.6190476190476191,
+              "BKL": 0.6168582375478927,
+              "DF": 1,
+              "VASC": 1,
+              "SCC": 0.7
+            },
+            "f1_por_clase": {
+              "MEL": 0.5906801007556675,
+              "NV": 0.8457484188334504,
+              "BCC": 0.6636304489264802,
+              "AK": 0.40310077519379844,
+              "BKL": 0.40966921119592875,
+              "DF": 0.08163265306122448,
+              "VASC": 0.27586206896551724,
+              "SCC": 0.3373493975903614
+            },
+            "matriz_confusion": [
+              [
+                469,
+                330,
+                69,
+                7,
+                27,
+                0,
+                0,
+                3
+              ],
+              [
+                88,
+                2407,
+                51,
+                0,
+                29,
+                0,
+                0,
+                0
+              ],
+              [
+                26,
+                97,
+                510,
+                11,
+                18,
+                0,
+                0,
+                3
+              ],
+              [
+                14,
+                16,
+                75,
+                52,
+                14,
+                0,
+                0,
+                3
+              ],
+              [
+                65,
+                192,
+                94,
+                10,
+                161,
+                0,
+                0,
+                3
+              ],
+              [
+                1,
+                25,
+                17,
+                0,
+                2,
+                2,
+                0,
+                0
+              ],
+              [
+                3,
+                31,
+                7,
+                0,
+                1,
+                0,
+                8,
+                0
+              ],
+              [
+                17,
+                19,
+                49,
+                4,
+                9,
+                0,
+                0,
+                28
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.38638725266053064,
+                0.42899112822377466
+              ],
+              "macro_f1": [
+                0.4215229374040589,
+                0.4820656116623822
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.4783895796329189,
+            "balanced_accuracy": 0.4940094533551146,
+            "macro_f1": 0.32862621012843873,
+            "macro_precision": 0.3358694750901635,
+            "macro_recall": 0.4940094533551146,
+            "auc_ovr_macro": 0.8391309731686502,
+            "ece": 0.22148492392090624,
+            "recall_por_clase": {
+              "MEL": 0.4839779005524862,
+              "NV": 0.5611650485436893,
+              "BCC": 0.30526315789473685,
+              "AK": 0.5344827586206896,
+              "BKL": 0.23238095238095238,
+              "DF": 0.6382978723404256,
+              "VASC": 0.76,
+              "SCC": 0.4365079365079365
+            },
+            "precision_por_clase": {
+              "MEL": 0.46844919786096256,
+              "NV": 0.8647516457211251,
+              "BCC": 0.5012345679012346,
+              "AK": 0.1785028790786948,
+              "BKL": 0.32360742705570295,
+              "DF": 0.09836065573770492,
+              "VASC": 0.06871609403254973,
+              "SCC": 0.18333333333333332
+            },
+            "f1_por_clase": {
+              "MEL": 0.47608695652173916,
+              "NV": 0.6806406029203956,
+              "BCC": 0.3794392523364486,
+              "AK": 0.26762589928057556,
+              "BKL": 0.270509977827051,
+              "DF": 0.17045454545454544,
+              "VASC": 0.12603648424543948,
+              "SCC": 0.25821596244131456
+            },
+            "matriz_confusion": [
+              [
+                438,
+                139,
+                30,
+                82,
+                84,
+                19,
+                60,
+                53
+              ],
+              [
+                357,
+                1445,
+                111,
+                50,
+                122,
+                142,
+                326,
+                22
+              ],
+              [
+                32,
+                28,
+                203,
+                174,
+                30,
+                50,
+                54,
+                94
+              ],
+              [
+                9,
+                4,
+                10,
+                93,
+                10,
+                10,
+                6,
+                32
+              ],
+              [
+                85,
+                46,
+                28,
+                92,
+                122,
+                46,
+                65,
+                41
+              ],
+              [
+                0,
+                2,
+                3,
+                5,
+                2,
+                30,
+                4,
+                1
+              ],
+              [
+                2,
+                0,
+                4,
+                0,
+                2,
+                2,
+                38,
+                2
+              ],
+              [
+                12,
+                7,
+                16,
+                25,
+                5,
+                6,
+                0,
+                55
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.46634582237074285,
+                0.5220736245094905
+              ],
+              "macro_f1": [
+                0.31259959974920176,
+                0.34339129259229706
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.45016775212157095,
+            "balanced_accuracy": 0.4304502538652766,
+            "macro_f1": 0.29607489638398554,
+            "macro_precision": 0.30967433098297314,
+            "macro_recall": 0.4304502538652766,
+            "auc_ovr_macro": 0.8032311303794973,
+            "ece": 0.2740401539819961,
+            "recall_por_clase": {
+              "MEL": 0.4220994475138122,
+              "NV": 0.5487378640776699,
+              "BCC": 0.19849624060150375,
+              "AK": 0.5229885057471264,
+              "BKL": 0.32571428571428573,
+              "DF": 0.5319148936170213,
+              "VASC": 0.6,
+              "SCC": 0.29365079365079366
+            },
+            "precision_por_clase": {
+              "MEL": 0.4613526570048309,
+              "NV": 0.8563636363636363,
+              "BCC": 0.43278688524590164,
+              "AK": 0.14021571648690292,
+              "BKL": 0.2762520193861066,
+              "DF": 0.08278145695364239,
+              "VASC": 0.06097560975609756,
+              "SCC": 0.16666666666666666
+            },
+            "f1_por_clase": {
+              "MEL": 0.4408540103866128,
+              "NV": 0.6688757396449704,
+              "BCC": 0.2721649484536082,
+              "AK": 0.22114216281895505,
+              "BKL": 0.29895104895104896,
+              "DF": 0.14326647564469913,
+              "VASC": 0.11070110701107011,
+              "SCC": 0.21264367816091953
+            },
+            "matriz_confusion": [
+              [
+                382,
+                135,
+                27,
+                116,
+                124,
+                26,
+                57,
+                38
+              ],
+              [
+                328,
+                1413,
+                102,
+                109,
+                186,
+                125,
+                301,
+                11
+              ],
+              [
+                29,
+                43,
+                132,
+                200,
+                83,
+                69,
+                39,
+                70
+              ],
+              [
+                4,
+                2,
+                11,
+                91,
+                25,
+                7,
+                2,
+                32
+              ],
+              [
+                67,
+                43,
+                21,
+                95,
+                171,
+                40,
+                58,
+                30
+              ],
+              [
+                1,
+                2,
+                2,
+                7,
+                4,
+                25,
+                5,
+                1
+              ],
+              [
+                2,
+                5,
+                1,
+                4,
+                3,
+                2,
+                30,
+                3
+              ],
+              [
+                15,
+                7,
+                9,
+                27,
+                23,
+                8,
+                0,
+                37
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.4034708001348329,
+                0.4593941045471888
+              ],
+              "macro_f1": [
+                0.2814167777122394,
+                0.3103521843983936
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_vgg19_isic2019.json",
+      "data": {
+        "modelo": "vgg19",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 512,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.6789027037694888,
+            "balanced_accuracy": 0.349755772215115,
+            "macro_f1": 0.38334018843723816,
+            "macro_precision": 0.5663862503548636,
+            "macro_recall": 0.349755772215115,
+            "auc_ovr_macro": 0.8561019929555709,
+            "ece": 0.05174781115983022,
+            "recall_por_clase": {
+              "MEL": 0.456353591160221,
+              "NV": 0.9273786407766991,
+              "BCC": 0.6676691729323309,
+              "AK": 0.21839080459770116,
+              "BKL": 0.2571428571428571,
+              "DF": 0,
+              "VASC": 0.16,
+              "SCC": 0.1111111111111111
+            },
+            "precision_por_clase": {
+              "MEL": 0.6803953871499177,
+              "NV": 0.7338660110633067,
+              "BCC": 0.5205158264947245,
+              "AK": 0.5,
+              "BKL": 0.5578512396694215,
+              "DF": 0,
+              "VASC": 1,
+              "SCC": 0.5384615384615384
+            },
+            "f1_por_clase": {
+              "MEL": 0.5462962962962963,
+              "NV": 0.8193515182707154,
+              "BCC": 0.5849802371541502,
+              "AK": 0.304,
+              "BKL": 0.3520208604954368,
+              "DF": 0,
+              "VASC": 0.27586206896551724,
+              "SCC": 0.18421052631578946
+            },
+            "matriz_confusion": [
+              [
+                413,
+                361,
+                89,
+                7,
+                34,
+                0,
+                0,
+                1
+              ],
+              [
+                76,
+                2388,
+                77,
+                3,
+                25,
+                1,
+                0,
+                5
+              ],
+              [
+                29,
+                147,
+                444,
+                16,
+                26,
+                0,
+                0,
+                3
+              ],
+              [
+                11,
+                30,
+                79,
+                38,
+                13,
+                0,
+                0,
+                3
+              ],
+              [
+                61,
+                228,
+                91,
+                10,
+                135,
+                0,
+                0,
+                0
+              ],
+              [
+                4,
+                29,
+                12,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                35,
+                4,
+                0,
+                2,
+                0,
+                8,
+                0
+              ],
+              [
+                12,
+                36,
+                57,
+                2,
+                5,
+                0,
+                0,
+                14
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.331900151772182,
+                0.3675677663167446
+              ],
+              "macro_f1": [
+                0.35696555319565965,
+                0.40749469746943945
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.5583185316755477,
+            "balanced_accuracy": 0.4965973627802883,
+            "macro_f1": 0.3908729772647572,
+            "macro_precision": 0.3732793776646033,
+            "macro_recall": 0.4965973627802883,
+            "auc_ovr_macro": 0.8598550649878888,
+            "ece": 0.0537463401676937,
+            "recall_por_clase": {
+              "MEL": 0.4839779005524862,
+              "NV": 0.6454368932038835,
+              "BCC": 0.48872180451127817,
+              "AK": 0.42528735632183906,
+              "BKL": 0.4247619047619048,
+              "DF": 0.46808510638297873,
+              "VASC": 0.6,
+              "SCC": 0.4365079365079365
+            },
+            "precision_por_clase": {
+              "MEL": 0.5232974910394266,
+              "NV": 0.8770448548812665,
+              "BCC": 0.5681818181818182,
+              "AK": 0.21203438395415472,
+              "BKL": 0.34520123839009287,
+              "DF": 0.07482993197278912,
+              "VASC": 0.22388059701492538,
+              "SCC": 0.16176470588235295
+            },
+            "f1_por_clase": {
+              "MEL": 0.5028702640642939,
+              "NV": 0.7436241610738255,
+              "BCC": 0.5254648342764754,
+              "AK": 0.2829827915869981,
+              "BKL": 0.3808710503842869,
+              "DF": 0.12903225806451613,
+              "VASC": 0.32608695652173914,
+              "SCC": 0.23605150214592274
+            },
+            "matriz_confusion": [
+              [
+                438,
+                145,
+                52,
+                58,
+                111,
+                21,
+                18,
+                62
+              ],
+              [
+                291,
+                1662,
+                91,
+                42,
+                227,
+                160,
+                48,
+                54
+              ],
+              [
+                23,
+                23,
+                325,
+                92,
+                44,
+                40,
+                18,
+                100
+              ],
+              [
+                6,
+                5,
+                31,
+                74,
+                21,
+                8,
+                3,
+                26
+              ],
+              [
+                61,
+                47,
+                43,
+                65,
+                223,
+                34,
+                12,
+                40
+              ],
+              [
+                3,
+                5,
+                5,
+                2,
+                6,
+                22,
+                2,
+                2
+              ],
+              [
+                5,
+                4,
+                4,
+                2,
+                3,
+                1,
+                30,
+                1
+              ],
+              [
+                10,
+                4,
+                21,
+                14,
+                11,
+                8,
+                3,
+                55
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.46761036005391915,
+                0.5245680061137074
+              ],
+              "macro_f1": [
+                0.37314215400425166,
+                0.4073801213218715
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.3430037497533057,
+            "balanced_accuracy": 0.3405438395408318,
+            "macro_f1": 0.2127945855562381,
+            "macro_precision": 0.25855620265809576,
+            "macro_recall": 0.3405438395408318,
+            "auc_ovr_macro": 0.7436929297223094,
+            "ece": 0.14012946398130696,
+            "recall_por_clase": {
+              "MEL": 0.39005524861878454,
+              "NV": 0.42524271844660194,
+              "BCC": 0.06917293233082707,
+              "AK": 0.40804597701149425,
+              "BKL": 0.15428571428571428,
+              "DF": 0.2765957446808511,
+              "VASC": 0.62,
+              "SCC": 0.38095238095238093
+            },
+            "precision_por_clase": {
+              "MEL": 0.38748627881448955,
+              "NV": 0.8081180811808119,
+              "BCC": 0.4,
+              "AK": 0.1265597147950089,
+              "BKL": 0.18969555035128804,
+              "DF": 0.025896414342629483,
+              "VASC": 0.05615942028985507,
+              "SCC": 0.07453416149068323
+            },
+            "f1_por_clase": {
+              "MEL": 0.38876651982378857,
+              "NV": 0.5572519083969466,
+              "BCC": 0.11794871794871795,
+              "AK": 0.19319727891156463,
+              "BKL": 0.17016806722689076,
+              "DF": 0.04735883424408015,
+              "VASC": 0.10299003322259136,
+              "SCC": 0.12467532467532468
+            },
+            "matriz_confusion": [
+              [
+                353,
+                121,
+                16,
+                104,
+                88,
+                39,
+                46,
+                138
+              ],
+              [
+                411,
+                1095,
+                22,
+                107,
+                165,
+                301,
+                303,
+                171
+              ],
+              [
+                46,
+                37,
+                46,
+                179,
+                59,
+                73,
+                84,
+                141
+              ],
+              [
+                8,
+                7,
+                10,
+                71,
+                14,
+                10,
+                10,
+                44
+              ],
+              [
+                75,
+                80,
+                16,
+                68,
+                81,
+                50,
+                65,
+                90
+              ],
+              [
+                4,
+                6,
+                1,
+                6,
+                4,
+                13,
+                5,
+                8
+              ],
+              [
+                4,
+                3,
+                1,
+                4,
+                0,
+                3,
+                31,
+                4
+              ],
+              [
+                10,
+                6,
+                3,
+                22,
+                16,
+                13,
+                8,
+                48
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.31267685912203463,
+                0.367894659175209
+              ],
+              "macro_f1": [
+                0.201981503971332,
+                0.2241681921650203
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2019/results_vit_b16_isic2019.json",
+      "data": {
+        "modelo": "vit_b16",
+        "dataset": "isic2019",
+        "smoke": false,
+        "n_train": 20264,
+        "n_val": 5067,
+        "dim_features": 768,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedKFold estratificado simple SIN grupo de paciente (el release no trae patient_id) - riesgo de fuga entre imagenes del mismo paciente, metricas con sesgo optimista",
+        "probes": {
+          "knn": {
+            "accuracy": 0.7047562660351293,
+            "balanced_accuracy": 0.3933092969203995,
+            "macro_f1": 0.44297139793956763,
+            "macro_precision": 0.7331100601688338,
+            "macro_recall": 0.3933092969203995,
+            "auc_ovr_macro": 0.9002773180856597,
+            "ece": 0.044628684217117034,
+            "recall_por_clase": {
+              "MEL": 0.4696132596685083,
+              "NV": 0.938252427184466,
+              "BCC": 0.7308270676691729,
+              "AK": 0.2471264367816092,
+              "BKL": 0.3180952380952381,
+              "DF": 0.06382978723404255,
+              "VASC": 0.22,
+              "SCC": 0.15873015873015872
+            },
+            "precision_por_clase": {
+              "MEL": 0.7024793388429752,
+              "NV": 0.7519452225334579,
+              "BCC": 0.5631517960602549,
+              "AK": 0.7049180327868853,
+              "BKL": 0.6007194244604317,
+              "DF": 1,
+              "VASC": 0.9166666666666666,
+              "SCC": 0.625
+            },
+            "f1_por_clase": {
+              "MEL": 0.5629139072847682,
+              "NV": 0.8348306841741534,
+              "BCC": 0.6361256544502618,
+              "AK": 0.3659574468085106,
+              "BKL": 0.41594022415940224,
+              "DF": 0.12,
+              "VASC": 0.3548387096774194,
+              "SCC": 0.25316455696202533
+            },
+            "matriz_confusion": [
+              [
+                425,
+                374,
+                69,
+                3,
+                31,
+                0,
+                0,
+                3
+              ],
+              [
+                71,
+                2416,
+                64,
+                0,
+                24,
+                0,
+                0,
+                0
+              ],
+              [
+                30,
+                120,
+                486,
+                5,
+                19,
+                0,
+                0,
+                5
+              ],
+              [
+                11,
+                17,
+                83,
+                43,
+                17,
+                0,
+                0,
+                3
+              ],
+              [
+                53,
+                223,
+                74,
+                7,
+                167,
+                0,
+                0,
+                1
+              ],
+              [
+                3,
+                21,
+                14,
+                0,
+                5,
+                3,
+                1,
+                0
+              ],
+              [
+                1,
+                23,
+                14,
+                0,
+                1,
+                0,
+                11,
+                0
+              ],
+              [
+                11,
+                19,
+                59,
+                3,
+                14,
+                0,
+                0,
+                20
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.37161659276594206,
+                0.4158628372100898
+              ],
+              "macro_f1": [
+                0.41133608084563095,
+                0.4722669682955139
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.6538385632524176,
+            "balanced_accuracy": 0.5793731298314562,
+            "macro_f1": 0.5276691424485109,
+            "macro_precision": 0.49798810079829653,
+            "macro_recall": 0.5793731298314562,
+            "auc_ovr_macro": 0.9058277515310799,
+            "ece": 0.11566594774052544,
+            "recall_por_clase": {
+              "MEL": 0.5646408839779006,
+              "NV": 0.730873786407767,
+              "BCC": 0.5954887218045113,
+              "AK": 0.5632183908045977,
+              "BKL": 0.6,
+              "DF": 0.40425531914893614,
+              "VASC": 0.74,
+              "SCC": 0.4365079365079365
+            },
+            "precision_por_clase": {
+              "MEL": 0.5378947368421053,
+              "NV": 0.8873173031588873,
+              "BCC": 0.6158631415241057,
+              "AK": 0.34146341463414637,
+              "BKL": 0.4375,
+              "DF": 0.2878787878787879,
+              "VASC": 0.6271186440677966,
+              "SCC": 0.248868778280543
+            },
+            "f1_por_clase": {
+              "MEL": 0.5509433962264151,
+              "NV": 0.8015332197614992,
+              "BCC": 0.6055045871559633,
+              "AK": 0.42516268980477223,
+              "BKL": 0.5060240963855421,
+              "DF": 0.336283185840708,
+              "VASC": 0.6788990825688074,
+              "SCC": 0.3170028818443804
+            },
+            "matriz_confusion": [
+              [
+                511,
+                159,
+                44,
+                39,
+                114,
+                7,
+                2,
+                29
+              ],
+              [
+                313,
+                1882,
+                96,
+                22,
+                201,
+                15,
+                14,
+                32
+              ],
+              [
+                49,
+                18,
+                396,
+                68,
+                47,
+                18,
+                2,
+                67
+              ],
+              [
+                5,
+                2,
+                37,
+                98,
+                19,
+                4,
+                0,
+                9
+              ],
+              [
+                62,
+                43,
+                36,
+                39,
+                315,
+                2,
+                2,
+                26
+              ],
+              [
+                3,
+                7,
+                5,
+                1,
+                7,
+                19,
+                2,
+                3
+              ],
+              [
+                1,
+                6,
+                2,
+                0,
+                3,
+                1,
+                37,
+                0
+              ],
+              [
+                6,
+                4,
+                27,
+                20,
+                14,
+                0,
+                0,
+                55
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.551161102358456,
+                0.606195613030923
+              ],
+              "macro_f1": [
+                0.5023586949171461,
+                0.5499500692373772
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.43043220840734164,
+            "balanced_accuracy": 0.3874185190643987,
+            "macro_f1": 0.2822156533119976,
+            "macro_precision": 0.29779213576397273,
+            "macro_recall": 0.3874185190643987,
+            "auc_ovr_macro": 0.7765253275753377,
+            "ece": 0.21281392475616212,
+            "recall_por_clase": {
+              "MEL": 0.3889502762430939,
+              "NV": 0.5211650485436893,
+              "BCC": 0.22706766917293233,
+              "AK": 0.47701149425287354,
+              "BKL": 0.3219047619047619,
+              "DF": 0.23404255319148937,
+              "VASC": 0.58,
+              "SCC": 0.3492063492063492
+            },
+            "precision_por_clase": {
+              "MEL": 0.37486687965921195,
+              "NV": 0.8314745972738538,
+              "BCC": 0.4967105263157895,
+              "AK": 0.14638447971781304,
+              "BKL": 0.262015503875969,
+              "DF": 0.05789473684210526,
+              "VASC": 0.05471698113207547,
+              "SCC": 0.15827338129496402
+            },
+            "f1_por_clase": {
+              "MEL": 0.38177874186550975,
+              "NV": 0.6407257101933636,
+              "BCC": 0.31166150670794635,
+              "AK": 0.22402159244264508,
+              "BKL": 0.28888888888888886,
+              "DF": 0.09282700421940929,
+              "VASC": 0.1,
+              "SCC": 0.21782178217821782
+            },
+            "matriz_confusion": [
+              [
+                352,
+                153,
+                25,
+                100,
+                136,
+                21,
+                59,
+                59
+              ],
+              [
+                477,
+                1342,
+                67,
+                111,
+                213,
+                74,
+                273,
+                18
+              ],
+              [
+                30,
+                28,
+                151,
+                168,
+                65,
+                46,
+                89,
+                88
+              ],
+              [
+                6,
+                1,
+                18,
+                83,
+                24,
+                8,
+                10,
+                24
+              ],
+              [
+                64,
+                73,
+                27,
+                70,
+                169,
+                24,
+                58,
+                40
+              ],
+              [
+                3,
+                3,
+                1,
+                5,
+                10,
+                11,
+                11,
+                3
+              ],
+              [
+                2,
+                6,
+                2,
+                6,
+                3,
+                0,
+                29,
+                2
+              ],
+              [
+                5,
+                8,
+                13,
+                24,
+                25,
+                6,
+                1,
+                44
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.35966025251501016,
+                0.41466425020470277
+              ],
+              "macro_f1": [
+                0.26865137644838594,
+                0.2963234720237252
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_alexnet_isic2020.json",
+      "data": {
+        "modelo": "alexnet",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 256,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.7645153929862745,
+            "ece": 0.006736827000633555,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.793993993993994,
+            "balanced_accuracy": 0.774418406390885,
+            "macro_f1": 0.5008124652003542,
+            "macro_precision": 0.5292078391435164,
+            "macro_recall": 0.774418406390885,
+            "auc_ovr_macro": 0.8574299555185572,
+            "ece": 0.04420459644519252,
+            "recall_por_clase": {
+              "benign": 0.7947384521260324,
+              "malignant": 0.7540983606557377
+            },
+            "precision_por_clase": {
+              "benign": 0.9942594718714122,
+              "malignant": 0.06415620641562064
+            },
+            "f1_por_clase": {
+              "benign": 0.8833730023801428,
+              "malignant": 0.11825192802056556
+            },
+            "matriz_confusion": [
+              [
+                5196,
+                1342
+              ],
+              [
+                30,
+                92
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7354090398325648,
+                0.8125303390038177
+              ],
+              "macro_f1": [
+                0.48942054300432036,
+                0.5121929694004218
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.7208708708708709,
+            "balanced_accuracy": 0.7613059089609797,
+            "macro_f1": 0.46517635852926026,
+            "macro_precision": 0.5228105901409947,
+            "macro_recall": 0.7613059089609797,
+            "auc_ovr_macro": 0.8406177755266814,
+            "ece": 0.11826374341059732,
+            "recall_por_clase": {
+              "benign": 0.7193331293973693,
+              "malignant": 0.8032786885245902
+            },
+            "precision_por_clase": {
+              "benign": 0.9949227840067696,
+              "malignant": 0.05069839627521987
+            },
+            "f1_por_clase": {
+              "benign": 0.8349755881047493,
+              "malignant": 0.09537712895377129
+            },
+            "matriz_confusion": [
+              [
+                4703,
+                1835
+              ],
+              [
+                24,
+                98
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7262434824802044,
+                0.7955636870355071
+              ],
+              "macro_f1": [
+                0.4555456640858687,
+                0.4749981215971106
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_dinov2_vitb14_isic2020.json",
+      "data": {
+        "modelo": "dinov2_vitb14",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 768,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.7646144356573676,
+            "ece": 0.0065808725884768035,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.8993993993993994,
+            "balanced_accuracy": 0.6752729315126198,
+            "macro_f1": 0.5426984868118188,
+            "macro_precision": 0.5354956451796363,
+            "macro_recall": 0.6752729315126198,
+            "auc_ovr_macro": 0.7999400729154652,
+            "ece": 0.05591618773442103,
+            "recall_por_clase": {
+              "benign": 0.9079229122055674,
+              "malignant": 0.4426229508196721
+            },
+            "precision_por_clase": {
+              "benign": 0.988674217188541,
+              "malignant": 0.08231707317073171
+            },
+            "f1_por_clase": {
+              "benign": 0.9465794929038431,
+              "malignant": 0.13881748071979436
+            },
+            "matriz_confusion": [
+              [
+                5936,
+                602
+              ],
+              [
+                68,
+                54
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.6283559192685747,
+                0.7186471410186042
+              ],
+              "macro_f1": [
+                0.5252104235598438,
+                0.5577478019288405
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.730930930930931,
+            "balanced_accuracy": 0.7342547227055951,
+            "macro_f1": 0.46668230089065027,
+            "macro_precision": 0.520997920997921,
+            "macro_recall": 0.7342547227055951,
+            "auc_ovr_macro": 0.8069645803348896,
+            "ece": 0.13800330545988165,
+            "recall_por_clase": {
+              "benign": 0.7308045273784032,
+              "malignant": 0.7377049180327869
+            },
+            "precision_por_clase": {
+              "benign": 0.9933471933471933,
+              "malignant": 0.04864864864864865
+            },
+            "f1_por_clase": {
+              "benign": 0.8420867113147691,
+              "malignant": 0.09127789046653144
+            },
+            "matriz_confusion": [
+              [
+                4778,
+                1760
+              ],
+              [
+                32,
+                90
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.6957307405752156,
+                0.773030713256423
+              ],
+              "macro_f1": [
+                0.45659686893035734,
+                0.47641630648876937
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_dinov2_vits14_isic2020.json",
+      "data": {
+        "modelo": "dinov2_vits14",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 384,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.7160083045399154,
+            "ece": 0.008297746387422056,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.846996996996997,
+            "balanced_accuracy": 0.7571736982784127,
+            "macro_f1": 0.526613788253883,
+            "macro_precision": 0.5345835653588771,
+            "macro_recall": 0.7571736982784127,
+            "auc_ovr_macro": 0.8576292945654408,
+            "ece": 0.056086015069011355,
+            "recall_por_clase": {
+              "benign": 0.8504129703273172,
+              "malignant": 0.6639344262295082
+            },
+            "precision_por_clase": {
+              "benign": 0.9926798785931084,
+              "malignant": 0.0764872521246459
+            },
+            "f1_por_clase": {
+              "benign": 0.9160556882774529,
+              "malignant": 0.1371718882303133
+            },
+            "matriz_confusion": [
+              [
+                5560,
+                978
+              ],
+              [
+                41,
+                81
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7132305908272951,
+                0.7981028279216595
+              ],
+              "macro_f1": [
+                0.5118819311242837,
+                0.5393054956807127
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.7249249249249249,
+            "balanced_accuracy": 0.7231519139055911,
+            "macro_f1": 0.46284874645688817,
+            "macro_precision": 0.5197688433415181,
+            "macro_recall": 0.7231519139055911,
+            "auc_ovr_macro": 0.8035281757593689,
+            "ece": 0.1465774275429614,
+            "recall_por_clase": {
+              "benign": 0.724992352401346,
+              "malignant": 0.7213114754098361
+            },
+            "precision_por_clase": {
+              "benign": 0.9928780896522832,
+              "malignant": 0.04665959703075292
+            },
+            "f1_por_clase": {
+              "benign": 0.8380480905233381,
+              "malignant": 0.08764940239043825
+            },
+            "matriz_confusion": [
+              [
+                4740,
+                1798
+              ],
+              [
+                34,
+                88
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.6827781086386013,
+                0.763288256231353
+              ],
+              "macro_f1": [
+                0.4531928425724132,
+                0.4720590480269666
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_efficientnet_b0_isic2020.json",
+      "data": {
+        "modelo": "efficientnet_b0",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 1280,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.6947203987783901,
+            "ece": 0.009096492872340604,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.9186186186186186,
+            "balanced_accuracy": 0.6367992417593991,
+            "macro_f1": 0.5457439830948283,
+            "macro_precision": 0.5351689408706952,
+            "macro_recall": 0.6367992417593991,
+            "auc_ovr_macro": 0.7606577436324338,
+            "ece": 0.03783348875410246,
+            "recall_por_clase": {
+              "benign": 0.9293361884368309,
+              "malignant": 0.3442622950819672
+            },
+            "precision_por_clase": {
+              "benign": 0.9870045484080572,
+              "malignant": 0.08333333333333333
+            },
+            "f1_por_clase": {
+              "benign": 0.9573026626752796,
+              "malignant": 0.134185303514377
+            },
+            "matriz_confusion": [
+              [
+                6076,
+                462
+              ],
+              [
+                80,
+                42
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5954396933147067,
+                0.6818266655319603
+              ],
+              "macro_f1": [
+                0.5264220443959136,
+                0.5639959918998356
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.6906906906906907,
+            "balanced_accuracy": 0.7419123509971968,
+            "macro_f1": 0.4499567088875956,
+            "macro_precision": 0.5199879921638303,
+            "macro_recall": 0.7419123509971968,
+            "auc_ovr_macro": 0.8193449142215246,
+            "ece": 0.08398775265023516,
+            "recall_por_clase": {
+              "benign": 0.6887427347812787,
+              "malignant": 0.7950819672131147
+            },
+            "precision_por_clase": {
+              "benign": 0.9944787985865724,
+              "malignant": 0.04549718574108818
+            },
+            "f1_por_clase": {
+              "benign": 0.8138442074823784,
+              "malignant": 0.08606921029281278
+            },
+            "matriz_confusion": [
+              [
+                4503,
+                2035
+              ],
+              [
+                25,
+                97
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7063822391498668,
+                0.7775964421913891
+              ],
+              "macro_f1": [
+                0.44064609547708206,
+                0.4588305669199954
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_resnet50_isic2020.json",
+      "data": {
+        "modelo": "resnet50",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 2048,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.6980339402935676,
+            "ece": 0.009312839496271975,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.9160660660660661,
+            "balanced_accuracy": 0.6877836506877824,
+            "macro_f1": 0.5601191419313881,
+            "macro_precision": 0.5447940987095263,
+            "macro_recall": 0.6877836506877824,
+            "auc_ovr_macro": 0.8297205742970478,
+            "ece": 0.02751036043807889,
+            "recall_por_clase": {
+              "benign": 0.9247476292444172,
+              "malignant": 0.45081967213114754
+            },
+            "precision_por_clase": {
+              "benign": 0.9890397513495829,
+              "malignant": 0.10054844606946983
+            },
+            "f1_por_clase": {
+              "benign": 0.9558137696624772,
+              "malignant": 0.16442451420029897
+            },
+            "matriz_confusion": [
+              [
+                6046,
+                492
+              ],
+              [
+                67,
+                55
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.6425245612341329,
+                0.7321208072038577
+              ],
+              "macro_f1": [
+                0.5395785930651771,
+                0.579025458194583
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.7426426426426427,
+            "balanced_accuracy": 0.7402198496557327,
+            "macro_f1": 0.4725141034240624,
+            "macro_precision": 0.5221217114377865,
+            "macro_recall": 0.7402198496557327,
+            "auc_ovr_macro": 0.8106899638431565,
+            "ece": 0.15848948551906838,
+            "recall_por_clase": {
+              "benign": 0.7427347812786785,
+              "malignant": 0.7377049180327869
+            },
+            "precision_por_clase": {
+              "benign": 0.9934533551554828,
+              "malignant": 0.050790067720090294
+            },
+            "f1_por_clase": {
+              "benign": 0.849991248030807,
+              "malignant": 0.09503695881731784
+            },
+            "matriz_confusion": [
+              [
+                4856,
+                1682
+              ],
+              [
+                32,
+                90
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7036103063188891,
+                0.7818918397754129
+              ],
+              "macro_f1": [
+                0.4627357493645111,
+                0.4822405112036299
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_simsiam_r50_isic2020.json",
+      "data": {
+        "modelo": "simsiam_r50",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 2048,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.7345781785175193,
+            "ece": 0.008110927855490745,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.7518018018018018,
+            "balanced_accuracy": 0.7649943081806738,
+            "macro_f1": 0.4795327993503816,
+            "macro_precision": 0.5248668855916675,
+            "macro_recall": 0.7649943081806738,
+            "auc_ovr_macro": 0.8468211063693214,
+            "ece": 0.08510407678823802,
+            "recall_por_clase": {
+              "benign": 0.7513000917711838,
+              "malignant": 0.7786885245901639
+            },
+            "precision_por_clase": {
+              "benign": 0.9945333063373153,
+              "malignant": 0.05520046484601976
+            },
+            "f1_por_clase": {
+              "benign": 0.8559728151956086,
+              "malignant": 0.10309278350515463
+            },
+            "matriz_confusion": [
+              [
+                4912,
+                1626
+              ],
+              [
+                27,
+                95
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7300671692552357,
+                0.8000096388383929
+              ],
+              "macro_f1": [
+                0.4693342903352592,
+                0.49062931258080733
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.7169669669669669,
+            "balanced_accuracy": 0.7392081099649463,
+            "macro_f1": 0.46112061723475695,
+            "macro_precision": 0.5207804861366676,
+            "macro_recall": 0.7392081099649463,
+            "auc_ovr_macro": 0.8049567722620343,
+            "ece": 0.16210455579442662,
+            "recall_por_clase": {
+              "benign": 0.7161211379626797,
+              "malignant": 0.7622950819672131
+            },
+            "precision_por_clase": {
+              "benign": 0.9938441944385481,
+              "malignant": 0.04771677783478707
+            },
+            "f1_por_clase": {
+              "benign": 0.8324295492932705,
+              "malignant": 0.08981168517624336
+            },
+            "matriz_confusion": [
+              [
+                4682,
+                1856
+              ],
+              [
+                29,
+                93
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7008227333927975,
+                0.7767526570017528
+              ],
+              "macro_f1": [
+                0.4518878092659115,
+                0.4711572366742654
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_vgg19_isic2020.json",
+      "data": {
+        "modelo": "vgg19",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 512,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.7226617153689151,
+            "ece": 0.007688983615325154,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.8232732732732733,
+            "balanced_accuracy": 0.737046723066662,
+            "macro_f1": 0.5100729844890383,
+            "macro_precision": 0.5286167643200739,
+            "macro_recall": 0.737046723066662,
+            "auc_ovr_macro": 0.8128256497951447,
+            "ece": 0.03330220085481675,
+            "recall_por_clase": {
+              "benign": 0.8265524625267666,
+              "malignant": 0.6475409836065574
+            },
+            "precision_por_clase": {
+              "benign": 0.9921057462823573,
+              "malignant": 0.0651277823577906
+            },
+            "f1_por_clase": {
+              "benign": 0.9017939090529828,
+              "malignant": 0.11835205992509364
+            },
+            "matriz_confusion": [
+              [
+                5404,
+                1134
+              ],
+              [
+                43,
+                79
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.6950706624681665,
+                0.7789403487980373
+              ],
+              "macro_f1": [
+                0.49783652996103933,
+                0.5233927366748155
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.7186186186186186,
+            "balanced_accuracy": 0.7480931151552839,
+            "macro_f1": 0.46278263995636437,
+            "macro_precision": 0.5215979383468619,
+            "macro_recall": 0.7480931151552839,
+            "auc_ovr_macro": 0.8243208681654289,
+            "ece": 0.13273635673093365,
+            "recall_por_clase": {
+              "benign": 0.7174977057204038,
+              "malignant": 0.7786885245901639
+            },
+            "precision_por_clase": {
+              "benign": 0.9942772361169987,
+              "malignant": 0.04891864057672503
+            },
+            "f1_por_clase": {
+              "benign": 0.8335110163468372,
+              "malignant": 0.09205426356589147
+            },
+            "matriz_confusion": [
+              [
+                4691,
+                1847
+              ],
+              [
+                27,
+                95
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7119888648908052,
+                0.7862114293134776
+              ],
+              "macro_f1": [
+                0.4538256391212614,
+                0.47243794277369644
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "results/baselines_isic2020/results_vit_b16_isic2020.json",
+      "data": {
+        "modelo": "vit_b16",
+        "dataset": "isic2020",
+        "smoke": false,
+        "n_train": 26466,
+        "n_val": 6660,
+        "dim_features": 768,
+        "resolucion": 224,
+        "semilla": 42,
+        "split": "StratifiedGroupKFold por patient_id (0 pacientes compartidos)",
+        "probes": {
+          "knn": {
+            "accuracy": 0.9816816816816817,
+            "balanced_accuracy": 0.5,
+            "macro_f1": 0.4953780875890286,
+            "macro_precision": 0.49084084084084084,
+            "macro_recall": 0.5,
+            "auc_ovr_macro": 0.7295896875266412,
+            "ece": 0.00848981478863961,
+            "recall_por_clase": {
+              "benign": 1,
+              "malignant": 0
+            },
+            "precision_por_clase": {
+              "benign": 0.9816816816816817,
+              "malignant": 0
+            },
+            "f1_por_clase": {
+              "benign": 0.9907561751780573,
+              "malignant": 0
+            },
+            "matriz_confusion": [
+              [
+                6538,
+                0
+              ],
+              [
+                122,
+                0
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.5,
+                0.5
+              ],
+              "macro_f1": [
+                0.49453551912568305,
+                0.4962178517397882
+              ]
+            }
+          },
+          "logreg": {
+            "accuracy": 0.8882882882882883,
+            "balanced_accuracy": 0.7339638632158028,
+            "macro_f1": 0.5492723650065712,
+            "macro_precision": 0.5415234845390003,
+            "macro_recall": 0.7339638632158028,
+            "auc_ovr_macro": 0.8274501150900913,
+            "ece": 0.05983805741768285,
+            "recall_por_clase": {
+              "benign": 0.8941572346283267,
+              "malignant": 0.5737704918032787
+            },
+            "precision_por_clase": {
+              "benign": 0.9911834520176331,
+              "malignant": 0.09186351706036745
+            },
+            "f1_por_clase": {
+              "benign": 0.9401736892891605,
+              "malignant": 0.1583710407239819
+            },
+            "matriz_confusion": [
+              [
+                5846,
+                692
+              ],
+              [
+                52,
+                70
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.6902609106523201,
+                0.7776605271082022
+              ],
+              "macro_f1": [
+                0.5319123970235409,
+                0.5668452222957988
+              ]
+            }
+          },
+          "prototype": {
+            "accuracy": 0.7509009009009009,
+            "balanced_accuracy": 0.760513567592235,
+            "macro_f1": 0.4785931575138088,
+            "macro_precision": 0.5244094973789701,
+            "macro_recall": 0.760513567592235,
+            "auc_ovr_macro": 0.8426776123444779,
+            "ece": 0.1453487299405061,
+            "recall_por_clase": {
+              "benign": 0.7505353319057816,
+              "malignant": 0.7704918032786885
+            },
+            "precision_por_clase": {
+              "benign": 0.9943262411347518,
+              "malignant": 0.05449275362318841
+            },
+            "f1_por_clase": {
+              "benign": 0.8553996339231239,
+              "malignant": 0.10178668110449378
+            },
+            "matriz_confusion": [
+              [
+                4907,
+                1631
+              ],
+              [
+                28,
+                94
+              ]
+            ],
+            "ic95_bootstrap": {
+              "balanced_accuracy": [
+                0.7226373692683082,
+                0.7962811052981368
+              ],
+              "macro_f1": [
+                0.46832366742775783,
+                0.48927935546432677
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -541,7 +541,7 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 
 En esta partición, B71 obtuvo un F1 macro de 0,7141. Los ocho intervalos pareados del 95\,\% excluyeron cero a favor de B71 frente a las líneas base. Dado que no hubo corrección global por multiplicidad, este patrón describe el resultado de la comparación y no equivale a ocho pruebas confirmatorias independientes.
 
-La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones en (a) y el desempeño de las líneas base con IC individuales en (b). La Figura~\ref{fig:contrastes-ham-baselines} presenta los contrastes pareados en (a) y la ablación F4 en (b). Los paneles (a) y (b) mantienen sus respectivos protocolos de extracción y sonda; el control público del panel (a) no se equipara a los DINOv2 del banco. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
+La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones en (a) y el desempeño de las líneas base con IC individuales en (b). La Figura~\ref{fig:contrastes-ham-baselines} presenta los contrastes pareados en (a) y la ablación F4 en (b). Los paneles (a) y (b) mantienen sus respectivos protocolos de extracción y sonda; el control público del panel (a) no se equipara a los DINOv2 del banco. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. Las evaluaciones canónicas de ISIC2019 e ISIC2020 se presentan en las Secciones~\ref{sec:clasificacion-isic2019} y~\ref{sec:clasificacion-isic2020}; el resumen de configuraciones limpias de HAM10000 se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
 
 
 
@@ -626,13 +626,16 @@ La Figura~\ref{fig:confiabilidad-b71} agrupa la confianza máxima de B71 en 15 i
 
 
 
+\FloatBarrier
+\input{capitulos/resultados_clasificacion_isic}
+
 \subsection{Comparación descriptiva: ajuste fino de las ocho líneas base}
 
 En el ajuste fino, todas las ponderaciones de cada línea base se actualizaron usando etiquetas. Se empleó una partición distinta (n = 2.014) y se seleccionó la época según el desempeño en validación, lo que introduce el sesgo optimista señalado en el protocolo. Debido a estas diferencias, la comparación con B71 es descriptiva y no constituye un contraste pareado.
 
 Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,7962 con ViT-B/16 en ISIC2019 y 0,5889 con VGG19 en ISIC2020. En HAM10000, el F1 macro de 0,7058 es numéricamente inferior al 0,7141 de B71; estas cifras proceden de particiones distintas y no constituyen un contraste pareado. La comparación entre regímenes debe distinguir el conjunto, la partición y el uso de etiquetas antes de atribuir diferencias al método. La comparación muestra que los dos regímenes responden a condiciones distintas: B71 aprende representaciones mediante SSL sin etiquetas para esa etapa, mientras que el ajuste fino actualiza los pesos con las etiquetas disponibles. Por tanto, los resultados no sustentan una superioridad absoluta de B71, sino el uso de representaciones autosupervisadas cuando se busca reducir la dependencia de etiquetas durante el aprendizaje de la representación.
 
-\subsection{Caso especial: ISIC2020, F1 contra sensibilidad clínica}
+\subsection{Análisis post hoc de ISIC2020 frente al ajuste fino}
 
 En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustados y aplicó Holm por separado a cada familia de métricas. B71-limpio obtuvo mayor F1 macro que siete de los ocho modelos; la diferencia frente a VGG19 no alcanzó el umbral corregido ($p_{\text{Holm}}=0{,}066$). En cambio, la exactitud balanceada favoreció a siete de los ocho modelos ajustados. La diferencia más clara aparece en la detección de melanoma: B71 identificó 39 de 122 casos (\textit{recall} 0,3197), frente a 86 de 122 (\textit{recall} 0,7049) con AlexNet ajustado. Este análisis es post hoc y no formó parte del registro original. En conjunto, los resultados muestran que un F1 macro mayor no implica necesariamente mayor sensibilidad para melanoma; la elección entre estas métricas requiere un criterio clínico que el proyecto aún no ha definido.
 
