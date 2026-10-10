@@ -88,9 +88,10 @@
     },
     {
       "svg": "03_segmentacion_dice.svg",
-      "svg_sha256": "061f9211dec419b5cdb49bff92f84d8d3a171d43bee24280f1910e944df77185",
+      "svg_sha256": "fe44d76cc1307f42d33c4971dd999cb7c6e0da608992047b95a191eeba548e7e",
       "pdf": "03_segmentacion_dice_svg-raw.pdf",
-      "pdf_sha256": "b6e924102b942f6786de33a9f15ca14e6651be8ec5a0bb43066d2823f7726e65"
+      "pdf_sha256": "63c54a63380e99b6f5676bfc2502454b648d88c6b3600c144fa03ff7b335c623",
+      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
     },
     {
       "svg": "04_pad_fst_ita.svg",
@@ -106,15 +107,17 @@
     },
     {
       "svg": "06_ita_roi_e5.svg",
-      "svg_sha256": "34306504830da3d0cd7e3f9d278edd0a4b9390712ba2d884dbd25361c1dac6f2",
+      "svg_sha256": "18d88402e30fdc5b0ef75351e5b169ec2d62954622d628b21f7f4dd591c70565",
       "pdf": "06_ita_roi_e5_svg-raw.pdf",
-      "pdf_sha256": "7fed2c3f9f1b69f8fd2c553f3d4a114da8df3573bf2033b9ca53a9ded7d4345f"
+      "pdf_sha256": "044c7c3ce1752ea805a1981084d8059f9359e7d06e10067510beff582b9db218",
+      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
     },
     {
       "svg": "07_ita_evaluacion_pad.svg",
-      "svg_sha256": "bb18cff4ac71dc20cd4d4911f1046fe5ccadf5810674b326e5993bd299f88377",
+      "svg_sha256": "bec87f2d661ee49004e7984f8d3e42bd8cb894d2ec7d3cd35db3d57ce7785fda",
       "pdf": "07_ita_evaluacion_pad_svg-raw.pdf",
-      "pdf_sha256": "a5492d582abff79fb30b3197f464b6c7a82c2b8f9e765fd409d00751fc2514ce"
+      "pdf_sha256": "0de651a031adb7ff5016ae694c5177c3310a7027a35ceb0e61a7c58d9a5d33f8",
+      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
     },
     {
       "svg": "08_configuraciones_ham.svg",
@@ -234,15 +237,17 @@
       "svg": "images/organizadas/26_f1_configuraciones.svg",
       "pdf": "images/organizadas/26_f1_configuraciones_svg-raw.pdf",
       "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
-      "svg_sha256": "5638727529e7b0e4ef271b938a1696fb8de75e8720f8adce1b8e78d791493ea5",
-      "pdf_sha256": "9972969b8e82869697d132db419dbb31dd11aaf18d64aca8ef7d78418001ab3c"
+      "svg_sha256": "fcf3e30fc65def39434002bdf1929fc743a3ab293ce3de44527722d7983ddfb7",
+      "pdf_sha256": "a6201fc4449f5ed259b66055e1c81bf81439606109e2450d2cec96b50c81e57d",
+      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
     },
     {
       "svg": "images/organizadas/27_f1_contrastes.svg",
       "pdf": "images/organizadas/27_f1_contrastes_svg-raw.pdf",
       "fuente": "Registros evaluacion.json, e3b_bs64_summary.json y e3_final_canonico.json; sin modificación de estimaciones ni intervalos.",
-      "svg_sha256": "4b3728a57db84d80a4199b5ea1532bf9f17d61fa7c5995cde531795404a29107",
-      "pdf_sha256": "ffa2f9ca76a793879f16336831803a9c9b2619d0344465ce1b96611123625b31"
+      "svg_sha256": "fcbcd269e6f76b83d816a37ad444660f8c743d51a209c11217a040a6d83e4e16",
+      "pdf_sha256": "daa5750f578aa0bad2c64d199cff8f51793565deb3efe62e70d14799c02ee0c1",
+      "disposicion": "Dos paneles horizontales con áreas de trazado de 2,805 × 2,805 pulgadas; escala uniforme en la inserción. Datos e intervalos conservados."
     },
     {
       "svg": "28_segmentacion_ham10000.svg",
