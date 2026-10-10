@@ -128,7 +128,7 @@ La Figura~\ref{fig:distribuciones-clase-combinadas} reúne los conteos de las ca
 \caption{Distribución de diagnósticos en los cuatro conjuntos de datos.}
 \label{fig:distribuciones-clase-combinadas}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/01_diagnosticos_2x2}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/01_diagnosticos_2x2}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -216,7 +216,7 @@ La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del mod
 \caption{Ejemplos cualitativos de segmentación en ISIC2018.}
 \label{fig:segmentacion-ejemplos}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/02_segmentacion_3x3}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/02_segmentacion_3x3}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -258,7 +258,7 @@ La Figura~\ref{fig:segmentacion-dice} representa las estimaciones y sus interval
 \caption{Dice medio de student\_r3 y S4-A2 por conjunto.}
 \label{fig:segmentacion-dice}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/03_segmentacion_dice}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/03_segmentacion_dice}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -266,6 +266,8 @@ La Figura~\ref{fig:segmentacion-dice} representa las estimaciones y sus interval
 \end{figure}
 
 
+
+\FloatBarrier
 
 S4-A2 cumplió el criterio definido antes de la evaluación: su Dice en ISIC2018 superó el valor de \texttt{student\_r3} menos 0,01 y también fue mayor en HAM10000. Entre las dos variantes evaluadas, S4-A2 obtuvo los mejores resultados de segmentación. Esta diferencia no se tradujo en una mejora demostrada de la clasificación: en la comparación C1, ninguno de los 15 intervalos de F1 macro del análisis primario con \texttt{student\_r3} excluyó cero, y el análisis secundario de S4-A2 mostró el mismo patrón. Por ello, los resultados respaldan la segmentación como módulo complementario, pero no como una mejora general de la clasificación.
 
@@ -320,7 +322,7 @@ La Figura~\ref{fig:pad-fototipo-clinico} contrasta las etiquetas de fototipo reg
 \caption{Fototipo registrado e ITA de fondo agrupado por esos registros en PAD-UFES-20.}
 \label{fig:pad-fototipo-clinico}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/04_pad_fst_ita}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/04_pad_fst_ita}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -335,7 +337,7 @@ La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del I
 \caption{Distribución del ITA de fondo por Otsu en los cuatro conjuntos.}
 \label{fig:ita-distribucion-multidataset}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/05_ita_otsu_2x2}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/05_ita_otsu_2x2}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -381,7 +383,7 @@ La Figura~\ref{fig:ita-roi-e5} reúne el violín de los registros individuales E
 \label{fig:ita-roi-e5}
 \label{fig:ita-e5-cobertura}
 \centering
-\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/06_ita_roi_e5}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/06_ita_roi_e5}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -436,7 +438,7 @@ La Figura~\ref{fig:ita-exactitud-pad} compara la exactitud del ITA y la línea b
 \caption{Exactitud del estimador ITA frente a la línea base por mayoría.}
 \label{fig:ita-exactitud-pad}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/07_ita_evaluacion_pad}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/07_ita_evaluacion_pad}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -543,7 +545,7 @@ La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones e
 \label{fig:contrastes-ham-baselines}
 \label{fig:ablacion-f4}
 \centering
-\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/16_f1_ham_2x2}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/16_f1_ham_2x2}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -554,7 +556,7 @@ La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones e
 \caption{Matriz de confusión de B71 normalizada por clase real.}
 \label{fig:confusion-b71-ham}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/10_confusion_b71}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/10_confusion_b71}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -571,7 +573,7 @@ La Figura~\ref{fig:metricas-clase-b71} complementa la matriz de confusión con p
 \caption{Precisión, sensibilidad y F1 de B71 por diagnóstico.}
 \label{fig:metricas-clase-b71}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/11_metricas_por_clase}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/11_metricas_por_clase}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -584,7 +586,7 @@ La Figura~\ref{fig:precision-recall-b71} evalúa cada clase frente al resto usan
 \caption{Curvas precision--recall de B71 para las siete clases.}
 \label{fig:precision-recall-b71}
 \centering
-\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/12_precision_recall}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/12_precision_recall}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -597,7 +599,7 @@ La Figura~\ref{fig:confiabilidad-b71} agrupa la confianza máxima de B71 en 15 i
 \caption{Confiabilidad de B71 y distribución de confianza.}
 \label{fig:confiabilidad-b71}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/13_confiabilidad_b71}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/13_confiabilidad_b71}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
@@ -688,7 +690,7 @@ La Figura~\ref{fig:adaptacion-pad-d0-d3} representa el F1 macro puntual de D0--D
 \caption{F1 macro de D0-D3 y diferencia pareada D3-D2 en PAD-UFES-20.}
 \label{fig:adaptacion-pad-d0-d3}
 \centering
-\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/15_adaptacion_pad}
+\noindent\makebox[\linewidth][c]{\includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/15_adaptacion_pad}}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
