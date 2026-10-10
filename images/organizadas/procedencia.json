@@ -151,9 +151,9 @@
     },
     {
       "svg": "13_confiabilidad_b71.svg",
-      "svg_sha256": "5ac5cc85268a91ea9e4ca13e3b2b758294bd3584ea43dd5601c6cafaa999a2fa",
+      "svg_sha256": "849f1ee0bd1fd9c35ac73d51b7fe7f69a406df71e51a8d5bb6d1eeb3db9d3c01",
       "pdf": "13_confiabilidad_b71_svg-raw.pdf",
-      "pdf_sha256": "b587c817e8d78a65f0ca27c0017a80809eb527326b89425b9d91e7a8d3169374"
+      "pdf_sha256": "dd2843a59078d156294319da7df0a520eceab09f78388940c3d90b9d4a94d878"
     },
     {
       "svg": "14_ablacion_f4.svg",
@@ -163,9 +163,9 @@
     },
     {
       "svg": "15_adaptacion_pad.svg",
-      "svg_sha256": "769a1a6fa219583ea455e621d2799972f38fa95bca507532f1a8c60ee286c0ea",
+      "svg_sha256": "7c491d8080a033aec8de101865c4180470016c3ddbb48889c59bbe3b9c70b6df",
       "pdf": "15_adaptacion_pad_svg-raw.pdf",
-      "pdf_sha256": "798f931606e96d74b447f48bef385d5d647d3b7834214d62485fe716a9326de3"
+      "pdf_sha256": "79e397683ba1edadb0b72a7a14ae3bd74f2e10ea3b11ddb7a264ff1a1b609aee"
     },
     {
       "svg": "16_f1_ham_2x2.svg",
