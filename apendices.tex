@@ -3,7 +3,7 @@
 
 \section{Protocolo experimental y procedencia}
 
-Los resultados experimentales se contrastaron con el repositorio de implementación \url{https://github.com/nicolas2601/proyecto-grado-ssl-lesiones}, rama \texttt{main}, en el commit \texttt{a3c3a6ed\allowbreak 6670745c\allowbreak 6687ae3d\allowbreak 3430998c\allowbreak 380d0dea}. La Tabla~\ref{tab:trazabilidad-experimental} resume las fuentes versionadas utilizadas para reconstruir el protocolo; no reemplaza los datos ni los artefactos originales.
+Los resultados experimentales se contrastaron con el repositorio de implementación \url{https://github.com/nicolas2601/proyecto-grado-ssl-lesiones}, utilizado como fuente de los registros experimentales. La Tabla~\ref{tab:trazabilidad-experimental} resume las registros experimentales utilizadas para reconstruir el protocolo; no reemplaza los datos ni los artefactos originales.
 
 \begingroup
 \small
@@ -14,7 +14,7 @@ Los resultados experimentales se contrastaron con el repositorio de implementaci
 \caption{Fuentes de trazabilidad de los protocolos y resultados.}
 \label{tab:trazabilidad-experimental}\\
 \toprule
-\textbf{Fuente versionada} & \textbf{Información utilizada} & \textbf{Límite documentado} \\
+\textbf{Registro experimental} & \textbf{Información utilizada} & \textbf{Límite documentado} \\
 \midrule
 \endfirsthead
 \toprule
@@ -23,19 +23,19 @@ Los resultados experimentales se contrastaron con el repositorio de implementaci
 \endhead
 \bottomrule
 \endfoot
-\path{docs/33-banco-completo-multidataset.md} &
+Informe consolidado de clasificación multidataset &
 Protocolo del banco, definición de comparaciones y estado de las corridas D2/D3. &
 Los \texttt{run.json} de D2/D3 no registran \texttt{data\_revision} y dejan el campo de hash de partición sin un valor trazable; el documento conserva otros hashes de exclusión, listas de IDs y partición PAD. \\
 \addlinespace[5pt]
-\path{docs/28-rediseno-brazo-propuesto-v7.md} &
-Diseño y resultados históricos de v7, incluidos los contrastes C1 con máscaras. &
-Es una línea histórica; el banco consolidado de \path{docs/33} aclara qué resultados la sustituyen y cuáles permanecen exploratorios. \\
+Informe de las variantes previas del clasificador &
+Diseño y resultados de las variantes previas, incluidos los contrastes C1 con máscaras. &
+Es una línea histórica; el banco consolidado de informe consolidado aclara qué resultados la sustituyen y cuáles permanecen exploratorios. \\
 \addlinespace[5pt]
-\path{plan-segmentacion/camino-b-cnn/resultados/2026-09-21-final/resultados.md} &
+Registro de evaluación del segmentador iterativo &
 Métricas globales de \texttt{student\_r3} en ISIC 2018 y HAM10000. &
 ISIC 2018 comparte parcialmente identificadores con el \textit{pool} de entrenamiento sin etiquetas; la evaluación es transductiva. \\
 \addlinespace[5pt]
-\path{plan-segmentacion/camino-b-cnn/resultados/2026-09-28-s4-a2/} &
+Registro de evaluación de S4-A2 &
 Configuración, métricas y archivos por imagen de la variante S4-A2. &
 La mejora de segmentación no implica una mejora del clasificador; el contraste C1 no mostró beneficio general de usar las máscaras. \\
 \end{longtable}
@@ -58,7 +58,7 @@ Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 mien
 \includegraphics[width=0.97\textwidth,height=0.80\textheight,keepaspectratio,trim=0pt 0pt 205pt 0pt,clip]{images/comparacion_modelos_clasificacion.pdf}
 \par\smallskip
 \raggedright\footnotesize
-\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo (v8.0.0-clean). Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
+\noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo. Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.
 \end{figure}
 
 

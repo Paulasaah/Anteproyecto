@@ -436,7 +436,7 @@ La Figura~\ref{fig:ita-exactitud-pad} compara la exactitud del ITA y la línea b
 
 \subsection{Evaluación congelada y ablación del término de tono}
 
-\noindent\textbf{Versión de resultados.} Las cifras de esta sección corresponden a la auditoría consolidada del banco completo (v8.0.0-clean), con cómputo agrupado por \texttt{lesion\_id}. No corresponden a la lectura anterior v7, que reportaba medias de tres semillas con remuestreo por imagen.
+\noindent\textbf{Protocolo de evaluación.} Las cifras de esta sección corresponden a la auditoría consolidada del banco completo, con cómputo agrupado por \texttt{lesion\_id}. No corresponden a la evaluación previa, que reportaba medias de tres semillas con remuestreo por imagen.
 
 La tabla \ref{tab:v7-clasificacion} resume la evaluación congelada (el \textit{backbone} no actualiza pesos; solo se ajusta la regresión logística) sobre la partición de HAM10000 (n = 2.004, agrupada por lesión). B71 es el brazo propuesto (SimSiam anclado con término de tono); A71 es la ablación sin ese término; el público usa el mismo protocolo de extracción que B71.
 
@@ -532,7 +532,7 @@ La Figura~\ref{fig:clasificacion-ham-pareada} separa el desempeño con IC indivi
 \includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/09_baselines_y_contrastes}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\noindent\textit{Nota.} Elaboración propia desde e3b\_summary.json del protocolo e3\_s1\_bs64\_autocast, consistente con la evaluación v71 congelada (B71: 0,7141). (a) F1 macro e IC individuales del 95 \%. (b) Diferencias pareadas B71 menos línea base e IC del 95 \%; referencia discontinua en cero. HAM10000, 2.004 imágenes; bootstrap por lesion\_id, 1.000 remuestras, semilla 20260923. Sin corrección global por multiplicidad. Los controles del banco no se equiparan al control público con protocolo B71.
+\noindent\textit{Nota.} Elaboración propia a partir de los registros de la comparación congelada (B71: 0,7141). (a) F1 macro e IC individuales del 95 \%. (b) Diferencias pareadas B71 menos línea base e IC del 95 \%; referencia discontinua en cero. HAM10000, 2.004 imágenes; bootstrap por lesion\_id, 1.000 remuestras, semilla 20260923. Sin corrección global por multiplicidad. Los controles del banco no se equiparan al control público con protocolo B71.
 \end{figure}
 
 
