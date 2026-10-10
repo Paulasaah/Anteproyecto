@@ -63,15 +63,15 @@
     },
     {
       "svg": "24_arbol_problema.svg",
-      "svg_sha256": "5aeee40cddcba6596d6012784065552abca07992df8748bad92e7bec5eebe15a",
+      "svg_sha256": "408871f60ccd6c4fad4a82aece84d2eeddf7f944483b4f6bf4a80fa7963488af",
       "pdf": "24_arbol_problema_svg-raw.pdf",
-      "pdf_sha256": "a7bb90df0faa87a0f2e14a27eb253cbc1ad1d29c69d08b61c42b19c645b6186d"
+      "pdf_sha256": "df5db6c3c66a4fd2ebaab92b9cc1175389d67a7492f1fa5f7fade8afc024cf18"
     },
     {
       "svg": "25_diseno_metodologico.svg",
-      "svg_sha256": "473864f69d79a680aa609954a908b741b6ed3b37afb0b3f4fc5ecc3845f24e64",
+      "svg_sha256": "4dcf2bbbfc191c692b7d3af3e674fb54f07a452332b5ae387a743a4c6e20e2d6",
       "pdf": "25_diseno_metodologico_svg-raw.pdf",
-      "pdf_sha256": "6b516ce0bcba56b862bfdb327eac2519da5aadebe6b16a1509163308b3fc3029"
+      "pdf_sha256": "37627a227540f5a941a51e6061b27753dd6c17200f4bbf36c73fee50ccd818ed"
     },
     {
       "svg": "01_diagnosticos_2x2.svg",
