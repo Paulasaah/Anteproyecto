@@ -11,5 +11,8 @@ for i,(ax,(name,labels,values)) in enumerate(zip(axs.flat,rows)):
  ax.barh(range(len(labels)),[v-1 for v in values],left=1,height=(.24 if len(labels)==2 else .54),color='#F4EDE6',edgecolor='#8A6C58',linewidth=.85,zorder=3)
  ax.set_yticks(range(len(labels)),labels);ax.set_ylim(len(labels)-.4,-.6);ax.set_xscale('log');ax.set_xlim(1,200000);ax.set_xticks([1,100,10000]);ax.minorticks_off();ax.xaxis.set_major_formatter(FuncFormatter(lambda v,p:f'{int(v):,}'.replace(',','.')));ax.grid(axis='x',alpha=.14,color='#AAA39E',linewidth=.5);ax.set_axisbelow(True)
  ax.text(-.07,1.08,chr(97+i),transform=ax.transAxes,fontsize=13,ha='right');ax.set_title(f'{name} · N = {sum(values):,}'.replace(',','.'),loc='left',pad=16);ax.set_xlabel('Imágenes · escala logarítmica',labelpad=7)
- for y,v in enumerate(values):ax.annotate(f'{v:,}'.replace(',','.'),(v,y),xytext=(5,0),textcoords='offset points',va='center',fontsize=10)
+ for y,v in enumerate(values):
+  # El conteo mayor queda dentro de la barra, lejos del borde del panel.
+  inside = v >= 20000
+  ax.annotate(f'{v:,}'.replace(',','.'),(v,y),xytext=(-5 if inside else 5,0),textcoords='offset points',ha='right' if inside else 'left',va='center',fontsize=10)
 fig.savefig(R/'images/organizadas/01_diagnosticos_2x2.svg',bbox_inches='tight',pad_inches=.08);plt.close(fig)

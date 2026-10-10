@@ -3,7 +3,7 @@
   "figuras": [
     {
       "svg": "01_diagnosticos_2x2.svg",
-      "svg_sha256": "eab776c051656aed57d4e29bb547b4f4ad3014555f2ca51288da8a91ed7fa228"
+      "svg_sha256": "3d155286ae3fc94e178ab3588ab3454a8d452aed1fd51a9da4a4268aaef2589a"
     },
     {
       "svg": "02_segmentacion_3x3.svg",
