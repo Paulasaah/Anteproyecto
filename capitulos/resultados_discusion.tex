@@ -6,9 +6,28 @@ Este capítulo presenta la configuración experimental, los conjuntos de datos y
 
 Los experimentos se ejecutaron en dos entornos de cómputo independientes, uno para el clasificador y otro para la segmentación. Por ello, los entornos reportan versiones distintas de CUDA y PyTorch.
 
-\textbf{(A) Preentrenamiento SSL y clasificador.} El preentrenamiento del codificador y el ajuste del clasificador lineal (Sección~\ref{sec:desarrollo-clasificador}) se ejecutaron en el clúster UNABIA mediante SLURM. La configuración fue de un nodo con 4 GPU, 32 CPU y 128\,GB de RAM. Según la variante del \textit{backbone}, el presupuesto fue de 40--80 GPU-hora. Se utilizaron Python 3.11, PyTorch 2.4.1, CUDA 12.1, precisión \texttt{bf16}, tamaño de lote efectivo de 128 y semilla 42.
+La Tabla~\ref{tab:entornos-experimentales} reúne los recursos y la configuración registrados. Los parámetros de cada variante y su protocolo se desarrollan en las secciones técnicas correspondientes.
 
-\textbf{(B) Segmentador U-Net.} El módulo de segmentación (Sección~\ref{sec:desarrollo-segmentacion}) se ejecutó en un pod Jupyter con 2 GPU RTX PRO 4000 Blackwell de 24\,GB, CUDA 13.0 y \texttt{torch 2.11.0+cu128}. Los datos y parámetros de entrenamiento se describen en la Sección~\ref{sec:desarrollo-segmentacion}; aquí se documenta el entorno de ejecución.
+\begin{table}[!htbp]
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\setlength{\tabcolsep}{4pt}
+\centering
+\caption{Entornos de ejecución de clasificación y segmentación.}
+\label{tab:entornos-experimentales}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.45\textwidth-16pt\relax}@{}}
+\toprule
+Línea & Entorno y recursos & Configuración registrada \\
+\midrule
+SSL y clasificador & Clúster UNABIA con SLURM: un nodo, 4 GPU, 32 CPU y 128\,GB de RAM. & Python 3.11; PyTorch 2.4.1; CUDA 12.1; precisión \texttt{bf16}; lote efectivo de 128; semilla 42. Presupuesto de 40--80 GPU-hora según el \textit{backbone}. \\
+\addlinespace
+Segmentador U-Net & Pod Jupyter: 2 GPU RTX PRO 4000 Blackwell de 24\,GB. & CUDA 13.0 y \texttt{torch 2.11.0+cu128}. Datos y parámetros de entrenamiento en la Sección~\ref{sec:desarrollo-segmentacion}. \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Configuraciones de los dos entornos independientes reportados; sus versiones no se presentan como una instalación común. El preentrenamiento SSL y el ajuste de la sonda se describen en la Sección~\ref{sec:desarrollo-clasificador}.
+\endgroup
+\end{table}
+\FloatBarrier
 
 \section{Conjuntos de datos y particiones}\label{sec:conjuntos-datos-resultados}
 
@@ -24,6 +43,13 @@ Esta sección informa qué conjuntos y particiones se utilizaron en los experime
 \toprule
 Línea & Conjunto y partición & Función y tamaño reportado \\
 \midrule
+\endfirsthead
+\toprule
+Línea & Conjunto y partición & Función y tamaño reportado \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
 Clasificación & HAM10000: ajuste de la sonda & 8.011 imágenes etiquetadas para ajustar la regresión logística en el experimento D0--D3. \\
 \addlinespace
 Clasificación & HAM10000: evaluación congelada & 2.004 imágenes en la partición agrupada por lesión usada para la comparación principal. \\
@@ -39,7 +65,6 @@ Segmentación & \textit{Pool} sin etiquetas & 58.457 imágenes: 57.288 para entr
 Segmentación & Evaluación con máscaras de referencia & ISIC 2018: 2.594 imágenes; HAM10000: 10.015 imágenes. La evaluación de ISIC 2018 es parcialmente transductiva por el solapamiento documentado con el \textit{pool} sin etiquetas. \\
 \addlinespace
 Tono de piel & Validación frente a FST & Fitzpatrick17k-C: 11.098 imágenes con anotación de referencia. PAD-UFES-20: 1.494 imágenes con FST registrado; el ITA fue calculable en 1.265 casos con imagen completa y en 1.189 con fondo enmascarado por Otsu. \\
-\bottomrule
 \end{longtable}
 \noindent \textit{Nota.} Elaboración propia a partir de los manifiestos y resultados experimentales descritos en las subsecciones correspondientes. FST = fototipo Fitzpatrick; ITA = ángulo tipológico individual. Las divisiones de HAM10000 para evaluación congelada y ajuste fino provienen de protocolos distintos. La pseudo-validación de segmentación usa pseudo-máscaras, no máscaras expertas. Los valores de ITA calculable excluyen los casos en que el estimador se abstuvo.
 \endgroup
@@ -50,7 +75,6 @@ Tono de piel & Validación frente a FST & Fitzpatrick17k-C: 11.098 imágenes con
 HAM10000 contiene 10.015 imágenes dermatoscópicas distribuidas en siete categorías diagnósticas: nevos melanocíticos (\texttt{nv}), melanoma (\texttt{mel}), lesiones similares a queratosis benignas (\texttt{bkl}), carcinoma basocelular (\texttt{bcc}), queratosis actínica y carcinoma intraepidérmico (\texttt{akiec}), lesiones vasculares (\texttt{vasc}) y dermatofibroma (\texttt{df}) \parencite{tschandl2018ham10000}. La categoría \texttt{bkl} comprende lesiones como queratosis seborreicas, lentigos solares y queratosis liquenoides; su denominación abreviada en la figura no reduce la clase a queratosis seborreica. La clase \texttt{nv} concentra la mayoría de las imágenes. \texttt{akiec} no representa una clase independiente de carcinoma escamocelular invasor. El conjunto constituye la fuente principal de entrenamiento y evaluación del clasificador, pero su composición no demuestra representatividad epidemiológica de Santander. Tampoco proporciona etiquetas clínicas de fototipo Fitzpatrick.
 
 \FloatBarrier
-\Needspace{0.88\textheight}
 \subsection{Caracterización de ISIC2019}
 
 ISIC2019 reúne 25.331 imágenes dermatoscópicas (20.264 de entrenamiento y 5.067 de validación) distribuidas en ocho categorías diagnósticas: nevos melanocíticos (\texttt{NV}), melanoma (\texttt{MEL}), carcinoma basocelular (\texttt{BCC}), lesiones similares a queratosis benignas (\texttt{BKL}), queratosis actínica (\texttt{AK}), carcinoma escamocelular (\texttt{SCC}), dermatofibroma (\texttt{DF}) y lesión vascular (\texttt{VASC}) \parencite{combalia2024bcn20000}. A diferencia de HAM10000, que agrupa la queratosis actínica y el carcinoma intraepidérmico en una sola clase (\texttt{akiec}), ISIC2019 separa \texttt{AK} de \texttt{SCC} como categorías independientes; ambas taxonomías no son directamente intercambiables en un entrenamiento conjunto. La clase \texttt{NV} concentra igualmente la mayoría de las imágenes, un desbalance compartido con HAM10000.
@@ -200,41 +224,8 @@ La identificación y el análisis exploratorio de conjuntos constituyen evidenci
 
 \FloatBarrier
 
-\section{Métricas de evaluación}
-Las métricas usadas para evaluar la clasificación se presentan a continuación, donde los valores a calcular dependen de los verdaderos positivos $TP$, verdaderos negativos $TN$, falsos positivos $FP$, y falsos negativos $FN$, asociados a la clase de cada ejemplo del conjunto de datos.
+Las definiciones de las métricas de clasificación se presentan en la Sección~\ref{sec:metricas-evaluacion}; cada bloque siguiente identifica su tarea, población evaluada y protocolo.
 
-
-\begin{itemize}
-    \item Exactitud: esta medida corresponde a la proporción de predicciones predichas correctamente,
-
-    \begin{equation}
-        \mathrm{Exactitud}= \frac{TP+TN}{TP+TN+FP+FN}.
-        \label{eq:acc}
-    \end{equation}
-
-
-    \item Precisión: esta medida es la proporción de ejemplos pertenecientes a una clase que fueron correctamente predichos en dicha clase,
-    
-        \begin{equation}
-            \mathrm{Precisi\acute{o}n} = \frac{TP}{TP+FP}.
-            \label{eq:pre}
-        \end{equation}
-        
-    \item Exhaustividad: esta medida es la proporción entre las predicciones que fueron correctamente clasificadas en una clase sobre los ejemplos que pertenecían a esa clase,
-    
-    \begin{equation}
-        \mathrm{Exhaustividad}= \frac{TP}{TP+FN}.
-        \label{eq:re}
-    \end{equation}
-
-    \item Métrica-F1: esta medida está diseñada para ponderar de manera equilibrada entre las métricas de precisión (\ref{eq:pre}) y exhaustividad (\ref{eq:re}),
-    
-    \begin{equation}
-        \mathrm{F1} = \frac{2\cdot\mathrm{Precisi\acute{o}n}\cdot\mathrm{Exhaustividad}}{\mathrm{Precisi\acute{o}n}+\mathrm{Exhaustividad}}.
-        \label{eq:f1}
-    \end{equation}
-
-\end{itemize}
 \section{Resultados de segmentación complementaria}
 \label{sec:segmentacion-complementaria}
 
@@ -351,7 +342,7 @@ La Figura~\ref{fig:pad-fototipo-clinico} contrasta las etiquetas de fototipo reg
 
 \FloatBarrier
 
-\subsection{Caracterización colorimétrica antes y después de la transformación}
+\subsection{Caracterización de las imágenes originales y alcance de la transformación}
 
 El resumen local anterior a la transformación permite describir el proxy ITA de las imágenes originales (tabla \ref{tab:ita-originales}). Se calcula sobre píxeles de piel seleccionados por máscara, usando las medianas de los canales CIELAB: $\mathrm{ITA}=(180/\pi)\arctan((\widetilde L^*-50)/\widetilde b^*)$. El código marca el resultado como indeterminado si $\widetilde b^*<5$; otras imágenes quedan en cuarentena por los controles del módulo. Los seis intervalos empleados internamente para agrupar ITA no se interpretan como fototipos clínicos.
 
@@ -450,7 +441,7 @@ En Fitzpatrick17k-C y PAD-UFES-20, la exactitud del estimador ITA fue inferior a
 
 \section{Resultados de clasificación}\label{sec:resultados-clasificacion}
 
-\subsection{Clasificación}
+\subsection{Evaluación congelada y ablación del término de tono}
 
 \noindent\textbf{Versión de resultados.} Las cifras de esta sección corresponden a la auditoría consolidada del banco completo (v8.0.0-clean), con cómputo agrupado por \texttt{lesion\_id}. No corresponden a la lectura anterior v7, que reportaba medias de tres semillas con remuestreo por imagen.
 
@@ -510,18 +501,21 @@ En esta comparación, el \textit{backbone} preentrenado con SSL permaneció cong
 \centering
 \caption{Contrastes pareados de F1 macro entre el clasificador congelado (B71) y ocho líneas base en HAM10000 (n = 2.004).}
 \label{tab:comparacion-baselines-ham}
-\begin{tabular}{lrrl}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrll@{}}
 \toprule
-Línea base & F1 macro propio & $\Delta$ F1 (B71 $-$ base) [IC 95\,\%] & Lectura \\
+ & Desempeño & \multicolumn{3}{c}{Contraste pareado frente a B71} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}
+Línea base & F1 macro & $\Delta$ F1 & IC del 95\,\% & Lectura \\
 \midrule
-VGG19 & 0,3810 & $+$0,3331 [$+$0,2844; $+$0,3800] & excluye cero \\
-AlexNet & 0,4728 & $+$0,2413 [$+$0,1942; $+$0,2898] & excluye cero \\
-ResNet-50 & 0,4670 & $+$0,2471 [$+$0,1969; $+$0,2943] & excluye cero \\
-EfficientNet-B0 & 0,5041 & $+$0,2100 [$+$0,1579; $+$0,2609] & excluye cero \\
-SimSiam ResNet-50 & 0,5369 & $+$0,1772 [$+$0,1278; $+$0,2299] & excluye cero \\
-DINOv2 ViT-S/14 & 0,5508 & $+$0,1633 [$+$0,1198; $+$0,2066] & excluye cero \\
-ViT-B/16 & 0,5633 & $+$0,1509 [$+$0,1005; $+$0,2068] & excluye cero \\
-DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 [$+$0,0728; $+$0,1585] & excluye cero \\
+VGG19 & 0,3810 & $+$0,3331 & [$+$0,2844; $+$0,3800] & excluye cero \\
+AlexNet & 0,4728 & $+$0,2413 & [$+$0,1942; $+$0,2898] & excluye cero \\
+ResNet-50 & 0,4670 & $+$0,2471 & [$+$0,1969; $+$0,2943] & excluye cero \\
+EfficientNet-B0 & 0,5041 & $+$0,2100 & [$+$0,1579; $+$0,2609] & excluye cero \\
+SimSiam ResNet-50 & 0,5369 & $+$0,1772 & [$+$0,1278; $+$0,2299] & excluye cero \\
+DINOv2 ViT-S/14 & 0,5508 & $+$0,1633 & [$+$0,1198; $+$0,2066] & excluye cero \\
+ViT-B/16 & 0,5633 & $+$0,1509 & [$+$0,1005; $+$0,2068] & excluye cero \\
+DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 \bottomrule
 \end{tabular}
 \endgroup
@@ -529,17 +523,6 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 [$+$0,0728; $+$0,1585] & excluye cero \\
 \noindent\textit{Nota.} Elaboración propia.
 
 En esta partición, B71 obtuvo un F1 macro de 0,7141. Los ocho intervalos pareados del 95\,\% excluyeron cero a favor de B71 frente a las líneas base. Dado que no hubo corrección global por multiplicidad, este patrón describe el resultado de la comparación y no equivale a ocho pruebas confirmatorias independientes.
-
-\subsection{Comparación descriptiva: ajuste fino de las ocho líneas base}
-
-En el ajuste fino, todas las ponderaciones de cada línea base se actualizaron usando etiquetas. Se empleó una partición distinta (n = 2.014) y se seleccionó la época según el desempeño en validación, lo que introduce el sesgo optimista señalado en el protocolo. Debido a estas diferencias, la comparación con B71 es descriptiva y no constituye un contraste pareado.
-
-Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,7962 con ViT-B/16 en ISIC2019 y 0,5889 con VGG19 en ISIC2020. En HAM10000 e ISIC2019, estos valores alcanzan o superan el resultado de B71. La comparación muestra que los dos regímenes responden a condiciones distintas: B71 aprende representaciones mediante SSL sin etiquetas para esa etapa, mientras que el ajuste fino actualiza los pesos con las etiquetas disponibles. Por tanto, los resultados no sustentan una superioridad absoluta de B71, sino el uso de representaciones autosupervisadas cuando se busca reducir la dependencia de etiquetas durante el aprendizaje de la representación.
-
-\subsection{Caso especial: ISIC2020, F1 contra sensibilidad clínica}
-
-En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustados y aplicó Holm por separado a cada familia de métricas. B71-limpio obtuvo mayor F1 macro que siete de los ocho modelos; la diferencia frente a VGG19 no alcanzó el umbral corregido ($p_{\text{Holm}}=0{,}066$). En cambio, la exactitud balanceada favoreció a siete de los ocho modelos ajustados. La diferencia más clara aparece en la detección de melanoma: B71 identificó 39 de 122 casos (\textit{recall} 0,3197), frente a 86 de 122 (\textit{recall} 0,7049) con AlexNet ajustado. Este análisis es post hoc y no formó parte del registro original. En conjunto, los resultados muestran que un F1 macro mayor no implica necesariamente mayor sensibilidad para melanoma; la elección entre estas métricas requiere un criterio clínico que el proyecto aún no ha definido.
-
 
 Las Figuras~\ref{fig:clasificacion-ham-pareada} y \ref{fig:contrastes-ham-baselines} separan las estimaciones de desempeño de los contrastes pareados en HAM10000. La Figura~\ref{fig:confusion-b71-ham} muestra los errores por clase. El resumen multidataset anterior se conserva como material suplementario en la Figura~\ref{fig:comparacion-modelos-multidataset}.
 
@@ -575,9 +558,43 @@ Las Figuras~\ref{fig:clasificacion-ham-pareada} y \ref{fig:contrastes-ham-baseli
 
 \FloatBarrier
 
+\subsection{Comparación descriptiva: ajuste fino de las ocho líneas base}
+
+En el ajuste fino, todas las ponderaciones de cada línea base se actualizaron usando etiquetas. Se empleó una partición distinta (n = 2.014) y se seleccionó la época según el desempeño en validación, lo que introduce el sesgo optimista señalado en el protocolo. Debido a estas diferencias, la comparación con B71 es descriptiva y no constituye un contraste pareado.
+
+Los mejores resultados de ajuste fino fueron 0,7058 con ViT-B/16 en HAM10000, 0,7962 con ViT-B/16 en ISIC2019 y 0,5889 con VGG19 en ISIC2020. En HAM10000 e ISIC2019, estos valores alcanzan o superan el resultado de B71. La comparación muestra que los dos regímenes responden a condiciones distintas: B71 aprende representaciones mediante SSL sin etiquetas para esa etapa, mientras que el ajuste fino actualiza los pesos con las etiquetas disponibles. Por tanto, los resultados no sustentan una superioridad absoluta de B71, sino el uso de representaciones autosupervisadas cuando se busca reducir la dependencia de etiquetas durante el aprendizaje de la representación.
+
+\subsection{Caso especial: ISIC2020, F1 contra sensibilidad clínica}
+
+En ISIC2020, el análisis post hoc comparó B71-limpio con ocho modelos ajustados y aplicó Holm por separado a cada familia de métricas. B71-limpio obtuvo mayor F1 macro que siete de los ocho modelos; la diferencia frente a VGG19 no alcanzó el umbral corregido ($p_{\text{Holm}}=0{,}066$). En cambio, la exactitud balanceada favoreció a siete de los ocho modelos ajustados. La diferencia más clara aparece en la detección de melanoma: B71 identificó 39 de 122 casos (\textit{recall} 0,3197), frente a 86 de 122 (\textit{recall} 0,7049) con AlexNet ajustado. Este análisis es post hoc y no formó parte del registro original. En conjunto, los resultados muestran que un F1 macro mayor no implica necesariamente mayor sensibilidad para melanoma; la elección entre estas métricas requiere un criterio clínico que el proyecto aún no ha definido.
+
+
 \subsection{Ablación de segmentación complementaria (F4)}
 
-F4 concatena la imagen completa, un recorte de la lesión con margen del 10\,\% y descriptores de forma y color de la pseudo-máscara del segmentador (\texttt{student\_r3}); no aplica enmascaramiento duro. En el contraste canónico B71+F4 frente a B71 en HAM10000, $\Delta$F1 macro $=+0{,}0300$ [$-0{,}0046$; $+0{,}0715$], exactitud balanceada $+0{,}0222$ [$-0{,}0159$; $+0{,}0624$] y \textit{recall} de melanoma $+0{,}0135$ [$-0{,}0446$; $+0{,}0714$]: ningún intervalo excluye cero. La sensibilidad por semilla confirma la falta de robustez: $+0{,}0300$ (semilla 42), $+0{,}0092$ (semilla 43) y $+0{,}0261$ (semilla 44), con 0 de 3 intervalos excluyendo cero. En el análisis exploratorio E3b, F4 sube el punto de F1 en 8 de 8 \textit{backbones}, pero solo 5 de 8 intervalos excluyen cero. F4 se mantiene como variante exploratoria; B71 sin segmentación sigue siendo la referencia principal del banco.
+F4 concatena la imagen completa, un recorte de la lesión con margen del 10\,\% y descriptores de forma y color de la pseudo-máscara del segmentador (\texttt{student\_r3}); no aplica enmascaramiento duro. La Tabla~\ref{tab:ablacion-f4-ham} separa las diferencias estimadas del contraste canónico B71+F4 frente a B71 en HAM10000. Ninguno de los tres intervalos excluye cero.
+
+\begin{table}[!htbp]
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\centering
+\caption{Ablación canónica F4 frente a B71 en HAM10000.}
+\label{tab:ablacion-f4-ham}
+\begin{tabular}{@{}lrll@{}}
+\toprule
+ & \multicolumn{3}{c}{B71+F4 menos B71} \\
+\cmidrule(lr){2-4}
+Métrica & Diferencia & IC del 95\,\% & Lectura \\
+\midrule
+F1 macro & $+0{,}0300$ & [$-0{,}0046$; $+0{,}0715$] & Incluye cero \\
+Exactitud balanceada & $+0{,}0222$ & [$-0{,}0159$; $+0{,}0624$] & Incluye cero \\
+Sensibilidad de melanoma & $+0{,}0135$ & [$-0{,}0446$; $+0{,}0714$] & Incluye cero \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} Contraste canónico ya reportado; los componentes de F4 no se evaluaron por separado. Esta tabla no reúne los contrastes exploratorios de los ocho \textit{backbones}.
+\endgroup
+\end{table}
+
+La sensibilidad por semilla confirma la falta de robustez: $+0{,}0300$ (semilla 42), $+0{,}0092$ (semilla 43) y $+0{,}0261$ (semilla 44), con 0 de 3 intervalos excluyendo cero. En el análisis exploratorio E3b, F4 sube el punto de F1 en 8 de 8 \textit{backbones}, pero solo 5 de 8 intervalos excluyen cero. F4 se mantiene como variante exploratoria; B71 sin segmentación sigue siendo la referencia principal del banco.
 
 \subsection{Adaptación de dominio: continuación SSL con PAD-UFES-20}
 
@@ -624,18 +641,55 @@ La Figura~\ref{fig:adaptacion-pad-d0-d3} representa F1 macro y MCC con sus inter
 Frente al control D2, D3 mejoró en F1 ($\Delta=+0{,}0816$; IC del 95\,\% [$+0{,}0525$; $+0{,}1085$]) y MCC ($\Delta=+0{,}0730$; IC del 95\,\% [$+0{,}0419$; $+0{,}1034$]). Los intervalos de exactitud balanceada ($+0{,}0375$ [$-0{,}0161$; $+0{,}0875$]) y AUC ($+0{,}0162$ [$-0{,}0065$; $+0{,}0393$]) incluyeron cero. D3, sin embargo, permaneció por debajo de D0 en F1 y MCC. Además, sus \textit{recalls} fueron 0,302 para BCC, 0,320 para melanoma y 0,959 para nevo, y el 47,8\,\% de sus predicciones quedó fuera de esas tres clases. La mejora respecto de D2 constituye una señal piloto, no evidencia de que la adaptación al dominio clínico esté resuelta: la evaluación disponible utiliza una semilla, incluye pocos melanomas y cubre un mapeo parcial de diagnósticos.
 
 \section{Discusión}
+\label{sec:discusion-integrada}
 
-Los resultados deben leerse según la tarea y el protocolo de cada evaluación. En la comparación congelada de HAM10000, B71 obtuvo intervalos pareados que excluyeron cero frente a las ocho líneas base, sin corrección global por multiplicidad. En el ajuste fino, algunos modelos alcanzaron o superaron a B71 en HAM10000 e ISIC2019. En ISIC2020, el F1 macro y la sensibilidad de melanoma favorecieron configuraciones distintas. Estos resultados no establecen un único modelo superior para todos los criterios.
+Los resultados se interpretan en el mismo orden de las líneas de trabajo, atendiendo a la tarea, la población y el protocolo de cada evaluación.
 
-En adaptación de dominio, D3 mejoró frente al control D2, pero permaneció por debajo de D0. En segmentación, S4-A2 superó a \texttt{student\_r3} en las métricas reportadas, aunque el uso de máscaras no mostró una mejora general de la clasificación. El ITA tuvo un desempeño inferior a la línea base por mayoría, por lo que no se interpreta como estimación validada del fototipo clínico.
+\subsection{Segmentación y alcance de su integración}
 
-\subsection{Limitaciones de ITA y Fitzpatrick}
+S4-A2 superó a \texttt{student\_r3} en las métricas de segmentación reportadas. La evaluación de ISIC2018 es parcialmente transductiva por el solapamiento documentado con el \textit{pool} sin etiquetas. El desempeño del segmentador y la contribución de sus máscaras al clasificador se evalúan por separado: en la ablación F4, los intervalos del contraste canónico incluyeron cero (Tabla~\ref{tab:ablacion-f4-ham}), y el uso de máscaras no mostró una mejora general de la clasificación.
+
+\subsection{Estimación de tono y límites de la transformación}
 
 El ITA del proyecto no constituye un clasificador Fitzpatrick validado. En PAD-UFES-20, su exactitud fue de 21,74\,\% con la imagen completa (n = 1.265; línea base por mayoría: 59,37\,\%) y de 22,88\,\% con el fondo enmascarado por Otsu (n = 1.189; línea base: 59,80\,\%). La cifra publicada de 22,9\,\% frente a 51,3\,\% corresponde a otro protocolo y no a esta evaluación \parencite{alipour2026italimitations}. Además, el reducido número de observaciones de los fototipos V y VI impide extraer conclusiones sobre esos grupos. En consecuencia, estos resultados no constituyen una auditoría concluyente de equidad por fototipo.
 
-\subsection{Estado del objetivo y trabajo pendiente}
+Las distribuciones del ITA caracterizan las imágenes originales con los protocolos identificados en la Sección~\ref{sec:resultados-tono}. La evaluación del estimador frente a FST se distingue de la transformación usada en SSL. El efecto posterior de esa transformación continúa pendiente de mediciones emparejadas con identificadores y preprocesamiento coincidentes.
 
-Los hallazgos principales son tres. En HAM10000, B71 superó a las ocho líneas base congeladas en los contrastes pareados, sin ajuste global por multiplicidad. En PAD-UFES-20, D3 mejoró frente al control D2, pero no superó al \textit{encoder} público. La integración de las máscaras tampoco mostró una mejora general de la clasificación. Siguen abiertos los siguientes aspectos:
+\subsection{Clasificación y adaptación de dominio}
+
+En la comparación congelada de HAM10000, B71 obtuvo intervalos pareados que excluyeron cero frente a las ocho líneas base, sin corrección global por multiplicidad. En el ajuste fino, algunos modelos alcanzaron o superaron a B71 en HAM10000 e ISIC2019. En ISIC2020, el F1 macro y la sensibilidad de melanoma favorecieron configuraciones distintas. Estos resultados no establecen un único modelo superior para todos los criterios.
+
+En adaptación de dominio, D3 mejoró frente al control D2, pero permaneció por debajo de D0. La evaluación piloto en PAD-UFES-20 usa una semilla, pocos melanomas y un mapeo parcial de diagnósticos. Su alcance corresponde a ese protocolo y no permite declarar una adaptación clínica validada a Santander.
+
+\subsection{Avance por objetivo y trabajo pendiente}
+
+La Tabla~\ref{tab:avance-objetivos-resultados} relaciona la evidencia presentada con los cuatro objetivos específicos. Las conclusiones amplían este balance en el Capítulo~\ref{chap:conclusiones}.
+
+\begin{table}[!htbp]
+\begingroup\fontsize{11}{13}\selectfont\singlespacing
+\setlength{\tabcolsep}{4pt}
+\centering
+\caption{Síntesis del avance documentado por objetivo específico.}
+\label{tab:avance-objetivos-resultados}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.48\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.28\textwidth-16pt\relax}@{}}
+\toprule
+Objetivo & Evidencia presentada & Estado y alcance \\
+\midrule
+1. Caracterizar conjuntos & Conjuntos, clases y particiones (Sección~\ref{sec:conjuntos-datos-resultados}); disponibilidad de FST y caracterización ITA (Sección~\ref{sec:caracterizacion-tono}). & Avance documentado; cierre sujeto a completar la trazabilidad. \\
+\addlinespace
+2. Diseñar el algoritmo & Arquitectura, procedimientos y configuraciones de las tres líneas (Sección~\ref{sec:desarrollo-tecnico}). & Diseño documentado; limitaciones de procedencia en D2/D3. \\
+\addlinespace
+3. Evaluar desempeño & Segmentación (Sección~\ref{sec:segmentacion-complementaria}), tono (Sección~\ref{sec:resultados-tono}) y clasificación/adaptación (Sección~\ref{sec:resultados-clasificacion}). & Evaluación experimental documentada, con los límites de cada protocolo. \\
+\addlinespace
+4. Implementar prototipo & Estado de ejecución en la Tabla~\ref{tab:trazabilidad-fases}. & Pendiente; aún no implementado ni desplegado. \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright
+\noindent\textit{Nota.} El balance conserva el estado descrito en las conclusiones. La existencia de evaluaciones experimentales no implica validación clínica ni cierre de los pendientes de trazabilidad.
+\endgroup
+\end{table}
+
+Siguen abiertos los siguientes aspectos:
 \begin{enumerate}
     \item \textbf{Trazabilidad de D2/D3.} Los archivos \texttt{run.json} revisados dejan vacío \texttt{data\_revision} y no incluyen un hash válido de partición. El protocolo sí identifica hashes de exclusión, listas de identificadores y el \textit{split} de PAD. Completar estos metadatos permitiría mejorar la trazabilidad de los resultados.
     \item \textbf{Ablación de F4.} F4 combina recorte de lesión y descriptores de forma/color. Como esos componentes no se aislaron en el banco reportado, el resultado sigue siendo exploratorio y no permite atribuir un eventual cambio a la segmentación por separado.
