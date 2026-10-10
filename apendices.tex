@@ -62,6 +62,36 @@ Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 mien
 \end{figure}
 
 
+\FloatBarrier
+\section{Comparación descriptiva de estimadores ITA}
+
+La Figura~\ref{fig:ita-e5-otsu-roi} conserva las distribuciones marginales de Otsu y ROI. Sus coberturas y selecciones de píxeles difieren; los percentiles no son intervalos de confianza ni contrastes pareados. Esta comparación complementa la Tabla~\ref{tab:e5-cobertura}, sin demostrar efecto de la transformación ni superioridad clínica.
+
+\begin{figure}[!htbp]
+\caption{Mediana y dispersión del ITA según el estimador en E5.}
+\label{fig:ita-e5-otsu-roi}
+\centering
+\includegraphics[width=\textwidth]{images/ita_e5_otsu_roi.pdf}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont
+\noindent\textit{Nota.} Cada punto es la mediana y cada segmento cubre los percentiles 25--75 de los casos válidos del estimador correspondiente. Son distribuciones marginales con coberturas diferentes, no intervalos de confianza ni diferencias pareadas. La Tabla~\ref{tab:e5-cobertura} informa las intersecciones. Otsu y ROI emplean selecciones de píxeles y, en ISIC, resoluciones distintas; la comparación es descriptiva y no demuestra superioridad, equivalencia clínica ni efecto de la transformación.
+\end{figure}
+\FloatBarrier
+\section{Confiabilidad de las configuraciones congeladas}
+
+La Figura~\ref{fig:confiabilidad-configuraciones} compara el control público con protocolo B71, A71 y B71 sobre las mismas 2.004 imágenes de HAM10000. Cada fila conserva los 15 intervalos uniformes y presenta confiabilidad y frecuencia de confianza. El ECE depende del protocolo de discretización; la comparación es descriptiva, sin contraste de incertidumbre y sin ajuste posterior de calibración. La menor discrepancia agregada de A71 no demuestra por sí sola una ventaja clínica o un efecto causal del término de tono.
+
+\begin{figure}[!htbp]
+\caption{Comparación descriptiva de confiabilidad de tres configuraciones.}
+\label{fig:confiabilidad-configuraciones}
+\centering
+\includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/A01_confiabilidad_comparacion}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont\singlespacing
+\noindent\textit{Nota.} Elaboración propia. HAM10000, validación n=2.004; 15 intervalos uniformes. Cada fila corresponde al control público con protocolo B71, A71 o B71. Las diferencias no aíslan el efecto causal de tono. ECE: público, 0,0688; A71, 0,0154; B71, 0,0529.
+\end{figure}
+\FloatBarrier
+
 \clearpage
 \chapter{Cronograma de actividades}\label{anexo:gantt}
 Se incorpora el diagrama de Gantt suministrado por los autores, junto con una vista ampliada de las actividades, responsables, fechas y porcentajes registrados. Corresponde al documento de planificación; sus porcentajes no sustituyen el estado de ejecución descrito en la metodología y los resultados. La copia conserva el contenido de la hoja consultada el 9 de octubre de 2026.
@@ -106,4 +136,5 @@ Se incorpora el presupuesto suministrado por los autores, conservando los rubros
 \includegraphics[page=2,width=\linewidth,height=0.94\textheight,keepaspectratio]{anexos/presupuesto.pdf}
 \end{landscape}
 \restoregeometry
+
 

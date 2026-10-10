@@ -1,0 +1,101 @@
+{
+  "fuente": "SVG canónico; exportación Inkscape con textos convertidos a trazados para conservar Nimbus Roman.",
+  "figuras": [
+    {
+      "svg": "01_diagnosticos_2x2.svg",
+      "svg_sha256": "89c5b1ce5f343ec68b45524f50f430b57ff3f60c068e78fafd14ccbafaba2f80",
+      "pdf": "01_diagnosticos_2x2_svg-raw.pdf",
+      "pdf_sha256": "ee4c92234323038c7b9417b04090443ab52aa39bb2538c10a139a8a0c8a6c239"
+    },
+    {
+      "svg": "02_segmentacion_3x3.svg",
+      "svg_sha256": "8302ea5272c0b6630ec662f5bb21d3a5495164a630c32fd240c0884fa7df5d76",
+      "pdf": "02_segmentacion_3x3_svg-raw.pdf",
+      "pdf_sha256": "b18ee61c58dd4b50e183d23d84e7d7eb725b57de6669a1df6e8c3795ea48eca8"
+    },
+    {
+      "svg": "03_segmentacion_dice.svg",
+      "svg_sha256": "5ee3cf552a537335da247d71b9c041182a233e85c074cc744c2f4664f650642f",
+      "pdf": "03_segmentacion_dice_svg-raw.pdf",
+      "pdf_sha256": "835ba467a56b0ef02953c4fd628ac6da3aafc1857ec5401e9a5cc37b9e2b3908"
+    },
+    {
+      "svg": "04_pad_fst_ita.svg",
+      "svg_sha256": "bed6552b0007b4326ed323ebe0326f89163f5e7e6b9012180ebaebbcb4dd6209",
+      "pdf": "04_pad_fst_ita_svg-raw.pdf",
+      "pdf_sha256": "09caa4d928e48bf41d9968e4ace235c41aff5267e1a9a4248ea749cbeefb602e"
+    },
+    {
+      "svg": "05_ita_otsu_2x2.svg",
+      "svg_sha256": "b0e406a48bb1fa2562a024a9053b714fae7acdeaadd48f3cba830c31a532566a",
+      "pdf": "05_ita_otsu_2x2_svg-raw.pdf",
+      "pdf_sha256": "0f139c7c39992c653765ca5a30119478c41bfbae95a2e72078fe1184204b821d"
+    },
+    {
+      "svg": "06_ita_roi_e5.svg",
+      "svg_sha256": "9ec14aa95dec94a6e66094ec1ab97e7bf51670c445d30edde75c5826d619ad1e",
+      "pdf": "06_ita_roi_e5_svg-raw.pdf",
+      "pdf_sha256": "8a3f4c3839eeca601dc110e4af6c817bcf080b5a755dd4395b5b942ecb7224d8"
+    },
+    {
+      "svg": "07_ita_evaluacion_pad.svg",
+      "svg_sha256": "19483bddcd7bce4c6b3bcea40760aa24362acb636936b2e0890b7a9408b97086",
+      "pdf": "07_ita_evaluacion_pad_svg-raw.pdf",
+      "pdf_sha256": "4aea226d34c91cd7ab98b71294f81cc1af0fbf8f8e334ecf92fab9dbf9ac1b90"
+    },
+    {
+      "svg": "08_configuraciones_ham.svg",
+      "svg_sha256": "e309549e6239b048280719319a848c3066d634586807cbb56508edde18a073ba",
+      "pdf": "08_configuraciones_ham_svg-raw.pdf",
+      "pdf_sha256": "aba07f49be24228de8e90bcd0eee6ba6c08eb6712124ebc956d4b50e851cde9c"
+    },
+    {
+      "svg": "09_baselines_y_contrastes.svg",
+      "svg_sha256": "4591fc7c20ea2b2f286175368572d27303c3358272f997d09abafa1a9fb278fb",
+      "pdf": "09_baselines_y_contrastes_svg-raw.pdf",
+      "pdf_sha256": "926c46a63d57684567daf5a5d251119805e37be38d5c57ba01cdfa40ef0d4586"
+    },
+    {
+      "svg": "10_confusion_b71.svg",
+      "svg_sha256": "5ed0dd1f0d237f9c2e415b949302eadb92ca4841524bfdc993dfc9a9259eb64a",
+      "pdf": "10_confusion_b71_svg-raw.pdf",
+      "pdf_sha256": "4264e8e6b66af40b5c339eecb405156242257419c1843d092316d278ab3e3d58"
+    },
+    {
+      "svg": "11_metricas_por_clase.svg",
+      "svg_sha256": "1b4720ebf01c05de22a9913ebb6a1bdc89124b2faac46c663aed1f9fb08fe685",
+      "pdf": "11_metricas_por_clase_svg-raw.pdf",
+      "pdf_sha256": "48e6ca5eb4024f4dfe3a4ba0a09eae798ba4324a3db845479394b9722b3dfca1"
+    },
+    {
+      "svg": "12_precision_recall.svg",
+      "svg_sha256": "0660ae50197909586bba672aacf3a76721dfeb35900ecc452a31ebd0ef5d5cf1",
+      "pdf": "12_precision_recall_svg-raw.pdf",
+      "pdf_sha256": "83371ae0a7a8e599ecb5bc100db7f65397d39f5b42700ac0d4025b6dfbad9938"
+    },
+    {
+      "svg": "13_confiabilidad_b71.svg",
+      "svg_sha256": "d1f5d65f0c58a3f47763410d2e4abbdc06f3d70af5b03d6626430f9b2f29da55",
+      "pdf": "13_confiabilidad_b71_svg-raw.pdf",
+      "pdf_sha256": "5afa758397911076f9cc1a10245be7c08c1bc04367317e19c780089be738a0ae"
+    },
+    {
+      "svg": "14_ablacion_f4.svg",
+      "svg_sha256": "c18bd81de379dedc0691b171285ef575513fe9895ee7e2f7e6be6288fb5273ca",
+      "pdf": "14_ablacion_f4_svg-raw.pdf",
+      "pdf_sha256": "bd373a9836c514acbd9441791049e216b35641eae51556066e6a67d101a2e1fc"
+    },
+    {
+      "svg": "15_adaptacion_pad.svg",
+      "svg_sha256": "58f9479194009aa85b496178b6b31ec5d53c96a888c6154d2d9099d4bdaee937",
+      "pdf": "15_adaptacion_pad_svg-raw.pdf",
+      "pdf_sha256": "4c376f5f1c0a631939d17cc0966e55392ec4c747a05b805370ee1db41b46178e"
+    },
+    {
+      "svg": "A01_confiabilidad_comparacion.svg",
+      "svg_sha256": "384d44af5c863416d5fe4cee139ff07b9c95a712439da63c2ca4c68db92c029a",
+      "pdf": "A01_confiabilidad_comparacion_svg-raw.pdf",
+      "pdf_sha256": "70bcd754fe8631a38837712b1c3d0e35a49c5cef83c83418e042c40cf2422553"
+    }
+  ]
+}
