@@ -48,6 +48,7 @@ El entrenamiento ancla los pesos entrenables $\Theta_{\mathrm{ent}}$ hacia su es
 \begin{equation}
  \mathcal L_{\mathrm{L2SP}}=\sum_{a\in\Theta_{\mathrm{ent}}}(\theta_a-\theta_a^0)^2.
 \end{equation}
+\Needspace{6\baselineskip}
 \item Anclaje de representaciones: compara las características aprendidas con las del codificador público congelado sobre la misma vista.
 \begin{equation}
  \mathcal L_{\mathrm{dist}}=\frac{1}{N}\sum_{i=1}^{N}\left[
