@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" width="453.6pt" height="381.6pt" viewBox="0 0 453.6 381.6" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" width="413.689pt" height="329.909pt" viewBox="12.4121 16.4977 413.689 329.909" version="1.1">
  <metadata>
   <rdf:RDF>
    <ns2:Work>
@@ -18,9 +18,6 @@
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
  </defs>
  <g id="figure_1">
-  <g id="patch_1">
-   <path d="M 0 381.6  L 453.6 381.6  L 453.6 0  L 0 0  z " style="fill: #ffffff" />
-  </g>
   <g id="axes_1">
    <g id="patch_2">
     <path d="M 72.576 309.715848  L 352.383696 309.715848  L 352.383696 29.908152  L 72.576 29.908152  z " style="fill: #ffffff" />
