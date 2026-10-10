@@ -65,50 +65,45 @@ El vector de fondo utiliza los pesos complementarios del mapa:
  v_b=\operatorname{norm}\left(\sum_{p}\bigl(1-P(p)\bigr)\,Z(p)\right).
 \end{equation}
 La pérdida combina un término negativo (separar primer plano de fondo dentro de la misma imagen) y uno positivo (acercar primeros planos entre sí y fondos entre sí, ponderado por similitud dentro del lote):
-\begin{itemize}[label=\(\blacksquare\),itemsep=1.2\baselineskip]
-\item Término negativo: separa las representaciones de primer plano y fondo de cada imagen.
+
+\noindent Término negativo: separa las representaciones de primer plano y fondo de cada imagen.
 \begin{equation}
  \mathcal L_{\mathrm{NEG}}=-\frac{1}{B}\sum_{i=1}^{B}\log\left(1-v_f^{(i)\top}v_b^{(i)}\right).
 \end{equation}
-\item Término positivo: acerca representaciones de primer plano entre imágenes, con un término análogo para el fondo.
+\noindent Término positivo: acerca representaciones de primer plano entre imágenes, con un término análogo para el fondo.
 \begin{equation}
  \mathcal L_{\mathrm{POS}}=-\frac{1}{B(B-1)}\sum_{i\neq j} w_{ij}\log\left(v_f^{(i)\top}v_f^{(j)}\right) + \text{(término análogo para } v_b\text{)},
 \end{equation}
-\end{itemize}
+
 con peso $w_{ij}=\exp(-\alpha\cdot\operatorname{rank}_{ij})$, de modo que solo los pares más parecidos del lote contribuyen de forma apreciable. La pérdida total es $\mathcal L_{\mathrm{CCAM}}=\mathcal L_{\mathrm{POS}}+\mathcal L_{\mathrm{NEG}}$. El mapa $P$ resultante se umbraliza para producir la pseudo-máscara inicial.
 
-\subsubsection{Algoritmos}
+\subsubsection{Algoritmo del flujo de segmentación}
 
-\begin{algorithm}[htbp]
-\caption{MoCo v2 (preentrenamiento contrastivo del backbone)}
+El Algoritmo~\ref{alg:segmentacion-flujo} integra el preentrenamiento, la generación de pseudo-máscaras y el entrenamiento del segmentador. MoCo v2 y CCAM se describen matemáticamente arriba; no se presentan como bloques independientes.
+
+\begin{algorithm}[!htbp]
+\fontsize{11}{13}\selectfont\singlespacing
+\caption{Flujo de segmentación con pseudo-máscaras}
+\label{alg:segmentacion-flujo}
 \label{alg:mocov2}
-\begin{algorithmic}[1]
-\Statex \textbf{Input:} lote de imágenes sin etiquetar; dos aumentaciones por imagen $x^q$, $x^k$
-\Statex \textbf{Initialize:} codificador de consulta $f_q$; codificador de clave $f_k\leftarrow f_q$; cola vacía de $Q=16\,384$ claves; $m=0{,}99$; $\tau=0{,}2$
-\For{cada lote}
-  \State $q\leftarrow f_q(x^q)$,\ $k\leftarrow f_k(x^k)$ \Comment{sin gradiente por $f_k$}
-  \State Calcular $\mathcal L_{\mathrm{MoCo}}$ (Ecuación~\ref{eq:moco-loss-s6}) con la cola actual \Comment{paso de pérdida}
-  \State Actualizar $f_q$ por descenso de gradiente sobre $\mathcal L_{\mathrm{MoCo}}$ \Comment{solo $f_q$ recibe gradiente}
-  \State $\theta_k\leftarrow m\,\theta_k+(1-m)\,\theta_q$ \Comment{actualización por media móvil}
-  \State Encolar $k$; descartar la clave más antigua si la cola excede $Q$ \Comment{actualización de la cola}
-\EndFor
-\State \Return backbone ResNet-50 preentrenado $f_q$
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[htbp]
-\caption{CCAM (generación de pseudo-máscaras)}
 \label{alg:ccam}
 \begin{algorithmic}[1]
-\Statex \textbf{Input:} lote de $B$ imágenes; backbone preentrenado (Algoritmo~\ref{alg:mocov2})
-\Statex \textbf{Initialize:} capa convolucional + BN + sigmoide sobre el mapa de características $Z$
-\For{cada lote}
-  \State $P\leftarrow\sigma(\mathrm{BN}(\mathrm{Conv}(Z)))$ \Comment{mapa de activación}
-  \State Calcular $v_f$, $v_b$ (Ecuación~\ref{eq:ccam-vectores-s6}) \Comment{vectores primer plano/fondo}
-  \State Calcular $\mathcal L_{\mathrm{CCAM}}=\mathcal L_{\mathrm{POS}}+\mathcal L_{\mathrm{NEG}}$ \Comment{paso de pérdida}
-  \State Actualizar los pesos de la capa por descenso de gradiente \Comment{paso de optimización}
+\Statex \textbf{Entrada:} imágenes sin etiquetas y configuración registrada
+\Statex \textbf{Salida:} segmentador entrenado y máscaras predichas
+\State Preentrenar ResNet-50 con MoCo v2 y dos vistas por imagen
+\State Actualizar el codificador de clave por media móvil y la cola de negativos
+\State Entrenar CCAM con los vectores de primer plano y fondo
+\State Umbralizar sus activaciones para obtener \texttt{pseudo\_r0}
+\State Aplicar los controles de región, área e incertidumbre; registrar exclusiones
+\For{cada una de las tres rondas registradas}
+ \State Entrenar el U-Net estudiante con pseudo-máscaras y píxeles confiables
+ \State Seleccionar el punto de verificación por pérdida de pseudo-validación
+ \State Actualizar las pseudo-máscaras para el refinamiento registrado
 \EndFor
-\State Umbralizar $P$ \Comment{pseudo-máscara inicial (\texttt{pseudo\_r0})}
-\State \Return pseudo-máscara inicial para entrenar al U-Net estudiante
+\State Evaluar también S4-A2: DINOv2 congelado y decoder DPT con \texttt{pseudo\_r0}
+\State Comparar \texttt{student\_r3} y S4-A2 con las máscaras de referencia
+\State Reportar Dice, IoU, sensibilidad, especificidad y HD95
+\State \Return modelos y predicciones, conservando el alcance parcialmente transductivo
 \end{algorithmic}
 \end{algorithm}
+\FloatBarrier

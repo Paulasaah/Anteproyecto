@@ -49,25 +49,9 @@ VI & $\mathrm{ITA}\leq-25$ \\
 \endgroup
 \end{table}
 
-\begin{algorithm}[htbp]
-\caption{Estimación del ángulo de tipología individual (ITA)}
-\label{alg:estimacion-ita}
-\begin{algorithmic}[1]
-\Statex \textbf{Input:} Imagen $x$ a resolución canónica, máscara de piel candidata $M_s$ (Otsu, imagen completa o anillo perilesional), pseudo-máscara de lesión del segmentador (si disponible)
-\Statex \textbf{Initialize:} región de muestreo $R \gets M_s \setminus \text{lesión}$
-\If{$|R|$ insuficiente \textbf{or} máscara degenerada}
-  \State \Return indeterminado \Comment{abstención explícita, imagen en cuarentena}
-\EndIf
-\State Convertir $x$ a CIELAB y restringir a $R$
-\State $\widetilde L^* \gets$ mediana de $L^*$ en $R$ \Comment{robusto a artefactos puntuales}
-\State $\widetilde b^* \gets$ mediana de $b^*$ en $R$
-\If{$\widetilde b^* < 5$}
-  \State \Return indeterminado \Comment{denominador numéricamente inestable}
-\EndIf
-\State $\mathrm{ITA} \gets (180/\pi)\arctan\!\big((\widetilde L^*-50)/\widetilde b^*\big)$
-\State \Return $\mathrm{ITA}$ \Comment{proxy colorimétrico, no un fototipo clínico}
-\end{algorithmic}
-\end{algorithm}
+\paragraph{Cálculo del ITA.}\label{alg:estimacion-ita}
+La estimación parte de una región candidata de piel y excluye la lesión cuando hay una pseudo-máscara disponible. Tras convertir a CIELAB, calcula las medianas de $L^*$ y $b^*$ y aplica la ecuación del ITA. Se registra abstención si la región es insuficiente, la máscara es degenerada o $\widetilde b^*<5$. Este procedimiento de caracterización se mantiene separado de la transformación de luminosidad.
+
 
 \subsubsection{Procedimiento de caracterización colorimétrica}
 
@@ -85,11 +69,12 @@ La transformación recibe una máscara de lesión $M(p)$ (valor uno en la lesió
 Los canales $a^*$ y $b^*$ se conservan sin cambios. Es una operación \textbf{determinística}: no hay parámetros aprendidos ni ajuste con datos, solo un desplazamiento fijo de luminosidad seguido de recorte a rango válido.
 
 \begin{algorithm}[htbp]
+\fontsize{11}{13}\selectfont\singlespacing
 \caption{Transformación determinística de tono de piel}
 \label{alg:transformacion-tono}
 \begin{algorithmic}[1]
-\Statex \textbf{Input:} Imagen $x$ en sRGB, máscara de lesión $M$, desplazamiento solicitado $s$
-\Statex \textbf{Initialize:} $s_c \gets \max(-2,\min(2,s))$ \Comment{acotar el desplazamiento}
+\Statex \textbf{Entrada:} Imagen $x$ en sRGB, máscara de lesión $M$, desplazamiento solicitado $s$
+\Statex \textbf{Inicialización:} $s_c \gets \max(-2,\min(2,s))$ \Comment{acotar el desplazamiento}
 \If{máscara no elegible según el manifiesto}
   \State \Return rechazar \Comment{versión protegida por manifiesto}
 \EndIf
