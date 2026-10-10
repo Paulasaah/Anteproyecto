@@ -24,7 +24,7 @@ Segmentador U-Net & Pod Jupyter: 2 GPU RTX PRO 4000 Blackwell de 24\,GB. & CUDA 
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Configuraciones de los dos entornos independientes reportados; sus versiones no se presentan como una instalación común. El preentrenamiento SSL y el ajuste de la sonda se describen en la Sección~\ref{sec:desarrollo-clasificador}.\par}
 \par\endgroup
 \end{table}
@@ -67,7 +67,7 @@ Segmentación & Evaluación con máscaras de referencia & ISIC 2018: 2.594 imág
 \addlinespace
 Tono de piel & Validación frente a FST & Fitzpatrick17k-C: 11.098 imágenes con anotación de referencia. PAD-UFES-20: 1.494 imágenes con FST registrado; el ITA fue calculable en 1.265 casos con imagen completa y en 1.189 con fondo enmascarado por Otsu. \\
 \end{longtable}
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent \textit{Nota.} Elaboración propia a partir de los manifiestos y resultados experimentales descritos en las subsecciones correspondientes. FST = fototipo Fitzpatrick; ITA = ángulo tipológico individual. Las divisiones de HAM10000 para evaluación congelada y ajuste fino provienen de protocolos distintos. La pseudo-validación de segmentación usa pseudo-máscaras, no máscaras expertas. Los valores de ITA calculable excluyen los casos en que el estimador se abstuvo.\par}
 \endgroup
 
@@ -131,7 +131,7 @@ La Figura~\ref{fig:distribuciones-clase-combinadas} reúne los conteos de las ca
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/01_diagnosticos_2x2}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Unidad: imagen; corpus completo, no particiones de validación. Se conserva la taxonomía original de cada conjunto. Eje logarítmico; conteos junto a las barras. El color no representa fototipo.\par}
 \end{figure}
 
@@ -183,7 +183,7 @@ Heridas crónicas (lepra/Hansen) & Crónica (lepra) & Trabajo futuro \\
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia a partir de la revisión epidemiológica cruzada documentada en la propuesta original del proyecto, con fuentes primarias en el Instituto del Cáncer del HIC, SIVIGILA y estudios de la Universidad Industrial de Santander.\par}
 \par\endgroup
 \end{table}
@@ -219,7 +219,7 @@ La Figura~\ref{fig:segmentacion-ejemplos} presenta ejemplos cualitativos del mod
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/02_segmentacion_3x3}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Filas: casos p90, p50 y p10 seleccionados mediante percentiles del Dice medio U-Net/S4-A2; columnas: imagen original, máscara de referencia y predicción student\_r3. Los valores mostrados son los Dice publicados de student\_r3, no recalculados. Se conservan las imágenes embebidas en la figura anterior; no son nuevas exportaciones del pipeline. Los ejemplos complementan las métricas agregadas; ISIC2018 es parcialmente transductivo.\par}
 \end{figure}
 
@@ -244,7 +244,7 @@ S4-A2 & 0,7221 [0,7134; 0,7308] & 0,7949 [0,7918; 0,7984] \\
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Valores de Dice medio e IC del 95\,\%. En ISIC2018, parte de las imágenes evaluadas también estuvo en el \textit{pool} sin etiquetas; por tanto, ese resultado es parcialmente transductivo y no constituye una evaluación externa completamente independiente.\par}
 \par\endgroup
 \end{table}
@@ -261,7 +261,7 @@ La Figura~\ref{fig:segmentacion-dice} representa las estimaciones y sus interval
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/03_segmentacion_dice}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Intervalos individuales documentados, no IC de diferencias pareadas. Mismo rango ampliado en ambos paneles. ISIC2018 parcialmente transductivo. La mejora de Dice no demuestra una mejora de clasificación.\par}
 \end{figure}
 
@@ -323,7 +323,7 @@ La Figura~\ref{fig:pad-fototipo-clinico} contrasta las etiquetas de fototipo reg
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/04_pad_fst_ita}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. (a) FST registrado: 1.494 imágenes; otras 804 sin registro. (b) ITA válido Otsu: 1.189; 305 abstenciones. Los colores corresponden a FST registrado. Los intervalos conservan los conteos de la figura anterior y sus totales; el cotejo con los registros individuales PAD continúa pendiente. La procedencia de la asignación FST no está verificada; el ITA no constituye un fototipo clínico ni evalúa la calidad de máscaras. V y VI solo permiten descripción.\par}
 \end{figure}
 
@@ -338,7 +338,7 @@ La Figura~\ref{fig:ita-distribucion-multidataset} compara la distribución del I
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/05_ita_otsu_2x2}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Intervalos de 10 grados. Solo estimaciones válidas; abstenciones indicadas por panel. PAD procesa 1.494 imágenes con FST registrado de 2.298 totales. Grupos I-VI: categorías del estimador, no fototipos clínicos validados. Los umbrales de Otsu no se sustituyen por los de ROI E5.\par}
 \end{figure}
 
@@ -367,7 +367,7 @@ ISIC2020 (\textit{pool}) & 33.126 & 20.833 & 10.587 & 1.706 & 52,36 \\
 \bottomrule
 \end{tabularx}\par
 
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia.\par}
 \par\endgroup
 \end{table}
@@ -384,7 +384,7 @@ La Figura~\ref{fig:ita-roi-e5} reúne el violín de los registros individuales E
 \includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/06_ita_roi_e5}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia desde los registros individuales E5. (a) Registros ROI válidos: HAM10000, 4.539; ISIC2019, 12.558; ISIC2020, 21.973. Violín: densidad kernel con regla de Scott; caja: mediana y cuartiles; bigotes: 1,5 veces el rango intercuartílico. (b) Denominador: corpus completo; abstenciones: 5.476, 12.773 y 11.153. ROI perilesional derivada de pseudo-máscara o borde de respaldo; no equivale al fondo Otsu. Los grupos I--VI usan umbrales internos 40, 23, 12, 0 y $-25$ grados y no son fototipos clínicos. No son mediciones posteriores a la transformación.\par}
 \end{figure}
 
@@ -405,7 +405,7 @@ ISIC2020 & 33.126 & 21.692 & 21.973 & 19.284 \\
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Conteos de registros individuales E5; las abstenciones de cada estimador son el total menos sus casos válidos. ROI incluye la alternativa de borde. Otsu y ROI seleccionan píxeles diferentes; sus distribuciones marginales se conservan como comparación descriptiva en la Figura~\ref{fig:ita-e5-otsu-roi} del material suplementario.\par}
 \par\endgroup
 \end{table}
@@ -439,7 +439,7 @@ La Figura~\ref{fig:ita-exactitud-pad} compara la exactitud del ITA y la línea b
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/07_ita_evaluacion_pad}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Cada condición usa su subconjunto evaluable y baseline correspondiente. Sobre 1.494 registros FST: 229 abstenciones en imagen completa y 305 en fondo Otsu. La exactitud no respalda equivalencia con Fitzpatrick clínico. No evalúa calidad de máscaras.\par}
 \end{figure}
 
@@ -478,7 +478,7 @@ B71 (propuesto, con término de tono) & 0,8378 & 0,6964 & 0,7141 & 0,9602 & 0,05
 \end{tabularx}\par
 \par\endgroup
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia.\par}
 \par\endgroup
 \end{table}
@@ -520,7 +520,7 @@ DINOv2 ViT-B/14 & 0,6002 & $+$0,1139 & [$+$0,0728; $+$0,1585] & excluye cero \\
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia.\par}
 \par\endgroup
 \end{table}
@@ -546,7 +546,7 @@ La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones e
 \includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/16_f1_ham_2x2}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Valores puntuales del control público, A71 y B71; sus diferencias no aíslan el efecto causal del tono. (b) F1 macro e IC individuales del 95\,\% del banco congelado. (c) Diferencias pareadas B71 menos línea base e IC del 95\,\%; remuestreo por lesión, 1.000 remuestras, sin corrección global por multiplicidad. (d) Diferencia de F1 al añadir F4 a B71: el IC incluye cero. Las referencias discontinuas indican diferencia nula. F4 integra imagen completa, recorte y descriptores; no evalúa por separado sus componentes. PAD-UFES-20 se presenta aparte por su población y protocolo distintos.\par}
 \end{figure}
 
@@ -557,7 +557,7 @@ La Figura~\ref{fig:f1-ham-integrado} reúne la comparación de configuraciones e
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/10_confusion_b71}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Validación HAM10000, n=2.004; porcentajes en celdas. Derivada del argmax del NPZ adjunto y cotejada exactamente con b71\_\_congelado.json. Filas reales, columnas predichas; normalización por fila no es precisión por columna.\par}
 \end{figure}
 
@@ -574,7 +574,7 @@ La Figura~\ref{fig:metricas-clase-b71} complementa la matriz de confusión con p
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/11_metricas_por_clase}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Validación HAM10000, n=2.004. n junto a cada clase: soporte real. Métricas derivadas de la matriz verificada; valores descriptivos, sin IC por clase.\par}
 \end{figure}
 
@@ -587,7 +587,7 @@ La Figura~\ref{fig:precision-recall-b71} evalúa cada clase frente al resto usan
 \includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/12_precision_recall}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. HAM10000, validación n=2.004. Una clase frente al resto; AP=average precision, no área trapezoidal. Referencia discontinua: prevalencia real de cada clase. Sin bandas de incertidumbre. La octava celda explica la lectura.\par}
 \end{figure}
 
@@ -600,7 +600,7 @@ La Figura~\ref{fig:confiabilidad-b71} agrupa la confianza máxima de B71 en 15 i
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/13_confiabilidad_b71}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Validación HAM10000, n=2.004; 15 intervalos uniformes. Puntos: confianza media y proporción de aciertos; intervalos vacíos omitidos. Diagonal: calibración ideal. ECE = 0,0529, de la evaluación congelada. No constituye validación clínica externa.\par}
 \end{figure}
 
@@ -637,7 +637,7 @@ Sensibilidad de melanoma & $+0{,}0135$ & [$-0{,}0446$; $+0{,}0714$] & Incluye ce
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Diferencias B71+F4 menos B71. Contraste canónico ya reportado; los componentes de F4 no se evaluaron por separado. Esta tabla no reúne los contrastes exploratorios de los ocho \textit{backbones}.\par}
 \par\endgroup
 \end{table}
@@ -676,7 +676,7 @@ D3 (D2 + PAD sin etiquetas) & 0,3693 & 0,5271 & 0,3039 & 0,4780 \\
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia.\par}
 \par\endgroup
 \end{table}
@@ -691,7 +691,7 @@ La Figura~\ref{fig:adaptacion-pad-d0-d3} representa el F1 macro puntual de D0--D
 \includesvg[width=\textwidth,height=.64\textheight,keepaspectratio]{images/organizadas/15_adaptacion_pad}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia desde pad\_e2\_eval.json. (a) F1 macro puntual de D0--D3. (b) Contraste pareado D3 menos D2 con IC del 95 \%, agrupado por paciente. Evaluación: 567 imágenes, 363 pacientes y 25 melanomas; mapeo parcial BCC/MEL/NV. Las 1.141 imágenes de target\_adapt se mantienen separadas por paciente de target\_test, que no participa en entrenamiento ni selección. D3 mejora frente a D2, pero no supera D0; no constituye adaptación validada a Santander.\par}
 \end{figure}
 
@@ -744,7 +744,7 @@ Objetivo & Evidencia presentada & Estado y alcance \\
 \bottomrule
 \end{tabularx}\par
 \par\smallskip\raggedright
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} El balance conserva el estado descrito en las conclusiones. La existencia de evaluaciones experimentales no implica validación clínica ni cierre de los pendientes de trazabilidad.\par}
 \par\endgroup
 \end{table}

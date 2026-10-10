@@ -42,7 +42,7 @@ La mejora de segmentación no implica una mejora del clasificador; el contraste 
 \endgroup
 
 {\small\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. Los conjuntos de imágenes originales no se duplican en este documento. La reproducibilidad depende del acceso al repositorio y a los manifiestos y artefactos de las corridas; las limitaciones indicadas deben conservarse al interpretar los resultados.\par}\par}
 
 \section{Materiales adicionales}
@@ -59,7 +59,7 @@ Se conserva el resumen previo para documentar HAM10000, ISIC2019 e ISIC2020 mien
 \includegraphics[width=0.97\textwidth,height=0.80\textheight,keepaspectratio,trim=0pt 0pt 205pt 0pt,clip]{images/comparacion_modelos_clasificacion.pdf}
 \par\smallskip
 \raggedright\footnotesize
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia a partir de la auditoría consolidada del banco completo. Las filas superiores e intermedias muestran F1 macro y MCC, respectivamente, en HAM10000, ISIC2019 e ISIC2020; la fila inferior muestra $\Delta$ entre el modelo limpio y el público con IC pareado del 95\,\%. Los intervalos de MCC solo están disponibles para A71, B71 y DINOv2 público en ISIC2019 e ISIC2020; en HAM10000 y para las líneas base se muestran estimaciones puntuales. El ajuste fino se presenta únicamente para ISIC2020. El gráfico resume los resultados del protocolo indicado y no representa una corrección global por multiplicidad.\par}
 \end{figure}
 
@@ -76,7 +76,7 @@ La Figura~\ref{fig:ita-e5-otsu-roi} conserva las distribuciones marginales de Ot
 \includegraphics[width=\textwidth]{images/ita_e5_otsu_roi.pdf}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Cada punto es la mediana y cada segmento cubre los percentiles 25--75 de los casos válidos del estimador correspondiente. Son distribuciones marginales con coberturas diferentes, no intervalos de confianza ni diferencias pareadas. La Tabla~\ref{tab:e5-cobertura} informa las intersecciones. Otsu y ROI emplean selecciones de píxeles y, en ISIC, resoluciones distintas; la comparación es descriptiva y no demuestra superioridad, equivalencia clínica ni efecto de la transformación.\par}
 \end{figure}
 
@@ -91,7 +91,7 @@ La Figura~\ref{fig:confiabilidad-configuraciones} compara el control público co
 \includesvg[width=\textwidth,height=.69\textheight,keepaspectratio]{images/organizadas/A01_confiabilidad_comparacion}
 \par\smallskip
 \raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\fontsize{11}{13}\selectfont\singlespacing\raggedright
+\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. HAM10000, validación n=2.004; 15 intervalos uniformes. Cada fila corresponde al control público con protocolo B71, A71 o B71. Las diferencias no aíslan el efecto causal de tono. ECE: público, 0,0688; A71, 0,0154; B71, 0,0529.\par}
 \end{figure}
 
