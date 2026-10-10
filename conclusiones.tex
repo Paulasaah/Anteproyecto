@@ -12,7 +12,7 @@ Los fototipos III y IV se consideran de interés para el proyecto, pero las fuen
 
 \section*{Objetivo 2: diseño del algoritmo de clasificación autosupervisado}
 
-El objetivo de diseñar un algoritmo de clasificación de lesiones cutáneas basado en aprendizaje autosupervisado se considera logrado. El proyecto documentó tres líneas técnicas: el clasificador SimSiam anclado sobre un \emph{backbone} DINOv2 ViT-B/14 con adaptación de dominio; el módulo complementario de segmentación sin etiquetas, basado en MoCo v2, CCAM, pseudo-máscaras y un U-Net estudiante con refinamiento iterativo; y el procedimiento determinístico de transformación y estimación del tono de piel en el espacio CIELAB. Los algoritmos se describen en el Capítulo~6.
+El objetivo de diseñar un algoritmo de clasificación de lesiones cutáneas basado en aprendizaje autosupervisado se considera logrado. El proyecto documentó tres líneas técnicas: el clasificador SimSiam anclado sobre un \emph{backbone} DINOv2 ViT-B/14 con adaptación de dominio; el módulo complementario de segmentación sin etiquetas, basado en MoCo v2, CCAM, pseudo-máscaras y un U-Net estudiante con refinamiento iterativo; y el procedimiento determinístico de transformación y estimación del tono de piel en el espacio CIELAB. Los algoritmos se describen en el Capítulo~\ref{chap:metodologia}.
 
 La documentación reúne las configuraciones metodológicas registradas para estas líneas. En D2 y D3, sin embargo, la ausencia de un valor válido en \texttt{data\_revision} limita la trazabilidad exacta de las particiones utilizadas. Esta limitación debe considerarse al interpretar y reproducir esos resultados.
 
@@ -20,15 +20,15 @@ La documentación reúne las configuraciones metodológicas registradas para est
 
 El objetivo de evaluar el desempeño mediante métricas utilizadas en la literatura se considera logrado dentro de las evaluaciones documentadas. Los resultados muestran diferencias según la tarea, el conjunto de datos y el protocolo aplicado.
 
+La integración de segmentación en la clasificación tampoco demostró una mejora general. En la evaluación propia de segmentación, S4-A2 obtuvo un Dice de 0,7221 en ISIC2018 y 0,7949 en HAM10000, y superó a \texttt{student\_r3} entre las dos variantes evaluadas. Este resultado caracteriza su desempeño como segmentador, pero no demuestra que el uso de sus máscaras mejore la clasificación.
+
+La evaluación del estimador ITA produjo exactitudes inferiores a la línea base por mayoría. En Fitzpatrick17k-C, el ITA obtuvo entre 28,5\,\% y 30,8\,\% de exactitud, frente a 32,9\,\% de la línea base. En PAD-UFES-20, la exactitud fue 21,74\,\% con imagen completa (n = 1.265; línea base de 59,37\,\%) y 22,88\,\% con el fondo enmascarado por Otsu (n = 1.189; línea base de 59,80\,\%). Ambas comparaciones se calcularon sobre los mismos casos evaluables para cada condición. La cifra publicada de 22,9\,\% frente a 51,3\,\% corresponde a otro protocolo, no a la evaluación del proyecto \parencite{alipour2026italimitations}. En consecuencia, el ITA no debe interpretarse como una estimación validada del fototipo clínico.
+
 En la clasificación congelada de HAM10000, B71 obtuvo intervalos pareados que excluyeron cero frente a ocho líneas base. No se aplicó una corrección global por multiplicidad, por lo que este patrón se interpreta dentro de la comparación evaluada. En el ajuste fino, que actualiza todos los pesos con etiquetas, los mejores modelos alcanzaron o superaron a B71 en HAM10000 e ISIC2019. Por tanto, los resultados no establecen una superioridad general de B71; muestran el desempeño de una representación aprendida mediante SSL bajo el protocolo congelado evaluado.
 
 En ISIC2020, los resultados de F1 macro y sensibilidad de melanoma apuntan en direcciones distintas. B71 detectó 39 de 122 melanomas (\textit{recall} 0,3197), mientras que AlexNet ajustado detectó 86 de 122 (\textit{recall} 0,7049). Aunque B71 obtuvo mayor F1 macro frente a siete de ocho líneas base ajustadas en el análisis post hoc, ese resultado no implica una mayor sensibilidad para melanoma. El proyecto no establece un criterio clínico para priorizar una de estas métricas en la selección final.
 
-La integración de segmentación en la clasificación tampoco demostró una mejora general. En la evaluación propia de segmentación, S4-A2 obtuvo un Dice de 0,7221 en ISIC2018 y 0,7949 en HAM10000, y superó a \texttt{student\_r3} entre las dos variantes evaluadas. Este resultado caracteriza su desempeño como segmentador, pero no demuestra que el uso de sus máscaras mejore la clasificación.
-
 La adaptación de dominio con PAD-UFES-20 mostró una mejora piloto de D3 frente al control de cómputo D2 en F1 ($\Delta=+0{,}0816$). D3, no obstante, permaneció por debajo del \textit{encoder} público D0. La evaluación se basó en una semilla y en pocos casos de melanoma, por lo que no permite concluir que la adaptación al dominio clínico esté resuelta.
-
-La transformación y estimación del tono de piel produjo exactitudes inferiores a la línea base por mayoría. En Fitzpatrick17k-C, el ITA obtuvo entre 28,5\,\% y 30,8\,\% de exactitud, frente a 32,9\,\% de la línea base. En PAD-UFES-20, la exactitud fue 21,74\,\% con imagen completa (n = 1.265; línea base de 59,37\,\%) y 22,88\,\% con el fondo enmascarado por Otsu (n = 1.189; línea base de 59,80\,\%). Ambas comparaciones se calcularon sobre los mismos casos evaluables para cada condición. La cifra publicada de 22,9\,\% frente a 51,3\,\% corresponde a otro protocolo, no a la evaluación del proyecto \parencite{alipour2026italimitations}. En consecuencia, el ITA no debe interpretarse como una estimación validada del fototipo clínico.
 
 \section*{Objetivo 4: prototipo de aplicación de apoyo al análisis de imágenes}
 

@@ -72,3 +72,10 @@ Verificacion local de la tercera entrega: la copia temporal de la tesis compila 
 
 ## Explicación ITA
 Esquema geométrico propio de la ecuación, sin observaciones experimentales, ubicado antes de los intervalos y generado por scripts/generar_esquema_ita.py. Ejes: mediana de b* y mediana de L* menos 50. Se ilustra un ángulo positivo y se explica el caso negativo y la abstención. El gráfico no representa un cambio observado después de transformar las imágenes. La copia de verificación actual compila 124 páginas sin referencias pendientes ni desbordamientos.
+
+## Organización posterior y entrega de figuras
+Responsable de generar las próximas figuras: Nico. En esta etapa se trabaja sobre texto, tablas y referencias; no se generan ni sustituyen assets gráficos. Las figuras incorporadas anteriormente quedan en su ubicación correspondiente hasta recibir las de Nico. El reemplazo posterior conservará etiquetas, cifras y protocolos, previa revisión del archivo entregado.
+
+Métricas trasladadas desde Resultados a Metodología sin alterar ecuaciones ni etiquetas. Desarrollo técnico, resultados, discusión y balance de conclusiones siguen segmentación → estimación/transformación de tono → clasificación/adaptación. Los gráficos de HAM10000 se ubican en la comparación de HAM10000.
+Tablas: configuración experimental; encabezados de continuación de particiones; columnas separadas de diferencia e intervalo en contrastes; ablación F4; balance de avance por objetivo.
+La ruta detallada y las ubicaciones para la entrega de Nico están en docs/organizacion-texto-tablas.md.
