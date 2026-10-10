@@ -2,17 +2,17 @@
 
 Esta sección presenta el desarrollo técnico realizado para cada una de las tres líneas de trabajo del proyecto, en continuidad con el diseño metodológico de las secciones anteriores de este capítulo. La exposición sigue el orden de los resultados: segmentación de lesiones cutáneas, estimación y transformación del tono de piel, y clasificación con aprendizaje autosupervisado y adaptación de dominio. Para cada línea se presentan las actividades realizadas, los datos y las entradas, las herramientas, los criterios, el modelamiento matemático y los algoritmos y procedimientos aplicados, incluida la descripción técnica del protocolo de evaluación. Los valores numéricos obtenidos y su interpretación se presentan en el Capítulo~\ref{chap:resultados}, que no repite aquí el procedimiento ya descrito.
 
-La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí las tres líneas: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, con una posible integración (compuerta I) que requiere ablación propia y no se presenta como validada.
+La Figura~\ref{fig:arquitectura-modular} resume cómo se relacionan entre sí las tres líneas: el clasificador SSL es el núcleo del proyecto, mientras que la segmentación opera como módulo complementario e independiente, cuya integración se evalúa mediante la ablación F4 y no se presenta como una mejora validada. El diagrama distingue el aprendizaje autosupervisado, la sonda supervisada con el encoder congelado y la evaluación externa separada por paciente.
 
 \begin{figure}[!htbp]
 \caption{Arquitectura del clasificador autosupervisado y módulos complementarios de segmentación y adaptación de dominio.}
 \label{fig:arquitectura-modular}
 \centering
-\includegraphics[width=0.95\textwidth,height=0.72\textheight,keepaspectratio]{images/arquitectura-clasificador.pdf}
+\includesvg[width=\textwidth,height=0.72\textheight,keepaspectratio]{images/organizadas/17_arquitectura_general}
 
 \par\smallskip
 \begingroup\footnotesize\singlespacing\raggedright
-\textit{Nota.} Elaboración propia. El diagrama muestra el flujo del clasificador SSL, la segmentación como módulo complementario y las ramas de adaptación de dominio y evaluación externa. El diseño se apoya en DINOv2, SimSiam, MoCo v2 y CCAM \parencite{oquab2024dinov2,chen2021simsiam,chen2020mocov2,xie2022ccam}.
+\textit{Nota.} Elaboración propia. El panel (a) representa las dos vistas y el objetivo SimSiam; el control público omite esta adaptación. El panel (b) conserva el encoder congelado y ajusta el escalador y la regresión logística con HAM10000 para cada condición. La imagen ISIC es ilustrativa y no identifica una partición experimental. La evaluación externa no actualiza parámetros y mantiene la separación por paciente entre \texttt{target\_adapt} y \texttt{target\_test}. Los módulos complementarios se resumen aparte; el esquema encoder--DPT corresponde a S4-A2, mientras que \texttt{student\_r3} utiliza U-Net. El objetivo mostrado resume SimSiam; los términos adicionales de anclaje, destilación y tono se describen en la Sección~\ref{sec:desarrollo-clasificador}. El diseño se apoya en DINOv2 y SimSiam \parencite{oquab2024dinov2,chen2021simsiam}.
 \par\endgroup
 \end{figure}
 

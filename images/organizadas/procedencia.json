@@ -102,6 +102,12 @@
       "svg_sha256": "efb922d93b6738e251e44bf4bcc07e639d50e94b12e0a7f9f5a8ab9e5b7bd644",
       "pdf": "16_f1_ham_2x2_svg-raw.pdf",
       "pdf_sha256": "c03a990953e2409c7709b90dab230854b9d5b7d71cf5ad33d88c883452dfed2f"
+    },
+    {
+      "svg": "17_arquitectura_general.svg",
+      "svg_sha256": "422ea7132adfa7a95749abf2628fb08adb26e413f7d134ec871bd8ffa1de7cb0",
+      "pdf": "17_arquitectura_general_svg-raw.pdf",
+      "pdf_sha256": "8a4ef092d5d5af3536ced641cabec5bc5a8374df9e4b5c16344c00e0dacc75fb"
     }
   ]
 }
