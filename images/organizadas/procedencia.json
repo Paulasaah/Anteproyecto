@@ -108,6 +108,24 @@
       "svg_sha256": "422ea7132adfa7a95749abf2628fb08adb26e413f7d134ec871bd8ffa1de7cb0",
       "pdf": "17_arquitectura_general_svg-raw.pdf",
       "pdf_sha256": "8a4ef092d5d5af3536ced641cabec5bc5a8374df9e4b5c16344c00e0dacc75fb"
+    },
+    {
+      "svg": "18_segmentacion_arquitecturas.svg",
+      "svg_sha256": "60d9231e329ba7e8462d59a4073a493b47f5a56eff76bc83f9f41060bd42311b",
+      "pdf": "18_segmentacion_arquitecturas_svg-raw.pdf",
+      "pdf_sha256": "16d0d273947769f871aaaaf2c1c41d2cdd8e38ef6c39cd606e5f350c133d2fc1"
+    },
+    {
+      "svg": "19_transformacion_tono.svg",
+      "svg_sha256": "5e96d4ede6f044b095d6fbd9b484d7f2b5e89b52eda650a18b1e8a135911dbb8",
+      "pdf": "19_transformacion_tono_svg-raw.pdf",
+      "pdf_sha256": "a03b3dc121521d1416f4fd72619589346060a455ceafd54e101c203616191752"
+    },
+    {
+      "svg": "20_adaptacion_dominio.svg",
+      "svg_sha256": "28ec6635557baa7bbabed780538ec807dafb84523cb12ea3ad261c5d90c3c000",
+      "pdf": "20_adaptacion_dominio_svg-raw.pdf",
+      "pdf_sha256": "286ce4b5f50ca7a0da80dc0a35f4100d498fdd0ec173105e7438dfe4d19965cd"
     }
   ]
 }

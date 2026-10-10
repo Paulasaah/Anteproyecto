@@ -14,6 +14,19 @@ Entorno de cómputo del preentrenamiento: cluster UNABIA vía SLURM, 1 nodo con 
 
 HAM10000 es la fuente de entrenamiento y evaluación del clasificador, particionada por \texttt{lesion\_id} para que ninguna lesión aparezca en más de un subconjunto a la vez. PAD-UFES-20 es el dominio objetivo de adaptación: la partición \texttt{target\_adapt} (1.141 imágenes, sin etiquetas) se incorpora al preentrenamiento autosupervisado para continuar adaptando el codificador al dominio clínico; la partición \texttt{target\_test} se reserva íntegramente para evaluación externa y queda excluida de todo entrenamiento, selección de modelos o hiperparámetros, calibración y ajuste de umbrales.
 
+La Figura~\ref{fig:flujo-adaptacion-dominio} presenta el contraste entre D2 y D3. Ambos parten de la misma inicialización y continúan el aprendizaje autosupervisado durante 2.000 pasos; D2 usa el pool fuente y D3 incorpora además 1.141 imágenes clínicas sin etiquetas de \texttt{target\_adapt}, aproximadamente el 2,7\,\% de su pool. Después se congela cada encoder y se ajustan, por condición, el escalador y la regresión logística con las mismas particiones etiquetadas de HAM10000. La comparación final utiliza únicamente \texttt{target\_test}, separado por paciente, sin realimentar el entrenamiento ni la selección. Los resultados de este piloto se presentan en el Capítulo~\ref{chap:resultados}.
+
+\begin{figure}[!htbp]
+\caption{Adaptación autosupervisada de dominio: control fuente D2 y condición D3.}
+\label{fig:flujo-adaptacion-dominio}
+\centering
+\includesvg[width=\textwidth,height=.66\textheight,keepaspectratio]{images/organizadas/20_adaptacion_dominio}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont\singlespacing
+\noindent\textit{Nota.} Elaboración propia a partir del protocolo del proyecto. DINOv2 y SimSiam se apoyan en \textcite{oquab2024dinov2,chen2021simsiam}; PAD-UFES-20 se describe en \textcite{pacheco2020padufes}. La pérdida dibujada resume el objetivo SimSiam; los términos activos adicionales se especifican en el modelamiento matemático. D3 conserva datos fuente además de los clínicos. La evaluación externa comprende 567 imágenes de 363 pacientes y un mapeo parcial BCC/MEL/NV; no constituye validación clínica en Santander.
+\par
+\end{figure}
+
 \subsubsection{Modelamiento matemático}
 \label{sec:modelamiento-clasificador}
 

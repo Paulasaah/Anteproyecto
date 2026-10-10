@@ -31,6 +31,19 @@ El \textit{backbone} es un ResNet-50 preentrenado de forma contrastiva con MoCo 
 
 \paragraph{Alternativa S4-A2.} Como variante posterior se evaluó un \textit{decoder} tipo DPT con un \textit{encoder} público DINOv2 ViT-B/14 congelado. El \textit{decoder} combina las salidas de los bloques 3, 6, 9 y 12 y se entrena con las pseudo-máscaras iniciales \texttt{pseudo\_r0} generadas por CCAM, sin máscaras expertas. Su criterio, registrado antes de la evaluación, fue alcanzar en ISIC2018 un Dice no inferior a \texttt{student\_r3} por más de 0,01; se evalúa además en HAM10000. S4-A2 es una alternativa distinta del refinamiento iterativo \texttt{student\_r1}--\texttt{student\_r3}, no una cuarta ronda.
 
+La Figura~\ref{fig:arquitecturas-segmentacion} distingue las dos arquitecturas evaluadas. En (a), U-Net recupera la resolución espacial mediante un decoder y conexiones de salto; la salida probabilística se umbraliza para obtener la predicción $P$, que se compara con la referencia $G$ mediante Dice. En (b), S4-A2 conserva congelado DINOv2 y entrena el decoder DPT, que reensambla y fusiona las representaciones para producir el mapa de segmentación. El esquema muestra la inferencia; el entrenamiento con pseudo-máscaras se describe en las fases anteriores y no utiliza la referencia experta mostrada en la ilustración.
+
+\begin{figure}[!htbp]
+\caption{Arquitecturas de segmentación U-Net y S4-A2 con DINOv2 y DPT.}
+\label{fig:arquitecturas-segmentacion}
+\centering
+\includesvg[width=\textwidth,height=.66\textheight,keepaspectratio]{images/organizadas/18_segmentacion_arquitecturas}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont\singlespacing
+\noindent\textit{Nota.} Elaboración propia con una imagen y máscaras reales del ejemplo suministrado. La referencia se utiliza para evaluación, no para entrenar el modelo. La salida de S4-A2 es simbólica: no se adjuntó su máscara para este caso. U-Net se basa en \textcite{ronneberger2015unet}; el encoder DINOv2 y el decoder DPT se apoyan en \textcite{oquab2024dinov2,ranftl2021dpt}. El Dice representado corresponde al solapamiento de máscaras, no a una pérdida de clasificación.
+\par
+\end{figure}
+
 \subsubsection{Datos empleados}
 
 \begin{sloppypar}

@@ -68,6 +68,19 @@ La transformación recibe una máscara de lesión $M(p)$ (valor uno en la lesió
 \end{equation}
 Los canales $a^*$ y $b^*$ se conservan sin cambios. Es una operación \textbf{determinística}: no hay parámetros aprendidos ni ajuste con datos, solo un desplazamiento fijo de luminosidad seguido de recorte a rango válido.
 
+La Figura~\ref{fig:flujo-transformacion-tono} separa la selección de piel no lesional, su caracterización en CIELAB, la transformación y la verificación posterior. En el procedimiento implementado, $T_\varphi$ corresponde al desplazamiento determinístico de $L^*$ definido arriba; $\varphi$ representa la configuración del protocolo, no parámetros aprendidos. El ITA mide el tono sobre una región válida $R$ y no determina por sí solo el desplazamiento. La comparación $\Delta\mathrm{ITA}$ del último bloque expresa una verificación propuesta: aún no se dispone de una evaluación emparejada antes y después que permita cuantificar ese efecto.
+
+\begin{figure}[!htbp]
+\caption{Caracterización, transformación determinística y verificación del tono de piel.}
+\label{fig:flujo-transformacion-tono}
+\centering
+\includesvg[width=\textwidth,height=.66\textheight,keepaspectratio]{images/organizadas/19_transformacion_tono}
+\par\smallskip
+\raggedright\fontsize{11}{13}\selectfont\singlespacing
+\noindent\textit{Nota.} Elaboración propia. La imagen y la máscara de referencia son ilustrativas; en el procedimiento se utilizan las máscaras elegibles disponibles. La región de caracterización y los píxeles modificados deben distinguirse según el protocolo. El fundamento colorimétrico del ITA se apoya en \textcite{delbino2013variations}; sus límites como proxy de fototipo se discuten con \textcite{alipour2026italimitations}. La transformación es propia del proyecto y no se atribuye a esas publicaciones. El último bloque no presenta resultados medidos ni una adaptación validada a Santander.
+\par
+\end{figure}
+
 \begin{algorithm}[htbp]
 \fontsize{11}{13}\selectfont\singlespacing
 \caption{Transformación determinística de tono de piel}
