@@ -30,20 +30,8 @@
       "svg_sha256": "bec87f2d661ee49004e7984f8d3e42bd8cb894d2ec7d3cd35db3d57ce7785fda"
     },
     {
-      "svg": "10_confusion_b71.svg",
-      "svg_sha256": "66804b12fd36bfaeadaf31375bd347360aa5fbf64ac804491ddb2b89dae5a803"
-    },
-    {
-      "svg": "11_metricas_por_clase.svg",
-      "svg_sha256": "108c13c0ef7f06a4895eb9c932c8ade6cef18213c571d22c89c205cf1e1ec505"
-    },
-    {
       "svg": "12_precision_recall.svg",
       "svg_sha256": "fed992a1f3e4b5fb35495ebcf0aa93ea42734bdb7ea7ffb98331671d5fc6433d"
-    },
-    {
-      "svg": "13_confiabilidad_b71.svg",
-      "svg_sha256": "849f1ee0bd1fd9c35ac73d51b7fe7f69a406df71e51a8d5bb6d1eeb3db9d3c01"
     },
     {
       "svg": "15_adaptacion_pad.svg",
@@ -92,10 +80,6 @@
     {
       "svg": "28_segmentacion_ham10000.svg",
       "svg_sha256": "cd6a36b488da70e0bd905fc135c99621a90e0e4b9e8b3ab5bb6018b127108121"
-    },
-    {
-      "svg": "A01_confiabilidad_comparacion.svg",
-      "svg_sha256": "82a37c4eb817413450a7f2d10a0d96a36b89cb3b954cd7934209d6204f295977"
     },
     {
       "svg": "A03_ita_e5_otsu_roi.svg",
@@ -160,6 +144,14 @@
     {
       "svg": "34_contrastes_ham10000.svg",
       "svg_sha256": "5d5aa54003b34eac0cde1a34addc15f710b2afbbb09b2019c44d2d462c7d1855"
+    },
+    {
+      "svg": "35_errores_b71_ham.svg",
+      "svg_sha256": "220213e2cfb0f4b36fcdec76214be2257e03907e36422b3d64f903503c6fc994"
+    },
+    {
+      "svg": "36_calibracion_ham_configuraciones.svg",
+      "svg_sha256": "fac50a35389383e777687744c2e6800d79d8034dcea4be97fed73faf20e68cf6"
     }
   ]
 }

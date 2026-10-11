@@ -1,6 +1,6 @@
 # Figuras vigentes
 
-Esta carpeta contiene los 40 SVG citados en la tesis. Las fotografías están incrustadas en los SVG, sin alterar su contenido.
+Esta carpeta contiene los 38 SVG citados en la tesis. Las fotografías están incrustadas en los SVG, sin alterar su contenido.
 
 XeLaTeX e Inkscape generan las copias auxiliares PDF al compilar; no se versionan. `procedencia.json` registra los hashes de los SVG actuales.
 

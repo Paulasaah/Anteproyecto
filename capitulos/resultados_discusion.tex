@@ -558,33 +558,27 @@ La Figura~\ref{fig:contrastes-ham-baselines} presenta los contrastes de B71 regi
 \noindent\textit{Nota.} Elaboración propia; HAM10000, 2.004 imágenes. (a) Diferencias pareadas B71 menos línea base e IC del 95\,\%; remuestreo por lesión, 1.000 remuestras, sin corrección global por multiplicidad. (b) Diferencia de F1 al añadir F4 a B71; el intervalo incluye cero. Las líneas discontinuas indican diferencia nula. F4 integra imagen completa, recorte y descriptores; no evalúa por separado sus componentes. PAD-UFES-20 se presenta aparte por su población y protocolo distintos.\par}
 \end{figure}
 
-\begin{figure}[!htbp]
-\caption{Matriz de confusión de B71 normalizada por clase real.}
-\label{fig:confusion-b71-ham}
-\centering
-\noindent\makebox[\linewidth][c]{\includesvg[width=\linewidth,height=.74\textheight,keepaspectratio]{images/organizadas/10_confusion_b71}}
-\par\smallskip
-\raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia. Validación HAM10000, n=2.004; porcentajes en celdas. Derivada del argmax del NPZ adjunto y cotejada exactamente con b71\_\_congelado.json. Filas reales, columnas predichas; normalización por fila no es precisión por columna.\par}
-\end{figure}
-
-
-
+\FloatBarrier
 \subsubsection{Análisis por clase, curvas precisión--sensibilidad y calibración en HAM10000}
 
-La Figura~\ref{fig:metricas-clase-b71} complementa la matriz de confusión con precisión, sensibilidad y F1 por diagnóstico, calculadas en la misma evaluación congelada de 2.004 imágenes. El soporte junto a cada clase permite interpretar el desequilibrio: NV reúne 1.341 casos, mientras que DF y VASC tienen 23 y 29. MEL alcanza una sensibilidad de 118/222 = 0,532; el promedio global no describe por sí solo su detección. Las métricas son estimaciones puntuales, sin intervalos por clase.
+La Figura~\ref{fig:errores-b71-integrados} reúne dos lecturas complementarias de B71 registrado sobre las mismas 2.004 imágenes. En el panel (a), cada fila corresponde al diagnóstico real y cada columna a la clase predicha. Los porcentajes se calculan respecto del total de cada fila: la diagonal muestra la proporción correctamente identificada de cada diagnóstico, equivalente a su sensibilidad. Las celdas fuera de la diagonal indican hacia qué clases se desplazan los errores; su intensidad no representa el número absoluto de imágenes.
+
+En el panel (b), la precisión indica qué proporción de las predicciones de una clase es correcta; la sensibilidad, qué proporción de sus casos reales se identifica; y el F1 resume ambas mediante su media armónica. El soporte $n$ corresponde al número de casos reales, no al número de predicciones. Por ello, precisión y sensibilidad pueden diferir aunque se calculen a partir de la misma matriz. Las tres métricas son estimaciones puntuales, sin intervalos por diagnóstico.
 
 \begin{figure}[!htbp]
-\caption{Precisión, sensibilidad y F1 de B71 por diagnóstico.}
+\caption{Matriz de confusión y métricas por diagnóstico de B71 registrado en HAM10000.}
+\label{fig:errores-b71-integrados}
+\label{fig:confusion-b71-ham}
 \label{fig:metricas-clase-b71}
 \centering
-\noindent\makebox[\linewidth][c]{\includesvg[width=\linewidth,height=.74\textheight,keepaspectratio]{images/organizadas/11_metricas_por_clase}}
+\includesvg[width=\linewidth]{images/organizadas/35_errores_b71_ham}
 \par\smallskip
-\raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia. Validación HAM10000, n=2.004. n junto a cada clase: soporte real. Métricas derivadas de la matriz verificada; valores descriptivos, sin IC por clase.\par}
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia. Validación HAM10000, 2.004 imágenes. (a) Porcentajes por fila; cada fila suma aproximadamente 100\,\% por redondeo. (b) Cuadrados: precisión; círculos: sensibilidad; rombos: F1. Soporte real junto a cada clase. Ambas vistas proceden de la misma matriz verificada; no se añaden intervalos por clase. Corresponden a B71 registrado, no a B71-limpio.\par}
 \end{figure}
+\FloatBarrier
+
+NV reúne 1.341 casos y alcanza una sensibilidad del 92,2\,\%; MEL tiene 222 casos y una sensibilidad del 53,2\,\% (118/222). En la fila de MEL, el 30,2\,\% de los casos se predice como NV y el 13,1\,\% como BKL: esta lectura localiza errores que el F1 macro global no describe. DF y VASC tienen únicamente 23 y 29 casos, respectivamente, por lo que sus estimaciones deben interpretarse con especial atención al soporte. El desempeño agregado no permite asumir una detección equivalente entre diagnósticos ni establecer utilidad clínica por sí solo.
 
 La Figura~\ref{fig:precision-recall-b71} evalúa cada clase frente al resto usando las probabilidades de B71, sin modificar la partición ni volver a ajustar el clasificador. La precisión promedio (AP) resume la curva mediante ponderación de sus incrementos de sensibilidad, no mediante un área trapezoidal. La referencia discontinua corresponde a la prevalencia de la clase: por eso las AP deben interpretarse junto al soporte y no como probabilidades de diagnóstico correcto ni como umbrales clínicos seleccionados. No se estimaron bandas de incertidumbre.
 
@@ -599,20 +593,26 @@ La Figura~\ref{fig:precision-recall-b71} evalúa cada clase frente al resto usan
 \noindent\textit{Nota.} Elaboración propia. HAM10000, validación n=2.004. Una clase frente al resto; AP=average precision, no área trapezoidal. Referencia discontinua: prevalencia real de cada clase. Sin bandas de incertidumbre. La octava celda explica la lectura.\par}
 \end{figure}
 
-La Figura~\ref{fig:confiabilidad-b71} agrupa la confianza máxima de B71 en 15 intervalos uniformes. El panel (a) compara la confianza media con la proporción de aciertos en los intervalos no vacíos; el panel (b) muestra cuántas imágenes contribuyen a cada intervalo. El ECE de 0,0529 resume su diferencia absoluta ponderada por frecuencia y depende de esta discretización. No implica calibración clínica ni garantiza confiabilidad para cada diagnóstico; tampoco se ajustó un calibrador con estos datos. La comparación descriptiva con el control público y A71 se presenta en la Figura~\ref{fig:confiabilidad-configuraciones} del anexo.
+\FloatBarrier
+\subsubsection{Calibración de las configuraciones registradas en HAM10000}
+
+La Figura~\ref{fig:confiabilidad-configuraciones} compara las probabilidades del control público con protocolo B71, A71 y B71 registrados en las mismas 2.004 imágenes. Esta evaluación conserva los pesos originales; no corresponde a A71-limpio ni B71-limpio. La clasificación analiza qué diagnóstico predice el modelo; la calibración examina si su confianza concuerda con la frecuencia observada de aciertos. Una confianza alta no garantiza una predicción correcta.
+
+Cada columna corresponde a una configuración. En la fila superior, los puntos representan la confianza media y la proporción de aciertos en 15 intervalos uniformes no vacíos. La diagonal discontinua indica concordancia ideal: un punto por debajo señala que la confianza media supera la proporción de aciertos; por encima ocurre lo contrario. La fila inferior muestra cuántas imágenes contribuyen a cada intervalo y permite distinguir discrepancias frecuentes de intervalos con pocos casos.
 
 \begin{figure}[!htbp]
-\caption{Confiabilidad de B71 y distribución de confianza.}
+\caption{Confiabilidad y distribución de confianza de las configuraciones registradas en HAM10000.}
+\label{fig:confiabilidad-configuraciones}
 \label{fig:confiabilidad-b71}
 \centering
-\noindent\makebox[\linewidth][c]{\includesvg[width=\linewidth,height=.74\textheight,keepaspectratio]{images/organizadas/13_confiabilidad_b71}}
+\includesvg[width=\linewidth]{images/organizadas/36_calibracion_ham_configuraciones}
 \par\smallskip
-\raggedright\fontsize{11}{13}\selectfont\singlespacing
-\par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
-\noindent\textit{Nota.} Elaboración propia. Validación HAM10000, n=2.004; 15 intervalos uniformes. Puntos: confianza media y proporción de aciertos; intervalos vacíos omitidos. Diagonal: calibración ideal. ECE = 0,0529, de la evaluación congelada. No constituye validación clínica externa.\par}
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde las probabilidades de la evaluación congelada. HAM10000, n=2.004; 15 intervalos uniformes. Columnas: público con protocolo B71, A71 y B71. Arriba: confiabilidad; abajo: frecuencia de confianza, con el mismo rango vertical. ECE ponderado por frecuencia. Sin ajuste posterior de calibración ni intervalos de incertidumbre.\par}
 \end{figure}
+\FloatBarrier
 
-
+El ECE resume la diferencia absoluta entre confianza media y proporción de aciertos, ponderada por el número de imágenes de cada intervalo. A71 presenta el menor ECE (0,0154), seguido de B71 (0,0529) y del control público (0,0688): describe una menor discrepancia agregada en esta partición y discretización. No constituye un contraste estadístico entre configuraciones, no garantiza calibración para cada diagnóstico y no demuestra que retirar el término de tono cause una mejora. Las diferencias de extracción y sonda impiden aislar ese efecto. Tampoco acredita confiabilidad clínica en PAD-UFES-20 o Santander; esa evaluación requeriría probabilidades y etiquetas del dominio correspondiente.
 
 \FloatBarrier
 \input{capitulos/resultados_clasificacion_isic}
