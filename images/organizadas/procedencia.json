@@ -3,7 +3,7 @@
   "figuras": [
     {
       "svg": "01_diagnosticos_2x2.svg",
-      "svg_sha256": "3d155286ae3fc94e178ab3588ab3454a8d452aed1fd51a9da4a4268aaef2589a"
+      "svg_sha256": "e3f527b0f5c1ef7b012fcbaf23df515f01a0724967cf160aef59565147949722"
     },
     {
       "svg": "02_segmentacion_3x3.svg",
@@ -15,11 +15,11 @@
     },
     {
       "svg": "04_pad_fst_ita.svg",
-      "svg_sha256": "6538288c3957f269debdf3674601428c295413bd1f517387eb2e548d78c9e314"
+      "svg_sha256": "cb71357b5771426960b604bdc67f14e462fc0bb748352ccdb5a053d72e7eada6"
     },
     {
       "svg": "05_ita_otsu_2x2.svg",
-      "svg_sha256": "36c4f19c1cebed2cc4ec0a2d6c1872be08c95b20affbc3d41fb69635f1ce7eff"
+      "svg_sha256": "afcce1fb9699a696ca2de48e5bb80b8703c0747d6d8404cdc5de29b6f695ed5c"
     },
     {
       "svg": "06_ita_roi_e5.svg",
