@@ -1,0 +1,43 @@
+\subsubsection{Análisis por clase y errores en ISIC2020}
+La Figura~\ref{fig:errores-isic2020} presenta a la izquierda la matriz de confusión de B71-limpio y a la derecha precisión, sensibilidad y F1 por diagnóstico. Las filas representan clases reales y las columnas clases predichas; cada fila suma el 100\,\%. La diagonal expresa sensibilidad por clase, no el número de imágenes. Los soportes aparecen junto a las métricas. Este análisis corresponde a los pesos limpios de la Tabla~\ref{tab:clasificacion-isic2020}.
+
+\begin{figure}[!htbp]
+\caption{Matriz de confusión y métricas por diagnóstico de B71-limpio en ISIC2020.}\label{fig:errores-isic2020}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/40_errores_isic2020}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde los registros canónicos; n=6.660. Porcentajes normalizados por fila. Métricas puntuales, sin intervalos añadidos.\par}
+\end{figure}
+\FloatBarrier
+En ISIC2020, B71-limpio identifica 39 de los 122 melanomas y omite 83. Aunque el conjunto contiene 6.538 lesiones benignas, esa clase mayoritaria no compensa la sensibilidad de melanoma de 0,3197. La matriz y las métricas por clase permiten apreciar esta limitación, que puede quedar oculta al interpretar únicamente la exactitud global.
+
+\subsubsection{Discriminación de melanoma en ISIC2020}
+La Figura~\ref{fig:curvas-isic2020} muestra las curvas precisión--sensibilidad y ROC de B71-limpio al considerar melanoma frente al resto. Cada punto corresponde a un umbral de probabilidad; las curvas no representan únicamente la predicción por máximo de probabilidad de la matriz anterior. La línea horizontal del panel (a) indica la proporción de melanoma en validación y la diagonal del panel (b) representa ausencia de discriminación. La precisión media (AP) es 0,1972; esta magnitud corresponde a melanoma y no debe confundirse con F1 macro ni con AUC multiclase.
+
+\begin{figure}[!htbp]
+\caption{Curvas precisión--sensibilidad y ROC para melanoma de B71-limpio en ISIC2020.}\label{fig:curvas-isic2020}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/41_curvas_isic2020}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde probabilidades por imagen. Melanoma: 122 de 6660 imágenes. Curvas empíricas sin suavizado ni intervalos de incertidumbre.\par}
+\end{figure}
+\FloatBarrier
+La AP de 0,1972 supera la referencia de proporción de melanoma (0,0183), pero no establece un umbral clínico. La curva ROC debe interpretarse junto con la precisión--sensibilidad, dada la baja frecuencia de melanoma. La elección de un umbral requeriría una evaluación independiente del balance entre falsos positivos y casos omitidos.
+
+\subsubsection{Calibración y confianza en ISIC2020}
+La Figura~\ref{fig:calibracion-isic2020} compara el control público con protocolo B71, B71 original y B71-limpio. La fila superior relaciona confianza media y proporción de aciertos; la inferior muestra cuántas imágenes contribuyen a cada intervalo. Esta disposición permite distinguir una diferencia de calibración de una diferencia en la distribución de confianza. Los intervalos sin imágenes se omiten de la confiabilidad; las cruces señalan intervalos con menos de diez imágenes.
+
+\begin{figure}[!htbp]
+\caption{Confiabilidad y distribución de confianza de las configuraciones B71 en ISIC2020.}\label{fig:calibracion-isic2020}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/42_calibracion_isic2020}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia desde los registros de probabilidades. n=6660; 15 intervalos uniformes, ECE ponderado por frecuencia. Misma escala de conteos entre columnas; sin recalibración posterior ni IC. B71 original se distingue de los pesos limpios.\par}
+\end{figure}
+\FloatBarrier
+El ECE de B71-limpio es 0,0111, frente a 0,0125 del control público. Estos valores resumen discrepancias agregadas y no constituyen un contraste estadístico entre configuraciones. Un punto por debajo de la diagonal indica confianza superior a la frecuencia observada de aciertos.
+
+El ECE reducido debe interpretarse junto con la matriz de confusión: el predominio de lesiones benignas puede producir buena concordancia agregada sin asegurar detección ni calibración adecuadas para melanoma. No se infiere seguridad clínica a partir de este indicador.

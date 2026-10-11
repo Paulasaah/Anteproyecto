@@ -1,0 +1,18 @@
+\subsection{Síntesis comparativa de clasificación por dataset}\label{sec:sintesis-datasets}
+Las Figuras~\ref{fig:clasificacion-ham-completa}, \ref{fig:clasificacion-isic2019} y \ref{fig:clasificacion-isic2020} presentan cada evaluación con sus líneas base. La Figura~\ref{fig:sintesis-datasets} reúne después los modelos limpios y sus controles públicos para mostrar el patrón conjunto de F1 macro y MCC. Esta síntesis conserva únicamente configuraciones congeladas; los pesos originales, el ajuste fino y la adaptación a PAD-UFES-20 se analizan por separado.
+
+\begin{figure}[!htbp]
+\caption{Síntesis descriptiva de F1 macro y MCC en HAM10000, ISIC2019 e ISIC2020.}\label{fig:sintesis-datasets}
+\centering
+\includesvg[width=\linewidth]{images/organizadas/43_sintesis_clasificacion_datasets}
+\par\smallskip
+{\singlespacing\fontsize{11}{13}\selectfont\raggedright
+\noindent\textit{Nota.} Elaboración propia. Estimaciones puntuales de configuraciones limpias y controles públicos con el protocolo de cada brazo. HAM10000: siete clases y agrupación por lesión (n=2.004); ISIC2019: ocho clases y partición por imagen (n=5.067); ISIC2020: dos clases y agrupación por paciente (n=6.660). No es un ranking entre datasets ni un contraste pareado entre ellos.\par}
+\end{figure}
+\FloatBarrier
+B71-limpio presenta mayor F1 macro que su control público en los tres conjuntos; sin embargo, sus IC pareados excluyen cero solamente en ISIC2020. Los IC de A71-limpio frente a su control excluyen cero en los tres conjuntos, dentro de los contrastes descritos y sin corrección global por multiplicidad. Este patrón no aísla el efecto causal del tono, porque A71 y B71 difieren también en extracción y selección de sonda.
+
+La comparación de errores se apoya en las Figuras~\ref{fig:errores-b71-integrados}, \ref{fig:errores-isic2019} y \ref{fig:errores-isic2020}. HAM10000 muestra B71 registrado, mientras que los dos ISIC muestran B71-limpio: no se equiparan estos pesos. En ISIC2020, la baja sensibilidad de melanoma obliga a interpretar F1 macro, MCC y calibración de forma conjunta. Las Figuras~\ref{fig:confiabilidad-configuraciones}, \ref{fig:calibracion-isic2019} y \ref{fig:calibracion-isic2020} complementan esa lectura; un ECE bajo no garantiza sensibilidad ni calibración para cada diagnóstico.
+
+Las magnitudes entre conjuntos no representan una medida directa de dificultad o transferencia: cambian las taxonomías, los soportes y las unidades de partición, y HAM10000 está contenido en ISIC2019. La adaptación al dominio clínico se presenta en su sección específica, conservando sus controles y su prueba por paciente.
+\FloatBarrier

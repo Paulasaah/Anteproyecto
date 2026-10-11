@@ -152,6 +152,34 @@
     {
       "svg": "36_calibracion_ham_configuraciones.svg",
       "svg_sha256": "fac50a35389383e777687744c2e6800d79d8034dcea4be97fed73faf20e68cf6"
+    },
+    {
+      "svg": "37_errores_isic2019.svg",
+      "svg_sha256": "1688b4d9062fb65f7fb38da5f1014a6ac20fcee7427650e33f37ce409b38adc2"
+    },
+    {
+      "svg": "38_curvas_isic2019.svg",
+      "svg_sha256": "92cd74167785fe049f39b4903583482376d23d345467104312d248b73c4054f9"
+    },
+    {
+      "svg": "39_calibracion_isic2019.svg",
+      "svg_sha256": "6d016d9a55510d8699128dc55d6b7f7f32e400da52dc41274a3ffa547ca51265"
+    },
+    {
+      "svg": "40_errores_isic2020.svg",
+      "svg_sha256": "3fddace29bf452f5a5c9f794291cc666428a916de4ee8f822e842a5d9d26cb0e"
+    },
+    {
+      "svg": "41_curvas_isic2020.svg",
+      "svg_sha256": "5db0ab6ead16efcf363dfe022261cee7652b8d50a3499ec892967790e5db0fe0"
+    },
+    {
+      "svg": "42_calibracion_isic2020.svg",
+      "svg_sha256": "79fe59846013e4c6d81411974d8117320d3f332dd2fd3ebe82181a76e90b2c7b"
+    },
+    {
+      "svg": "43_sintesis_clasificacion_datasets.svg",
+      "svg_sha256": "acd13cf79a702966edd0e50a2ee2ef84922d8c9ca9501a724e30b7fd63bbb397"
     }
   ]
 }

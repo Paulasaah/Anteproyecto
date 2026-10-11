@@ -79,3 +79,10 @@ p=D/'procedencia.json';doc=json.loads(p.read_text());new=['29_clasificacion_isic
 for n in new:doc['figuras'].append({'svg':n+'.svg','svg_sha256':hashlib.sha256((D/(n+'.svg')).read_bytes()).hexdigest()})
 p.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(summary,indent=2))
+
+# Conservar análisis detallado tras regenerar las tablas y comparaciones.
+p=R/"capitulos/resultados_clasificacion_isic.tex"
+s=p.read_text()
+s=s.replace("\\subsection{Clasificación congelada en ISIC2020}","\\input{capitulos/resultados_detalle_isic2019}\n\n\\subsection{Clasificación congelada en ISIC2020}")
+s+="\n\\input{capitulos/resultados_detalle_isic2020}\n"
+p.write_text(s)
