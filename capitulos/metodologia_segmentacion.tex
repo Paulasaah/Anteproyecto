@@ -60,16 +60,16 @@ La selección de cada punto de verificación de \texttt{student\_r1}--\texttt{st
 \end{equation}
 donde $\mathrm{TP}$, $\mathrm{FP}$ y $\mathrm{FN}$ se calculan a nivel de píxel entre ambas máscaras. Los valores de Dice obtenidos se presentan como resultado en el Capítulo~7, no en este apartado.
 
-\subsubsection{Modelamiento matemático}
-
-\paragraph{MoCo v2.} Un codificador de consulta $f_q$ procesa la vista $x^q$ y un codificador de clave $f_k$, actualizado por media móvil exponencial del codificador de consulta ($\theta_k\leftarrow m\,\theta_k+(1-m)\theta_q$, con $m=0{,}99$), procesa la vista $x^k$. Las representaciones $q=f_q(x^q)$ y $k=f_k(x^k)$ se comparan contra una cola de $Q=16\,384$ claves negativas $\{k_j\}_{j=1}^{Q}$ acumuladas de lotes anteriores, con temperatura $\tau=0{,}2$:
+\subsubsection{Modelo matemático}
+\begin{itemize}
+    \item \textbf{MoCo v2:} Un codificador de consulta $f_q$ procesa la vista $x^q$ y un codificador de clave $f_k$, actualizado por media móvil exponencial del codificador de consulta ($\theta_k\leftarrow m\,\theta_k+(1-m)\theta_q$, con $m=0{,}99$), procesa la vista $x^k$. Las representaciones $q=f_q(x^q)$ y $k=f_k(x^k)$ se comparan contra una cola de $Q=16\,384$ claves negativas $\{k_j\}_{j=1}^{Q}$ acumuladas de lotes anteriores, con temperatura $\tau=0{,}2$:
 \begin{equation}
  \mathcal L_{\mathrm{MoCo}}=-\log\frac{\exp(q\cdot k_+/\tau)}{\exp(q\cdot k_+/\tau)+\sum_{j=1}^{Q}\exp(q\cdot k_j/\tau)}.
  \label{eq:moco-loss-s6}
 \end{equation}
 Los parámetros de $f_k$ no reciben gradiente directo; solo se actualizan por la media móvil.
-
-\paragraph{CCAM.} Para un mapa de características $Z\in\mathbb{R}^{C\times h\times w}$ del \textit{backbone} y un mapa de activación $P\in(0,1)^{1\times h\times w}=\sigma(\mathrm{BN}(\mathrm{Conv}(Z)))$, los vectores de primer plano y de fondo son promedios ponderados espacialmente:
+\item 
+\textbf{CCAM:} Para un mapa de características $Z\in\mathbb{R}^{C\times h\times w}$ del \textit{backbone} y un mapa de activación $P\in(0,1)^{1\times h\times w}=\sigma(\mathrm{BN}(\mathrm{Conv}(Z)))$, los vectores de primer plano y de fondo son promedios ponderados espacialmente:
 \begin{equation}
  v_f=\operatorname{norm}\left(\sum_{p} P(p)\,Z(p)\right).
  \label{eq:ccam-vectores-s6}
@@ -90,6 +90,9 @@ La pérdida combina un término negativo (separar primer plano de fondo dentro d
 \end{equation}
 
 con peso $w_{ij}=\exp(-\alpha\cdot\operatorname{rank}_{ij})$, de modo que solo los pares más parecidos del lote contribuyen de forma apreciable. La pérdida total es $\mathcal L_{\mathrm{CCAM}}=\mathcal L_{\mathrm{POS}}+\mathcal L_{\mathrm{NEG}}$. El mapa $P$ resultante se umbraliza para producir la pseudo-máscara inicial.
+\end{itemize}
+
+
 
 \subsubsection{Algoritmo del flujo de segmentación}
 

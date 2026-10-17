@@ -1,0 +1,11 @@
+\chapter{Justificación}
+
+La investigación se justifica por la necesidad de evaluar métodos de clasificación de lesiones cutáneas en condiciones donde las imágenes etiquetadas y representativas del contexto regional son limitadas. El cambio entre conjuntos de datos puede afectar el desempeño de los modelos, por lo que la evaluación debe distinguir los resultados obtenidos en repositorios públicos de una validación clínica o poblacional en Santander \parencite{yang2024crosshospital}.
+
+El proyecto examina el aprendizaje autosupervisado como estrategia de preentrenamiento con imágenes no etiquetadas y estudia la adaptación de dominio hacia imágenes clínicas. Esta aproximación se investiga en medicina para aprovechar datos sin anotaciones; su conveniencia debe establecerse para cada tarea y conjunto de evaluación \parencite{krishnan2022selfsupervisedmedicine}. Como aporte complementario, se documentan procedimientos de segmentación y transformación y estimación colorimétrica del tono de piel, sin tratar el proxy ITA como fototipo clínico validado.
+
+El trabajo también se enmarca en la Política Nacional de Inteligencia Artificial establecida por el Documento CONPES 4144, que plantea orientaciones para desarrollar y adoptar capacidades de IA en Colombia. Esta relación contextualiza la investigación, pero no implica aprobación institucional ni habilitación para uso clínico \parencite{dnp2025conpes4144}.
+
+La viabilidad experimental se apoya en conjuntos públicos utilizados en investigación dermatológica, como HAM10000 y PAD-UFES-20, que ofrecen imágenes y modalidades distintas para estudiar clasificación y adaptación entre dominios \parencite{tschandl2018ham10000,pacheco2020padufes}. El proyecto reporta los procedimientos, particiones y métricas disponibles para que las comparaciones puedan interpretarse según sus condiciones, sin atribuir a los resultados una representatividad que los datos no demuestran.
+
+El trabajo aporta una evaluación técnica de enfoques de aprendizaje autosupervisado en imágenes dermatológicas y fortalece la experiencia en procesamiento de imágenes y sistemas de aprendizaje automático. Su aplicación clínica requeriría etapas posteriores de desarrollo, revisión institucional y validación en el contexto de uso.

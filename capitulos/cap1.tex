@@ -21,26 +21,18 @@ El melanoma, pese a representar solo el 2\% de los casos de cáncer de piel, con
 
 \end{figure}
 
-
-
 En el estudio del cáncer de piel, la clasificación de las lesiones dermatológicas permite establecer las características clínicas y visuales que diferencian las lesiones benignas de las malignas. Esta clasificación es ampliamente utilizada en la literatura médica y en los \textit{datasets} dermatológicos empleados en modelos de inteligencia artificial. En la Tabla~\ref{tab:clasificacion-lesiones} se presentan los principales tipos de lesiones cutáneas y sus características clínicas.
 
-\begingroup
+\begin{table}[htbp]
+\centering
 \small
-\singlespacing
 \setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.52\textwidth-4\tabcolsep\relax}@{}}
-\caption{Clasificación de lesiones dermatológicas y frecuencia en Colombia y Santander}\label{tab:clasificacion-lesiones}\\
+\caption{Clasificación de lesiones dermatológicas y frecuencia en Colombia y Santander}
+\label{tab:clasificacion-lesiones}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.52\textwidth-4\tabcolsep\relax}@{}}
 \toprule
 \textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
 \midrule
-\endfirsthead
-\toprule
-\textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
-\midrule
-\endhead
-\bottomrule
-\endfoot
 Carcinoma basocelular (BCC) & Maligna & Tumor cutáneo más frecuente, de crecimiento lento y baja metástasis \\
 \addlinespace
 Carcinoma escamocelular (SCC) & Maligna & Tumor asociado a radiación UV con potencial invasivo \\
@@ -56,11 +48,51 @@ Queratosis seborreica (SEK) & Benigna & Lesión cutánea no cancerosa común en 
 Dermatofibroma (DF) & Benigna & Lesión fibrosa causada por reacción inflamatoria \\
 \addlinespace
 Lesiones vasculares (VASC) & Benigna & Lesiones pigmentadas por hemoglobina \\
-\addlinespace
-\end{longtable}
-\endgroup
+\bottomrule
+\end{tabular}
 
-Nota. Elaboración propia a partir de \textcite{tschandl2018ham10000} y \textcite{uribe2018bccbucaramanga}.
+\vspace{4pt}
+\begin{minipage}{\textwidth}
+\footnotesize
+\textit{Nota.} Elaboración propia a partir de \textcite{tschandl2018ham10000} y \textcite{uribe2018bccbucaramanga}.
+\end{minipage}
+\end{table}
+
+% \begingroup
+% \small
+% \singlespacing
+% \setlength{\tabcolsep}{4pt}
+% \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.52\textwidth-4\tabcolsep\relax}@{}}
+% \caption{Clasificación de lesiones dermatológicas y frecuencia en Colombia y Santander}\label{tab:clasificacion-lesiones}\\
+% \toprule
+% \textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
+% \midrule
+% \endfirsthead
+% \toprule
+% \textbf{Lesión} & \textbf{Tipo clínico} & \textbf{Descripción médica} \\
+% \midrule
+% \endhead
+% \bottomrule
+% \endfoot
+% Carcinoma basocelular (BCC) & Maligna & Tumor cutáneo más frecuente, de crecimiento lento y baja metástasis \\
+% \addlinespace
+% Carcinoma escamocelular (SCC) & Maligna & Tumor asociado a radiación UV con potencial invasivo \\
+% \addlinespace
+% Melanoma (MEL) & Maligna & Tumor agresivo de melanocitos con alta mortalidad \\
+% \addlinespace
+% Queratosis actínica (ACK) & Precancerosa & Lesión causada por daño solar que puede evolucionar a SCC \\
+% \addlinespace
+% Nevo (NEV) & Benigna & Lunar melanocítico común \\
+% \addlinespace
+% Queratosis seborreica (SEK) & Benigna & Lesión cutánea no cancerosa común en adultos \\
+% \addlinespace
+% Dermatofibroma (DF) & Benigna & Lesión fibrosa causada por reacción inflamatoria \\
+% \addlinespace
+% Lesiones vasculares (VASC) & Benigna & Lesiones pigmentadas por hemoglobina \\
+% \addlinespace
+% \end{longtable}
+% \endgroup
+% Nota. Elaboración propia a partir de \textcite{tschandl2018ham10000} y \textcite{uribe2018bccbucaramanga}.
 
 \section{Métodos tradicionales para la identificación de lesiones cutáneas}
 
@@ -75,11 +107,9 @@ La inspección visual constituye el primer nivel de cribado. El método ABCDE (A
 \label{fig:original-2}
 \centering
     \includesvg[width=\textwidth,height=0.72\textheight,keepaspectratio]{images/organizadas/teoria_03_abcde}
-    
 \par\smallskip
 \raggedright\footnotesize
 \textit{Nota.} Adaptación gráfica con fotografías de la figura ABCDE del melanoma, HC Marbella International Hospital (2020), \url{https://www.hcmarbella.com/es/abcde-del-melanoma/}. Las fotografías son referencias ilustrativas y no establecen por sí solas un diagnóstico. No incluyen escala calibrada ni seguimiento del mismo paciente: el diámetro debe medirse y la evolución documentarse en el tiempo. El umbral de 6 mm es orientativo; también existen melanomas de menor tamaño, según la American Academy of Dermatology, \url{https://www.aad.org/public/diseases/skin-cancer/el-abcde-del-melanoma}.
-
 \end{figure}
 
 
@@ -282,47 +312,47 @@ El Aprendizaje Autosupervisado (SSL) constituye el eje metodológico de este pro
 
 
 
-\section{Relación de los conceptos teóricos con el proyecto}
+% \section{Relación de los conceptos teóricos con el proyecto}
 
-La Tabla~\ref{tab:conceptos-marco-proyecto} agrupa los conceptos según las tres líneas de trabajo y explica la aplicación de cada grupo en el proyecto.
+% La Tabla~\ref{tab:conceptos-marco-proyecto} agrupa los conceptos según las tres líneas de trabajo y explica la aplicación de cada grupo en el proyecto.
 
-\begingroup
-\small
-\singlespacing
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.25}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.71\textwidth-2\tabcolsep\relax}@{}}
-\caption{Relación entre los conceptos teóricos y su aplicación en el proyecto}
-\label{tab:conceptos-marco-proyecto}\\
-\toprule
-\textbf{Conceptos relacionados} & \textbf{Aplicación en el proyecto} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Conceptos relacionados} & \textbf{Aplicación en el proyecto} \\
-\midrule
-\endhead
-\bottomrule
-\endfoot
+% \begingroup
+% \small
+% \singlespacing
+% \setlength{\tabcolsep}{5pt}
+% \renewcommand{\arraystretch}{1.25}
+% \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{\dimexpr0.71\textwidth-2\tabcolsep\relax}@{}}
+% \caption{Relación entre los conceptos teóricos y su aplicación en el proyecto}
+% \label{tab:conceptos-marco-proyecto}\\
+% \toprule
+% \textbf{Conceptos relacionados} & \textbf{Aplicación en el proyecto} \\
+% \midrule
+% \endfirsthead
+% \toprule
+% \textbf{Conceptos relacionados} & \textbf{Aplicación en el proyecto} \\
+% \midrule
+% \endhead
+% \bottomrule
+% \endfoot
 
-Lesiones cutáneas, sistemas CAD, CNN, ViT, aprendizaje supervisado y autosupervisado (SSL), \textit{transfer learning}, extracción de características, ajuste fino y adaptación de dominio &
-El clasificador utiliza un codificador DINOv2 adaptado mediante SimSiam. La clasificación principal se realiza con extracción congelada de características y regresión logística; el ajuste fino se considera en las líneas base comparativas. La adaptación de dominio se evalúa mediante continuación del aprendizaje autosupervisado con imágenes clínicas sin etiquetas. \\
-\addlinespace
+% Lesiones cutáneas, sistemas CAD, CNN, ViT, aprendizaje supervisado y autosupervisado (SSL), \textit{transfer learning}, extracción de características, ajuste fino y adaptación de dominio &
+% El clasificador utiliza un codificador DINOv2 adaptado mediante SimSiam. La clasificación principal se realiza con extracción congelada de características y regresión logística; el ajuste fino se considera en las líneas base comparativas. La adaptación de dominio se evalúa mediante continuación del aprendizaje autosupervisado con imágenes clínicas sin etiquetas. \\
+% \addlinespace
 
-Segmentación semántica, CNN, U-Net, DPT, MoCo v2, CCAM y pseudo-máscaras &
-La línea complementaria genera pseudo-máscaras con MoCo v2 y CCAM, y evalúa configuraciones de segmentación que incluyen un estudiante U-Net y la variante A2 con DINOv2 congelado y decodificador DPT. El desempeño de segmentación se evalúa por separado con la métrica Dice. \\
-\addlinespace
+% Segmentación semántica, CNN, U-Net, DPT, MoCo v2, CCAM y pseudo-máscaras &
+% La línea complementaria genera pseudo-máscaras con MoCo v2 y CCAM, y evalúa configuraciones de segmentación que incluyen un estudiante U-Net y la variante A2 con DINOv2 congelado y decodificador DPT. El desempeño de segmentación se evalúa por separado con la métrica Dice. \\
+% \addlinespace
 
-Fototipos de Fitzpatrick, espacio CIELAB e ITA &
-La línea de tono aplica una transformación determinística de luminosidad en CIELAB y calcula el ITA a partir de la región de piel analizada. La comparación con etiquetas de Fitzpatrick se interpreta como una evaluación exploratoria del estimador, no como validación de un clasificador clínico de fototipos. \\
-\addlinespace
+% Fototipos de Fitzpatrick, espacio CIELAB e ITA &
+% La línea de tono aplica una transformación determinística de luminosidad en CIELAB y calcula el ITA a partir de la región de piel analizada. La comparación con etiquetas de Fitzpatrick se interpreta como una evaluación exploratoria del estimador, no como validación de un clasificador clínico de fototipos. \\
+% \addlinespace
 
-Agrupamiento, VAE, GAN y DoubleU-Net &
-Se presentan como antecedentes para contextualizar otros métodos de análisis y segmentación de imágenes. No se reportan como procedimientos experimentales implementados en el proyecto. \\
+% Agrupamiento, VAE, GAN y DoubleU-Net &
+% Se presentan como antecedentes para contextualizar otros métodos de análisis y segmentación de imágenes. No se reportan como procedimientos experimentales implementados en el proyecto. \\
 
-\end{longtable}
+% \end{longtable}
 
-\vspace{4pt}
-\noindent\textit{Nota.} CAD = diagnóstico asistido por computador; CNN = red neuronal convolucional; ViT = transformador visual; SSL = aprendizaje autosupervisado; CIELAB = espacio de color CIE L*a*b*; ITA = ángulo tipológico individual; DPT = transformador de predicción densa; CCAM = mapas de activación agnósticos a la clase mediante aprendizaje contrastivo; VAE = autoencoder variacional; GAN = red generativa adversarial.
-\endgroup
+% \vspace{4pt}
+% \noindent\textit{Nota.} CAD = diagnóstico asistido por computador; CNN = red neuronal convolucional; ViT = transformador visual; SSL = aprendizaje autosupervisado; CIELAB = espacio de color CIE L*a*b*; ITA = ángulo tipológico individual; DPT = transformador de predicción densa; CCAM = mapas de activación agnósticos a la clase mediante aprendizaje contrastivo; VAE = autoencoder variacional; GAN = red generativa adversarial.
+% \endgroup
 

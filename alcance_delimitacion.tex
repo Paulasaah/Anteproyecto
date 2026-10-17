@@ -1,14 +1,10 @@
-\section{Alcances y limitaciones}\label{sec:alcance-delimitacion}
-
-\paragraph{Alcance.}
+\chapter{Alcances y limitaciones}\label{sec:alcance-delimitacion}
 
 El proyecto comprende el diseño, la implementación y la evaluación experimental de un clasificador de lesiones cutáneas basado en aprendizaje autosupervisado. La caracterización de los conjuntos públicos se contrasta con el perfil epidemiológico del departamento de Santander para establecer su pertinencia y sus límites de cobertura, sin asumir que representan por sí solos la población regional.
 
 HAM10000 constituye la fuente etiquetada principal de entrenamiento y evaluación de clasificación de siete categorías: \texttt{nv}, \texttt{mel}, \texttt{bkl}, \texttt{bcc}, \texttt{akiec}, \texttt{vasc} y \texttt{df} \parencite{tschandl2018ham10000}. El aprendizaje autosupervisado permite aprender representaciones a partir de imágenes no etiquetadas; la adaptación y el entrenamiento del clasificador se documentan según el protocolo de cada experimento. El desempeño se cuantifica mediante métricas estándar de clasificación y se plantea su comparación con una línea base supervisada bajo condiciones equivalentes de arquitectura, datos y partición.
 
 El modelo se integrará en un prototipo funcional orientado al apoyo de médicos generales y dermatólogos, que permita cargar una imagen y consultar la predicción del clasificador. La segmentación, el manejo de pelo y otros artefactos y la estimación de tono son módulos complementarios que se evalúan por separado. Su incorporación al clasificador requiere comprobar experimentalmente su aporte mediante comparaciones que aíslen el efecto de cada módulo.
-
-\paragraph{Delimitación.}
 
 El proyecto se desarrolla durante el período académico del trabajo de grado y utiliza conjuntos públicos y los recursos computacionales documentados en la Tabla~\ref{tab:entornos-experimentales}. No contempla recolección de imágenes en instituciones clínicas, pruebas prospectivas con pacientes ni implementación hospitalaria. El aplicativo no incluye integración con sistemas de información clínica ni con bases de datos institucionales externas.
 

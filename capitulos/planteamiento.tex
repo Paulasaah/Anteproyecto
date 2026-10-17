@@ -1,6 +1,4 @@
-\chapter{Planteamiento del problema y justificación}
-
-\section{Planteamiento del problema}
+\chapter{Planteamiento del problema}
 
 Las lesiones cutáneas comprenden alteraciones benignas y malignas, entre ellas los nevos melanocíticos, la queratosis seborreica, el melanoma y los carcinomas basocelular y escamocelular. El cáncer de piel figura entre las neoplasias de mayor carga mundial y su incidencia mostró una tendencia creciente entre 1990 y 2021 \parencite{zhou2025skinburdengbd}. En Colombia, la Cuenta de Alto Costo reportó de manera preliminar 11.064 casos de melanoma cutáneo atendidos hasta el 31 de diciembre de 2024 \parencite{cuentaaltocosto2025melanoma}.
 
@@ -12,35 +10,23 @@ La transferencia de modelos entre instituciones y poblaciones plantea un reto ad
 
 El aprendizaje autosupervisado ofrece una vía para preentrenar modelos con imágenes sin etiquetas y reducir la dependencia de anotaciones durante esa etapa. La utilidad de las representaciones aprendidas para una tarea concreta debe comprobarse posteriormente con etiquetas y evaluaciones apropiadas \parencite{krishnan2022selfsupervisedmedicine}. En consecuencia, resulta pertinente estudiar este enfoque en imágenes de lesiones cutáneas y documentar los límites de su desempeño y su adaptación entre dominios.
 
-\subsection*{Árbol del problema}
+\section{Árbol del problema}
 
 La Figura~\ref{fig:arbol-problema} sintetiza la relación entre las causas directas e indirectas, el problema central y las consecuencias identificadas para la clasificación de lesiones cutáneas en Santander.
-\begin{figure}[!htbp]
+
+
+
+
+\section{Pregunta de investigación}
+\textcolor{red}{¿Cómo diseñar un algoritmo de inteligencia artificial basado en aprendizaje autosupervisado para clasificar lesiones cutáneas a partir de imágenes dermatológicas y apoyar el análisis clínico en el contexto del departamento de Santander?}
+\begin{figure}[H]
 \caption{Árbol del problema de clasificación de lesiones cutáneas}
 \label{fig:arbol-problema}
 \centering
 \includesvg[width=\textwidth,height=.72\textheight,keepaspectratio]{images/organizadas/24_arbol_problema}
-
 \par\smallskip
 \raggedright\footnotesize
 \par\smallskip{\singlespacing\fontsize{11}{13}\selectfont\raggedright
 \noindent\textit{Nota.} Elaboración propia. El diagrama presenta las causas directas e indirectas, el problema central y sus consecuencias.\par}
 \end{figure}
 
-
-
-\subsection{Pregunta de investigación}
-
-¿Cómo diseñar un algoritmo de inteligencia artificial basado en aprendizaje autosupervisado para clasificar lesiones cutáneas a partir de imágenes dermatológicas y apoyar el análisis clínico en el contexto del departamento de Santander?
-
-\section{Justificación}
-
-La investigación se justifica por la necesidad de evaluar métodos de clasificación de lesiones cutáneas en condiciones donde las imágenes etiquetadas y representativas del contexto regional son limitadas. El cambio entre conjuntos de datos puede afectar el desempeño de los modelos, por lo que la evaluación debe distinguir los resultados obtenidos en repositorios públicos de una validación clínica o poblacional en Santander \parencite{yang2024crosshospital}.
-
-El proyecto examina el aprendizaje autosupervisado como estrategia de preentrenamiento con imágenes no etiquetadas y estudia la adaptación de dominio hacia imágenes clínicas. Esta aproximación se investiga en medicina para aprovechar datos sin anotaciones; su conveniencia debe establecerse para cada tarea y conjunto de evaluación \parencite{krishnan2022selfsupervisedmedicine}. Como aporte complementario, se documentan procedimientos de segmentación y transformación y estimación colorimétrica del tono de piel, sin tratar el proxy ITA como fototipo clínico validado.
-
-El trabajo también se enmarca en la Política Nacional de Inteligencia Artificial establecida por el Documento CONPES 4144, que plantea orientaciones para desarrollar y adoptar capacidades de IA en Colombia. Esta relación contextualiza la investigación, pero no implica aprobación institucional ni habilitación para uso clínico \parencite{dnp2025conpes4144}.
-
-La viabilidad experimental se apoya en conjuntos públicos utilizados en investigación dermatológica, como HAM10000 y PAD-UFES-20, que ofrecen imágenes y modalidades distintas para estudiar clasificación y adaptación entre dominios \parencite{tschandl2018ham10000,pacheco2020padufes}. El proyecto reporta los procedimientos, particiones y métricas disponibles para que las comparaciones puedan interpretarse según sus condiciones, sin atribuir a los resultados una representatividad que los datos no demuestran.
-
-El trabajo aporta una evaluación técnica de enfoques de aprendizaje autosupervisado en imágenes dermatológicas y fortalece la experiencia en procesamiento de imágenes y sistemas de aprendizaje automático. Su aplicación clínica requeriría etapas posteriores de desarrollo, revisión institucional y validación en el contexto de uso.
